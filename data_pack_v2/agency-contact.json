@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "version": "v1-stage-5",
+    "purpose": "Configuracion operativa/comercial de Agencias Abed para contacto y pre-solicitud asistida."
+  },
+  "channels": {
+    "whatsapp": {
+      "enabled": false,
+      "label": "WhatsApp",
+      "url": "",
+      "status": "pending_validation"
+    },
+    "email": {
+      "enabled": false,
+      "label": "Email comercial",
+      "address": "",
+      "status": "pending_validation"
+    }
+  },
+  "form": {
+    "enabled": true,
+    "mode": "placeholder",
+    "provider": "pending",
+    "endpoint": "",
+    "method": "POST",
+    "status": "pending_validation"
+  },
+  "messages": {
+    "success": "Recibimos tu pre-solicitud. Un asesor va a revisar la informacion antes de avanzar.",
+    "unavailable": "La pre-solicitud quedo preparada, pero el envio automatico todavia esta en configuracion.",
+    "error": "No pudimos procesar la pre-solicitud. Revisá los datos e intentá nuevamente.",
+    "nextSteps": "Completar este formulario no implica contratar ni quedar inscripto. La agencia revisa tu caso, te contacta y te explica documentacion, condiciones y pasos reales."
+  }
+}

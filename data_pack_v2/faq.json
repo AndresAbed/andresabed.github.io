@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "version": "v2-hardening"
+  },
+  "featuredFaqIds": [
+    "que-se-obtiene-al-final-del-plan-330",
+    "como-se-realizan-los-sorteos-mensuales",
+    "si-salgo-adjudicado-debo-seguir-pagando",
+    "la-inscripcion-se-hace-online"
+  ],
+  "categories": [
+    {
+      "slug": "funcionamiento-general",
+      "title": "Funcionamiento general",
+      "sortOrder": 1,
+      "items": [
+        {
+          "id": "que-es-club-san-jorge",
+          "question": "¿Qué es Club San Jorge en Capitalización y Ahorro?",
+          "answer": "Club San Jorge ofrece planes de Capitalización y Ahorro en los que el suscriptor abona cuotas para formar un capital y participa de sorteos según las condiciones vigentes del sistema.",
+          "status": "verified"
+        },
+        {
+          "id": "de-cuantas-cuotas-consta-el-plan",
+          "question": "¿De cuántas cuotas consta el plan?",
+          "answer": "La operación oficial menciona planes de 330 meses y también planes a 90 y 120 meses. Para esta agencia, la comercialización principal está enfocada en los planes 330.",
+          "status": "verified"
+        },
+        {
+          "id": "que-se-obtiene-al-final-del-plan-330",
+          "question": "¿Qué se obtiene al finalizar el plan 330?",
+          "answer": "El objeto del contrato es formar un capital equivalente al valor nominal del título al finalizar el plazo, mediante el pago de cuotas de ahorro. Es importante no interpretar el plan como una promesa de entrega automática de un vehículo por el simple pago de cierta cantidad de cuotas.",
+          "status": "verified"
+        },
+        {
+          "id": "cuando-puedo-solicitar-mi-rescate",
+          "question": "¿Cuándo puedo solicitar mi rescate?",
+          "answer": "Para los planes de 330 meses, el rescate puede solicitarse desde la cuota 18. En la web oficial también se indica que en los planes de 90 meses puede solicitarse desde la cuota 9 y en los de 120 meses desde la cuota 12.",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "slug": "sorteos-y-adjudicacion",
+      "title": "Sorteos y adjudicación",
+      "sortOrder": 2,
+      "items": [
+        {
+          "id": "como-se-realizan-los-sorteos-mensuales",
+          "question": "¿Cómo se realizan los sorteos mensuales?",
+          "answer": "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires / LOTBA, en la última jugada del último sábado de cada mes, salvo excepciones previamente aprobadas por la autoridad correspondiente.",
+          "status": "verified"
+        },
+        {
+          "id": "si-salgo-adjudicado-debo-seguir-pagando",
+          "question": "¿Si salgo adjudicado debo seguir pagando?",
+          "answer": "Según la FAQ oficial, si salís adjudicado tenés dos opciones: 1) retirar el beneficio obtenido y seguir abonando normalmente, con posibilidad de volver a ganar si tu número vuelve a salir en sorteos mensuales; 2) retirarte del plan y no pagar más.",
+          "status": "verified"
+        },
+        {
+          "id": "si-mi-numero-sale-otra-vez-que-pasa",
+          "question": "¿Qué pasa si mi número vuelve a salir más adelante?",
+          "answer": "En los planes 330, los títulos favorecidos por sorteo continúan vigentes a todos sus efectos. Si seguís abonando normalmente, podés volver a ganar si tu número se repite en los sorteos mensuales.",
+          "status": "verified"
+        },
+        {
+          "id": "si-no-pago-la-cuota-y-salgo-sorteado",
+          "question": "¿Qué pasa si no pago una cuota y justo ese mes salgo sorteado?",
+          "answer": "La FAQ oficial indica que si no abonás la cuota mensual y tu título resulta adjudicado, no podés recibir el beneficio correspondiente.",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "slug": "plan-dinero",
+      "title": "Plan Dinero / Capital",
+      "sortOrder": 3,
+      "items": [
+        {
+          "id": "que-es-el-plan-dinero",
+          "question": "¿Qué es el Plan Dinero / Capital?",
+          "answer": "Es un plan de capitalización y ahorro orientado a la formación de un capital en dinero.",
+          "status": "verified"
+        },
+        {
+          "id": "que-se-obtiene-al-final-del-plan-dinero",
+          "question": "¿Qué se obtiene al finalizar el Plan Dinero?",
+          "answer": "Se obtiene el capital / ahorro correspondiente al plan contratado, conforme a sus condiciones vigentes.",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "slug": "pagos-y-gestiones",
+      "title": "Pagos y gestiones",
+      "sortOrder": 4,
+      "items": [
+        {
+          "id": "si-no-recibo-la-boleta",
+          "question": "¿Qué hago si no recibo la boleta mensual?",
+          "answer": "La web oficial indica que debés reclamarla a Club San Jorge o a la agencia mercantil correspondiente. También podés utilizar los canales de pago y descarga de boleta disponibles en la web oficial.",
+          "status": "verified"
+        },
+        {
+          "id": "como-puedo-pagar-mi-cuota",
+          "question": "¿Cómo puedo pagar mi cuota?",
+          "answer": "Club San Jorge ofrece recursos como pago de boleta, descarga de boleta, medios de pago, adhesión a débito automático y adhesión a boleta digital.",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "slug": "agencia-y-proceso",
+      "title": "Agencia y proceso comercial",
+      "sortOrder": 5,
+      "items": [
+        {
+          "id": "la-inscripcion-se-hace-online",
+          "question": "¿La inscripción se hace completamente online desde esta web?",
+          "answer": "En esta primera etapa, la web está pensada para asesorarte, explicarte cómo funciona cada plan y ayudarte a iniciar tu solicitud. La inscripción final sigue un proceso comercial asistido por la agencia.",
+          "status": "verified"
+        },
+        {
+          "id": "por-que-la-web-insiste-tanto-en-leer-el-contrato",
+          "question": "¿Por qué la web insiste tanto en leer el contrato y la documentación?",
+          "answer": "Porque uno de los objetivos de la agencia es evitar confusiones. La documentación del plan es la referencia más importante para entender qué se obtiene, cómo funcionan los sorteos, cuándo podés rescatar y qué decisiones podés tomar si tu título resulta favorecido.",
+          "status": "verified"
+        }
+      ]
+    }
+  ]
+}

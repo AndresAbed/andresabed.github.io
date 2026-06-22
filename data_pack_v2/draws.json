@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "version": "v2-hardening",
+    "notes": "Estructura final para renderizar bloque de sorteos."
+  },
+  "schedule": {
+    "officialRule": "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires / LOTBA, en la última jugada del último sábado de cada mes, salvo excepciones aprobadas.",
+    "status": "verified"
+  },
+  "lastDraw": {
+    "date": "",
+    "status": "pending_validation",
+    "source": "club_web_manual_load"
+  },
+  "nextDraw": {
+    "date": "",
+    "status": "pending_validation",
+    "source": "club_web_manual_load"
+  },
+  "stimuli": [
+    {
+      "position": 1,
+      "label": "1° Estímulo",
+      "winningNumber": "",
+      "status": "pending_validation"
+    },
+    {
+      "position": 2,
+      "label": "2° Estímulo",
+      "winningNumber": "",
+      "status": "pending_validation"
+    },
+    {
+      "position": 3,
+      "label": "3° Estímulo",
+      "winningNumber": "",
+      "status": "pending_validation"
+    }
+  ]
+}

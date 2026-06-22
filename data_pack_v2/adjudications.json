@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "version": "v2-hardening",
+    "status": "partial_mock",
+    "tableColumns": [
+      {
+        "key": "name",
+        "label": "Nombre",
+        "status": "verified"
+      },
+      {
+        "key": "address",
+        "label": "Domicilio",
+        "status": "verified"
+      },
+      {
+        "key": "locality",
+        "label": "Localidad",
+        "status": "verified"
+      },
+      {
+        "key": "installment",
+        "label": "Cuota",
+        "status": "verified"
+      }
+    ]
+  },
+  "availableYears": [
+    {
+      "year": 2026,
+      "status": "verified"
+    },
+    {
+      "year": 2025,
+      "status": "verified"
+    },
+    {
+      "year": 2024,
+      "status": "verified"
+    }
+  ],
+  "availableMonthsByYear": {
+    "2026": {
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "status": "mock"
+    },
+    "2025": {
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "status": "mock"
+    },
+    "2024": {
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "status": "mock"
+    }
+  },
+  "data": {
+    "2026": {
+      "6": [
+        {
+          "name": "Ejemplo Apellido Nombre",
+          "address": "Calle 123",
+          "locality": "San Jorge",
+          "installment": "24",
+          "status": "mock"
+        }
+      ]
+    }
+  }
+}

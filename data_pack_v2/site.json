@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "version": "v2-hardening",
+    "generatedAt": "2026-06-22",
+    "sourcePolicy": {
+      "verified": "Dato validado contra web oficial, PDF o material revisado.",
+      "pending_validation": "Dato plausible o inferido que necesita confirmación.",
+      "mock": "Dato de ejemplo para avanzar en UI/estructura."
+    }
+  },
+  "agency": {
+    "name": "Agencias Abed",
+    "displayLockup": "Club San Jorge | Agencias Abed",
+    "tagline": "Asesoramiento claro para entender los planes de Club San Jorge y avanzar con información precisa.",
+    "legalDescriptor": "Agencia mercantil de Club San Jorge",
+    "coverageLabel": "Atención online a todo el país",
+    "primaryWhatsapp": "",
+    "secondaryWhatsapp": "",
+    "contactEmail": "",
+    "instagramUrl": "",
+    "facebookUrl": "",
+    "status": "pending_validation"
+  },
+  "brand": {
+    "clubName": "Club San Jorge",
+    "clubAreaName": "Capitalización y Ahorro",
+    "showClubReference": true,
+    "palette": {
+      "primaryRed": {
+        "value": "",
+        "status": "pending_validation"
+      },
+      "brandGreen": {
+        "value": "rgb(97, 175, 84)",
+        "status": "verified"
+      },
+      "neutralDark": {
+        "value": "#1F2937",
+        "status": "mock"
+      },
+      "neutralMid": {
+        "value": "#6B7280",
+        "status": "mock"
+      },
+      "neutralLight": {
+        "value": "#F3F4F6",
+        "status": "mock"
+      },
+      "white": {
+        "value": "#FFFFFF",
+        "status": "mock"
+      }
+    }
+  },
+  "club": {
+    "headline": "Suscribite, ahorrá y ganá",
+    "supportingClaim": "Con cada cuota, ahorrás y todos los meses estás un paso más cerca de ser uno de nuestros adjudicados.",
+    "stats": [
+      {
+        "label": "Suscriptores",
+        "value": "+40 mil",
+        "status": "verified"
+      },
+      {
+        "label": "Adjudicados",
+        "value": "+20 mil",
+        "status": "verified"
+      },
+      {
+        "label": "Agentes mercantiles",
+        "value": "+70",
+        "status": "verified"
+      },
+      {
+        "label": "Productores asesores independientes",
+        "value": "+300",
+        "status": "verified"
+      }
+    ]
+  },
+  "cta": {
+    "primary": {
+      "label": "Quiero asesoramiento",
+      "target": "/contacto/?intent=asesoramiento"
+    },
+    "secondary": {
+      "label": "Iniciar mi solicitud",
+      "target": "/contacto/?intent=iniciar_solicitud"
+    },
+    "whatsapp": {
+      "label": "Hablar por WhatsApp",
+      "target": ""
+    }
+  },
+  "forms": {
+    "leadEndpoint": "",
+    "provider": "google_apps_script",
+    "status": "pending_validation"
+  },
+  "seo": {
+    "defaultTitle": "Agencias Abed | Club San Jorge",
+    "defaultDescription": "Información clara sobre planes, sorteos, adjudicaciones, documentación y asesoramiento comercial de Club San Jorge.",
+    "defaultOgImage": "/assets/img/og/default-og.svg"
+  },
+  "legal": {
+    "siteRoleText": "Este sitio representa comercialmente a una agencia mercantil de Club San Jorge y brinda información orientativa sobre planes, procesos y recursos vinculados a Club San Jorge.",
+    "disclaimerText": "La información de este sitio debe leerse junto con la documentación y condiciones vigentes de Club San Jorge. Ante cualquier duda, recomendamos revisar el contrato y consultar antes de contratar."
+  }
+}

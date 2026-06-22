@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder de plan</title>
+  <desc id="desc">Imagen generica reservada para assets futuros de planes.</desc>
+  <rect width="800" height="520" fill="#f6f8fb"/>
+  <rect x="48" y="48" width="704" height="424" rx="24" fill="#fff8f0" stroke="#d8dee8"/>
+  <circle cx="186" cy="204" r="72" fill="#61af54" opacity=".18"/>
+  <rect x="304" y="164" width="296" height="24" rx="12" fill="#b4232a" opacity=".75"/>
+  <rect x="304" y="216" width="220" height="18" rx="9" fill="#465364" opacity=".35"/>
+  <rect x="304" y="256" width="260" height="18" rx="9" fill="#465364" opacity=".25"/>
+  <rect x="304" y="328" width="152" height="48" rx="8" fill="#61af54"/>
+</svg>

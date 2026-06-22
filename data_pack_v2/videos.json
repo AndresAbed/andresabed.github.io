@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "version": "v2-hardening"
+  },
+  "items": [
+    {
+      "id": "como-funciona-club-san-jorge",
+      "title": "Cómo funciona Club San Jorge",
+      "description": "Video explicativo sobre el funcionamiento del sistema y los planes.",
+      "youtubeUrl": "",
+      "thumbnail": "/assets/img/placeholders/video-thumb-1.jpg",
+      "status": "pending_validation"
+    },
+    {
+      "id": "conoce-los-planes",
+      "title": "Conocé los planes de Capitalización y Ahorro",
+      "description": "Video general de presentación de los planes.",
+      "youtubeUrl": "",
+      "thumbnail": "/assets/img/placeholders/video-thumb-2.jpg",
+      "status": "pending_validation"
+    }
+  ]
+}

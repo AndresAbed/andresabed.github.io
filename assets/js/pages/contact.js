@@ -1,0 +1,227 @@
+import { getVisiblePlans, loadAgencyContact, loadPlans } from "../data/api.js";
+import {
+  CONTACT_STATES,
+  clearFieldErrors,
+  createContactHero,
+  createContactMethods,
+  createLeadForm,
+  createPayloadSummary,
+  createProcessSteps,
+  createSectionHeader,
+  setFormState,
+  showFieldErrors,
+} from "../components/contact-components.js";
+import { createFinalHelpCta } from "../components/info-components.js";
+import { clear, el, qs } from "../utils/dom.js";
+import { hasValue, isValidUrl } from "../utils/validators.js";
+
+function getQueryDefaults() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    intent: params.get("intent") || "asesoramiento",
+    inquiryType: params.get("intent") === "iniciar_solicitud" ? "iniciar_solicitud" : "informacion_general",
+    plan: params.get("plan") || "no_estoy_seguro",
+  };
+}
+
+function normalizePayload(form) {
+  const formData = new FormData(form);
+  return {
+    source: "club_san_jorge_static_site",
+    createdAt: new Date().toISOString(),
+    intent: String(formData.get("intent") || "").trim(),
+    inquiryType: String(formData.get("inquiryType") || "").trim(),
+    fullName: String(formData.get("fullName") || "").trim(),
+    phone: String(formData.get("phone") || "").trim(),
+    email: String(formData.get("email") || "").trim(),
+    province: String(formData.get("province") || "").trim(),
+    city: String(formData.get("city") || "").trim(),
+    planInterest: String(formData.get("planInterest") || "").trim(),
+    message: String(formData.get("message") || "").trim(),
+    readInfo: formData.get("readInfo") === "yes",
+  };
+}
+
+function validatePayload(payload) {
+  const errors = {};
+  if (!hasValue(payload.intent)) errors.intent = "Elegí si querés asesoramiento o iniciar una pre-solicitud.";
+  if (!hasValue(payload.inquiryType)) errors.inquiryType = "Elegí el tipo de consulta.";
+  if (!hasValue(payload.fullName)) errors.fullName = "Ingresá tu nombre y apellido.";
+  if (!hasValue(payload.phone)) errors.phone = "Ingresá un teléfono o WhatsApp para contactarte.";
+  if (!hasValue(payload.email)) {
+    errors.email = "Ingresá un email de contacto.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+    errors.email = "Ingresá un email válido.";
+  }
+  if (!hasValue(payload.province)) errors.province = "Indicá tu provincia.";
+  if (!hasValue(payload.planInterest)) errors.planInterest = "Elegí un plan o indicá que no estás seguro.";
+  return errors;
+}
+
+function buildMailto(config, payload) {
+  const email = config?.channels?.email;
+  if (!email?.enabled || !hasValue(email.address)) return "";
+
+  const subject = encodeURIComponent(`Pre-solicitud Club San Jorge - ${payload.fullName}`);
+  const body = encodeURIComponent(
+    [
+      `Nombre: ${payload.fullName}`,
+      `Telefono/WhatsApp: ${payload.phone}`,
+      `Email: ${payload.email}`,
+      `Provincia/Ciudad: ${payload.province}${payload.city ? ` / ${payload.city}` : ""}`,
+      `Intencion: ${payload.intent}`,
+      `Tipo de consulta: ${payload.inquiryType}`,
+      `Plan de interes: ${payload.planInterest}`,
+      `Comentarios: ${payload.message || "-"}`,
+      `Leido info general: ${payload.readInfo ? "Si" : "No / quiere explicacion"}`,
+    ].join("\n"),
+  );
+  return `mailto:${email.address}?subject=${subject}&body=${body}`;
+}
+
+async function sendLead(config, payload) {
+  const formConfig = config?.form || {};
+
+  if (formConfig.enabled && formConfig.endpoint && isValidUrl(formConfig.endpoint)) {
+    const response = await fetch(formConfig.endpoint, {
+      method: formConfig.method || "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error(`Lead endpoint failed: ${response.status}`);
+    return { state: CONTACT_STATES.SUCCESS, mode: "endpoint" };
+  }
+
+  const mailto = buildMailto(config, payload);
+  if (mailto) {
+    window.location.href = mailto;
+    return { state: CONTACT_STATES.SUCCESS, mode: "mailto" };
+  }
+
+  console.info("Lead payload preparado en modo placeholder", payload);
+  sessionStorage.setItem("lastLeadPayload", JSON.stringify(payload));
+  return { state: CONTACT_STATES.UNAVAILABLE, mode: "placeholder" };
+}
+
+function createUnavailableNotice(config) {
+  return el("article", {
+    className: "data-status-banner",
+    attrs: { "data-state": "partial" },
+    children: [
+      el("div", {
+        className: "stack",
+        children: [
+          el("span", { className: "badge badge--warning", text: "Canales en configuracion" }),
+          el("h3", { text: "El flujo queda preparado para conectar el envio real" }),
+          el("p", {
+            text:
+              config?.messages?.unavailable ||
+              "La pre-solicitud puede validarse y preparar el payload, pero aun falta configurar endpoint, email o WhatsApp.",
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
+export async function initContactPage() {
+  const target = qs("[data-contact-page]");
+  if (!target) return;
+
+  const [config, plansData] = await Promise.all([loadAgencyContact(), loadPlans()]);
+  const plans = getVisiblePlans(plansData);
+  const defaults = getQueryDefaults();
+  const resultSlot = el("div", { className: "stack", attrs: { "aria-live": "polite" } });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const payload = normalizePayload(form);
+    setFormState(form, CONTACT_STATES.VALIDATING, "Revisando datos...");
+    const errors = validatePayload(payload);
+
+    if (Object.keys(errors).length) {
+      showFieldErrors(form, errors);
+      setFormState(form, CONTACT_STATES.ERROR, "Hay campos para revisar antes de enviar.");
+      return;
+    }
+
+    clearFieldErrors(form);
+    setFormState(form, CONTACT_STATES.SUBMITTING, "Preparando pre-solicitud...");
+    sendLead(config, payload)
+      .then((result) => {
+        clear(resultSlot);
+        if (result.state === CONTACT_STATES.SUCCESS) {
+          setFormState(form, CONTACT_STATES.SUCCESS, config.messages?.success || "Pre-solicitud enviada.");
+        } else {
+          setFormState(form, CONTACT_STATES.UNAVAILABLE, config.messages?.unavailable || "Canal en configuracion.");
+          resultSlot.append(createPayloadSummary(payload));
+        }
+      })
+      .catch(() => {
+        setFormState(form, CONTACT_STATES.ERROR, config.messages?.error || "No pudimos procesar la pre-solicitud.");
+      });
+  }
+
+  clear(target);
+  target.append(
+    createContactHero(),
+    el("section", {
+      className: "plans-section",
+      attrs: { "aria-labelledby": "contact-methods-title" },
+      children: [
+        createSectionHeader({
+          eyebrow: "Canales",
+          title: "Elegí cómo querés seguir",
+          id: "contact-methods-title",
+          intro: "Mostramos canales reales cuando estén configurados. Mientras tanto, el formulario prepara la pre-solicitud sin romper el flujo.",
+        }),
+        createContactMethods(config),
+      ],
+    }),
+    el("section", {
+      className: "plans-section",
+      attrs: { "aria-labelledby": "before-start-title" },
+      children: [
+        createSectionHeader({
+          eyebrow: "Antes de iniciar",
+          title: "Este paso ordena la consulta, no reemplaza la contratación",
+          id: "before-start-title",
+          intro: config.messages?.nextSteps,
+        }),
+        createProcessSteps(),
+      ],
+    }),
+    el("section", {
+      className: "contact-layout",
+      attrs: { "aria-labelledby": "lead-form-title" },
+      children: [
+        el("div", {
+          className: "stack",
+          children: [
+            createSectionHeader({
+              eyebrow: "Formulario",
+              title: "Pre-solicitud / consulta",
+              id: "lead-form-title",
+              intro: "Completá los datos mínimos para que la agencia pueda orientarte mejor.",
+            }),
+            createLeadForm({ plans, defaults, onSubmit: handleSubmit }),
+          ],
+        }),
+        el("aside", {
+          className: "stack",
+          children: [
+            createUnavailableNotice(config),
+            resultSlot,
+            createFinalHelpCta({
+              title: "Te acompañamos antes de avanzar",
+              body: "Si no sabés qué plan elegir, marcá 'No estoy seguro' y dejá tus dudas en el mensaje.",
+              label: "Ver planes",
+              href: "/planes/",
+            }),
+          ],
+        }),
+      ],
+    }),
+  );
+}

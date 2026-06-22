@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "version": "v2-hardening"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "sortOrder": 1,
+      "enabled": true
+    },
+    {
+      "id": "featured-plans",
+      "sortOrder": 2,
+      "enabled": true
+    },
+    {
+      "id": "how-it-works",
+      "sortOrder": 3,
+      "enabled": true
+    },
+    {
+      "id": "draws-summary",
+      "sortOrder": 4,
+      "enabled": true
+    },
+    {
+      "id": "adjudications-preview",
+      "sortOrder": 5,
+      "enabled": true
+    },
+    {
+      "id": "faq-highlight",
+      "sortOrder": 6,
+      "enabled": true
+    },
+    {
+      "id": "resources-hub",
+      "sortOrder": 7,
+      "enabled": true
+    },
+    {
+      "id": "lead-form",
+      "sortOrder": 8,
+      "enabled": true
+    }
+  ]
+}

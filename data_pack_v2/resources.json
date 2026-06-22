@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "version": "v2-hardening"
+  },
+  "groups": [
+    {
+      "slug": "gestiones",
+      "title": "Pagos y gestiones",
+      "sortOrder": 1,
+      "items": [
+        {
+          "id": "pagar-cuota",
+          "type": "external",
+          "title": "Pagar tu cuota",
+          "description": "Acceso al pago de cuota desde la web oficial de Club San Jorge.",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/paga-tu-cuota",
+          "featured": true,
+          "status": "verified"
+        },
+        {
+          "id": "descargar-boleta",
+          "type": "external",
+          "title": "Descargá tu boleta",
+          "description": "Impresión / descarga de boleta de pago.",
+          "url": "",
+          "featured": true,
+          "status": "pending_validation"
+        },
+        {
+          "id": "medios-de-pago",
+          "type": "external",
+          "title": "Medios de pago",
+          "description": "Consultá los medios de pago habilitados por Club San Jorge.",
+          "url": "",
+          "featured": false,
+          "status": "pending_validation"
+        },
+        {
+          "id": "debito-automatico",
+          "type": "external",
+          "title": "Adherite al débito automático",
+          "description": "Gestioná el débito automático para no perder ningún sorteo por falta de pago.",
+          "url": "",
+          "featured": false,
+          "status": "pending_validation"
+        },
+        {
+          "id": "boleta-digital",
+          "type": "external",
+          "title": "Adherite a la boleta digital",
+          "description": "Recibí tu boleta por mail.",
+          "url": "",
+          "featured": false,
+          "status": "pending_validation"
+        }
+      ]
+    },
+    {
+      "slug": "informacion-oficial",
+      "title": "Información oficial",
+      "sortOrder": 2,
+      "items": [
+        {
+          "id": "el-sistema",
+          "type": "external",
+          "title": "Cómo funciona el sistema",
+          "description": "Explicación oficial de Club San Jorge sobre el sistema de Capitalización y Ahorro.",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/el-sistema",
+          "featured": true,
+          "status": "verified"
+        },
+        {
+          "id": "faq-oficial",
+          "type": "external",
+          "title": "Preguntas frecuentes oficiales",
+          "description": "Preguntas frecuentes publicadas por Club San Jorge.",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/preguntas-frecuentes",
+          "featured": false,
+          "status": "verified"
+        },
+        {
+          "id": "adjudicados-oficial",
+          "type": "external",
+          "title": "Adjudicados oficiales",
+          "description": "Consulta de adjudicados publicada por Club San Jorge.",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/adjudicados",
+          "featured": true,
+          "status": "verified"
+        }
+      ]
+    }
+  ]
+}

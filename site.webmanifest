@@ -1,0 +1,16 @@
+{
+  "name": "Club San Jorge | Agencias Abed",
+  "short_name": "Agencias Abed",
+  "description": "Asesoramiento claro sobre planes de Capitalizacion y Ahorro de Club San Jorge.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#b4232a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

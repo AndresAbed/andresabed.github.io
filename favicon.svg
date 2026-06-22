@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Club San Jorge | Agencias Abed</title>
+  <rect width="64" height="64" rx="14" fill="#18212f"/>
+  <path d="M16 42 32 12l16 30H16Z" fill="#61af54"/>
+  <path d="M22 42h20l-10-18-10 18Z" fill="#ffffff"/>
+  <rect x="14" y="46" width="36" height="6" rx="3" fill="#b4232a"/>
+</svg>

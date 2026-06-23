@@ -5,6 +5,7 @@ export const DATA_ROOT = "/data_pack_v2";
 export const DATASETS = Object.freeze({
   site: "site.json",
   plans: "plans.json",
+  planCatalog: "plan_catalog.json",
   faq: "faq.json",
   resources: "resources.json",
   draws: "draws.json",
@@ -38,6 +39,7 @@ export async function loadDataset(name) {
 
 export const loadSite = () => loadDataset("site");
 export const loadPlans = () => loadDataset("plans");
+export const loadPlanCatalog = () => loadDataset("planCatalog");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
 export const loadDraws = () => loadDataset("draws");
@@ -47,9 +49,10 @@ export const loadHomeSections = () => loadDataset("homeSections");
 export const loadAgencyContact = () => loadDataset("agencyContact");
 
 export async function loadAllForHome() {
-  const [site, plans, faq, resources, draws, adjudications, homeSections] = await Promise.all([
+  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeSections] = await Promise.all([
     loadSite(),
     loadPlans(),
+    loadPlanCatalog(),
     loadFaq(),
     loadResources(),
     loadDraws(),
@@ -57,7 +60,7 @@ export async function loadAllForHome() {
     loadHomeSections(),
   ]);
 
-  return { site, plans, faq, resources, draws, adjudications, homeSections };
+  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeSections };
 }
 
 export function getPlanBySlug(plansData, slug) {
@@ -71,6 +74,37 @@ export function getVisiblePlans(plansData) {
 export function getFeaturedPlan(plansData) {
   const slug = plansData?.meta?.featuredPlanSlug;
   return getPlanBySlug(plansData, slug) || plansData?.plans?.find((plan) => plan.featured) || null;
+}
+
+export function getCatalogCategories(catalogData) {
+  return [...(catalogData?.categories || [])].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+}
+
+export function getCatalogItems(catalogData) {
+  return [...(catalogData?.items || [])];
+}
+
+export function getCatalogItemsByCategory(catalogData, categorySlug) {
+  return getCatalogItems(catalogData).filter((item) => item.category === categorySlug);
+}
+
+export function getFeaturedCatalogItems(catalogData, limit = 6) {
+  const categories = getCatalogCategories(catalogData);
+  const featured = categories.flatMap((category) =>
+    getCatalogItemsByCategory(catalogData, category.slug)
+      .filter((item) => item.featured)
+      .slice(0, 2),
+  );
+  const fallback = getCatalogItems(catalogData).slice(0, limit);
+  return (featured.length ? featured : fallback).slice(0, limit);
+}
+
+export function getCatalogItemBySlug(catalogData, slug) {
+  return getCatalogItems(catalogData).find((item) => item.slug === slug) || null;
+}
+
+export function getCategoryBySlug(catalogData, slug) {
+  return getCatalogCategories(catalogData).find((category) => category.slug === slug) || null;
 }
 
 export function flattenFaqs(faqData) {

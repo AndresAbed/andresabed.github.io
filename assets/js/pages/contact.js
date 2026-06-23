@@ -1,4 +1,4 @@
-import { getVisiblePlans, loadAgencyContact, loadPlans } from "../data/api.js";
+import { getCatalogItems, loadAgencyContact, loadPlanCatalog } from "../data/api.js";
 import {
   CONTACT_STATES,
   clearFieldErrors,
@@ -54,7 +54,7 @@ function validatePayload(payload) {
     errors.email = "Ingresá un email válido.";
   }
   if (!hasValue(payload.province)) errors.province = "Indicá tu provincia.";
-  if (!hasValue(payload.planInterest)) errors.planInterest = "Elegí un plan o indicá que no estás seguro.";
+  if (!hasValue(payload.planInterest)) errors.planInterest = "Elegí una opcion del catalogo o indicá que no estás seguro.";
   return errors;
 }
 
@@ -71,7 +71,7 @@ function buildMailto(config, payload) {
       `Provincia/Ciudad: ${payload.province}${payload.city ? ` / ${payload.city}` : ""}`,
       `Intencion: ${payload.intent}`,
       `Tipo de consulta: ${payload.inquiryType}`,
-      `Plan de interes: ${payload.planInterest}`,
+      `Opcion de catalogo: ${payload.planInterest}`,
       `Comentarios: ${payload.message || "-"}`,
       `Leido info general: ${payload.readInfo ? "Si" : "No / quiere explicacion"}`,
     ].join("\n"),
@@ -128,8 +128,8 @@ export async function initContactPage() {
   const target = qs("[data-contact-page]");
   if (!target) return;
 
-  const [config, plansData] = await Promise.all([loadAgencyContact(), loadPlans()]);
-  const plans = getVisiblePlans(plansData);
+  const [config, catalogData] = await Promise.all([loadAgencyContact(), loadPlanCatalog()]);
+  const catalogItems = getCatalogItems(catalogData);
   const defaults = getQueryDefaults();
   const resultSlot = el("div", { className: "stack", attrs: { "aria-live": "polite" } });
 
@@ -174,7 +174,7 @@ export async function initContactPage() {
           eyebrow: "Canales",
           title: "Elegí cómo querés seguir",
           id: "contact-methods-title",
-          intro: "Mostramos canales reales cuando estén configurados. Mientras tanto, el formulario prepara la pre-solicitud sin romper el flujo.",
+          intro: "Mostramos canales reales cuando estén configurados. Mientras tanto, el formulario ordena la consulta y prepara el payload.",
         }),
         createContactMethods(config),
       ],
@@ -185,7 +185,7 @@ export async function initContactPage() {
       children: [
         createSectionHeader({
           eyebrow: "Antes de iniciar",
-          title: "Este paso ordena la consulta, no reemplaza la contratación",
+          title: "Este paso ordena la consulta",
           id: "before-start-title",
           intro: config.messages?.nextSteps,
         }),
@@ -201,11 +201,11 @@ export async function initContactPage() {
           children: [
             createSectionHeader({
               eyebrow: "Formulario",
-              title: "Pre-solicitud / consulta",
+              title: "Consulta / pre-solicitud asistida",
               id: "lead-form-title",
-              intro: "Completá los datos mínimos para que la agencia pueda orientarte mejor.",
+              intro: "Completá los datos mínimos para que la agencia pueda orientarte por categoria u opcion de catalogo.",
             }),
-            createLeadForm({ plans, defaults, onSubmit: handleSubmit }),
+            createLeadForm({ plans: catalogItems, defaults, onSubmit: handleSubmit }),
           ],
         }),
         el("aside", {
@@ -215,7 +215,7 @@ export async function initContactPage() {
             resultSlot,
             createFinalHelpCta({
               title: "Te acompañamos antes de avanzar",
-              body: "Si no sabés qué plan elegir, marcá 'No estoy seguro' y dejá tus dudas en el mensaje.",
+              body: "Si no sabés qué opcion elegir, marcá 'No estoy seguro' y dejá tus dudas en el mensaje.",
               label: "Ver planes",
               href: "/planes/",
             }),

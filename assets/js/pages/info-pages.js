@@ -15,7 +15,6 @@ import {
 } from "../data/api.js";
 import {
   createAdjudicationsTable,
-  createCallout,
   createDataStatusBanner,
   createDrawSummary,
   createFaqGroup,
@@ -60,8 +59,8 @@ export async function initDrawsPage() {
   target.append(
     createSectionHeader({
       eyebrow: "Sorteos y resultados",
-      title: "Informacion disponible sin completar datos pendientes",
-      intro: "Esta pagina centraliza lo que esta cargado en el data pack y aclara cuando los resultados estan en actualizacion.",
+      title: "Segui los sorteos del sistema",
+      intro: "Centralizamos regla de sorteo, fechas disponibles y accesos utiles para interpretar resultados.",
     }),
     createDrawSummary(draws),
     el("section", {
@@ -83,19 +82,15 @@ export async function initDrawsPage() {
             })
           : createDataStatusBanner({
               title: "Historial en actualizacion",
-              body: "El data pack no trae resultados recientes completos. Por eso no se fuerza una tabla inventada.",
+              body: "Todavia no hay resultados recientes completos en la carga local. Cuando esten validados, se publican aca.",
               state: UI_STATES.PARTIAL,
               action: createOfficialLink(resources, "adjudicados-oficial", "Consultar fuente oficial"),
             }),
       ],
     }),
-    createCallout(
-      "Consultar un resultado no reemplaza revisar condiciones del plan. Si tenes dudas sobre adjudicacion, continuidad o pago de cuotas, conviene consultar antes de tomar decisiones.",
-      "warning",
-    ),
     createFinalHelpCta({
       title: "¿Necesitas interpretar un sorteo?",
-      body: "Podemos ayudarte a revisar que significa un resultado y que informacion conviene confirmar.",
+      body: "Podemos ayudarte a revisar que significa un resultado y como se conecta con tu titulo, cuota y plan.",
     }),
   );
 }
@@ -151,17 +146,13 @@ export async function initAdjudicationsPage() {
   target.append(
     createSectionHeader({
       eyebrow: "Adjudicados",
-      title: "Consulta por año y mes",
-      intro: "Usamos la estructura del data pack sin inventar historicos. Los datos mock quedan ocultos como resultados reales.",
+      title: "Consulta publicaciones de adjudicados",
+      intro: "La seccion queda preparada para historico local y prioriza fuente oficial cuando falta carga validada.",
     }),
     selectorSlot,
-    createCallout(
-      "Esta seccion ayuda a consultar publicaciones disponibles. Ante una duda sobre un caso puntual, revisa la fuente oficial o consultanos con los datos del titulo.",
-      "warning",
-    ),
     createFinalHelpCta({
       title: "¿Tenes dudas sobre un adjudicado?",
-      body: "Te orientamos para revisar la informacion disponible y contrastarla con documentacion oficial.",
+      body: "Te orientamos para revisar la publicacion disponible y entender el siguiente paso.",
     }),
   );
 
@@ -181,7 +172,7 @@ export async function initResourcesPage() {
     createSectionHeader({
       eyebrow: "Gestiones utiles",
       title: "Accesos para pagos, boletas e informacion oficial",
-      intro: "Priorizamos recursos verificados y marcamos los enlaces pendientes para no generar caminos rotos.",
+      intro: "Recursos para pagar, consultar boletas, revisar el sistema y acceder a informacion oficial.",
     }),
     el("section", {
       className: "plans-section",
@@ -198,7 +189,7 @@ export async function initResourcesPage() {
     ...groups.map(createResourceGroup),
     createFinalHelpCta({
       title: "¿No encontraste la gestion?",
-      body: "Si falta un link o no estas seguro de que recurso usar, consultanos antes de avanzar.",
+      body: "Si no estas seguro de que recurso usar, la agencia puede orientarte.",
     }),
   );
 }
@@ -215,8 +206,8 @@ export async function initFaqPage() {
   target.append(
     createSectionHeader({
       eyebrow: "FAQ general",
-      title: "Primero, las dudas mas sensibles",
-      intro: "Priorizamos las respuestas que evitan malentendidos sobre capital, sorteos, adjudicacion y solicitud asistida.",
+      title: "Respuestas claras para entender el sistema",
+      intro: "Priorizamos capital, sorteos, adjudicacion, pagos y proceso comercial.",
     }),
     el("section", {
       className: "plans-section",
@@ -237,7 +228,7 @@ export async function initFaqPage() {
     ...categories.map((category) => createFaqGroup(category, PRIORITY_FAQ_IDS)),
     createFinalHelpCta({
       title: "¿Tu duda no quedo resuelta?",
-      body: "La agencia puede ayudarte a revisar el plan, la documentacion y los proximos pasos sin apurarte a contratar.",
+      body: "La agencia puede ayudarte a revisar categoria, opcion de catalogo y proximos pasos.",
     }),
   );
 }

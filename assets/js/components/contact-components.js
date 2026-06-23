@@ -134,10 +134,10 @@ export function createContactMethods(config) {
 
 export function createProcessSteps() {
   const steps = [
-    ["1. Dejas tus datos", "Indicas tu interes, plan y dudas principales."],
-    ["2. Revisamos el caso", "La agencia valida la informacion antes de avanzar."],
-    ["3. Te contactamos", "Un asesor explica pasos, documentacion y condiciones."],
-    ["4. Decidis informado", "La pre-solicitud no reemplaza la contratacion formal."],
+    ["1. Dejas tus datos", "Indicas si miras auto, moto, dinero o si todavia no estas seguro."],
+    ["2. Ordenamos la consulta", "La agencia revisa objetivo, valor nominal, cuota y dudas principales."],
+    ["3. Te contactamos", "Un asesor explica alternativas, documentacion y siguientes pasos."],
+    ["4. Decidis informado", "Avanzas solo si la opcion y las condiciones quedaron claras."],
   ];
 
   return el("div", {
@@ -148,7 +148,7 @@ export function createProcessSteps() {
 
 export function createLeadForm({ plans, defaults, onSubmit }) {
   const planOptions = [
-    ...plans.map((plan) => ({ value: plan.slug, label: plan.name })),
+    ...plans.map((plan) => ({ value: plan.contactPreset || plan.slug, label: `${plan.displayName || plan.name} (${plan.category || "catalogo"})` })),
     { value: "no_estoy_seguro", label: "No estoy seguro / quiero asesoramiento" },
   ];
 
@@ -183,18 +183,18 @@ export function createLeadForm({ plans, defaults, onSubmit }) {
       el("fieldset", {
         children: [
           el("legend", { text: "Interes comercial" }),
-          createSelect({ name: "planInterest", label: "Plan de interes", options: planOptions, required: true, selected: defaults.plan }),
-          createTextarea({ name: "message", label: "Comentarios o dudas", placeholder: "Contanos que queres entender o que paso te gustaria iniciar." }),
+          createSelect({ name: "planInterest", label: "Opcion de catalogo", options: planOptions, required: true, selected: defaults.plan }),
+          createTextarea({ name: "message", label: "Comentarios o dudas", placeholder: "Contanos si te interesa auto, moto, dinero, valor nominal, cuota o una duda puntual." }),
           el("label", {
             className: "checkbox-field",
             children: [
               el("input", { attrs: { type: "checkbox", name: "readInfo", value: "yes" } }),
-              el("span", { text: "Ya lei la informacion general del plan o quiero que me la expliquen antes de avanzar." }),
+              el("span", { text: "Quiero que me expliquen la opcion antes de avanzar con una solicitud formal." }),
             ],
           }),
         ],
       }),
-      createCallout("Completar esta pre-solicitud no implica contratar ni quedar inscripto. Un asesor revisa la informacion antes de seguir.", "warning"),
+      createCallout("Completar esta pre-solicitud solo ordena la consulta. La contratacion formal, si corresponde, se revisa despues con documentacion.", "warning"),
       el("div", {
         className: "cluster",
         children: [
@@ -284,20 +284,19 @@ export function createContactHero() {
       el("div", {
         className: "plans-hub-hero__copy",
         children: [
-          el("span", { className: "badge", text: "Pre-solicitud asistida" }),
-          el("h2", { text: "Dejá tus datos y avanzá con informacion clara" }),
+          el("span", { className: "badge", text: "Contacto / catalogo asistido" }),
+          el("h2", { text: "Pasar de una opcion a una consulta concreta" }),
           el("p", {
             className: "home-hero__lead",
-            text: "Podés pedir asesoramiento o iniciar una pre-solicitud. La agencia revisa tu caso antes de continuar con pasos reales.",
+            text: "Contanos si estas mirando autos, motos o dinero. La agencia te ayuda a revisar la opcion antes de iniciar cualquier paso comercial.",
           }),
         ],
       }),
       el("aside", {
         className: "hero-panel",
         children: [
-          el("h3", { text: "Antes de iniciar" }),
-          el("p", { text: "Esta instancia no reemplaza documentacion, condiciones ni contratacion formal del plan." }),
-          el("p", { text: "Si tenes dudas, conviene resolverlas antes de confirmar cualquier avance." }),
+          el("h3", { text: "Que pasa despues" }),
+          el("p", { text: "La agencia revisa tu consulta y te contacta para ordenar valor nominal, cuota, categoria y documentacion." }),
         ],
       }),
     ],

@@ -1,0 +1,294 @@
+{
+  "meta": {
+    "version": "v2-catalog",
+    "sourcePolicy": "Catalogo comercial de agencia construido sobre datos del sistema Club San Jorge y campos prudentes cuando falta informacion especifica.",
+    "featuredCategorySlugs": ["autos", "motos", "dinero"],
+    "defaultMonths": {
+      "value": 330,
+      "status": "verified"
+    },
+    "currency": "ARS"
+  },
+  "categories": [
+    {
+      "slug": "autos",
+      "label": "Autos",
+      "shortLabel": "Autos",
+      "sortOrder": 1,
+      "theme": "red",
+      "description": "Opciones orientadas al rubro automotor dentro del sistema de Capitalizacion y Ahorro.",
+      "summary": "Para quienes quieren evaluar un plan vinculado a auto 0 km, valor nominal y posibles sorteos estimulo."
+    },
+    {
+      "slug": "motos",
+      "label": "Motos",
+      "shortLabel": "Motos",
+      "sortOrder": 2,
+      "theme": "green",
+      "description": "Opciones orientadas a motos dentro del sistema de Capitalizacion y Ahorro.",
+      "summary": "Para quienes buscan una alternativa mas simple de entender antes de elegir monto, cuota y condiciones."
+    },
+    {
+      "slug": "dinero",
+      "label": "Dinero",
+      "shortLabel": "Dinero",
+      "sortOrder": 3,
+      "theme": "dark",
+      "description": "Opciones orientadas a formar capital / valor nominal en dinero segun el plan contratado.",
+      "summary": "Para quienes priorizan capital disponible y quieren revisar plazo, rescate y funcionamiento del sistema."
+    }
+  ],
+  "items": [
+    {
+      "id": "auto-330-300",
+      "slug": "auto-330-300",
+      "category": "autos",
+      "displayName": "Auto 0 km - cuota 3,00‰",
+      "brand": "",
+      "model": "",
+      "planLabel": "Plan 330 meses - cuota del 3,00‰ del Valor Nominal",
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": null,
+        "label": "Segun titulo suscripto",
+        "status": "pending_validation"
+      },
+      "cuota": {
+        "value": null,
+        "label": "3,00‰ del Valor Nominal + conceptos aplicables",
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Opcion de 330 meses orientada al rubro automotor. El foco comercial es revisar valor nominal, cuota, sorteos y condiciones antes de iniciar solicitud.",
+      "notes": [
+        {
+          "text": "La web oficial informa planes 330 no amortizantes.",
+          "status": "verified"
+        },
+        {
+          "text": "Marca, modelo y valor nominal deben confirmarse segun la solicitud y documentacion vigente.",
+          "status": "pending_validation"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "que-se-obtiene-al-final-del-plan-330",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-salgo-adjudicado-debo-seguir-pagando"
+      ],
+      "contactPreset": "auto-330-300",
+      "sourceStatus": "verified_system_partial_catalog"
+    },
+    {
+      "id": "auto-330-283",
+      "slug": "auto-330-283",
+      "category": "autos",
+      "displayName": "Auto 0 km - cuota 2,83‰",
+      "brand": "",
+      "model": "",
+      "planLabel": "Plan 330 meses - cuota del 2,83‰ del Valor Nominal",
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": null,
+        "label": "Segun titulo suscripto",
+        "status": "pending_validation"
+      },
+      "cuota": {
+        "value": null,
+        "label": "2,83‰ del Valor Nominal + conceptos aplicables",
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Alternativa automotor dentro de los planes 330. Conviene revisar diferencia de cuota, derecho de suscripcion y valor nominal antes de avanzar.",
+      "notes": [
+        {
+          "text": "La variante 2,83‰ surge de la informacion del sistema publicada oficialmente.",
+          "status": "verified"
+        },
+        {
+          "text": "La aplicacion comercial concreta debe confirmarse con la agencia.",
+          "status": "pending_validation"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "que-se-obtiene-al-final-del-plan-330",
+        "cuando-puedo-solicitar-mi-rescate"
+      ],
+      "contactPreset": "auto-330-283",
+      "sourceStatus": "verified_system_partial_catalog"
+    },
+    {
+      "id": "moto-330",
+      "slug": "moto-330",
+      "category": "motos",
+      "displayName": "Moto 0 km",
+      "brand": "",
+      "model": "",
+      "planLabel": "Plan 330 meses orientado a moto",
+      "months": {
+        "value": 330,
+        "status": "pending_validation"
+      },
+      "valorNominal": {
+        "value": null,
+        "label": "A confirmar segun opcion elegida",
+        "status": "pending_validation"
+      },
+      "cuota": {
+        "value": null,
+        "label": "A confirmar",
+        "status": "pending_validation"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Opcion comercial orientada a motos. La consulta sirve para definir valor nominal, cuota estimada y condiciones aplicables.",
+      "notes": [
+        {
+          "text": "La FAQ oficial menciona moto 0 km como objetivo posible del sistema.",
+          "status": "verified"
+        },
+        {
+          "text": "Faltan datos especificos de catalogo para marca, modelo y cuota.",
+          "status": "pending_validation"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-salgo-adjudicado-debo-seguir-pagando"
+      ],
+      "contactPreset": "moto-330",
+      "sourceStatus": "pending_catalog_details"
+    },
+    {
+      "id": "moto-consulta-valor",
+      "slug": "moto-consulta-valor",
+      "category": "motos",
+      "displayName": "Moto - definir valor nominal",
+      "brand": "",
+      "model": "",
+      "planLabel": "Consulta de valor nominal para moto",
+      "months": {
+        "value": null,
+        "status": "pending_validation"
+      },
+      "valorNominal": {
+        "value": null,
+        "label": "A definir",
+        "status": "pending_validation"
+      },
+      "cuota": {
+        "value": null,
+        "label": "A confirmar",
+        "status": "pending_validation"
+      },
+      "currency": "ARS",
+      "status": "consultation",
+      "featured": false,
+      "description": "Entrada para quienes todavia no saben que monto o moto tomar como referencia y necesitan orientacion comercial.",
+      "notes": [
+        {
+          "text": "Item de catalogo operativo para ordenar consultas, no claim oficial de una variante especifica.",
+          "status": "pending_validation"
+        }
+      ],
+      "faqRefs": [
+        "la-inscripcion-se-hace-online",
+        "como-se-realizan-los-sorteos-mensuales"
+      ],
+      "contactPreset": "moto-consulta-valor",
+      "sourceStatus": "agency_operational"
+    },
+    {
+      "id": "dinero-330",
+      "slug": "dinero-330",
+      "category": "dinero",
+      "displayName": "Capital / valor nominal",
+      "brand": "",
+      "model": "",
+      "planLabel": "Plan 330 meses orientado a capital",
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": null,
+        "label": "Segun titulo suscripto",
+        "status": "pending_validation"
+      },
+      "cuota": {
+        "value": null,
+        "label": "Segun Valor Nominal",
+        "status": "pending_validation"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Alternativa para evaluar la formacion de un capital en dinero, sin asociarla a un bien fisico especifico.",
+      "notes": [
+        {
+          "text": "Al finalizar el plan se obtiene el valor nominal inicial suscripto mas conceptos que correspondan segun condiciones.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "que-es-el-plan-dinero",
+        "que-se-obtiene-al-final-del-plan-dinero",
+        "cuando-puedo-solicitar-mi-rescate"
+      ],
+      "contactPreset": "dinero-330",
+      "sourceStatus": "verified_system_partial_catalog"
+    },
+    {
+      "id": "dinero-90-120",
+      "slug": "dinero-90-120",
+      "category": "dinero",
+      "displayName": "Capital - planes 90 / 120 meses",
+      "brand": "",
+      "model": "",
+      "planLabel": "Planes 90 y 120 meses amortizantes",
+      "months": {
+        "value": "90 / 120",
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": null,
+        "label": "Segun titulo suscripto",
+        "status": "pending_validation"
+      },
+      "cuota": {
+        "value": null,
+        "label": "Segun plazo y Valor Nominal",
+        "status": "pending_validation"
+      },
+      "currency": "ARS",
+      "status": "consultation",
+      "featured": false,
+      "description": "Opcion a revisar solo con asesoramiento, porque estos plazos tienen logica amortizante y condiciones distintas a los 330 meses.",
+      "notes": [
+        {
+          "text": "La web oficial informa que los planes 90 y 120 meses son amortizantes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "cuando-puedo-solicitar-mi-rescate"
+      ],
+      "contactPreset": "dinero-90-120",
+      "sourceStatus": "verified_system_partial_catalog"
+    }
+  ]
+}

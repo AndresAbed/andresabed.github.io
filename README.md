@@ -5,12 +5,13 @@ Base estatica para construir el sitio comercial e informativo de una agencia mer
 ## Estructura
 
 - `index.html`: Home V1 real comercial e informativa.
-- `planes/`: hub real de planes y paginas de detalle Auto 330, Moto 330 y Dinero.
+- `planes/`: catalogo V2 por categorias Autos, Motos y Dinero, mas paginas detalle heredadas.
 - `sorteos/`, `adjudicados/`, `recursos/`, `faq/`, `contacto/`: paginas internas base.
 - `assets/css/`: tokens, base, layout, componentes, utilities y ajustes de pagina.
 - `assets/js/`: shell, data layer, helpers de estado, componentes y scripts de pagina.
 - `assets/img/placeholders/`: placeholders visuales temporales.
 - `data_pack_v2/`: source-of-truth editable de contenido. No se duplica ni se migra.
+- `data_pack_v2/plan_catalog.json`: source principal V2 para renderizar catalogo comercial.
 - `data_pack_v2/agency-contact.json`: configuracion operativa de contacto/pre-solicitud de la agencia.
 
 ## Como correr localmente
@@ -47,6 +48,7 @@ Incluye funciones como:
 
 - `loadSite()`
 - `loadPlans()`
+- `loadPlanCatalog()`
 - `loadFaq()`
 - `loadResources()`
 - `loadDraws()`
@@ -65,7 +67,7 @@ Los helpers de estado estan en `assets/js/utils/status.js` y contemplan:
 
 ### Source of truth
 
-`data_pack_v2/` es el source-of-truth editable del proyecto. La V1 no duplica ni migra JSON a otra carpeta: las paginas consumen directamente los archivos publicados en esa carpeta.
+`data_pack_v2/` es el source-of-truth editable del proyecto. La V2 no duplica ni migra JSON a otra carpeta: las paginas consumen directamente los archivos publicados en esa carpeta.
 
 ### Separacion conceptual
 
@@ -74,7 +76,23 @@ El sitio mantiene dos capas conceptuales:
 - Capa oficial / sistema Club San Jorge: planes, FAQ del sistema, sorteos, adjudicados, recursos oficiales y datos institucionales del data pack.
 - Capa agencia / comercial-operativa: hero comercial, CTAs, contacto, pre-solicitud asistida, formulario, copy de confianza y explicacion del acompanamiento de Agencias Abed.
 
-La separacion esta reflejada en componentes, copy y datos de contacto. No requiere crear otra app ni duplicar contenido.
+La separacion esta reflejada en componentes, copy, catalogo y datos de contacto. No requiere crear otra app ni duplicar contenido.
+
+### Catalogo V2
+
+La Home y `/planes/` consumen `data_pack_v2/plan_catalog.json`.
+
+`plans.json` queda como compatibilidad para paginas detalle heredadas y para contenido explicativo historico, pero ya no es la arquitectura principal de planes.
+
+El catalogo V2 agrupa por:
+
+- `autos`
+- `motos`
+- `dinero`
+
+Cada item soporta `displayName`, `category`, `brand`, `model`, `planLabel`, `months`, `valorNominal`, `cuota`, `status`, `featured`, `notes`, `faqRefs`, `contactPreset` y `sourceStatus`.
+
+Si faltan valores nominales, cuota exacta, marca o modelo, el dato se muestra como `A confirmar` y no se completa con informacion inventada.
 
 ## Reglas de renderizado
 
@@ -115,11 +133,11 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 
 ## Hecho en Etapa 3
 
-- Hub real de planes en `/planes/`.
-- Comparador simple tipo opcion B con datos de `plans.json`.
-- Paginas de detalle para Auto 330, Moto 330 y Plan Dinero.
+- Hub inicial de planes en `/planes/`.
+- Comparador simple tipo opcion B con datos de `plans.json` como antecedente V1.
+- Paginas de detalle heredadas para auto, moto y dinero.
 - Componentes reutilizables de planes en `assets/js/components/plan-components.js`.
-- Fallbacks para campos pendientes o incompletos en Moto 330 y Plan Dinero.
+- Fallbacks para campos pendientes o incompletos en moto y dinero.
 
 ## Hecho en Etapa 4
 
@@ -146,6 +164,16 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 - `robots.txt`, `sitemap.xml`, `favicon.svg` y `site.webmanifest`.
 - Ajuste del OG image del data pack para apuntar al asset existente.
 - Documentacion de reglas de renderizado, estados de UI y checklist de publicacion.
+
+## Rebuild V2
+
+- `REBUILD_V2_PLAN.md` documenta auditoria, diagnostico y plan de reconstruccion.
+- Home reconstruida con narrativa comercial: hero fuerte, categorias, sistema, catalogo destacado, respaldo, sorteos/adjudicados, FAQ, recursos y contacto.
+- `/planes/` reconstruida como catalogo navegable por categorias.
+- Nuevo data model `data_pack_v2/plan_catalog.json`.
+- Contacto actualizado para recibir opciones de catalogo.
+- Copy global reducido en disclaimers repetidos y ajustado a tono comercial sobrio.
+- Paginas internas alineadas con la nueva arquitectura y CTAs.
 
 ## Corresponde a una futura integracion
 

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "v2-hardening",
-    "commercialFocus": "La agencia prioriza comercialmente los planes 330, especialmente auto.",
+    "commercialFocus": "La agencia prioriza el catalogo por categorias: autos, motos y dinero, con foco en planes 330 cuando aplique.",
     "featuredPlanSlug": "auto-330"
   },
   "systemSummary": {
@@ -54,8 +54,8 @@
       "featured": true,
       "type": "auto",
       "commercialStatus": "active_priority",
-      "name": "Plan Auto 330",
-      "shortLabel": "Auto 330",
+      "name": "Plan orientado a auto",
+      "shortLabel": "Autos",
       "headline": "Plan de capitalización y ahorro orientado al rubro automotor",
       "summary": "Plan de 330 cuotas con formación de capital, participación en sorteos estímulo según condiciones vigentes y posibilidad de rescate desde la cuota correspondiente.",
       "termMonths": {
@@ -125,8 +125,8 @@
       "featured": false,
       "type": "moto",
       "commercialStatus": "active_secondary",
-      "name": "Plan Moto 330",
-      "shortLabel": "Moto 330",
+      "name": "Plan orientado a moto",
+      "shortLabel": "Motos",
       "headline": "Plan de capitalización y ahorro orientado a motos",
       "summary": "Plan de 330 cuotas con lógica de ahorro y participación en sorteos estímulo, orientado al rubro de motos.",
       "termMonths": {
@@ -179,7 +179,7 @@
       "featured": false,
       "type": "dinero",
       "commercialStatus": "active_secondary",
-      "name": "Plan Dinero / Capital",
+      "name": "Plan de capital / dinero",
       "shortLabel": "Dinero",
       "headline": "Plan orientado a obtener un capital / monto de dinero según el plan contratado",
       "summary": "Alternativa de capitalización y ahorro orientada a formar un capital en dinero, con funcionamiento sujeto al plan específico y sus condiciones.",

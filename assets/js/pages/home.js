@@ -1,72 +1,35 @@
 import {
-  getFeaturedFaqs,
-  getFeaturedPlan,
+  getCatalogCategories,
+  getCatalogItemsByCategory,
   getFaqById,
-  getPlanBySlug,
+  getFeaturedCatalogItems,
   getResourcesByGroup,
   loadAllForHome,
   normalizeInternalTarget,
 } from "../data/api.js";
 import { classifyLinkItem } from "../data/validators.js";
+import {
+  categoryHref,
+  createButton,
+  createCatalogItemCard,
+  createCategoryEntryCard,
+  createFeaturedCatalogGrid,
+  createMiniFact,
+  createSectionHeader,
+  createSystemExplainer,
+} from "../components/plan-components.js";
 import { clear, el, qs } from "../utils/dom.js";
-import { valueOrConfirm } from "../utils/formatters.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
-import { hasValue, isMockStatus, isValidUrl } from "../utils/validators.js";
-
-const PLAN_ROUTES = {
-  "auto-330": "/planes/auto-330/",
-  "moto-330": "/planes/moto-330/",
-  dinero: "/planes/dinero/",
-};
+import { isMockStatus, isValidUrl } from "../utils/validators.js";
 
 const PRIORITY_FAQ_IDS = [
   "que-se-obtiene-al-final-del-plan-330",
   "como-se-realizan-los-sorteos-mensuales",
   "si-salgo-adjudicado-debo-seguir-pagando",
   "si-mi-numero-sale-otra-vez-que-pasa",
-  "la-inscripcion-se-hace-online",
+  "si-no-pago-la-cuota-y-salgo-sorteado",
+  "como-puedo-pagar-mi-cuota",
 ];
-
-function createButton({ label, href, variant = "primary" }) {
-  const target = normalizeInternalTarget(href);
-  const enabled = isValidUrl(target);
-
-  return el("a", {
-    className: `button button--${enabled ? variant : "disabled"}`,
-    text: label,
-    attrs: enabled ? { href: target } : { href: "#", "aria-disabled": "true", title: FALLBACK_TEXT.unavailable },
-  });
-}
-
-function createSectionHeader({ eyebrow, title, intro, id }) {
-  return el("div", {
-    className: "section-header",
-    children: [
-      eyebrow ? el("span", { className: "badge", text: eyebrow }) : null,
-      el("h2", { text: title, attrs: id ? { id } : {} }),
-      intro ? el("p", { text: intro }) : null,
-    ],
-  });
-}
-
-function createMiniFact({ label, value, state = UI_STATES.READY }) {
-  return el("div", {
-    className: "mini-fact",
-    attrs: { "data-state": state },
-    children: [el("span", { text: label }), el("strong", { text: value })],
-  });
-}
-
-function createCallout(text) {
-  return el("div", {
-    className: "callout",
-    children: [el("p", { text })],
-  });
-}
-
-function getPlanRoute(slug) {
-  return PLAN_ROUTES[slug] || "/planes/";
-}
 
 function getPrimaryCta(site) {
   const cta = site?.cta?.primary;
@@ -80,16 +43,15 @@ function renderHero(data) {
   const target = qs("[data-home-hero]");
   if (!target) return;
 
-  const { site, plans } = data;
+  const { site, planCatalog } = data;
   const agency = site.agency || {};
-  const club = site.club || {};
-  const featuredPlan = getFeaturedPlan(plans);
   const primaryCta = getPrimaryCta(site);
+  const categories = getCatalogCategories(planCatalog);
 
   clear(target);
   target.append(
     el("div", {
-      className: "container home-hero__inner",
+      className: "container home-hero__inner home-hero__inner--v2",
       children: [
         el("div", {
           className: "home-hero__copy",
@@ -97,37 +59,40 @@ function renderHero(data) {
             el("span", { className: "badge", text: agency.legalDescriptor || "Agencia mercantil" }),
             el("h1", {
               attrs: { id: "home-title" },
-              text: "Entende los planes de Club San Jorge antes de avanzar",
+              text: "Elegí mejor tu plan de Club San Jorge con asesoramiento claro",
             }),
             el("p", {
               className: "home-hero__lead",
               text:
-                agency.tagline ||
-                "Asesoramiento claro para entender planes de Capitalizacion y Ahorro y consultar con informacion precisa.",
-            }),
-            el("p", {
-              text:
-                "Te ayudamos a revisar objetivos, cuotas, sorteos y condiciones para que la decision sea clara, sin promesas automaticas ni mensajes confusos.",
+                "Explorá opciones de autos, motos y dinero. Te ayudamos a entender valor nominal, cuotas, sorteos y pasos de solicitud antes de avanzar.",
             }),
             el("div", {
               className: "cluster",
               children: [
                 createButton({ label: primaryCta.label, href: primaryCta.href, variant: "primary" }),
-                createButton({ label: "Ver planes", href: "/planes/", variant: "secondary" }),
+                createButton({ label: "Explorar catalogo", href: "/planes/", variant: "secondary" }),
               ],
             }),
           ],
         }),
         el("aside", {
-          className: "hero-panel",
-          attrs: { "aria-label": "Resumen del sistema" },
+          className: "hero-catalog-panel",
+          attrs: { "aria-label": "Categorias principales" },
           children: [
-            el("span", { className: "badge badge--warning", text: "Capitalizacion y Ahorro" }),
-            el("h2", { text: featuredPlan?.shortLabel ? `Foco comercial: ${featuredPlan.shortLabel}` : club.headline }),
-            el("p", { text: featuredPlan?.summary || club.supportingClaim }),
-            createCallout(
-              "Los planes forman un capital / ahorro. Los sorteos funcionan como estimulos segun condiciones vigentes; no equivalen a entrega automatica de un vehiculo.",
-            ),
+            el("span", { className: "eyebrow", text: "Catalogo asistido" }),
+            el("h2", { text: "Autos, motos y capital en una sola consulta ordenada" }),
+            el("div", {
+              className: "hero-category-list",
+              children: categories.map((category) =>
+                el("a", {
+                  attrs: { href: categoryHref(category.slug) },
+                  children: [
+                    el("strong", { text: category.label }),
+                    el("span", { text: category.summary }),
+                  ],
+                }),
+              ),
+            }),
           ],
         }),
       ],
@@ -135,8 +100,82 @@ function renderHero(data) {
   );
 }
 
-function renderTrust(data) {
+function renderCategoryEntry(data) {
   const target = qs("[data-trust-section]");
+  if (!target) return;
+
+  const categories = getCatalogCategories(data.planCatalog);
+
+  clear(target);
+  target.append(
+    createSectionHeader({
+      eyebrow: "Por donde empezar",
+      title: "Tres puertas de entrada al catalogo",
+      id: "category-entry-title",
+      intro: "Primero elegis objetivo. Despues revisamos monto, cuota y condiciones del sistema.",
+    }),
+    el("div", {
+      className: "category-entry-grid",
+      children: categories.map((category) => createCategoryEntryCard(category, getCatalogItemsByCategory(data.planCatalog, category.slug))),
+    }),
+  );
+}
+
+function renderHowItWorks(data) {
+  const target = qs("[data-how-it-works]");
+  if (!target) return;
+
+  const endFaq = getFaqById(data.faq, "que-se-obtiene-al-final-del-plan-330");
+
+  clear(target);
+  target.append(
+    createSectionHeader({
+      eyebrow: "Como funciona",
+      title: "Capitalizacion y ahorro, explicado para decidir mejor",
+      id: "how-title",
+      intro:
+        "La web de agencia no reemplaza la documentacion oficial: ordena la informacion para que sepas que consultar.",
+    }),
+    createSystemExplainer(),
+    el("div", {
+      className: "system-note",
+      children: [
+        el("h3", { text: "El final del plan no se resume en una promesa simple" }),
+        el("p", {
+          text:
+            endFaq?.answer ||
+            "El objeto del contrato es formar un capital equivalente al Valor Nominal del Titulo, segun condiciones vigentes.",
+        }),
+      ],
+    }),
+  );
+}
+
+function renderFeaturedCatalog(data) {
+  const target = qs("[data-featured-plans]");
+  if (!target) return;
+
+  const categories = getCatalogCategories(data.planCatalog);
+  const featured = getFeaturedCatalogItems(data.planCatalog, 6);
+
+  clear(target);
+  target.append(
+    createSectionHeader({
+      eyebrow: "Catalogo destacado",
+      title: "Opciones para consultar con datos claros",
+      id: "plans-title",
+      intro: "No son tres productos cerrados: son fichas de catalogo para ordenar una conversacion comercial seria.",
+    }),
+    createFeaturedCatalogGrid(featured, categories),
+    el("div", {
+      className: "section-actions",
+      children: [createButton({ label: "Ver catalogo completo", href: "/planes/", variant: "primary" })],
+    }),
+  );
+}
+
+function renderTrust(data) {
+  const target = qs("[data-resources-hub]");
   if (!target) return;
 
   const { site } = data;
@@ -145,17 +184,16 @@ function renderTrust(data) {
   clear(target);
   target.append(
     el("div", {
-      className: "trust-band",
+      className: "trust-band trust-band--v2",
       children: [
         el("div", {
           className: "trust-band__copy",
           children: [
             el("span", { className: "badge", text: site.agency?.coverageLabel || "Atencion online" }),
-            el("h2", { attrs: { id: "trust-title" }, text: "Respaldo del sistema, acompanamiento de agencia" }),
+            el("h2", { attrs: { id: "trust-title" }, text: "Respaldo del sistema, trato de agencia" }),
             el("p", {
               text:
-                site.legal?.siteRoleText ||
-                "Este sitio representa comercialmente a una agencia mercantil y brinda informacion orientativa.",
+                "Club San Jorge aporta el sistema de Capitalizacion y Ahorro. Agencias Abed te ayuda a leerlo, compararlo y avanzar con una consulta bien preparada.",
             }),
           ],
         }),
@@ -168,204 +206,68 @@ function renderTrust(data) {
   );
 }
 
-function createPlanCard(plan, featuredPlanSlug) {
-  const isFeatured = plan.slug === featuredPlanSlug;
-  const rescue = plan.rescue?.canRequestFromInstallment;
-  const rescueState = resolveValueState(rescue, plan.rescue?.status);
-  const clarification = plan.importantClarifications?.[0]?.text || plan.whatYouGetAtEnd?.[0]?.text;
-
-  return el("article", {
-    className: `plan-card ${isFeatured ? "plan-card--featured" : ""}`,
-    children: [
-      el("div", {
-        className: "plan-card__top",
-        children: [
-          el("span", { className: isFeatured ? "badge" : "badge badge--warning", text: isFeatured ? "Prioritario" : "Alternativa" }),
-          el("h3", { text: plan.name }),
-        ],
-      }),
-      el("p", { text: plan.summary }),
-      el("div", {
-        className: "plan-card__badges",
-        children: (plan.badges || []).map((badge) => el("span", { className: "badge", text: badge })),
-      }),
-      el("div", {
-        className: "plan-card__facts",
-        children: [
-          createMiniFact({ label: "Plazo", value: plan.termMonths?.value ? `${plan.termMonths.value} meses` : valueOrConfirm(null), state: resolveValueState(plan.termMonths?.value, plan.termMonths?.status) }),
-          createMiniFact({ label: "Rescate", value: rescue ? `Desde cuota ${rescue}` : valueOrConfirm(null), state: rescueState }),
-        ],
-      }),
-      clarification ? createCallout(clarification) : null,
-      el("div", {
-        className: "cluster",
-        children: [
-          createButton({ label: "Ver plan", href: getPlanRoute(plan.slug), variant: isFeatured ? "primary" : "secondary" }),
-          createButton({ label: "Consultar", href: `/contacto/?intent=asesoramiento&plan=${encodeURIComponent(plan.slug)}`, variant: "secondary" }),
-        ],
-      }),
-    ],
-  });
-}
-
-function renderPlans(data) {
-  const target = qs("[data-featured-plans]");
-  if (!target) return;
-
-  const plansData = data.plans;
-  const featuredPlanSlug = plansData.meta?.featuredPlanSlug;
-  const plans = [...(plansData.plans || [])].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-
-  clear(target);
-  target.append(
-    createSectionHeader({
-      eyebrow: "Planes destacados",
-      title: "Opciones para distintos objetivos de ahorro",
-      id: "plans-title",
-      intro:
-        "Auto 330 tiene prioridad comercial, pero mostramos las alternativas disponibles con aclaraciones para evitar malentendidos.",
-    }),
-    el("div", {
-      className: "plans-grid",
-      children: plans.map((plan) => createPlanCard(plan, featuredPlanSlug)),
-    }),
-  );
-}
-
-function renderHowItWorks(data) {
-  const target = qs("[data-how-it-works]");
-  if (!target) return;
-
-  const { site, plans, faq } = data;
-  const autoPlan = getPlanBySlug(plans, "auto-330");
-  const endFaq = getFaqById(faq, "que-se-obtiene-al-final-del-plan-330");
-  const drawsFaq = getFaqById(faq, "como-se-realizan-los-sorteos-mensuales");
-  const repeatFaq = getFaqById(faq, "si-mi-numero-sale-otra-vez-que-pasa");
-
-  const steps = [
-    {
-      title: "1. Es ahorro",
-      body: autoPlan?.whatItIs?.[0]?.text || "Es un plan de Capitalizacion y Ahorro.",
-    },
-    {
-      title: "2. Pagas cuotas",
-      body:
-        autoPlan?.whatItIs?.[1]?.text ||
-        "Cada cuota forma parte del esquema de ahorro previsto por el plan contratado.",
-    },
-    {
-      title: "3. Formas capital",
-      body: endFaq?.answer || autoPlan?.whatYouGetAtEnd?.[0]?.text || "Al finalizar, obtenes el capital correspondiente al plan.",
-    },
-    {
-      title: "4. Participan sorteos",
-      body: drawsFaq?.answer || "Los sorteos son estimulos dentro del sistema y se rigen por condiciones vigentes.",
-    },
-    {
-      title: "5. Consulta antes",
-      body:
-        repeatFaq?.answer ||
-        "Antes de avanzar conviene entender rescate, adjudicacion, continuidad del titulo y documentacion.",
-    },
-  ];
-
-  clear(target);
-  target.append(
-    createSectionHeader({
-      eyebrow: "Como funciona",
-      title: "Una explicacion simple antes de consultar",
-      id: "how-title",
-      intro:
-        "La prioridad es que sepas que estas evaluando: capitalizacion, ahorro, sorteos estimulo y condiciones vigentes.",
-    }),
-    el("div", {
-      className: "steps-grid",
-      children: steps.map((step) =>
-        el("article", {
-          className: "step-card",
-          children: [el("h3", { text: step.title }), el("p", { text: step.body })],
-        }),
-      ),
-    }),
-    createCallout(site.legal?.disclaimerText || "Revisa siempre documentacion y condiciones vigentes antes de contratar."),
-  );
-}
-
 function renderDraws(data) {
   const target = qs("[data-draws-preview]");
   if (!target) return;
 
   const draws = data.draws || {};
+  const adjudications = data.adjudications || {};
+  const hasRealLocalData = adjudications.meta?.status && !isMockStatus(adjudications.meta.status);
   const lastState = resolveValueState(draws.lastDraw?.date, draws.lastDraw?.status);
   const nextState = resolveValueState(draws.nextDraw?.date, draws.nextDraw?.status);
-  const renderableStimuli = (draws.stimuli || []).filter((item) => hasValue(item.winningNumber));
 
   clear(target);
   target.append(
     el("article", {
-      className: "home-panel stack",
+      className: "results-panel",
       children: [
-        createSectionHeader({
-          eyebrow: "Sorteos",
-          title: "Resultados y proximas fechas",
-          id: "draws-title",
-          intro: draws.schedule?.officialRule,
+        el("div", {
+          children: [
+            el("span", { className: "badge", text: "Sorteos y adjudicados" }),
+            el("h2", { attrs: { id: "draws-title" }, text: "El sistema tambien se sigue por resultados" }),
+            el("p", { text: draws.schedule?.officialRule || "Los sorteos se publican segun condiciones vigentes del sistema." }),
+          ],
         }),
         el("div", {
           className: "facts-row",
           children: [
             createMiniFact({ label: "Ultimo sorteo", value: draws.lastDraw?.date || FALLBACK_TEXT.updating, state: lastState }),
             createMiniFact({ label: "Proximo sorteo", value: draws.nextDraw?.date || FALLBACK_TEXT.updating, state: nextState }),
+            createMiniFact({ label: "Adjudicados locales", value: hasRealLocalData ? "Disponibles" : "En validacion", state: hasRealLocalData ? UI_STATES.READY : UI_STATES.PARTIAL }),
           ],
         }),
-        renderableStimuli.length
-          ? el("div", {
-              className: "stimuli-grid",
-              children: renderableStimuli.map((item) => createMiniFact({ label: item.label, value: item.winningNumber })),
-            })
-          : createCallout("Los numeros de estimulos se mostraran cuando esten validados en el data pack."),
-        createButton({ label: "Ver sorteos", href: "/sorteos/", variant: "secondary" }),
+        el("div", {
+          className: "cluster",
+          children: [
+            createButton({ label: "Ver sorteos", href: "/sorteos/", variant: "secondary" }),
+            createButton({ label: "Ver adjudicados", href: "/adjudicados/", variant: "secondary" }),
+          ],
+        }),
       ],
     }),
   );
-}
-
-function findResource(resources, id) {
-  return (resources.groups || []).flatMap((group) => group.items || []).find((item) => item.id === id) || null;
 }
 
 function renderAdjudications(data) {
   const target = qs("[data-adjudications-preview]");
   if (!target) return;
 
-  const adjudications = data.adjudications || {};
   const officialLink = findResource(data.resources, "adjudicados-oficial");
-  const hasRealLocalData = adjudications.meta?.status && !isMockStatus(adjudications.meta.status);
-  const years = (adjudications.availableYears || []).map((item) => item.year).filter(Boolean);
 
   clear(target);
   target.append(
     el("article", {
-      className: "home-panel stack",
+      className: "home-panel stack home-panel--editorial",
       children: [
         createSectionHeader({
-          eyebrow: "Adjudicados",
-          title: "Consulta con fuente clara",
-          intro:
-            "La preview local queda preparada, pero no publicamos ejemplos mock como si fueran resultados reales.",
+          eyebrow: "Consulta rapida",
+          title: "Resultados oficiales y recursos a mano",
+          intro: "Cuando un dato local no esta validado, la web deriva al recurso oficial en vez de completar una tabla falsa.",
         }),
-        el("div", {
-          className: "facts-row",
-          children: [
-            createMiniFact({ label: "Historico preparado", value: years.length ? years.join(", ") : FALLBACK_TEXT.updating, state: years.length ? UI_STATES.PARTIAL : UI_STATES.EMPTY }),
-            createMiniFact({ label: "Datos locales", value: hasRealLocalData ? "Disponibles" : "En validacion", state: hasRealLocalData ? UI_STATES.READY : UI_STATES.PARTIAL }),
-          ],
-        }),
-        createCallout("Por ahora se prioriza el acceso a la fuente oficial hasta contar con una carga local validada."),
         el("div", {
           className: "cluster",
           children: [
-            createButton({ label: "Ver adjudicados", href: "/adjudicados/", variant: "secondary" }),
+            createButton({ label: "Abrir adjudicados", href: "/adjudicados/", variant: "secondary" }),
             officialLink && classifyLinkItem(officialLink) === UI_STATES.READY
               ? createButton({ label: "Fuente oficial", href: officialLink.url, variant: "secondary" })
               : null,
@@ -376,24 +278,27 @@ function renderAdjudications(data) {
   );
 }
 
+function findResource(resources, id) {
+  return (resources.groups || []).flatMap((group) => group.items || []).find((item) => item.id === id) || null;
+}
+
 function renderFaq(data) {
   const target = qs("[data-faq-highlight]");
   if (!target) return;
 
-  const selected = PRIORITY_FAQ_IDS.map((id) => getFaqById(data.faq, id)).filter(Boolean);
-  const faqs = selected.length ? selected : getFeaturedFaqs(data.faq);
+  const faqs = PRIORITY_FAQ_IDS.map((id) => getFaqById(data.faq, id)).filter(Boolean);
 
   clear(target);
   target.append(
     createSectionHeader({
       eyebrow: "Dudas clave",
-      title: "Preguntas que conviene resolver antes de avanzar",
+      title: "Preguntas que cambian la decision",
       id: "faq-title",
-      intro: "Seleccionamos las preguntas que mas ayudan a entender capital, sorteos, adjudicacion y proceso asistido.",
+      intro: "Antes de elegir una ficha del catalogo, conviene resolver estas preguntas.",
     }),
     el("div", {
       className: "accordion-shell faq-home",
-      children: faqs.slice(0, 5).map((item) =>
+      children: faqs.slice(0, 6).map((item) =>
         el("details", {
           children: [el("summary", { text: item.question }), el("p", { text: item.answer })],
         }),
@@ -401,7 +306,7 @@ function renderFaq(data) {
     }),
     el("div", {
       className: "section-actions",
-      children: [createButton({ label: "Ver todas las FAQ", href: "/faq/", variant: "secondary" })],
+      children: [createButton({ label: "Ver FAQ completa", href: "/faq/", variant: "secondary" })],
     }),
   );
 }
@@ -425,7 +330,7 @@ function createResourceCard(item) {
 }
 
 function renderResources(data) {
-  const target = qs("[data-resources-hub]");
+  const target = qs("[data-final-cta]");
   if (!target) return;
 
   const management = getResourcesByGroup(data.resources, "gestiones");
@@ -435,13 +340,13 @@ function renderResources(data) {
   clear(target);
   target.append(
     createSectionHeader({
-      eyebrow: "Recursos utiles",
-      title: "Accesos rapidos para pagos y gestiones",
+      eyebrow: "Gestiones",
+      title: "Pagos, boletas y recursos oficiales",
       id: "resources-title",
-      intro: "Mostramos enlaces verificados cuando existen. Las gestiones pendientes quedan indicadas sin crear links rotos.",
+      intro: "Accesos utiles para quienes ya son suscriptores o estan revisando documentacion.",
     }),
     el("div", {
-      className: "resource-grid",
+      className: "resource-grid resource-grid--wide",
       children: items.map(createResourceCard),
     }),
     el("div", {
@@ -452,7 +357,7 @@ function renderResources(data) {
 }
 
 function renderFinalCta(data) {
-  const target = qs("[data-final-cta]");
+  const target = qs("[data-contact-cta]");
   if (!target) return;
 
   const { site } = data;
@@ -462,16 +367,16 @@ function renderFinalCta(data) {
   clear(target);
   target.append(
     el("article", {
-      className: "final-cta",
+      className: "final-cta final-cta--v2",
       children: [
         el("div", {
           className: "final-cta__copy",
           children: [
             el("span", { className: "badge", text: "Asesoramiento asistido" }),
-            el("h2", { attrs: { id: "contact-title" }, text: "Hablemos antes de que tomes una decision" }),
+            el("h2", { attrs: { id: "contact-title" }, text: "Converti una duda en una consulta concreta" }),
             el("p", {
               text:
-                "Contanos que objetivo tenes y te ayudamos a revisar el plan, las condiciones y los pasos para avanzar con informacion clara.",
+                "Decinos si miras auto, moto o dinero. Te ayudamos a revisar la opcion, ordenar documentacion y entender el siguiente paso.",
             }),
           ],
         }),
@@ -481,7 +386,7 @@ function renderFinalCta(data) {
             createButton({ label: primaryCta.label, href: primaryCta.href, variant: "primary" }),
             whatsappReady
               ? createButton({ label: site.cta.whatsapp.label || "Hablar por WhatsApp", href: site.cta.whatsapp.target, variant: "secondary" })
-              : el("span", { className: "badge badge--warning", text: "WhatsApp en configuracion" }),
+              : createButton({ label: "Ver contacto", href: "/contacto/", variant: "secondary" }),
           ],
         }),
       ],
@@ -492,9 +397,10 @@ function renderFinalCta(data) {
 export async function initHomePage() {
   const data = await loadAllForHome();
   renderHero(data);
-  renderTrust(data);
-  renderPlans(data);
+  renderCategoryEntry(data);
   renderHowItWorks(data);
+  renderFeaturedCatalog(data);
+  renderTrust(data);
   renderDraws(data);
   renderAdjudications(data);
   renderFaq(data);

@@ -38,6 +38,7 @@ function createHeader(site) {
   const cta = site?.cta?.primary || {};
   const target = normalizeInternalTarget(cta.target);
   const hasCtaTarget = isValidUrl(target);
+  const officialLogo = site?.brand?.officialLogo;
 
   return el("header", {
     className: "site-header",
@@ -49,8 +50,14 @@ function createHeader(site) {
             className: "brand-lockup",
             attrs: { href: "/", "aria-label": "Ir al inicio" },
             children: [
+              officialLogo
+                ? el("img", {
+                    className: "brand-lockup__logo",
+                    attrs: { src: officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
+                  })
+                : null,
+              el("span", { className: "brand-lockup__name", text: agency.name || "Agencias Abed" }),
               el("span", { className: "brand-lockup__eyebrow", text: agency.legalDescriptor || "Agencia mercantil" }),
-              el("span", { text: agency.displayLockup || "Club San Jorge | Agencias Abed" }),
             ],
           }),
           createNav(),
@@ -59,7 +66,7 @@ function createHeader(site) {
             children: [
               el("a", {
                 className: `button ${hasCtaTarget ? "button--primary" : "button--disabled"}`,
-                text: cta.label || "Quiero asesoramiento",
+                text: cta.label || "Consultar plan",
                 attrs: hasCtaTarget
                   ? { href: target }
                   : { href: "#", "aria-disabled": "true", title: "Canal en configuracion" },
@@ -99,13 +106,13 @@ function createFooter(site) {
               el("a", { text: "Adjudicados", attrs: { href: "/adjudicados/" } }),
               el("a", { text: "Recursos", attrs: { href: "/recursos/" } }),
               el("a", { text: "FAQ", attrs: { href: "/faq/" } }),
-              el("a", { text: "Contacto", attrs: { href: "/contacto/?intent=asesoramiento" } }),
+              el("a", { text: "Contacto", attrs: { href: "/contacto/?intent=consulta" } }),
             ],
           }),
           el("p", {
             className: "site-footer__note",
             text:
-              "Transparencia: la consulta o pre-solicitud desde este sitio no implica contratacion final. Los datos pendientes se muestran como informacion en actualizacion.",
+              "Transparencia: la consulta desde este sitio no implica contratacion final. Los datos pendientes se muestran como informacion en actualizacion.",
           }),
         ],
       }),

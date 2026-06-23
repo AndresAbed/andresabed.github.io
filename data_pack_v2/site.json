@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "v2-hardening",
-    "generatedAt": "2026-06-22",
+    "version": "v3-landing",
+    "generatedAt": "2026-06-23",
     "sourcePolicy": {
       "verified": "Dato validado contra web oficial, PDF o material revisado.",
       "pending_validation": "Dato plausible o inferido que necesita confirmación.",
@@ -11,44 +11,48 @@
   "agency": {
     "name": "Agencias Abed",
     "displayLockup": "Club San Jorge | Agencias Abed",
-    "tagline": "Asesoramiento claro para entender los planes de Club San Jorge y avanzar con información precisa.",
+    "tagline": "Planes de Capitalización y Ahorro Club San Jorge con atención comercial de Agencias Abed.",
     "legalDescriptor": "Agencia mercantil de Club San Jorge",
     "coverageLabel": "Atención online a todo el país",
-    "primaryWhatsapp": "",
+    "primaryWhatsapp": "+54 9 11 1234-5678",
     "secondaryWhatsapp": "",
     "contactEmail": "",
     "instagramUrl": "",
     "facebookUrl": "",
-    "status": "pending_validation"
+    "status": "pending_validation",
+    "commercialPromise": "Suscribite, ahorrá y participá por autos, motos o dinero, con atención personalizada durante la elección del plan.",
+    "processLabel": "Capitalización y Ahorro"
   },
   "brand": {
     "clubName": "Club San Jorge",
     "clubAreaName": "Capitalización y Ahorro",
     "showClubReference": true,
+    "officialLogo": "/assets/img/brand/logo-capitalizacion.svg",
+    "manualClaim": "Con nosotros podés",
     "palette": {
       "primaryRed": {
-        "value": "",
-        "status": "pending_validation"
+        "value": "#be002f",
+        "status": "verified"
       },
       "brandGreen": {
-        "value": "rgb(97, 175, 84)",
+        "value": "#61af54",
         "status": "verified"
       },
       "neutralDark": {
-        "value": "#1F2937",
-        "status": "mock"
+        "value": "#292929",
+        "status": "verified"
       },
       "neutralMid": {
-        "value": "#6B7280",
-        "status": "mock"
+        "value": "#939389",
+        "status": "verified"
       },
       "neutralLight": {
-        "value": "#F3F4F6",
-        "status": "mock"
+        "value": "#F4F4F1",
+        "status": "derived"
       },
       "white": {
         "value": "#FFFFFF",
-        "status": "mock"
+        "status": "verified"
       }
     }
   },
@@ -80,16 +84,17 @@
   },
   "cta": {
     "primary": {
-      "label": "Quiero asesoramiento",
-      "target": "/contacto/?intent=asesoramiento"
+      "label": "Hablar por WhatsApp",
+      "target": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge."
     },
     "secondary": {
-      "label": "Iniciar mi solicitud",
-      "target": "/contacto/?intent=iniciar_solicitud"
+      "label": "Completar formulario",
+      "target": "/contacto/?intent=consulta"
     },
     "whatsapp": {
       "label": "Hablar por WhatsApp",
-      "target": ""
+      "target": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
+      "status": "mock"
     }
   },
   "forms": {
@@ -98,8 +103,8 @@
     "status": "pending_validation"
   },
   "seo": {
-    "defaultTitle": "Agencias Abed | Club San Jorge",
-    "defaultDescription": "Información clara sobre planes, sorteos, adjudicaciones, documentación y asesoramiento comercial de Club San Jorge.",
+    "defaultTitle": "Club San Jorge | Agencias Abed",
+    "defaultDescription": "Planes de Capitalización y Ahorro Club San Jorge: autos, motos y dinero con atención comercial de Agencias Abed.",
     "defaultOgImage": "/assets/img/og/default-og.svg"
   },
   "legal": {

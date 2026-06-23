@@ -49,7 +49,7 @@ export const loadHomeSections = () => loadDataset("homeSections");
 export const loadAgencyContact = () => loadDataset("agencyContact");
 
 export async function loadAllForHome() {
-  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeSections] = await Promise.all([
+  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeSections, videos] = await Promise.all([
     loadSite(),
     loadPlans(),
     loadPlanCatalog(),
@@ -58,9 +58,10 @@ export async function loadAllForHome() {
     loadDraws(),
     loadAdjudications(),
     loadHomeSections(),
+    loadVideos(),
   ]);
 
-  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeSections };
+  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeSections, videos };
 }
 
 export function getPlanBySlug(plansData, slug) {

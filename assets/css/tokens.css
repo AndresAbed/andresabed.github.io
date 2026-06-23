@@ -1,23 +1,25 @@
 :root {
   color-scheme: light;
 
-  /* TODO: PENDING VALIDATION - fallback until official red is confirmed. */
-  --color-brand-red: #b4232a;
-  --color-brand-red-dark: #8f1d23;
-  --color-brand-green: rgb(97, 175, 84);
-  --color-ink: #18212f;
-  --color-ink-soft: #465364;
-  --color-muted: #6b7280;
-  --color-line: #d8dee8;
+  --color-brand-red: #be002f;
+  --color-brand-red-dark: #8f0024;
+  --color-brand-red-soft: #fff0f3;
+  --color-brand-green: #61af54;
+  --color-brand-green-dark: #26763a;
+  --color-ink: #292929;
+  --color-ink-soft: #4e5350;
+  --color-muted: #73786f;
+  --color-line: #deded6;
   --color-surface: #ffffff;
-  --color-surface-soft: #f6f8fb;
-  --color-surface-warm: #fff8f0;
+  --color-surface-soft: #f6f6f2;
+  --color-surface-warm: #fbf5ee;
+  --color-neutral-mid: #939389;
   --color-success: #1f7a45;
   --color-warning: #9a5b00;
   --color-error: #b42318;
-  --color-focus: #174ea6;
+  --color-focus: #005fcc;
 
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: Roboto, Arial, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -32,6 +34,7 @@
   --radius-md: 8px;
   --radius-lg: 12px;
 
-  --shadow-soft: 0 12px 32px rgb(24 33 47 / 0.08);
-  --container: 1120px;
+  --shadow-soft: 0 18px 50px rgb(41 41 41 / 0.10);
+  --shadow-card: 0 8px 24px rgb(41 41 41 / 0.08);
+  --container: 1180px;
 }

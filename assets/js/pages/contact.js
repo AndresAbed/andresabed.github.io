@@ -18,7 +18,7 @@ import { hasValue, isValidUrl } from "../utils/validators.js";
 function getQueryDefaults() {
   const params = new URLSearchParams(window.location.search);
   return {
-    intent: params.get("intent") || "asesoramiento",
+    intent: params.get("intent") || "consulta",
     inquiryType: params.get("intent") === "iniciar_solicitud" ? "iniciar_solicitud" : "informacion_general",
     plan: params.get("plan") || "no_estoy_seguro",
   };
@@ -44,7 +44,7 @@ function normalizePayload(form) {
 
 function validatePayload(payload) {
   const errors = {};
-  if (!hasValue(payload.intent)) errors.intent = "Elegí si querés asesoramiento o iniciar una pre-solicitud.";
+  if (!hasValue(payload.intent)) errors.intent = "Elegí si querés consultar o iniciar una solicitud.";
   if (!hasValue(payload.inquiryType)) errors.inquiryType = "Elegí el tipo de consulta.";
   if (!hasValue(payload.fullName)) errors.fullName = "Ingresá tu nombre y apellido.";
   if (!hasValue(payload.phone)) errors.phone = "Ingresá un teléfono o WhatsApp para contactarte.";
@@ -54,7 +54,7 @@ function validatePayload(payload) {
     errors.email = "Ingresá un email válido.";
   }
   if (!hasValue(payload.province)) errors.province = "Indicá tu provincia.";
-  if (!hasValue(payload.planInterest)) errors.planInterest = "Elegí una opcion del catalogo o indicá que no estás seguro.";
+  if (!hasValue(payload.planInterest)) errors.planInterest = "Elegí una opción del catálogo o indicá que no estás seguro.";
   return errors;
 }
 
@@ -62,7 +62,7 @@ function buildMailto(config, payload) {
   const email = config?.channels?.email;
   if (!email?.enabled || !hasValue(email.address)) return "";
 
-  const subject = encodeURIComponent(`Pre-solicitud Club San Jorge - ${payload.fullName}`);
+  const subject = encodeURIComponent(`Consulta Club San Jorge - ${payload.fullName}`);
   const body = encodeURIComponent(
     [
       `Nombre: ${payload.fullName}`,
@@ -77,6 +77,27 @@ function buildMailto(config, payload) {
     ].join("\n"),
   );
   return `mailto:${email.address}?subject=${subject}&body=${body}`;
+}
+
+function buildWhatsapp(config, payload) {
+  const whatsapp = config?.channels?.whatsapp;
+  if (!whatsapp?.enabled || !isValidUrl(whatsapp.url)) return "";
+
+  const url = new URL(whatsapp.url, window.location.origin);
+  const text = [
+    "Hola, quiero consultar por un plan Club San Jorge.",
+    "",
+    `Nombre: ${payload.fullName}`,
+    `Telefono/WhatsApp: ${payload.phone}`,
+    `Email: ${payload.email}`,
+    `Provincia/Ciudad: ${payload.province}${payload.city ? ` / ${payload.city}` : ""}`,
+    `Tipo de consulta: ${payload.inquiryType}`,
+    `Opción de catálogo: ${payload.planInterest}`,
+    `Comentarios: ${payload.message || "-"}`,
+  ].join("\n");
+
+  url.searchParams.set("text", text);
+  return url.toString();
 }
 
 async function sendLead(config, payload) {
@@ -98,6 +119,12 @@ async function sendLead(config, payload) {
     return { state: CONTACT_STATES.SUCCESS, mode: "mailto" };
   }
 
+  const whatsapp = buildWhatsapp(config, payload);
+  if (whatsapp) {
+    window.location.href = whatsapp;
+    return { state: CONTACT_STATES.SUCCESS, mode: "whatsapp" };
+  }
+
   console.info("Lead payload preparado en modo placeholder", payload);
   sessionStorage.setItem("lastLeadPayload", JSON.stringify(payload));
   return { state: CONTACT_STATES.UNAVAILABLE, mode: "placeholder" };
@@ -116,7 +143,7 @@ function createUnavailableNotice(config) {
           el("p", {
             text:
               config?.messages?.unavailable ||
-              "La pre-solicitud puede validarse y preparar el payload, pero aun falta configurar endpoint, email o WhatsApp.",
+              "La consulta puede validarse y preparar el payload, pero aun falta configurar endpoint, email o WhatsApp.",
           }),
         ],
       }),
@@ -147,19 +174,19 @@ export async function initContactPage() {
     }
 
     clearFieldErrors(form);
-    setFormState(form, CONTACT_STATES.SUBMITTING, "Preparando pre-solicitud...");
+    setFormState(form, CONTACT_STATES.SUBMITTING, "Preparando consulta...");
     sendLead(config, payload)
       .then((result) => {
         clear(resultSlot);
         if (result.state === CONTACT_STATES.SUCCESS) {
-          setFormState(form, CONTACT_STATES.SUCCESS, config.messages?.success || "Pre-solicitud enviada.");
+          setFormState(form, CONTACT_STATES.SUCCESS, config.messages?.success || "Consulta enviada.");
         } else {
           setFormState(form, CONTACT_STATES.UNAVAILABLE, config.messages?.unavailable || "Canal en configuracion.");
           resultSlot.append(createPayloadSummary(payload));
         }
       })
       .catch(() => {
-        setFormState(form, CONTACT_STATES.ERROR, config.messages?.error || "No pudimos procesar la pre-solicitud.");
+        setFormState(form, CONTACT_STATES.ERROR, config.messages?.error || "No pudimos procesar la consulta.");
       });
   }
 
@@ -174,7 +201,7 @@ export async function initContactPage() {
           eyebrow: "Canales",
           title: "Elegí cómo querés seguir",
           id: "contact-methods-title",
-          intro: "Mostramos canales reales cuando estén configurados. Mientras tanto, el formulario ordena la consulta y prepara el payload.",
+          intro: "Mostramos canales reales cuando estén configurados. Mientras tanto, el formulario ordena la consulta comercial.",
         }),
         createContactMethods(config),
       ],
@@ -201,9 +228,9 @@ export async function initContactPage() {
           children: [
             createSectionHeader({
               eyebrow: "Formulario",
-              title: "Consulta / pre-solicitud asistida",
+              title: "Consulta comercial",
               id: "lead-form-title",
-              intro: "Completá los datos mínimos para que la agencia pueda orientarte por categoria u opcion de catalogo.",
+              intro: "Completá los datos mínimos para continuar por categoria u opcion de catalogo.",
             }),
             createLeadForm({ plans: catalogItems, defaults, onSubmit: handleSubmit }),
           ],

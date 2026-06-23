@@ -1,13 +1,30 @@
 {
   "meta": {
-    "version": "v2-catalog",
-    "sourcePolicy": "Catalogo comercial de agencia construido sobre datos del sistema Club San Jorge y campos prudentes cuando falta informacion especifica.",
-    "featuredCategorySlugs": ["autos", "motos", "dinero"],
+    "version": "v3-official-catalog-snapshot",
+    "generatedAt": "2026-06-23T07:05:34.692Z",
+    "sourceUrl": "https://artemis.clubsanjorge.com.ar/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/listapre",
+    "sourcePolicy": "Snapshot estatico del catalogo oficial activo de Club San Jorge. No consumir en vivo desde el navegador.",
+    "featuredCategorySlugs": [
+      "autos",
+      "motos",
+      "dinero"
+    ],
     "defaultMonths": {
       "value": 330,
       "status": "verified"
     },
-    "currency": "ARS"
+    "currency": "ARS",
+    "totalItems": 73,
+    "subcategories": {
+      "autos": [
+        "Baja Gama",
+        "Utilitarios",
+        "Alta Gama"
+      ],
+      "motos": [
+        "Alta Gama"
+      ]
+    }
   },
   "categories": [
     {
@@ -16,8 +33,8 @@
       "shortLabel": "Autos",
       "sortOrder": 1,
       "theme": "red",
-      "description": "Opciones orientadas al rubro automotor dentro del sistema de Capitalizacion y Ahorro.",
-      "summary": "Para quienes quieren evaluar un plan vinculado a auto 0 km, valor nominal y posibles sorteos estimulo."
+      "description": "Opciones orientadas a autos 0 km y utilitarios dentro del sistema de Capitalizacion y Ahorro.",
+      "summary": "Para comparar referencias de auto, valor nominal, cuota mensual y chances de sorteo."
     },
     {
       "slug": "motos",
@@ -26,7 +43,7 @@
       "sortOrder": 2,
       "theme": "green",
       "description": "Opciones orientadas a motos dentro del sistema de Capitalizacion y Ahorro.",
-      "summary": "Para quienes buscan una alternativa mas simple de entender antes de elegir monto, cuota y condiciones."
+      "summary": "Para elegir una referencia de moto y revisar cuotas, valor nominal y condiciones."
     },
     {
       "slug": "dinero",
@@ -34,261 +51,3952 @@
       "shortLabel": "Dinero",
       "sortOrder": 3,
       "theme": "dark",
-      "description": "Opciones orientadas a formar capital / valor nominal en dinero segun el plan contratado.",
-      "summary": "Para quienes priorizan capital disponible y quieren revisar plazo, rescate y funcionamiento del sistema."
+      "description": "Opciones de orden de compra / capital segun valor nominal dentro del sistema.",
+      "summary": "Para quienes priorizan formar capital y comparar montos de cuota y valor nominal."
     }
   ],
   "items": [
     {
-      "id": "auto-330-300",
-      "slug": "auto-330-300",
+      "id": "autos-fiat-cronos-4p-3-chances-964",
+      "slug": "autos-fiat-cronos-4p-3-chances-964",
       "category": "autos",
-      "displayName": "Auto 0 km - cuota 3,00‰",
+      "subCategory": "Baja Gama",
+      "displayName": "Fiat Cronos 4p 3 Chances",
+      "officialName": "FIAT CRONOS 4P 3 CHANCES",
       "brand": "",
       "model": "",
-      "planLabel": "Plan 330 meses - cuota del 3,00‰ del Valor Nominal",
+      "planLabel": "Articulo 964 / Plan 2",
+      "officialArticle": 964,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/964.webp",
+      "imageAlt": "Fiat Cronos 4p 3 Chances Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 1,
       "months": {
         "value": 330,
         "status": "verified"
       },
       "valorNominal": {
-        "value": null,
-        "label": "Segun titulo suscripto",
-        "status": "pending_validation"
+        "value": 40192213,
+        "status": "verified"
       },
       "cuota": {
-        "value": null,
-        "label": "3,00‰ del Valor Nominal + conceptos aplicables",
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
         "status": "verified"
       },
       "currency": "ARS",
       "status": "active",
       "featured": true,
-      "description": "Opcion de 330 meses orientada al rubro automotor. El foco comercial es revisar valor nominal, cuota, sorteos y condiciones antes de iniciar solicitud.",
+      "description": "Referencia Fiat Cronos 4p 3 Chances con cuota de catalogo $140.000 y 3 chances de sorteo.",
       "notes": [
         {
-          "text": "La web oficial informa planes 330 no amortizantes.",
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
           "status": "verified"
         },
         {
-          "text": "Marca, modelo y valor nominal deben confirmarse segun la solicitud y documentacion vigente.",
-          "status": "pending_validation"
-        }
-      ],
-      "faqRefs": [
-        "de-cuantas-cuotas-consta-el-plan",
-        "que-se-obtiene-al-final-del-plan-330",
-        "como-se-realizan-los-sorteos-mensuales",
-        "si-salgo-adjudicado-debo-seguir-pagando"
-      ],
-      "contactPreset": "auto-330-300",
-      "sourceStatus": "verified_system_partial_catalog"
-    },
-    {
-      "id": "auto-330-283",
-      "slug": "auto-330-283",
-      "category": "autos",
-      "displayName": "Auto 0 km - cuota 2,83‰",
-      "brand": "",
-      "model": "",
-      "planLabel": "Plan 330 meses - cuota del 2,83‰ del Valor Nominal",
-      "months": {
-        "value": 330,
-        "status": "verified"
-      },
-      "valorNominal": {
-        "value": null,
-        "label": "Segun titulo suscripto",
-        "status": "pending_validation"
-      },
-      "cuota": {
-        "value": null,
-        "label": "2,83‰ del Valor Nominal + conceptos aplicables",
-        "status": "verified"
-      },
-      "currency": "ARS",
-      "status": "active",
-      "featured": false,
-      "description": "Alternativa automotor dentro de los planes 330. Conviene revisar diferencia de cuota, derecho de suscripcion y valor nominal antes de avanzar.",
-      "notes": [
-        {
-          "text": "La variante 2,83‰ surge de la informacion del sistema publicada oficialmente.",
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
           "status": "verified"
-        },
-        {
-          "text": "La aplicacion comercial concreta debe confirmarse con la agencia.",
-          "status": "pending_validation"
-        }
-      ],
-      "faqRefs": [
-        "de-cuantas-cuotas-consta-el-plan",
-        "que-se-obtiene-al-final-del-plan-330",
-        "cuando-puedo-solicitar-mi-rescate"
-      ],
-      "contactPreset": "auto-330-283",
-      "sourceStatus": "verified_system_partial_catalog"
-    },
-    {
-      "id": "moto-330",
-      "slug": "moto-330",
-      "category": "motos",
-      "displayName": "Moto 0 km",
-      "brand": "",
-      "model": "",
-      "planLabel": "Plan 330 meses orientado a moto",
-      "months": {
-        "value": 330,
-        "status": "pending_validation"
-      },
-      "valorNominal": {
-        "value": null,
-        "label": "A confirmar segun opcion elegida",
-        "status": "pending_validation"
-      },
-      "cuota": {
-        "value": null,
-        "label": "A confirmar",
-        "status": "pending_validation"
-      },
-      "currency": "ARS",
-      "status": "active",
-      "featured": true,
-      "description": "Opcion comercial orientada a motos. La consulta sirve para definir valor nominal, cuota estimada y condiciones aplicables.",
-      "notes": [
-        {
-          "text": "La FAQ oficial menciona moto 0 km como objetivo posible del sistema.",
-          "status": "verified"
-        },
-        {
-          "text": "Faltan datos especificos de catalogo para marca, modelo y cuota.",
-          "status": "pending_validation"
         }
       ],
       "faqRefs": [
         "de-cuantas-cuotas-consta-el-plan",
         "como-se-realizan-los-sorteos-mensuales",
-        "si-salgo-adjudicado-debo-seguir-pagando"
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
       ],
-      "contactPreset": "moto-330",
-      "sourceStatus": "pending_catalog_details"
+      "contactPreset": "autos-fiat-cronos-4p-3-chances-964",
+      "sourceStatus": "official_catalog_snapshot"
     },
     {
-      "id": "moto-consulta-valor",
-      "slug": "moto-consulta-valor",
-      "category": "motos",
-      "displayName": "Moto - definir valor nominal",
+      "id": "autos-toyota-hilux-4x4-cd-966",
+      "slug": "autos-toyota-hilux-4x4-cd-966",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Toyota Hilux 4x4 CD",
+      "officialName": "TOYOTA HILUX 4x4 CD",
       "brand": "",
       "model": "",
-      "planLabel": "Consulta de valor nominal para moto",
-      "months": {
-        "value": null,
-        "status": "pending_validation"
-      },
-      "valorNominal": {
-        "value": null,
-        "label": "A definir",
-        "status": "pending_validation"
-      },
-      "cuota": {
-        "value": null,
-        "label": "A confirmar",
-        "status": "pending_validation"
-      },
-      "currency": "ARS",
-      "status": "consultation",
-      "featured": false,
-      "description": "Entrada para quienes todavia no saben que monto o moto tomar como referencia y necesitan orientacion comercial.",
-      "notes": [
-        {
-          "text": "Item de catalogo operativo para ordenar consultas, no claim oficial de una variante especifica.",
-          "status": "pending_validation"
-        }
-      ],
-      "faqRefs": [
-        "la-inscripcion-se-hace-online",
-        "como-se-realizan-los-sorteos-mensuales"
-      ],
-      "contactPreset": "moto-consulta-valor",
-      "sourceStatus": "agency_operational"
-    },
-    {
-      "id": "dinero-330",
-      "slug": "dinero-330",
-      "category": "dinero",
-      "displayName": "Capital / valor nominal",
-      "brand": "",
-      "model": "",
-      "planLabel": "Plan 330 meses orientado a capital",
+      "planLabel": "Articulo 966 / Plan 2",
+      "officialArticle": 966,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/966.webp",
+      "imageAlt": "Toyota Hilux 4x4 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 3,
       "months": {
         "value": 330,
         "status": "verified"
       },
       "valorNominal": {
-        "value": null,
-        "label": "Segun titulo suscripto",
-        "status": "pending_validation"
+        "value": 63160362,
+        "status": "verified"
       },
       "cuota": {
-        "value": null,
-        "label": "Segun Valor Nominal",
-        "status": "pending_validation"
+        "value": 220000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
       },
       "currency": "ARS",
       "status": "active",
       "featured": true,
-      "description": "Alternativa para evaluar la formacion de un capital en dinero, sin asociarla a un bien fisico especifico.",
+      "description": "Referencia Toyota Hilux 4x4 CD con cuota de catalogo $220.000 y 3 chances de sorteo.",
       "notes": [
         {
-          "text": "Al finalizar el plan se obtiene el valor nominal inicial suscripto mas conceptos que correspondan segun condiciones.",
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
           "status": "verified"
-        }
-      ],
-      "faqRefs": [
-        "que-es-el-plan-dinero",
-        "que-se-obtiene-al-final-del-plan-dinero",
-        "cuando-puedo-solicitar-mi-rescate"
-      ],
-      "contactPreset": "dinero-330",
-      "sourceStatus": "verified_system_partial_catalog"
-    },
-    {
-      "id": "dinero-90-120",
-      "slug": "dinero-90-120",
-      "category": "dinero",
-      "displayName": "Capital - planes 90 / 120 meses",
-      "brand": "",
-      "model": "",
-      "planLabel": "Planes 90 y 120 meses amortizantes",
-      "months": {
-        "value": "90 / 120",
-        "status": "verified"
-      },
-      "valorNominal": {
-        "value": null,
-        "label": "Segun titulo suscripto",
-        "status": "pending_validation"
-      },
-      "cuota": {
-        "value": null,
-        "label": "Segun plazo y Valor Nominal",
-        "status": "pending_validation"
-      },
-      "currency": "ARS",
-      "status": "consultation",
-      "featured": false,
-      "description": "Opcion a revisar solo con asesoramiento, porque estos plazos tienen logica amortizante y condiciones distintas a los 330 meses.",
-      "notes": [
+        },
         {
-          "text": "La web oficial informa que los planes 90 y 120 meses son amortizantes.",
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
           "status": "verified"
         }
       ],
       "faqRefs": [
         "de-cuantas-cuotas-consta-el-plan",
-        "cuando-puedo-solicitar-mi-rescate"
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
       ],
-      "contactPreset": "dinero-90-120",
-      "sourceStatus": "verified_system_partial_catalog"
+      "contactPreset": "autos-toyota-hilux-4x4-cd-966",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-toyota-yaris-5p-894",
+      "slug": "autos-toyota-yaris-5p-894",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Toyota Yaris 5p",
+      "officialName": "TOYOTA YARIS 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 894 / Plan 2",
+      "officialArticle": 894,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/894.webp",
+      "imageAlt": "Toyota Yaris 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 4,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Toyota Yaris 5p con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-toyota-yaris-5p-894",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-strada-c-s-904",
+      "slug": "autos-fiat-strada-c-s-904",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Fiat Strada C/S",
+      "officialName": "FIAT STRADA C/S",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 904 / Plan 2",
+      "officialArticle": 904,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/904.webp",
+      "imageAlt": "Fiat Strada C/S Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 5,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Strada C/S con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-strada-c-s-904",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-kwid-5p-887",
+      "slug": "autos-renault-kwid-5p-887",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Renault Kwid 5p",
+      "officialName": "RENAULT KWID 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 887 / Plan 2",
+      "officialArticle": 887,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/887.webp",
+      "imageAlt": "Renault Kwid 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 6,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 28708138,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 100000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Kwid 5p con cuota de catalogo $100.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-kwid-5p-887",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-kardian-947",
+      "slug": "autos-renault-kardian-947",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Renault Kardian",
+      "officialName": "RENAULT KARDIAN",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 947 / Plan 2",
+      "officialArticle": 947,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/947.webp",
+      "imageAlt": "Renault Kardian Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 7,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 43063231,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 150000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Kardian con cuota de catalogo $150.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-kardian-947",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-toyota-hilux-dx-4x2-cd-923",
+      "slug": "autos-toyota-hilux-dx-4x2-cd-923",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Toyota Hilux Dx 4x2 CD",
+      "officialName": "TOYOTA HILUX DX 4x2 CD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 923 / Plan 2",
+      "officialArticle": 923,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/923.webp",
+      "imageAlt": "Toyota Hilux Dx 4x2 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 10,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 54547306,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 190000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Toyota Hilux Dx 4x2 CD con cuota de catalogo $190.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-toyota-hilux-dx-4x2-cd-923",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-ford-ranger-d-4x4-cd-928",
+      "slug": "autos-ford-ranger-d-4x4-cd-928",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Ford Ranger D 4x4 CD",
+      "officialName": "FORD RANGER D 4x4 CD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 928 / Plan 2",
+      "officialArticle": 928,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/928.webp",
+      "imageAlt": "Ford Ranger D 4x4 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 11,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 57418325,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 200000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Ford Ranger D 4x4 CD con cuota de catalogo $200.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-ford-ranger-d-4x4-cd-928",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-f-cronos-1-3-5-chances-963",
+      "slug": "autos-f-cronos-1-3-5-chances-963",
+      "category": "autos",
+      "subCategory": "-",
+      "displayName": "F. Cronos 1.3 5 Chances",
+      "officialName": "F. CRONOS 1.3 5 CHANCES",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 963 / Plan 2",
+      "officialArticle": 963,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/963.webp",
+      "imageAlt": "F. Cronos 1.3 5 Chances Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 12,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 5,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia F. Cronos 1.3 5 Chances con cuota de catalogo $125.000 y 5 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-f-cronos-1-3-5-chances-963",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-toyota-corolla-4p-910",
+      "slug": "autos-toyota-corolla-4p-910",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Toyota Corolla 4p",
+      "officialName": "TOYOTA COROLLA 4P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 910 / Plan 2",
+      "officialArticle": 910,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/910.webp",
+      "imageAlt": "Toyota Corolla 4p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 13,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 50240778,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 175000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Toyota Corolla 4p con cuota de catalogo $175.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-toyota-corolla-4p-910",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-nivus-5p-911",
+      "slug": "autos-vw-nivus-5p-911",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Vw. Nivus 5p",
+      "officialName": "VW. NIVUS 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 911 / Plan 2",
+      "officialArticle": 911,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/911.webp",
+      "imageAlt": "Vw. Nivus 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 14,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 43063231,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 150000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. Nivus 5p con cuota de catalogo $150.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-nivus-5p-911",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-chevrolet-tracker-912",
+      "slug": "autos-chevrolet-tracker-912",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Chevrolet Tracker",
+      "officialName": "CHEVROLET TRACKER",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 912 / Plan 2",
+      "officialArticle": 912,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/912.webp",
+      "imageAlt": "Chevrolet Tracker Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 15,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 40192213,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Chevrolet Tracker con cuota de catalogo $140.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-chevrolet-tracker-912",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-chevrolet-onix-joy-ls-5p-891",
+      "slug": "autos-chevrolet-onix-joy-ls-5p-891",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Chevrolet Onix Joy Ls 5p",
+      "officialName": "CHEVROLET ONIX JOY LS 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 891 / Plan 2",
+      "officialArticle": 891,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/891.webp",
+      "imageAlt": "Chevrolet Onix Joy Ls 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 21,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Chevrolet Onix Joy Ls 5p con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-chevrolet-onix-joy-ls-5p-891",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-mobi-5p-888",
+      "slug": "autos-fiat-mobi-5p-888",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Fiat Mobi 5p",
+      "officialName": "FIAT MOBI 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 888 / Plan 2",
+      "officialArticle": 888,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/888.webp",
+      "imageAlt": "Fiat Mobi 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 22,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 28708138,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 100000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Mobi 5p con cuota de catalogo $100.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-mobi-5p-888",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-polo-5p-900",
+      "slug": "autos-vw-polo-5p-900",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Vw. Polo 5p",
+      "officialName": "VW. POLO 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 900 / Plan 2",
+      "officialArticle": 900,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/900.webp",
+      "imageAlt": "Vw. Polo 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 23,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 37321194,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 130000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. Polo 5p con cuota de catalogo $130.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-polo-5p-900",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-chevrolet-onix-plus-4p-892",
+      "slug": "autos-chevrolet-onix-plus-4p-892",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Chevrolet Onix Plus 4p",
+      "officialName": "CHEVROLET ONIX PLUS 4P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 892 / Plan 2",
+      "officialArticle": 892,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/892.webp",
+      "imageAlt": "Chevrolet Onix Plus 4p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 24,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Chevrolet Onix Plus 4p con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-chevrolet-onix-plus-4p-892",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-peugeot-partner-furgon-hdi-946",
+      "slug": "autos-peugeot-partner-furgon-hdi-946",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Peugeot Partner Furgon Hdi",
+      "officialName": "PEUGEOT PARTNER FURGON HDI",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 946 / Plan 2",
+      "officialArticle": 946,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/946.webp",
+      "imageAlt": "Peugeot Partner Furgon Hdi Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 25,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Peugeot Partner Furgon Hdi con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-peugeot-partner-furgon-hdi-946",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-kangoo-break-918",
+      "slug": "autos-renault-kangoo-break-918",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Renault Kangoo Break",
+      "officialName": "RENAULT KANGOO BREAK",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 918 / Plan 2",
+      "officialArticle": 918,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/918.webp",
+      "imageAlt": "Renault Kangoo Break Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 27,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 48805269,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 170000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Kangoo Break con cuota de catalogo $170.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-kangoo-break-918",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-amarok-tdi-4x2-cd-924",
+      "slug": "autos-vw-amarok-tdi-4x2-cd-924",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Vw. Amarok Tdi 4x2 CD",
+      "officialName": "VW. AMAROK TDI 4x2 CD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 924 / Plan 2",
+      "officialArticle": 924,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/924.webp",
+      "imageAlt": "Vw. Amarok Tdi 4x2 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 28,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 54547306,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 190000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. Amarok Tdi 4x2 CD con cuota de catalogo $190.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-amarok-tdi-4x2-cd-924",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-toro-freedom-921",
+      "slug": "autos-fiat-toro-freedom-921",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Fiat Toro Freedom",
+      "officialName": "FIAT TORO FREEDOM",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 921 / Plan 2",
+      "officialArticle": 921,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/921.webp",
+      "imageAlt": "Fiat Toro Freedom Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 29,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 48805269,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 170000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Toro Freedom con cuota de catalogo $170.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-toro-freedom-921",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-ford-ranger-4x2-cd-922",
+      "slug": "autos-ford-ranger-4x2-cd-922",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Ford Ranger 4x2 CD",
+      "officialName": "FORD RANGER 4x2 CD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 922 / Plan 2",
+      "officialArticle": 922,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/922.webp",
+      "imageAlt": "Ford Ranger 4x2 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 30,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 54547306,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 190000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Ford Ranger 4x2 CD con cuota de catalogo $190.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-ford-ranger-4x2-cd-922",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-cronos-4p-895",
+      "slug": "autos-fiat-cronos-4p-895",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Fiat Cronos 4p",
+      "officialName": "FIAT CRONOS 4P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 895 / Plan 2",
+      "officialArticle": 895,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/895.webp",
+      "imageAlt": "Fiat Cronos 4p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 34,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 34450176,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 120000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Cronos 4p con cuota de catalogo $120.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-cronos-4p-895",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-t-cross-913",
+      "slug": "autos-vw-t-cross-913",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Vw. T-Cross",
+      "officialName": "VW. T-CROSS",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 913 / Plan 2",
+      "officialArticle": 913,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/913.webp",
+      "imageAlt": "Vw. T-Cross Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 36,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 50240778,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 175000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. T-Cross con cuota de catalogo $175.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-t-cross-913",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-citroen-c3-aircross-5p-902",
+      "slug": "autos-citroen-c3-aircross-5p-902",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Citroen C3 Aircross 5p",
+      "officialName": "CITROEN C3 AIRCROSS 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 902 / Plan 2",
+      "officialArticle": 902,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/902.webp",
+      "imageAlt": "Citroen C3 Aircross 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 37,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 37321194,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 130000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Citroen C3 Aircross 5p con cuota de catalogo $130.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-citroen-c3-aircross-5p-902",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-saveiro-c-s-914",
+      "slug": "autos-vw-saveiro-c-s-914",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Vw. Saveiro C/S",
+      "officialName": "VW. SAVEIRO C/S",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 914 / Plan 2",
+      "officialArticle": 914,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/914.webp",
+      "imageAlt": "Vw. Saveiro C/S Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 38,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 40192213,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. Saveiro C/S con cuota de catalogo $140.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-saveiro-c-s-914",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-kangoo-express-n-915",
+      "slug": "autos-renault-kangoo-express-n-915",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Renault Kangoo Express N",
+      "officialName": "RENAULT KANGOO EXPRESS N",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 915 / Plan 2",
+      "officialArticle": 915,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/915.webp",
+      "imageAlt": "Renault Kangoo Express N Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 39,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 40192213,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Kangoo Express N con cuota de catalogo $140.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-kangoo-express-n-915",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-citroen-c3-897",
+      "slug": "autos-citroen-c3-897",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Citroen C3",
+      "officialName": "CITROEN C3",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 897 / Plan 2",
+      "officialArticle": 897,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/897.webp",
+      "imageAlt": "Citroen C3 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 40,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 34450176,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 120000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Citroen C3 con cuota de catalogo $120.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-citroen-c3-897",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-chevrolet-s10-td-4x2-cd-925",
+      "slug": "autos-chevrolet-s10-td-4x2-cd-925",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Chevrolet S10 Td 4x2 CD",
+      "officialName": "CHEVROLET S10 TD 4X2 CD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 925 / Plan 2",
+      "officialArticle": 925,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/925.webp",
+      "imageAlt": "Chevrolet S10 Td 4x2 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 41,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 54547306,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 190000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Chevrolet S10 Td 4x2 CD con cuota de catalogo $190.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-chevrolet-s10-td-4x2-cd-925",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-peugeot-boxer-hdi-931",
+      "slug": "autos-peugeot-boxer-hdi-931",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Peugeot Boxer Hdi",
+      "officialName": "PEUGEOT BOXER HDI",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 931 / Plan 2",
+      "officialArticle": 931,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/931.webp",
+      "imageAlt": "Peugeot Boxer Hdi Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 42,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 77515455,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 270000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Peugeot Boxer Hdi con cuota de catalogo $270.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-peugeot-boxer-hdi-931",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-fiorino-903",
+      "slug": "autos-fiat-fiorino-903",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Fiat Fiorino",
+      "officialName": "FIAT FIORINO",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 903 / Plan 2",
+      "officialArticle": 903,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/903.webp",
+      "imageAlt": "Fiat Fiorino Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 44,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 34450176,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 120000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Fiorino con cuota de catalogo $120.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-fiorino-903",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-peugeot-2008-916",
+      "slug": "autos-peugeot-2008-916",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Peugeot 2008",
+      "officialName": "PEUGEOT 2008",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 916 / Plan 2",
+      "officialArticle": 916,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/916.webp",
+      "imageAlt": "Peugeot 2008 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 45,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 45934250,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 160000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Peugeot 2008 con cuota de catalogo $160.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-peugeot-2008-916",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-duster-oroch-919",
+      "slug": "autos-renault-duster-oroch-919",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Renault Duster Oroch",
+      "officialName": "RENAULT DUSTER OROCH",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 919 / Plan 2",
+      "officialArticle": 919,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/919.webp",
+      "imageAlt": "Renault Duster Oroch Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 46,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 48805269,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 170000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Duster Oroch con cuota de catalogo $170.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-duster-oroch-919",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-ducato-furgon-corto-tn-td-929",
+      "slug": "autos-fiat-ducato-furgon-corto-tn-td-929",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Fiat Ducato Furgon Corto Tn Td",
+      "officialName": "FIAT DUCATO FURGON CORTO TN TD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 929 / Plan 2",
+      "officialArticle": 929,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/929.webp",
+      "imageAlt": "Fiat Ducato Furgon Corto Tn Td Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 47,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 66031380,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 230000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Ducato Furgon Corto Tn Td con cuota de catalogo $230.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-ducato-furgon-corto-tn-td-929",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-peugeot-208-n-905",
+      "slug": "autos-peugeot-208-n-905",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Peugeot 208 N",
+      "officialName": "PEUGEOT 208 N",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 905 / Plan 2",
+      "officialArticle": 905,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/905.webp",
+      "imageAlt": "Peugeot 208 N Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 48,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 37321194,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 130000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Peugeot 208 N con cuota de catalogo $130.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-peugeot-208-n-905",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-chevrolet-montana-1-8-927",
+      "slug": "autos-chevrolet-montana-1-8-927",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Chevrolet Montana 1.8",
+      "officialName": "CHEVROLET MONTANA 1.8",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 927 / Plan 2",
+      "officialArticle": 927,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/927.webp",
+      "imageAlt": "Chevrolet Montana 1.8 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 49,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 48805269,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 170000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Chevrolet Montana 1.8 con cuota de catalogo $170.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-chevrolet-montana-1-8-927",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-taos-at-951",
+      "slug": "autos-vw-taos-at-951",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Vw. Taos At",
+      "officialName": "VW. TAOS AT",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 951 / Plan 2",
+      "officialArticle": 951,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/951.webp",
+      "imageAlt": "Vw. Taos At Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 50,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 60289343,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 210000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. Taos At con cuota de catalogo $210.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-taos-at-951",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-citroen-berlingo-multispace-d-907",
+      "slug": "autos-citroen-berlingo-multispace-d-907",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Citroen Berlingo Multispace D",
+      "officialName": "CITROEN BERLINGO MULTISPACE D",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 907 / Plan 2",
+      "officialArticle": 907,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/907.webp",
+      "imageAlt": "Citroen Berlingo Multispace D Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 51,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 43063231,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 150000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Citroen Berlingo Multispace D con cuota de catalogo $150.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-citroen-berlingo-multispace-d-907",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-alaskan-4x2-cd-926",
+      "slug": "autos-renault-alaskan-4x2-cd-926",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Renault Alaskan 4x2 CD",
+      "officialName": "RENAULT ALASKAN 4x2 CD",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 926 / Plan 2",
+      "officialArticle": 926,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/926.webp",
+      "imageAlt": "Renault Alaskan 4x2 CD Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 52,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 54547306,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 190000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Alaskan 4x2 CD con cuota de catalogo $190.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-alaskan-4x2-cd-926",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-duster-917",
+      "slug": "autos-renault-duster-917",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Renault Duster",
+      "officialName": "RENAULT DUSTER",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 917 / Plan 2",
+      "officialArticle": 917,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/917.webp",
+      "imageAlt": "Renault Duster Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 53,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 45934250,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 160000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Duster con cuota de catalogo $160.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-duster-917",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-master-d-furg-corto-tb-932",
+      "slug": "autos-renault-master-d-furg-corto-tb-932",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Renault Master D Furg.Corto Tb",
+      "officialName": "RENAULT MASTER D FURG.CORTO TB",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 932 / Plan 2",
+      "officialArticle": 932,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/932.webp",
+      "imageAlt": "Renault Master D Furg.Corto Tb Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 55,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 77515455,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 270000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 2,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Master D Furg.Corto Tb con cuota de catalogo $270.000 y 2 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-master-d-furg-corto-tb-932",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-pulse-drive-1-3-mt-949",
+      "slug": "autos-fiat-pulse-drive-1-3-mt-949",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Fiat Pulse Drive 1.3 Mt",
+      "officialName": "FIAT PULSE DRIVE 1.3 MT",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 949 / Plan 2",
+      "officialArticle": 949,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/949.webp",
+      "imageAlt": "Fiat Pulse Drive 1.3 Mt Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 57,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 40192213,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Pulse Drive 1.3 Mt con cuota de catalogo $140.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-pulse-drive-1-3-mt-949",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-fastback-turbo-270-at-950",
+      "slug": "autos-fiat-fastback-turbo-270-at-950",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Fiat Fastback Turbo 270 At",
+      "officialName": "FIAT FASTBACK TURBO 270 AT",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 950 / Plan 2",
+      "officialArticle": 950,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/950.webp",
+      "imageAlt": "Fiat Fastback Turbo 270 At Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 58,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 43063231,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 150000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Fastback Turbo 270 At con cuota de catalogo $150.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-fastback-turbo-270-at-950",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-chev-equinox-at-952",
+      "slug": "autos-chev-equinox-at-952",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Chev. Equinox At",
+      "officialName": "CHEV. EQUINOX AT",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 952 / Plan 2",
+      "officialArticle": 952,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/952.webp",
+      "imageAlt": "Chev. Equinox At Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 59,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 54547306,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 190000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Chev. Equinox At con cuota de catalogo $190.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-chev-equinox-at-952",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-vw-virtus-4p-901",
+      "slug": "autos-vw-virtus-4p-901",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Vw. Virtus 4p",
+      "officialName": "VW. VIRTUS 4P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 901 / Plan 2",
+      "officialArticle": 901,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/901.webp",
+      "imageAlt": "Vw. Virtus 4p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 64,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 40192213,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Vw. Virtus 4p con cuota de catalogo $140.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-vw-virtus-4p-901",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-citroen-c4-cactus-at-945",
+      "slug": "autos-citroen-c4-cactus-at-945",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Citroen C4 Cactus At",
+      "officialName": "CITROEN C4 CACTUS AT",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 945 / Plan 2",
+      "officialArticle": 945,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/945.webp",
+      "imageAlt": "Citroen C4 Cactus At Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 65,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 40192213,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 140000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Citroen C4 Cactus At con cuota de catalogo $140.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-citroen-c4-cactus-at-945",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-toyota-corolla-cross-2-0-cvt-948",
+      "slug": "autos-toyota-corolla-cross-2-0-cvt-948",
+      "category": "autos",
+      "subCategory": "Alta Gama",
+      "displayName": "Toyota Corolla Cross 2.0 Cvt",
+      "officialName": "TOYOTA COROLLA CROSS 2.0 CVT",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 948 / Plan 2",
+      "officialArticle": 948,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/948.webp",
+      "imageAlt": "Toyota Corolla Cross 2.0 Cvt Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 66,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 60289343,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 210000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Toyota Corolla Cross 2.0 Cvt con cuota de catalogo $210.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-toyota-corolla-cross-2-0-cvt-948",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-toyota-hiace-l-2-957",
+      "slug": "autos-toyota-hiace-l-2-957",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Toyota Hiace L-2",
+      "officialName": "TOYOTA HIACE L-2",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 957 / Plan 2",
+      "officialArticle": 957,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/957.webp",
+      "imageAlt": "Toyota Hiace L-2 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 67,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 71773418,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 250000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Toyota Hiace L-2 con cuota de catalogo $250.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-toyota-hiace-l-2-957",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-ford-transit-furgon-mediano-d-930",
+      "slug": "autos-ford-transit-furgon-mediano-d-930",
+      "category": "autos",
+      "subCategory": "Utilitarios",
+      "displayName": "Ford Transit Furgon Mediano D",
+      "officialName": "FORD TRANSIT FURGON MEDIANO D",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 930 / Plan 2",
+      "officialArticle": 930,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/930.webp",
+      "imageAlt": "Ford Transit Furgon Mediano D Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 69,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 71773418,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 250000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Ford Transit Furgon Mediano D con cuota de catalogo $250.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-ford-transit-furgon-mediano-d-930",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-logan-4p-944",
+      "slug": "autos-renault-logan-4p-944",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Renault Logan 4p",
+      "officialName": "RENAULT LOGAN 4P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 944 / Plan 2",
+      "officialArticle": 944,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/944.webp",
+      "imageAlt": "Renault Logan 4p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 70,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Logan 4p con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-logan-4p-944",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-sandero-5p-893",
+      "slug": "autos-renault-sandero-5p-893",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Renault Sandero 5p",
+      "officialName": "RENAULT SANDERO 5P",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 893 / Plan 2",
+      "officialArticle": 893,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/893.webp",
+      "imageAlt": "Renault Sandero 5p Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 71,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 35885685,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 125000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Sandero 5p con cuota de catalogo $125.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-sandero-5p-893",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-renault-sandero-stepway-898",
+      "slug": "autos-renault-sandero-stepway-898",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Renault Sandero Stepway",
+      "officialName": "RENAULT SANDERO STEPWAY",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 898 / Plan 2",
+      "officialArticle": 898,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/898.webp",
+      "imageAlt": "Renault Sandero Stepway Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 72,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 37321194,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 130000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Renault Sandero Stepway con cuota de catalogo $130.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-renault-sandero-stepway-898",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "autos-fiat-cronos-4p-3chances-965",
+      "slug": "autos-fiat-cronos-4p-3chances-965",
+      "category": "autos",
+      "subCategory": "Baja Gama",
+      "displayName": "Fiat Cronos 4p 3chances",
+      "officialName": "FIAT CRONOS 4P 3CHANCES",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 965 / Plan 2",
+      "officialArticle": 965,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/965.webp",
+      "imageAlt": "Fiat Cronos 4p 3chances Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 107,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 39330907,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 137000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Fiat Cronos 4p 3chances con cuota de catalogo $137.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "autos-fiat-cronos-4p-3chances-965",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-xr300tornado-500000-3cha-967",
+      "slug": "motos-honda-xr300tornado-500000-3cha-967",
+      "category": "motos",
+      "subCategory": "Alta Gama",
+      "displayName": "Honda Xr300tornado+$500000 3cha",
+      "officialName": "HONDA XR300TORNADO+$500000 3CHA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 967 / Plan 2",
+      "officialArticle": 967,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/967.webp",
+      "imageAlt": "Honda Xr300tornado+$500000 3cha Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 8,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 39618009,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 138000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Referencia Honda Xr300tornado+$500000 3cha con cuota de catalogo $138.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-xr300tornado-500000-3cha-967",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-gilera-smash110-100000-5chanc-880",
+      "slug": "motos-gilera-smash110-100000-5chanc-880",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Gilera Smash110+$100000 5chanc",
+      "officialName": "GILERA SMASH110+$100000 5CHANC",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 880 / Plan 2",
+      "officialArticle": 880,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/880.webp",
+      "imageAlt": "Gilera Smash110+$100000 5chanc Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 15,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 11482027,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 40000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 5,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Referencia Gilera Smash110+$100000 5chanc con cuota de catalogo $40.000 y 5 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-gilera-smash110-100000-5chanc-880",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-xr300tornado-500000-5cha-968",
+      "slug": "motos-honda-xr300tornado-500000-5cha-968",
+      "category": "motos",
+      "subCategory": "Alta Gama",
+      "displayName": "Honda Xr300tornado+$500000 5cha",
+      "officialName": "HONDA XR300TORNADO+$500000 5CHA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 968 / Plan 2",
+      "officialArticle": 968,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/968.webp",
+      "imageAlt": "Honda Xr300tornado+$500000 5cha Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 16,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 66031380,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 230000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 5,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda Xr300tornado+$500000 5cha con cuota de catalogo $230.000 y 5 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-xr300tornado-500000-5cha-968",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-xr300tornado-200000-956",
+      "slug": "motos-honda-xr300tornado-200000-956",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Honda Xr300tornado + $200000",
+      "officialName": "HONDA XR300TORNADO + $200000",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 956 / Plan 2",
+      "officialArticle": 956,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/956.webp",
+      "imageAlt": "Honda Xr300tornado + $200000 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 17,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 12917536,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 45000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 1,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda Xr300tornado + $200000 con cuota de catalogo $45.000 y 1 chance de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-xr300tornado-200000-956",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-bajaj-dominar-d400-200-000-883",
+      "slug": "motos-bajaj-dominar-d400-200-000-883",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Bajaj Dominar D400 + $200.000",
+      "officialName": "BAJAJ DOMINAR D400 + $200.000",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 883 / Plan 2",
+      "officialArticle": 883,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/883.webp",
+      "imageAlt": "Bajaj Dominar D400 + $200.000 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 19,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 11482027,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 40000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 1,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Bajaj Dominar D400 + $200.000 con cuota de catalogo $40.000 y 1 chance de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-bajaj-dominar-d400-200-000-883",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-yamaha-fz25-200000-882",
+      "slug": "motos-yamaha-fz25-200000-882",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Yamaha Fz25 + $200000",
+      "officialName": "YAMAHA FZ25 + $200000",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 882 / Plan 2",
+      "officialArticle": 882,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/882.webp",
+      "imageAlt": "Yamaha Fz25 + $200000 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 20,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 10907823,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 38000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 1,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Yamaha Fz25 + $200000 con cuota de catalogo $38.000 y 1 chance de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-yamaha-fz25-200000-882",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-new-wave-110-100000-870",
+      "slug": "motos-honda-new-wave-110-100000-870",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Honda New Wave 110+100000",
+      "officialName": "HONDA NEW WAVE 110+100000",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 870 / Plan 2",
+      "officialArticle": 870,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/870.webp",
+      "imageAlt": "Honda New Wave 110+100000 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 32,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 12917536,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 45000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda New Wave 110+100000 con cuota de catalogo $45.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-new-wave-110-100000-870",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-new-wave110-100000-960",
+      "slug": "motos-honda-new-wave110-100000-960",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Honda New Wave110+100000",
+      "officialName": "HONDA NEW WAVE110+100000",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 960 / Plan 2",
+      "officialArticle": 960,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/960.webp",
+      "imageAlt": "Honda New Wave110+100000 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 60,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 21530592,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 75000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 5,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda New Wave110+100000 con cuota de catalogo $75.000 y 5 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-new-wave110-100000-960",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-xr150-100000-3-chances-961",
+      "slug": "motos-honda-xr150-100000-3-chances-961",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Honda Xr150+$100000 3 Chances",
+      "officialName": "HONDA XR150+$100000 3 CHANCES",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 961 / Plan 2",
+      "officialArticle": 961,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/961.webp",
+      "imageAlt": "Honda Xr150+$100000 3 Chances Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 61,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 19520879,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 68000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda Xr150+$100000 3 Chances con cuota de catalogo $68.000 y 3 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-xr150-100000-3-chances-961",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-xr150-100000-5-chances-962",
+      "slug": "motos-honda-xr150-100000-5-chances-962",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Honda Xr150+$100000 5 Chances",
+      "officialName": "HONDA XR150+$100000 5 CHANCES",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 962 / Plan 2",
+      "officialArticle": 962,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/962.webp",
+      "imageAlt": "Honda Xr150+$100000 5 Chances Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 62,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 32440463,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 113000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 5,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda Xr150+$100000 5 Chances con cuota de catalogo $113.000 y 5 chances de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-xr150-100000-5-chances-962",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "motos-honda-twister-300-200-000-881",
+      "slug": "motos-honda-twister-300-200-000-881",
+      "category": "motos",
+      "subCategory": "-",
+      "displayName": "Honda Twister 300 + $200.000",
+      "officialName": "HONDA TWISTER 300 + $200.000",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 881 / Plan 2",
+      "officialArticle": 881,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/881.webp",
+      "imageAlt": "Honda Twister 300 + $200.000 Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 67,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 10907823,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 38000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 1,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Referencia Honda Twister 300 + $200.000 con cuota de catalogo $38.000 y 1 chance de sorteo.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "motos-honda-twister-300-200-000-881",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-938",
+      "slug": "dinero-orden-de-compra-938",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 938 / Plan 2",
+      "officialArticle": 938,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/938.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 7,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 27330050,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 95200,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Orden de compra / capital con cuota de referencia $95.200 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-938",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-969",
+      "slug": "dinero-orden-de-compra-969",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 969 / Plan 2",
+      "officialArticle": 969,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/969.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 18,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 11482027,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 40000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": true,
+      "description": "Orden de compra / capital con cuota de referencia $40.000 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-969",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-942",
+      "slug": "dinero-orden-de-compra-942",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 942 / Plan 2",
+      "officialArticle": 942,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/942.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 26,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 13032377,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 45400,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $45.400 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-942",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-939",
+      "slug": "dinero-orden-de-compra-939",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 939 / Plan 2",
+      "officialArticle": 939,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/939.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 31,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 32670144,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 113800,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $113.800 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-939",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-953",
+      "slug": "dinero-orden-de-compra-953",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 953 / Plan 2",
+      "officialArticle": 953,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/953.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 33,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 65457177,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 228000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $228.000 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-953",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-875",
+      "slug": "dinero-orden-de-compra-875",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 875 / Plan 2",
+      "officialArticle": 875,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/875.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 35,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 11194925,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 39000,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 5,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $39.000 y 5 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-875",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-940",
+      "slug": "dinero-orden-de-compra-940",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 940 / Plan 2",
+      "officialArticle": 940,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/940.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 43,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 39732850,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 138400,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $138.400 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-940",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-954",
+      "slug": "dinero-orden-de-compra-954",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 954 / Plan 2",
+      "officialArticle": 954,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/954.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 54,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 97268063,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 338800,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $338.800 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-954",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-958",
+      "slug": "dinero-orden-de-compra-958",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 958 / Plan 2",
+      "officialArticle": 958,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/958.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 56,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 106110800,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 369600,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $369.600 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-958",
+      "sourceStatus": "official_catalog_snapshot"
+    },
+    {
+      "id": "dinero-orden-de-compra-935",
+      "slug": "dinero-orden-de-compra-935",
+      "category": "dinero",
+      "subCategory": "-",
+      "displayName": "Orden de compra / capital",
+      "officialName": "ORDEN DE COMPRA",
+      "brand": "",
+      "model": "",
+      "planLabel": "Articulo 935 / Plan 2",
+      "officialArticle": 935,
+      "imageUrl": "https://artemis.clubsanjorge.com.ar/images/935.webp",
+      "imageAlt": "Orden de compra Club San Jorge",
+      "officialPlan": 2,
+      "officialOrder": 68,
+      "months": {
+        "value": 330,
+        "status": "verified"
+      },
+      "valorNominal": {
+        "value": 19721850,
+        "status": "verified"
+      },
+      "cuota": {
+        "value": 68700,
+        "status": "verified"
+      },
+      "chances": {
+        "value": 3,
+        "status": "verified"
+      },
+      "currency": "ARS",
+      "status": "active",
+      "featured": false,
+      "description": "Orden de compra / capital con cuota de referencia $68.700 y 3 chances de sorteo, segun catalogo vigente.",
+      "notes": [
+        {
+          "text": "Importes tomados del catalogo oficial activo al momento de generar el snapshot.",
+          "status": "verified"
+        },
+        {
+          "text": "La solicitud formal debe revisarse con documentacion y condiciones vigentes.",
+          "status": "verified"
+        }
+      ],
+      "faqRefs": [
+        "de-cuantas-cuotas-consta-el-plan",
+        "como-se-realizan-los-sorteos-mensuales",
+        "si-no-pago-la-cuota-y-salgo-sorteado",
+        "que-se-obtiene-al-final-del-plan-330"
+      ],
+      "contactPreset": "dinero-orden-de-compra-935",
+      "sourceStatus": "official_catalog_snapshot"
     }
   ]
 }

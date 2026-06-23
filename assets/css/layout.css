@@ -24,6 +24,7 @@
 .site-header {
   background: rgb(255 255 255 / 0.96);
   border-bottom: 1px solid var(--color-line);
+  box-shadow: 0 6px 22px rgb(41 41 41 / 0.05);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -37,17 +38,27 @@
 
 .brand-lockup {
   color: var(--color-ink);
-  display: inline-flex;
-  flex-direction: column;
+  display: grid;
+  gap: 2px;
   font-weight: 800;
   line-height: 1.15;
   text-decoration: none;
 }
 
+.brand-lockup__logo {
+  height: 30px;
+  width: 150px;
+}
+
+.brand-lockup__name {
+  color: var(--color-ink);
+  font-size: 0.96rem;
+}
+
 .brand-lockup__eyebrow {
-  color: var(--color-brand-green);
-  font-size: 0.78rem;
-  font-weight: 700;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
@@ -68,7 +79,7 @@
 
 .site-nav a:hover,
 .site-nav a[aria-current="page"] {
-  background: var(--color-surface-warm);
+  background: var(--color-brand-red-soft);
   color: var(--color-brand-red-dark);
 }
 
@@ -78,7 +89,8 @@
 }
 
 .site-footer {
-  background: var(--color-ink);
+  background:
+    linear-gradient(180deg, #292929, #1f1f1f);
   color: #f8fafc;
   padding-block: var(--space-6);
 }

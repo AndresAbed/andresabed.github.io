@@ -1,5 +1,6 @@
 import {
   getCatalogCategories,
+  getCatalogItems,
   getCatalogItemsByCategory,
   getFaqById,
   getFaqsForPlan,
@@ -24,7 +25,7 @@ import {
   planEndText,
   planObjective,
 } from "../components/plan-components.js";
-import { clear, el, qs } from "../utils/dom.js";
+import { clear, el, qs, qsa } from "../utils/dom.js";
 
 const PLAN_FAQ_IDS = [
   "que-se-obtiene-al-final-del-plan-330",
@@ -43,18 +44,18 @@ function createCatalogHero(catalogData, categories) {
       el("div", {
         className: "catalog-hero__copy",
         children: [
-          el("span", { className: "badge", text: "Catalogo de agencia" }),
-          el("h2", { text: "Explora opciones por objetivo: auto, moto o capital" }),
+          el("span", { className: "badge", text: "Capitalización y Ahorro" }),
+          el("h2", { text: "Autos, motos y dinero" }),
           el("p", {
             className: "home-hero__lead",
             text:
-              "Esta pagina organiza las alternativas comerciales por categoria. Despues, la agencia te ayuda a revisar valor nominal, cuota, plazo y condiciones antes de iniciar una solicitud.",
+              "Catálogo de planes vigentes para consulta comercial de Agencias Abed.",
           }),
           el("div", {
             className: "cluster",
             children: [
-              createButton({ label: "Consultar con un asesor", href: "/contacto/?intent=asesoramiento", variant: "primary" }),
-              createButton({ label: "Entender el sistema", href: "#sistema", variant: "secondary" }),
+              createButton({ label: "Consultar plan", href: "/contacto/?intent=consulta", variant: "primary" }),
+              createButton({ label: "Ver sistema", href: "#sistema", variant: "secondary" }),
             ],
           }),
         ],
@@ -65,8 +66,62 @@ function createCatalogHero(catalogData, categories) {
         children: [
           el("span", { className: "eyebrow", text: "Opciones cargadas" }),
           el("strong", { text: String(totalItems) }),
-          el("p", { text: "Fichas organizadas por Autos, Motos y Dinero. Los importes no confirmados quedan marcados sin inventar datos." }),
+          el("p", { text: "Opciones con cuota, valor nominal, chances y artículo de referencia." }),
           createCategoryNav(categories),
+        ],
+      }),
+    ],
+  });
+}
+
+function createCatalogFilters(catalogData, categories) {
+  const total = getCatalogItems(catalogData).length;
+  return el("section", {
+    className: "plans-section catalog-filter-section",
+    attrs: { "aria-labelledby": "catalog-filter-title" },
+    children: [
+      createSectionHeader({
+        eyebrow: "Buscador",
+        title: "Encontrá tu plan",
+        id: "catalog-filter-title",
+        intro: "Buscá por modelo, rubro, artículo o valor de referencia.",
+      }),
+      el("form", {
+        className: "catalog-filter",
+        attrs: { "data-catalog-filter": "", role: "search" },
+        children: [
+          el("label", {
+            attrs: { for: "catalog-search" },
+            children: [
+              el("span", { text: "Buscar" }),
+              el("input", {
+                attrs: {
+                  id: "catalog-search",
+                  type: "search",
+                  placeholder: "Ej. Cronos, Hilux, orden de compra, artículo 964",
+                  "data-catalog-search": "",
+                },
+              }),
+            ],
+          }),
+          el("label", {
+            attrs: { for: "catalog-category" },
+            children: [
+              el("span", { text: "Categoría" }),
+              el("select", {
+                attrs: { id: "catalog-category", "data-catalog-category": "" },
+                children: [
+                  el("option", { text: "Todas", attrs: { value: "all" } }),
+                  ...categories.map((category) => el("option", { text: category.label, attrs: { value: category.slug } })),
+                ],
+              }),
+            ],
+          }),
+          el("p", {
+            className: "catalog-filter__result",
+            text: `${total} opciones visibles`,
+            attrs: { "data-catalog-result": "", "aria-live": "polite" },
+          }),
         ],
       }),
     ],
@@ -82,12 +137,12 @@ function createCategorySection(category, items, categories) {
         className: "catalog-category__head",
         children: [
           createSectionHeader({
-            eyebrow: "Categoria",
+            eyebrow: "Rubro",
             title: category.label,
             id: `${category.slug}-title`,
             intro: category.description,
           }),
-          createButton({ label: "Consultar esta categoria", href: `/contacto/?intent=asesoramiento&category=${encodeURIComponent(category.slug)}`, variant: "secondary" }),
+          createButton({ label: "Consultar rubro", href: `/contacto/?intent=consulta&category=${encodeURIComponent(category.slug)}`, variant: "secondary" }),
         ],
       }),
       el("div", {
@@ -109,10 +164,10 @@ function createSystemSection(faqData) {
     children: [
       createSectionHeader({
         eyebrow: "El sistema",
-        title: "330 es una condicion del plan, no el nombre del producto",
+        title: "Cómo funciona el sistema",
         id: "system-title",
         intro:
-          "La referencia comercial puede ser auto, moto o dinero. El plazo, el valor nominal, la cuota y la documentacion son los puntos que hay que revisar antes de avanzar.",
+          "Los planes combinan ahorro, valor nominal y participación en sorteos mensuales según condiciones vigentes.",
       }),
       createSystemExplainer(),
       el("div", {
@@ -121,14 +176,14 @@ function createSystemSection(faqData) {
           el("article", {
             className: "editorial-panel",
             children: [
-              el("h3", { text: "Que se obtiene al final" }),
+              el("h3", { text: "Al finalizar el plan" }),
               el("p", { text: endFaq?.answer || "El objeto es formar un capital equivalente al Valor Nominal del Titulo, segun condiciones vigentes." }),
             ],
           }),
           el("article", {
             className: "editorial-panel",
             children: [
-              el("h3", { text: "Sorteos y continuidad" }),
+              el("h3", { text: "Sorteos mensuales" }),
               el("p", { text: repeatFaq?.answer || "En planes 330, si el titulo sigue vigente y al dia, puede volver a participar segun las condiciones del sistema." }),
             ],
           }),
@@ -147,9 +202,9 @@ function createPlanFaqSection(faqData) {
     children: [
       createSectionHeader({
         eyebrow: "Dudas clave",
-        title: "Preguntas para leer antes de consultar",
+        title: "Preguntas frecuentes",
         id: "plan-faq-title",
-        intro: "Respuestas cortas sobre final del plan, sorteos, continuidad, rescate y cuotas.",
+        intro: "Información útil sobre cuotas, sorteos, rescate y documentación.",
       }),
       createFaqBlock(faqs),
       el("div", {
@@ -170,15 +225,16 @@ export async function initPlansHub() {
   clear(target);
   target.append(
     createCatalogHero(catalogData, categories),
+    createCatalogFilters(catalogData, categories),
     el("section", {
       className: "plans-section",
       attrs: { "aria-labelledby": "catalog-nav-title" },
       children: [
         createSectionHeader({
-          eyebrow: "Categorias",
-          title: "Elegi por objetivo, despues revisamos condiciones",
+          eyebrow: "Rubros",
+          title: "Elegí el rubro",
           id: "catalog-nav-title",
-          intro: "Las categorias ordenan la consulta. No reemplazan la lectura de la documentacion ni la validacion comercial.",
+          intro: "Cada rubro reúne planes vigentes para consulta comercial.",
         }),
         createCategoryNav(categories),
       ],
@@ -195,20 +251,65 @@ export async function initPlansHub() {
             el("div", {
               className: "final-cta__copy",
               children: [
-                el("span", { className: "badge", text: "Consulta de catalogo" }),
-                el("h2", { text: "Te ayudamos a pasar del catalogo a una opcion concreta" }),
-                el("p", { text: "Contanos si te interesa auto, moto o dinero y revisamos juntos monto, cuota, plazo, sorteos y documentacion." }),
+                el("span", { className: "badge", text: "Presuscripción" }),
+                el("h2", { text: "Consultá por el plan que te interesa" }),
+                el("p", { text: "Elegí una opción del catálogo o dejá tus datos para recibir atención comercial." }),
               ],
             }),
             el("div", {
               className: "final-cta__actions",
-              children: [createButton({ label: "Iniciar consulta", href: "/contacto/?intent=asesoramiento", variant: "primary" })],
+              children: [createButton({ label: "Consultar plan", href: "/contacto/?intent=consulta", variant: "primary" })],
             }),
           ],
         }),
       ],
     }),
   );
+
+  initCatalogFiltering(target);
+}
+
+function initCatalogFiltering(root) {
+  const input = qs("[data-catalog-search]", root);
+  const select = qs("[data-catalog-category]", root);
+  const result = qs("[data-catalog-result]", root);
+  const form = qs("[data-catalog-filter]", root);
+  const cards = qsa(".catalog-item", root);
+  const sections = qsa(".catalog-category", root);
+
+  if (!input || !select || !cards.length) return;
+
+  const hashCategory = window.location.hash.replace("#", "");
+  if (hashCategory && [...select.options].some((option) => option.value === hashCategory)) {
+    select.value = hashCategory;
+  }
+
+  function update() {
+    const query = input.value.trim().toLowerCase();
+    const category = select.value;
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const matchesCategory = category === "all" || card.dataset.category === category;
+      const matchesQuery = !query || card.dataset.search.includes(query);
+      const show = matchesCategory && matchesQuery;
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+
+    sections.forEach((section) => {
+      section.hidden = qsa(".catalog-item", section).every((card) => card.hidden);
+    });
+
+    if (result) {
+      result.textContent = `${visible} ${visible === 1 ? "opción visible" : "opciones visibles"}`;
+    }
+  }
+
+  input.addEventListener("input", update);
+  select.addEventListener("change", update);
+  form?.addEventListener("submit", (event) => event.preventDefault());
+  update();
 }
 
 function detailIntroFor(plan) {
@@ -249,7 +350,7 @@ function createPlanHero(plan, site) {
           el("div", {
             className: "cluster",
             children: [
-              createButton({ label: cta?.label || "Quiero asesoramiento", href: `/contacto/?intent=asesoramiento&plan=${encodeURIComponent(plan.slug)}`, variant: "primary" }),
+              createButton({ label: cta?.label || "Consultar plan", href: `/contacto/?intent=consulta&plan=${encodeURIComponent(plan.slug)}`, variant: "primary" }),
               createButton({ label: "Ver catalogo completo", href: "/planes/", variant: "secondary" }),
             ],
           }),

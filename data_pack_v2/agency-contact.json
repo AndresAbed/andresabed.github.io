@@ -1,14 +1,15 @@
 {
   "meta": {
-    "version": "v1-stage-5",
-    "purpose": "Configuracion operativa/comercial de Agencias Abed para contacto y pre-solicitud asistida."
+    "version": "v3-landing",
+    "purpose": "Configuracion operativa/comercial de Agencias Abed para contacto y consultas de planes Club San Jorge."
   },
   "channels": {
     "whatsapp": {
-      "enabled": false,
-      "label": "WhatsApp",
-      "url": "",
-      "status": "pending_validation"
+      "enabled": true,
+      "label": "WhatsApp comercial",
+      "url": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
+      "displayPhone": "+54 9 11 1234-5678",
+      "status": "mock"
     },
     "email": {
       "enabled": false,
@@ -26,9 +27,10 @@
     "status": "pending_validation"
   },
   "messages": {
-    "success": "Recibimos tu pre-solicitud. Un asesor va a revisar la informacion antes de avanzar.",
-    "unavailable": "La pre-solicitud quedo preparada, pero el envio automatico todavia esta en configuracion.",
-    "error": "No pudimos procesar la pre-solicitud. Revisá los datos e intentá nuevamente.",
-    "nextSteps": "Completar este formulario no implica contratar ni quedar inscripto. La agencia revisa tu caso, te contacta y te explica documentacion, condiciones y pasos reales."
+    "success": "Recibimos tu consulta. Un asesor va a revisar la informacion antes de avanzar.",
+    "unavailable": "La consulta quedo preparada, pero el envio automatico todavia esta en configuracion.",
+    "error": "No pudimos procesar la consulta. Revisá los datos e intentá nuevamente.",
+    "nextSteps": "Completar este formulario no implica contratar ni quedar inscripto. Un asesor comercial revisa tu consulta, te contacta y te explica documentacion, condiciones y pasos reales.",
+    "whatsappNote": "Canal principal de contacto. El numero actual es placeholder tecnico hasta cargar el WhatsApp comercial definitivo."
   }
 }

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "v2-hardening"
+    "version": "v3-landing"
   },
   "featuredFaqIds": [
     "que-se-obtiene-al-final-del-plan-330",
@@ -37,6 +37,18 @@
           "question": "¿Cuándo puedo solicitar mi rescate?",
           "answer": "Para los planes de 330 meses, el rescate puede solicitarse desde la cuota 18. En la web oficial también se indica que en los planes de 90 meses puede solicitarse desde la cuota 9 y en los de 120 meses desde la cuota 12.",
           "status": "verified"
+        },
+        {
+          "id": "los-planes-estan-aprobados",
+          "question": "¿Los planes están aprobados por algún organismo?",
+          "answer": "La información oficial indica que los planes de Club San Jorge están aprobados por la Inspección General de Justicia, incluyendo la Resolución N° 1080/01 mencionada en la FAQ oficial.",
+          "status": "verified"
+        },
+        {
+          "id": "si-dejo-de-pagar-tengo-deuda",
+          "question": "¿Si dejo de pagar una cuota me queda una deuda?",
+          "answer": "La FAQ oficial indica que si dejás de pagar cuotas no se genera deuda. Aun así, dejar de pagar puede afectar la vigencia del título, la participación en sorteos y otros derechos del plan.",
+          "status": "verified"
         }
       ]
     },
@@ -67,6 +79,12 @@
           "id": "si-no-pago-la-cuota-y-salgo-sorteado",
           "question": "¿Qué pasa si no pago una cuota y justo ese mes salgo sorteado?",
           "answer": "La FAQ oficial indica que si no abonás la cuota mensual y tu título resulta adjudicado, no podés recibir el beneficio correspondiente.",
+          "status": "verified"
+        },
+        {
+          "id": "que-es-la-garantia-de-entrega",
+          "question": "¿Qué es la garantía de entrega?",
+          "answer": "La documentación oficial la vincula al endoso de ampliación automática: si el título resulta favorecido y la cuota está paga antes del sorteo, puede aplicarse la entrega del 0 km, moto o valor correspondiente según condiciones vigentes.",
           "status": "verified"
         }
       ]
@@ -104,7 +122,13 @@
         {
           "id": "como-puedo-pagar-mi-cuota",
           "question": "¿Cómo puedo pagar mi cuota?",
-          "answer": "Club San Jorge ofrece recursos como pago de boleta, descarga de boleta, medios de pago, adhesión a débito automático y adhesión a boleta digital.",
+          "answer": "Club San Jorge informa medios como Banco Nación, Banco Credicoop, Pago Fácil, Rapipago, Correo Argentino y débitos con tarjeta, además de recursos online para pago, boleta y débito automático.",
+          "status": "verified"
+        },
+        {
+          "id": "el-titulo-se-puede-transferir",
+          "question": "¿El título se puede transferir?",
+          "answer": "La FAQ oficial indica que el título es transferible. Antes de hacerlo conviene confirmar requisitos, documentación y estado del plan.",
           "status": "verified"
         }
       ]

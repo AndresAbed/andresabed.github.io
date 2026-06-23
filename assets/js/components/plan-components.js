@@ -1,8 +1,7 @@
 import { normalizeInternalTarget } from "../data/api.js";
 import { el } from "../utils/dom.js";
-import { valueOrConfirm } from "../utils/formatters.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
-import { hasValue, isPendingStatus, isValidUrl } from "../utils/validators.js";
+import { isPendingStatus, isValidUrl } from "../utils/validators.js";
 
 export const PLAN_ROUTES = Object.freeze({
   "auto-330": "/planes/auto-330/",
@@ -81,6 +80,12 @@ export function formatCatalogField(field, formatter = (value) => value) {
   };
 }
 
+export function formatMoneyARS(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return FALLBACK_TEXT.confirm;
+  return `$${number.toLocaleString("es-AR", { maximumFractionDigits: 0 })}`;
+}
+
 export function formatRescue(rescue) {
   const state = resolveValueState(rescue?.canRequestFromInstallment, rescue?.status);
   if (state !== UI_STATES.READY) return { value: FALLBACK_TEXT.confirm, state };
@@ -153,6 +158,10 @@ function categoryLabel(categories, slug) {
 }
 
 function statusBadge(item) {
+  if (item.sourceStatus === "official_catalog_snapshot") {
+    return el("span", { className: "badge", text: item.featured ? "Destacado oficial" : "Catálogo oficial" });
+  }
+
   if (item.sourceStatus === "pending_catalog_details" || item.status === "consultation") {
     return el("span", { className: "badge badge--warning", text: "A confirmar" });
   }
@@ -162,34 +171,76 @@ function statusBadge(item) {
 
 export function createCatalogItemCard(item, categories = [], options = {}) {
   const months = formatCatalogField(item.months, (value) => `${value} cuotas`);
-  const nominal = formatCatalogField(item.valorNominal, (value) => valueOrConfirm(value));
-  const cuota = formatCatalogField(item.cuota, (value) => valueOrConfirm(value));
+  const nominal = formatCatalogField(item.valorNominal, formatMoneyARS);
+  const cuota = formatCatalogField(item.cuota, formatMoneyARS);
+  const chances = formatCatalogField(item.chances, (value) => `${value} ${Number(value) === 1 ? "chance" : "chances"}`);
   const showCategory = options.showCategory !== false;
   const notes = (item.notes || []).filter((note) => note.text);
 
   return el("article", {
     className: `catalog-item ${item.featured ? "catalog-item--featured" : ""}`,
-    attrs: { "data-category": item.category },
+    attrs: {
+      "data-category": item.category,
+      "data-subcategory": item.subCategory || "",
+      "data-search": [item.displayName, item.officialName, item.subCategory, item.planLabel, item.officialArticle]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase(),
+    },
     children: [
+      item.imageUrl
+        ? el("a", {
+            className: "catalog-item__media",
+            attrs: {
+              href: `/contacto/?intent=consulta&plan=${encodeURIComponent(item.contactPreset || item.slug)}`,
+              "aria-label": `Consultar ${item.displayName}`,
+            },
+            children: [
+              el("img", {
+                attrs: {
+                  src: item.imageUrl,
+                  alt: item.imageAlt || item.displayName,
+                  loading: "lazy",
+                },
+              }),
+            ],
+          })
+        : null,
       el("div", {
         className: "catalog-item__head",
         children: [
           showCategory ? el("span", { className: "eyebrow", text: categoryLabel(categories, item.category) }) : null,
           statusBadge(item),
+          item.subCategory && item.subCategory !== "-"
+            ? el("span", { className: "badge badge--neutral", text: item.subCategory })
+            : null,
           el("h3", { text: item.displayName }),
-          el("p", { text: item.description }),
+          el("p", { text: item.category === "dinero" ? "Plan orientado a orden de compra / capital." : "Referencia disponible en el catálogo vigente." }),
+        ],
+      }),
+      el("div", {
+        className: "catalog-price-strip",
+        children: [
+          el("div", {
+            attrs: { "data-state": cuota.state },
+            children: [el("span", { text: "Cuota" }), el("strong", { text: cuota.value })],
+          }),
+          el("div", {
+            attrs: { "data-state": nominal.state },
+            children: [el("span", { text: "Valor nominal" }), el("strong", { text: nominal.value })],
+          }),
+          el("div", {
+            attrs: { "data-state": chances.state },
+            children: [el("span", { text: "Sorteo" }), el("strong", { text: chances.value })],
+          }),
         ],
       }),
       el("dl", {
         className: "catalog-meta",
         children: [
           metaRow("Referencia", item.planLabel || FALLBACK_TEXT.confirm, UI_STATES.READY),
-          hasValue(item.brand) || hasValue(item.model)
-            ? metaRow("Unidad", [item.brand, item.model].filter(Boolean).join(" "), UI_STATES.READY)
-            : metaRow("Marca / modelo", FALLBACK_TEXT.confirm, UI_STATES.PARTIAL),
           metaRow("Plazo", months.value, months.state),
-          metaRow("Valor nominal", nominal.value, nominal.state),
-          metaRow("Cuota", cuota.value, cuota.state),
+          metaRow("Artículo", item.officialArticle ? String(item.officialArticle) : FALLBACK_TEXT.confirm, item.officialArticle ? UI_STATES.READY : UI_STATES.PARTIAL),
         ],
       }),
       notes.length
@@ -202,11 +253,11 @@ export function createCatalogItemCard(item, categories = [], options = {}) {
         className: "cluster",
         children: [
           createButton({
-            label: "Consultar esta opcion",
-            href: `/contacto/?intent=asesoramiento&plan=${encodeURIComponent(item.contactPreset || item.slug)}`,
+            label: "Consultar plan",
+            href: `/contacto/?intent=consulta&plan=${encodeURIComponent(item.contactPreset || item.slug)}`,
             variant: item.featured ? "primary" : "secondary",
           }),
-          createButton({ label: "Ver sistema", href: "/planes/#sistema", variant: "secondary" }),
+          createButton({ label: "Ver condiciones", href: "/planes/#sistema", variant: "secondary" }),
         ],
       }),
     ],
@@ -276,7 +327,7 @@ export function createPlanAccessCard(plan, featuredSlug) {
         className: "cluster",
         children: [
           createButton({ label: "Ver detalle", href: planRoute(plan.slug), variant: isFeatured ? "primary" : "secondary" }),
-          createButton({ label: "Consultar", href: `/contacto/?intent=asesoramiento&plan=${encodeURIComponent(plan.slug)}`, variant: "secondary" }),
+          createButton({ label: "Consultar", href: `/contacto/?intent=consulta&plan=${encodeURIComponent(plan.slug)}`, variant: "secondary" }),
         ],
       }),
     ],
@@ -342,22 +393,22 @@ export function createFaqBlock(faqs = []) {
 
 export function createPlanCta(site, plan) {
   const cta = site?.cta?.primary;
-  const href = `/contacto/?intent=asesoramiento&plan=${encodeURIComponent(plan.slug)}`;
+  const href = `/contacto/?intent=consulta&plan=${encodeURIComponent(plan.slug)}`;
   return el("article", {
     className: "final-cta plan-cta",
     children: [
       el("div", {
         className: "final-cta__copy",
         children: [
-          el("span", { className: "badge", text: "Consulta asistida" }),
-          el("h2", { text: "Revisemos si esta opcion encaja con tu objetivo" }),
-          el("p", { text: "Te ayudamos a ordenar valor nominal, cuota, sorteos, rescate y documentacion antes de avanzar." }),
+          el("span", { className: "badge", text: "Consulta comercial" }),
+          el("h2", { text: "Revisá esta opción con información clara" }),
+          el("p", { text: "Consultá valor nominal, cuota, sorteos, rescate y documentacion antes de avanzar." }),
         ],
       }),
       el("div", {
         className: "final-cta__actions",
         children: [
-          createButton({ label: cta?.label || "Quiero asesoramiento", href, variant: "primary" }),
+          createButton({ label: cta?.label || "Consultar plan", href, variant: "primary" }),
           createButton({ label: "Ver catalogo", href: "/planes/", variant: "secondary" }),
         ],
       }),

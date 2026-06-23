@@ -1,23 +1,31 @@
 {
   "meta": {
-    "version": "v2-hardening"
+    "version": "v3-landing"
   },
   "items": [
     {
       "id": "como-funciona-club-san-jorge",
       "title": "Cómo funciona Club San Jorge",
       "description": "Video explicativo sobre el funcionamiento del sistema y los planes.",
-      "youtubeUrl": "",
-      "thumbnail": "/assets/img/placeholders/video-thumb-1.jpg",
-      "status": "pending_validation"
+      "youtubeUrl": "https://www.youtube.com/embed/6OqVYPsZ190",
+      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
+      "status": "verified"
     },
     {
       "id": "conoce-los-planes",
       "title": "Conocé los planes de Capitalización y Ahorro",
       "description": "Video general de presentación de los planes.",
-      "youtubeUrl": "",
-      "thumbnail": "/assets/img/placeholders/video-thumb-2.jpg",
-      "status": "pending_validation"
+      "youtubeUrl": "https://www.youtube.com/embed/JAKg9W9lOKQ",
+      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
+      "status": "verified"
+    },
+    {
+      "id": "experiencia-club-san-jorge",
+      "title": "Historias y experiencias",
+      "description": "Material audiovisual oficial para reforzar contexto antes de consultar.",
+      "youtubeUrl": "https://www.youtube.com/embed/dab1gMqQmPU",
+      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
+      "status": "verified"
     }
   ]
 }

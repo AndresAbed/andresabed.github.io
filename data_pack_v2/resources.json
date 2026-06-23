@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "v2-hardening"
+    "version": "v3-landing"
   },
   "groups": [
     {
@@ -22,36 +22,36 @@
           "type": "external",
           "title": "Descargá tu boleta",
           "description": "Impresión / descarga de boleta de pago.",
-          "url": "",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/boleta_de_pago",
           "featured": true,
-          "status": "pending_validation"
+          "status": "verified"
         },
         {
           "id": "medios-de-pago",
           "type": "external",
           "title": "Medios de pago",
           "description": "Consultá los medios de pago habilitados por Club San Jorge.",
-          "url": "",
-          "featured": false,
-          "status": "pending_validation"
+          "url": "https://clubsanjorge.com.ar/medios-de-pago",
+          "featured": true,
+          "status": "verified"
         },
         {
           "id": "debito-automatico",
           "type": "external",
           "title": "Adherite al débito automático",
           "description": "Gestioná el débito automático para no perder ningún sorteo por falta de pago.",
-          "url": "",
+          "url": "https://clubsanjorge.com.ar/debito-automatico-cya",
           "featured": false,
-          "status": "pending_validation"
+          "status": "verified"
         },
         {
           "id": "boleta-digital",
           "type": "external",
           "title": "Adherite a la boleta digital",
           "description": "Recibí tu boleta por mail.",
-          "url": "",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/adherite-a-la-boleta-digital",
           "featured": false,
-          "status": "pending_validation"
+          "status": "verified"
         }
       ]
     },
@@ -85,6 +85,42 @@
           "description": "Consulta de adjudicados publicada por Club San Jorge.",
           "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/adjudicados",
           "featured": true,
+          "status": "verified"
+        },
+        {
+          "id": "catalogo-oficial",
+          "type": "external",
+          "title": "Catálogo oficial de planes",
+          "description": "Catálogo publicado por Club San Jorge para consultar opciones vigentes.",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/planes-catalogo",
+          "featured": true,
+          "status": "verified"
+        },
+        {
+          "id": "terminos-condiciones",
+          "type": "external",
+          "title": "Términos y condiciones",
+          "description": "PDF oficial vinculado al catálogo de planes.",
+          "url": "https://artemis.clubsanjorge.com.ar/6/assets/Terminos_y_Condiciones.pdf",
+          "featured": false,
+          "status": "verified"
+        },
+        {
+          "id": "pdf-plan-330",
+          "type": "external",
+          "title": "Solicitud Plan 330",
+          "description": "Formulario / documentación oficial del Plan 330.",
+          "url": "https://clubsanjorge.com.ar/sites/default/files/pdf/Plan330.pdf",
+          "featured": false,
+          "status": "verified"
+        },
+        {
+          "id": "pdf-plan-90-120",
+          "type": "external",
+          "title": "Solicitud Plan 90 y 120",
+          "description": "Formulario / documentación oficial para planes 90 y 120.",
+          "url": "https://clubsanjorge.com.ar/sites/default/files/pdf/2020/plan-90-y-120-web.pdf",
+          "featured": false,
           "status": "verified"
         }
       ]

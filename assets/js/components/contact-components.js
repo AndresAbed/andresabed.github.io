@@ -1,6 +1,6 @@
 import { el } from "../utils/dom.js";
 import { hasValue, isValidUrl } from "../utils/validators.js";
-import { createButton, createCallout, createSectionHeader } from "./plan-components.js";
+import { createButton, createCallout, createSectionHeader, formatMoneyARS } from "./plan-components.js";
 
 export const CONTACT_STATES = Object.freeze({
   IDLE: "idle",
@@ -12,14 +12,14 @@ export const CONTACT_STATES = Object.freeze({
 });
 
 const INTENT_OPTIONS = [
-  { value: "asesoramiento", label: "Quiero asesoramiento" },
-  { value: "iniciar_solicitud", label: "Quiero iniciar una pre-solicitud" },
+  { value: "consulta", label: "Quiero consultar un plan" },
+  { value: "iniciar_solicitud", label: "Quiero iniciar una solicitud" },
 ];
 
 const INQUIRY_OPTIONS = [
   { value: "informacion_general", label: "Información general" },
-  { value: "iniciar_solicitud", label: "Quiero iniciar solicitud" },
-  { value: "contactarme", label: "Ya me decidí y quiero que me contacten" },
+  { value: "iniciar_solicitud", label: "Quiero avanzar con una solicitud" },
+  { value: "contactarme", label: "Ya elegí una opción" },
   { value: "otra", label: "Otra consulta" },
 ];
 
@@ -97,20 +97,26 @@ export function createContactMethods(config) {
   const methods = [
     {
       title: "WhatsApp",
-      body: whatsapp?.enabled && isValidUrl(whatsapp.url) ? "Canal disponible para consultas rapidas." : "Canal en configuracion.",
+      body:
+        whatsapp?.enabled && isValidUrl(whatsapp.url)
+          ? `Canal principal para consultas directas${whatsapp.displayPhone ? `: ${whatsapp.displayPhone}` : "."}`
+          : "Canal en configuracion.",
       enabled: whatsapp?.enabled && isValidUrl(whatsapp.url),
-      action: whatsapp?.enabled && isValidUrl(whatsapp.url) ? createButton({ label: "Hablar por WhatsApp", href: whatsapp.url, variant: "secondary" }) : null,
+      badge: whatsapp?.enabled && isValidUrl(whatsapp.url) ? "Principal" : "En configuracion",
+      action: whatsapp?.enabled && isValidUrl(whatsapp.url) ? createButton({ label: "Hablar por WhatsApp", href: whatsapp.url, variant: "primary" }) : null,
     },
     {
       title: "Formulario",
-      body: "Dejá tus datos y tu interes para ordenar la consulta comercial.",
+      body: "Dejá tus datos y el plan de interés para recibir atención comercial.",
       enabled: config?.form?.enabled,
+      badge: config?.form?.enabled ? "Recomendado" : "En configuracion",
       action: null,
     },
     {
       title: "Email",
       body: email?.enabled && hasValue(email.address) ? email.address : "Email comercial pendiente de configuracion.",
       enabled: email?.enabled && hasValue(email.address),
+      badge: email?.enabled && hasValue(email.address) ? "Disponible" : "Opcional",
       action: email?.enabled && hasValue(email.address) ? createButton({ label: "Enviar email", href: `mailto:${email.address}`, variant: "secondary" }) : null,
     },
   ];
@@ -122,7 +128,7 @@ export function createContactMethods(config) {
         className: "contact-method",
         attrs: { "data-state": method.enabled ? "ready" : "disabled" },
         children: [
-          el("span", { className: method.enabled ? "badge" : "badge badge--warning", text: method.enabled ? "Disponible" : "En configuracion" }),
+          el("span", { className: method.enabled ? "badge badge--neutral" : "badge badge--warning", text: method.badge }),
           el("h3", { text: method.title }),
           el("p", { text: method.body }),
           method.action,
@@ -135,9 +141,9 @@ export function createContactMethods(config) {
 export function createProcessSteps() {
   const steps = [
     ["1. Dejas tus datos", "Indicas si miras auto, moto, dinero o si todavia no estas seguro."],
-    ["2. Ordenamos la consulta", "La agencia revisa objetivo, valor nominal, cuota y dudas principales."],
-    ["3. Te contactamos", "Un asesor explica alternativas, documentacion y siguientes pasos."],
-    ["4. Decidis informado", "Avanzas solo si la opcion y las condiciones quedaron claras."],
+    ["2. Revisamos el plan", "Tomamos como referencia el rubro, valor nominal y cuota vigente."],
+    ["3. Te contactamos", "Un asesor comercial continúa la atención por el canal elegido."],
+    ["4. Avanzás con respaldo", "La solicitud formal se completa con la documentación correspondiente."],
   ];
 
   return el("div", {
@@ -146,10 +152,24 @@ export function createProcessSteps() {
   });
 }
 
+function compactOptionLabel(value, maxLength = 34) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 3).trim()}...`;
+}
+
 export function createLeadForm({ plans, defaults, onSubmit }) {
   const planOptions = [
-    ...plans.map((plan) => ({ value: plan.contactPreset || plan.slug, label: `${plan.displayName || plan.name} (${plan.category || "catalogo"})` })),
-    { value: "no_estoy_seguro", label: "No estoy seguro / quiero asesoramiento" },
+    { value: "no_estoy_seguro", label: "No estoy seguro" },
+    ...plans.map((plan) => {
+      const cuota = Number(plan.cuota?.value);
+      const price = Number.isFinite(cuota) ? ` | ${formatMoneyARS(cuota)}` : "";
+      const category = plan.category ? `${plan.category}: ` : "";
+      return {
+        value: plan.contactPreset || plan.slug,
+        label: compactOptionLabel(`${category}${plan.displayName || plan.name}${price}`),
+      };
+    }),
   ];
 
   const form = el("form", {
@@ -183,22 +203,22 @@ export function createLeadForm({ plans, defaults, onSubmit }) {
       el("fieldset", {
         children: [
           el("legend", { text: "Interes comercial" }),
-          createSelect({ name: "planInterest", label: "Opcion de catalogo", options: planOptions, required: true, selected: defaults.plan }),
-          createTextarea({ name: "message", label: "Comentarios o dudas", placeholder: "Contanos si te interesa auto, moto, dinero, valor nominal, cuota o una duda puntual." }),
+          createSelect({ name: "planInterest", label: "Opcion del catalogo", options: planOptions, required: true, selected: defaults.plan }),
+          createTextarea({ name: "message", label: "Comentarios o dudas", placeholder: "Ej. Estoy entre auto y dinero, quiero saber cuota aproximada y cómo funcionan los sorteos." }),
           el("label", {
             className: "checkbox-field",
             children: [
               el("input", { attrs: { type: "checkbox", name: "readInfo", value: "yes" } }),
-              el("span", { text: "Quiero que me expliquen la opcion antes de avanzar con una solicitud formal." }),
+              el("span", { text: "Quiero recibir informacion antes de avanzar con una solicitud formal." }),
             ],
           }),
         ],
       }),
-      createCallout("Completar esta pre-solicitud solo ordena la consulta. La contratacion formal, si corresponde, se revisa despues con documentacion.", "warning"),
+      createCallout("El formulario inicia una consulta comercial. La contratación formal se completa con documentación y condiciones vigentes.", "warning"),
       el("div", {
         className: "cluster",
         children: [
-          el("button", { className: "button button--primary", text: "Enviar pre-solicitud", attrs: { type: "submit" } }),
+          el("button", { className: "button button--primary", text: "Enviar consulta", attrs: { type: "submit" } }),
           el("button", { className: "button button--secondary", text: "Limpiar datos", attrs: { type: "reset" } }),
         ],
       }),
@@ -218,7 +238,7 @@ export function setFormState(form, state, message) {
   }
   if (button) {
     button.disabled = state === CONTACT_STATES.SUBMITTING || state === CONTACT_STATES.VALIDATING;
-    button.textContent = state === CONTACT_STATES.SUBMITTING ? "Preparando envio..." : "Enviar pre-solicitud";
+    button.textContent = state === CONTACT_STATES.SUBMITTING ? "Preparando envío..." : "Enviar consulta";
   }
 }
 
@@ -261,8 +281,8 @@ export function createPayloadSummary(payload) {
         className: "stack",
         children: [
           el("span", { className: "badge badge--warning", text: "Modo fallback" }),
-          el("h3", { text: "Pre-solicitud preparada" }),
-          el("p", { text: "El envio automatico esta en configuracion. Estos son los datos preparados para integrar con un endpoint real:" }),
+          el("h3", { text: "Consulta preparada" }),
+          el("p", { text: "El envío automático está en configuración. Estos son los datos preparados para integrar con un endpoint real:" }),
           el("ul", {
             children: [
               el("li", { text: `Nombre: ${payload.fullName}` }),
@@ -284,19 +304,19 @@ export function createContactHero() {
       el("div", {
         className: "plans-hub-hero__copy",
         children: [
-          el("span", { className: "badge", text: "Contacto / catalogo asistido" }),
-          el("h2", { text: "Pasar de una opcion a una consulta concreta" }),
+          el("span", { className: "badge", text: "Contacto comercial" }),
+          el("h2", { text: "Consultá por tu plan" }),
           el("p", {
             className: "home-hero__lead",
-            text: "Contanos si estas mirando autos, motos o dinero. La agencia te ayuda a revisar la opcion antes de iniciar cualquier paso comercial.",
+            text: "Dejá tus datos o escribinos por WhatsApp para continuar la atención comercial de planes Club San Jorge.",
           }),
         ],
       }),
       el("aside", {
         className: "hero-panel",
         children: [
-          el("h3", { text: "Que pasa despues" }),
-          el("p", { text: "La agencia revisa tu consulta y te contacta para ordenar valor nominal, cuota, categoria y documentacion." }),
+          el("h3", { text: "Qué pasa después" }),
+          el("p", { text: "Un asesor comercial continúa la consulta y te indica los pasos de presuscripción correspondientes." }),
         ],
       }),
     ],

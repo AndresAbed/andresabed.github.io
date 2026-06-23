@@ -216,7 +216,7 @@ export function createFaqGroup(category, priorityIds = []) {
   });
 }
 
-export function createFinalHelpCta({ title = "¿Seguís con dudas?", body, label = "Consultar con la agencia", href = "/contacto/?intent=asesoramiento" } = {}) {
+export function createFinalHelpCta({ title = "¿Seguís con dudas?", body, label = "Consultar", href = "/contacto/?intent=consulta" } = {}) {
   return el("article", {
     className: "final-cta",
     children: [

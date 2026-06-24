@@ -55,15 +55,20 @@ function createWhatsappLink({ hasCtaTarget, target, cta, compact = false }) {
   });
 }
 
-function createBrandLogo(officialLogo) {
+function createBrandLogo({ logo, scrolledLogo }) {
   return el("a", {
     className: "brand-lockup",
     attrs: { href: "/", "aria-label": "Club San Jorge Capitalización y Ahorro - Inicio" },
     children: [
-      officialLogo
+      logo
         ? el("img", {
             className: "brand-lockup__logo",
-            attrs: { src: officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
+            attrs: {
+              src: logo,
+              alt: "Club San Jorge Capitalización y Ahorro",
+              "data-logo-default": logo,
+              "data-logo-scrolled": scrolledLogo || logo,
+            },
           })
         : null,
     ],
@@ -74,7 +79,8 @@ function createHeader(site) {
   const cta = site?.cta?.primary || {};
   const target = normalizeInternalTarget(cta.target);
   const hasCtaTarget = isValidUrl(target);
-  const officialLogo = site?.brand?.navbarLogo || site?.brand?.officialLogo;
+  const logo = site?.brand?.navbarLogo || site?.brand?.officialLogo;
+  const scrolledLogo = site?.brand?.navbarLogoScrolled || site?.brand?.logoVariants?.agenciasAbedColorIsoWhite || logo;
 
   const header = el("header", {
     className: "site-header",
@@ -82,7 +88,7 @@ function createHeader(site) {
       el("div", {
         className: "container site-header__inner",
         children: [
-          createBrandLogo(officialLogo),
+          createBrandLogo({ logo, scrolledLogo }),
           el("div", {
             className: "site-header__desktop",
             children: [
@@ -139,7 +145,32 @@ function createHeader(site) {
   const fragment = document.createDocumentFragment();
   fragment.append(header, menuLayer);
   setupHeaderMenu({ header, overlay, drawer });
+  setupHeaderScrollState(header);
   return fragment;
+}
+
+function setupHeaderScrollState(header) {
+  const logo = header.querySelector(".brand-lockup__logo");
+  const defaultLogo = logo?.dataset.logoDefault;
+  const scrolledLogo = logo?.dataset.logoScrolled;
+
+  const setScrolled = () => {
+    const isScrolled = window.scrollY > 8;
+    header.classList.toggle("site-header--scrolled", isScrolled);
+    if (logo && defaultLogo && scrolledLogo) {
+      const nextLogo = isScrolled ? scrolledLogo : defaultLogo;
+      if (logo.getAttribute("src") !== nextLogo) logo.setAttribute("src", nextLogo);
+    }
+  };
+
+  setScrolled();
+  const syncScrolled = () => window.requestAnimationFrame(setScrolled);
+  window.addEventListener("scroll", syncScrolled, { passive: true });
+  document.addEventListener("scroll", syncScrolled, { passive: true });
+  window.addEventListener("wheel", syncScrolled, { passive: true });
+  window.addEventListener("touchmove", syncScrolled, { passive: true });
+  window.addEventListener("resize", syncScrolled, { passive: true });
+  window.setInterval(setScrolled, 120);
 }
 
 function setupHeaderMenu({ header, overlay, drawer }) {

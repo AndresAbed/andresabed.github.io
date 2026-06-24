@@ -1,7 +1,7 @@
 import { loadSite } from "./data/api.js";
-import { renderShell } from "./components/shell.js";
+import { renderShell } from "./components/shell.js?v=header-scroll-3";
 import { initContactPage } from "./pages/contact.js";
-import { initHomePage } from "./pages/home.js";
+import { initHomePage } from "./pages/home.js?v=hero-video-modal-layer";
 import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js";
 import { initPlanDetail, initPlansHub } from "./pages/plans.js";
 import { initBasePage } from "./pages/base.js";

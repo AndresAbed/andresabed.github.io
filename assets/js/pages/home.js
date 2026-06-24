@@ -111,29 +111,147 @@ function createHeroStat(item) {
   });
 }
 
+function withAutoplay(url) {
+  if (!url) return "";
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}autoplay=1&rel=0`;
+}
+
+function setupHeroVideoModal({ trigger, modal, frame, closeButton, video }) {
+  if (!trigger || !modal || !frame || !closeButton || !video?.youtubeUrl) return;
+
+  let previousFocus = null;
+
+  const setOpen = (open) => {
+    modal.dataset.open = open ? "true" : "false";
+    modal.setAttribute("aria-hidden", open ? "false" : "true");
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("site-video-open", open);
+
+    if (open) {
+      previousFocus = document.activeElement;
+      closeButton.removeAttribute("tabindex");
+      frame.setAttribute("tabindex", "0");
+      frame.setAttribute("src", withAutoplay(video.youtubeUrl));
+      window.requestAnimationFrame(() => closeButton.focus({ preventScroll: true }));
+    } else {
+      frame.removeAttribute("src");
+      frame.setAttribute("tabindex", "-1");
+      closeButton.setAttribute("tabindex", "-1");
+      if (previousFocus && typeof previousFocus.focus === "function") {
+        previousFocus.focus({ preventScroll: true });
+      }
+    }
+  };
+
+  trigger.addEventListener("click", () => setOpen(true));
+  closeButton.addEventListener("click", () => setOpen(false));
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (modal.dataset.open !== "true") return;
+    if (event.key === "Escape") {
+      setOpen(false);
+      return;
+    }
+
+    if (event.key === "Tab") {
+      const focusable = [closeButton, frame];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+}
+
 function createHeroVideo(video) {
   if (!video?.youtubeUrl) return null;
 
-  return el("article", {
-    className: "home-hero-video",
+  const modalId = "hero-video-modal";
+  const titleId = "hero-video-title";
+  const trigger = el("button", {
+    className: "home-hero-video__trigger",
+    attrs: {
+      type: "button",
+      "aria-controls": modalId,
+      "aria-expanded": "false",
+    },
+    children: [
+      el("span", { className: "home-hero-video__play", attrs: { "aria-hidden": "true" } }),
+      el("span", {
+        className: "home-hero-video__text",
+        children: [
+          el("strong", { text: "Vos también podés ser el próximo" }),
+          el("small", { text: "Conocé cómo funciona Club San Jorge" }),
+        ],
+      }),
+    ],
+  });
+  const frame = el("iframe", {
+    attrs: {
+      title: video.title || "Video de Club San Jorge Capitalización y Ahorro",
+      loading: "lazy",
+      tabindex: "-1",
+      allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+      referrerpolicy: "strict-origin-when-cross-origin",
+      allowfullscreen: true,
+    },
+  });
+  const closeButton = el("button", {
+    className: "home-hero-video-modal__close",
+    text: "Cerrar",
+    attrs: { type: "button", "aria-label": "Cerrar video", tabindex: "-1" },
+  });
+  const modal = el("div", {
+    className: "home-hero-video-modal",
+    attrs: {
+      id: modalId,
+      role: "dialog",
+      "aria-modal": "true",
+      "aria-hidden": "true",
+      "aria-labelledby": titleId,
+      "data-open": "false",
+    },
     children: [
       el("div", {
-        className: "home-hero-video__frame",
+        className: "home-hero-video-modal__panel",
         children: [
-          el("iframe", {
-            attrs: {
-              src: video.youtubeUrl,
-              title: video.title || "Video de Club San Jorge Capitalización y Ahorro",
-              loading: "lazy",
-              allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-              referrerpolicy: "strict-origin-when-cross-origin",
-              allowfullscreen: true,
-            },
+          el("div", {
+            className: "home-hero-video-modal__head",
+            children: [
+              el("h2", { text: video.title || "Club San Jorge", attrs: { id: titleId } }),
+              closeButton,
+            ],
+          }),
+          el("div", {
+            className: "home-hero-video-modal__frame",
+            children: [frame],
           }),
         ],
       }),
     ],
   });
+
+  const videoBlock = el("article", {
+    className: "home-hero-video",
+    children: [trigger],
+  });
+
+  document.getElementById(modalId)?.remove();
+  document.body.append(modal);
+  setupHeroVideoModal({ trigger, modal, frame, closeButton, video });
+
+  return videoBlock;
 }
 
 function createHeroDraws(draws, primaryCta) {

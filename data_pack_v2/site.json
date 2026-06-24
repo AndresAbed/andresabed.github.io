@@ -28,7 +28,8 @@
     "clubAreaName": "Capitalización y Ahorro",
     "showClubReference": true,
     "navbarLogo": "/assets/img/brand/logo-agencias-abed.svg",
-    "officialLogo": "/assets/img/brand/logo-capitalizacion.svg",
+    "navbarLogoScrolled": "/assets/img/brand/logo-agencias-abed-color-white.svg",
+    "officialLogo": "/assets/img/brand/logo-agencias-abed.svg",
     "logoVariants": {
       "agenciasAbed": "/assets/img/brand/logo-agencias-abed.svg",
       "agenciasAbedWhite": "/assets/img/brand/logo-agencias-abed-white.svg",

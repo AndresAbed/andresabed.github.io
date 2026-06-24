@@ -74,7 +74,7 @@ function createHeader(site) {
   const cta = site?.cta?.primary || {};
   const target = normalizeInternalTarget(cta.target);
   const hasCtaTarget = isValidUrl(target);
-  const officialLogo = site?.brand?.officialLogo;
+  const officialLogo = site?.brand?.navbarLogo || site?.brand?.officialLogo;
 
   const header = el("header", {
     className: "site-header",

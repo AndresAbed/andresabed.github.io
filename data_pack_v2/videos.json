@@ -4,6 +4,14 @@
   },
   "items": [
     {
+      "id": "hero-capitalizacion-ahorro",
+      "title": "Club San Jorge Capitalización y Ahorro",
+      "description": "Video institucional para presentar el sistema de Capitalización y Ahorro.",
+      "youtubeUrl": "https://www.youtube.com/embed/l6HmMRVueT4",
+      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
+      "status": "verified"
+    },
+    {
       "id": "como-funciona-club-san-jorge",
       "title": "Cómo funciona Club San Jorge",
       "description": "Video explicativo sobre el funcionamiento del sistema y los planes.",

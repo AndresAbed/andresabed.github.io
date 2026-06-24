@@ -76,19 +76,134 @@ function createPlanVisual(item, className = "home-plan-visual") {
   });
 }
 
+function getHeroVideo(videosData) {
+  return (
+    (videosData?.items || []).find((item) => item.id === "hero-capitalizacion-ahorro") ||
+    (videosData?.items || []).find((item) => item.youtubeUrl) ||
+    null
+  );
+}
+
+function formatDrawDate(rawDate) {
+  const value = String(rawDate || "").trim();
+  const badgeMatch = value.match(/\bLOTBA\b/i);
+
+  return {
+    date: value.replace(/\s*\bLOTBA\b\s*/i, "").trim(),
+    badge: badgeMatch ? badgeMatch[0].toUpperCase() : "",
+  };
+}
+
+function getHeroStats(site) {
+  const priority = ["Suscriptores", "Adjudicados", "Trayectoria"];
+  const stats = site.club?.stats || [];
+
+  return priority.map((label) => stats.find((item) => item.label === label)).filter(Boolean);
+}
+
+function createHeroStat(item) {
+  return el("article", {
+    className: "home-hero-stat",
+    children: [
+      el("span", {
+        className: `home-hero-stat__icon home-hero-stat__icon--${item.icon || "stat"}`,
+        attrs: { "aria-hidden": "true" },
+      }),
+      el("strong", { text: item.value }),
+      el("span", { text: item.label }),
+    ],
+  });
+}
+
+function createHeroVideo(video) {
+  if (!video?.youtubeUrl) return null;
+
+  return el("article", {
+    className: "home-hero-video",
+    children: [
+      el("div", {
+        className: "home-hero-video__frame",
+        children: [
+          el("iframe", {
+            attrs: {
+              src: video.youtubeUrl,
+              title: video.title || "Video de Club San Jorge Capitalización y Ahorro",
+              loading: "lazy",
+              allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+              referrerpolicy: "strict-origin-when-cross-origin",
+              allowfullscreen: true,
+            },
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
+function createHeroDraws(draws, primaryCta) {
+  const stimuli = (draws?.stimuli || []).sort((a, b) => (a.position || 0) - (b.position || 0)).slice(0, 3);
+  const lastState = resolveValueState(draws?.lastDraw?.date, draws?.lastDraw?.status);
+  const nextState = resolveValueState(draws?.nextDraw?.date, draws?.nextDraw?.status);
+  const lastDrawDate = formatDrawDate(draws?.lastDraw?.date);
+  const nextDrawDate = formatDrawDate(draws?.nextDraw?.date);
+  const drawBadge = lastDrawDate.badge || nextDrawDate.badge;
+
+  return el("article", {
+    className: "home-hero-drawcard",
+    attrs: { "aria-label": "Información de sorteos Club San Jorge" },
+    children: [
+      drawBadge ? el("span", { className: "home-hero-drawcard__badge", text: drawBadge }) : null,
+      el("div", {
+        className: "home-hero-drawcard__numbers",
+        children: stimuli.map((item) =>
+          el("div", {
+            className: "home-hero-drawcard__number",
+            attrs: {
+              "data-state": resolveValueState(item.winningNumber, item.status),
+              title: item.label,
+            },
+            children: [
+              el("strong", { text: item.winningNumber || FALLBACK_TEXT.updating }),
+              el("span", { text: item.label }),
+            ],
+          }),
+        ),
+      }),
+      el("div", {
+        className: "home-hero-drawcard__dates",
+        children: [
+          el("div", {
+            className: "home-hero-drawcard__date",
+            attrs: { "data-state": lastState },
+            children: [
+              el("span", { text: "Último sorteo" }),
+              el("strong", { text: lastDrawDate.date || FALLBACK_TEXT.updating }),
+            ],
+          }),
+          el("div", {
+            className: "home-hero-drawcard__date home-hero-drawcard__date--next",
+            attrs: { "data-state": nextState },
+            children: [
+              el("span", { text: "Próximo sorteo" }),
+              el("strong", { text: nextDrawDate.date || FALLBACK_TEXT.updating }),
+            ],
+          }),
+        ],
+      }),
+      createButton({ label: "Quiero mi plan", href: primaryCta.href, variant: "primary" }),
+    ],
+  });
+}
+
 function renderHero(data) {
   const target = qs("[data-home-hero]");
   if (!target) return;
 
-  const { site, planCatalog } = data;
+  const { site, draws, videos } = data;
+  const stats = getHeroStats(site);
+  const video = getHeroVideo(videos);
   const primaryCta = getPrimaryCta(site);
-  const secondaryCta = getSecondaryCta(site);
-  const categories = getCatalogCategories(planCatalog);
-  const stats = (site.club?.stats || []).filter((item) => item.status === "verified").slice(0, 2);
-  const heroItems = categories
-    .map((category) => getCategoryStats(planCatalog, category).leadItem)
-    .filter(Boolean)
-    .slice(0, 3);
+  const headline = site.club?.headline || "Suscribite, ahorrá y ganá";
 
   clear(target);
   target.append(
@@ -96,66 +211,46 @@ function renderHero(data) {
       className: "container home-hero-v5",
       children: [
         el("div", {
-          className: "home-hero-v5__copy",
+          className: "home-hero-v5__intro",
           children: [
-            el("span", {
-              className: "home-eyebrow home-eyebrow--light",
-              text: site.agency?.legalDescriptor || "Agencia mercantil de Club San Jorge",
-            }),
-            el("h1", {
-              attrs: { id: "home-title" },
-              text: site.club?.headline || "Suscribite, ahorrá y ganá",
-            }),
-            el("p", {
-              className: "home-hero-v5__lead",
-              text:
-                "Planes de Capitalización y Ahorro Club San Jorge para autos, motos y dinero, con atención comercial de Agencias Abed.",
-            }),
             el("div", {
-              className: "home-action-row",
+              className: "home-hero-v5__copy",
               children: [
-                createButton({ label: primaryCta.label, href: primaryCta.href, variant: "primary" }),
-                createButton({ label: "Ver planes", href: "/planes/", variant: "secondary" }),
-                createButton({ label: secondaryCta.label, href: secondaryCta.href, variant: "ghost" }),
-              ],
-            }),
-            el("div", {
-              className: "home-hero-v5__proof",
-              children: [
-                ...stats.map((item) => createMiniFact({ label: item.label, value: item.value })),
-                createMiniFact({ label: "Rubros principales", value: "Auto, moto y dinero" }),
-              ],
-            }),
-          ],
-        }),
-        el("aside", {
-          className: "home-hero-v5__showcase",
-          attrs: { "aria-label": "Planes destacados de Club San Jorge" },
-          children: [
-            site.brand?.officialLogo
-              ? el("img", {
-                  className: "home-hero-v5__logo",
-                  attrs: { src: site.brand.officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
-                })
-              : null,
-            el("div", {
-              className: "home-product-strip",
-              children: heroItems.map((item) =>
-                el("article", {
-                  className: "home-product-strip__item",
+                el("h1", {
+                  attrs: { id: "home-title" },
+                  text: headline.toLocaleUpperCase("es-AR"),
+                }),
+                el("p", {
+                  className: "home-hero-v5__lead",
                   children: [
-                    createPlanVisual(item, "home-product-strip__image"),
-                    el("div", {
-                      children: [
-                        el("span", { text: item.category }),
-                        el("strong", { text: item.displayName }),
-                      ],
+                    "Cuota a cuota vas formando tu ahorro y participás todos los meses por ",
+                    el("strong", {
+                      text: "adjudicaciones que pueden acercarte a tu auto, tu moto o capital en dinero.",
                     }),
                   ],
                 }),
-              ),
+                el("div", {
+                  className: "home-hero-v5__actions",
+                  children: [
+                    createButton({ label: "Ver planes", href: "/planes/", variant: "primary" }),
+                    createButton({ label: "Cómo funciona", href: "#how-title", variant: "green" }),
+                  ],
+                }),
+              ],
             }),
+            createHeroDraws(draws, primaryCta),
           ],
+        }),
+        createHeroVideo(video),
+      ],
+    }),
+    el("div", {
+      className: "home-hero-stats-band",
+      children: [
+        el("div", {
+          className: "container home-hero-v5__proof",
+          attrs: { "aria-label": "Números de confianza" },
+          children: stats.map(createHeroStat),
         }),
       ],
     }),

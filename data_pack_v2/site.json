@@ -27,7 +27,14 @@
     "clubName": "Club San Jorge",
     "clubAreaName": "Capitalización y Ahorro",
     "showClubReference": true,
+    "navbarLogo": "/assets/img/brand/logo-agencias-abed.svg",
     "officialLogo": "/assets/img/brand/logo-capitalizacion.svg",
+    "logoVariants": {
+      "agenciasAbed": "/assets/img/brand/logo-agencias-abed.svg",
+      "agenciasAbedWhite": "/assets/img/brand/logo-agencias-abed-white.svg",
+      "agenciasAbedBlack": "/assets/img/brand/logo-agencias-abed-black.svg",
+      "agenciasAbedColorIsoWhite": "/assets/img/brand/logo-agencias-abed-color-white.svg"
+    },
     "manualClaim": "Con nosotros podés",
     "palette": {
       "primaryRed": {
@@ -63,21 +70,32 @@
       {
         "label": "Suscriptores",
         "value": "+40 mil",
+        "icon": "users",
         "status": "verified"
       },
       {
         "label": "Adjudicados",
         "value": "+20 mil",
+        "icon": "award",
         "status": "verified"
+      },
+      {
+        "label": "Trayectoria",
+        "value": "+40 años",
+        "icon": "calendar",
+        "status": "pending_validation",
+        "source": "manual_placeholder"
       },
       {
         "label": "Agentes mercantiles",
         "value": "+70",
+        "icon": "network",
         "status": "verified"
       },
       {
         "label": "Productores asesores independientes",
         "value": "+300",
+        "icon": "users",
         "status": "verified"
       }
     ]

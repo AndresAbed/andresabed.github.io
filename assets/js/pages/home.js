@@ -1,42 +1,28 @@
 import {
   getCatalogCategories,
-  getCatalogItems,
   getCatalogItemsByCategory,
   getFaqById,
-  getFeaturedCatalogItems,
   getResourcesByGroup,
   loadAllForHome,
   normalizeInternalTarget,
 } from "../data/api.js";
 import { classifyLinkItem } from "../data/validators.js";
-import {
-  categoryHref,
-  createButton,
-  createCatalogItemCard,
-  createFeaturedCatalogGrid,
-  formatMoneyARS,
-  createMiniFact,
-  createSectionHeader,
-  createSystemExplainer,
-} from "../components/plan-components.js";
+import { categoryHref, createButton, createMiniFact, formatMoneyARS } from "../components/plan-components.js";
 import { clear, el, qs } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
-import { isMockStatus, isValidUrl } from "../utils/validators.js";
+import { isMockStatus } from "../utils/validators.js";
 
-const PRIORITY_FAQ_IDS = [
-  "que-se-obtiene-al-final-del-plan-330",
+const HOME_FAQ_IDS = [
   "como-se-realizan-los-sorteos-mensuales",
+  "que-se-obtiene-al-final-del-plan-330",
   "si-salgo-adjudicado-debo-seguir-pagando",
-  "si-dejo-de-pagar-tengo-deuda",
-  "si-no-pago-la-cuota-y-salgo-sorteado",
-  "los-planes-estan-aprobados",
 ];
 
 function getPrimaryCta(site) {
   const cta = site?.cta?.primary;
   return {
-    label: cta?.label || "Consultar plan",
-    href: normalizeInternalTarget(cta?.target) || "/contacto/",
+    label: cta?.label || "Hablar por WhatsApp",
+    href: normalizeInternalTarget(cta?.target) || "/contacto/?intent=consulta",
   };
 }
 
@@ -44,37 +30,50 @@ function getSecondaryCta(site) {
   const cta = site?.cta?.secondary;
   return {
     label: cta?.label || "Completar formulario",
-    href: normalizeInternalTarget(cta?.target) || "/contacto/",
+    href: normalizeInternalTarget(cta?.target) || "/contacto/?intent=consulta",
   };
 }
 
-function catalogStats(planCatalog) {
-  const items = getCatalogItems(planCatalog);
-  const categories = getCatalogCategories(planCatalog);
-  const cuotas = items
-    .map((item) => Number(item.cuota?.value))
-    .filter((value) => Number.isFinite(value) && value > 0);
-
-  return {
-    total: items.length,
-    categoryCount: categories.length,
-    minCuota: cuotas.length ? Math.min(...cuotas) : null,
-    maxCuota: cuotas.length ? Math.max(...cuotas) : null,
-  };
-}
-
-function categorySummary(planCatalog, category) {
+function getCategoryStats(planCatalog, category) {
   const items = getCatalogItemsByCategory(planCatalog, category.slug);
   const cuotas = items
     .map((item) => Number(item.cuota?.value))
     .filter((value) => Number.isFinite(value) && value > 0);
-  const subcategories = [...new Set(items.map((item) => item.subCategory).filter((value) => value && value !== "-"))];
+  const leadItem = items.find((item) => item.imageUrl) || items[0];
 
   return {
-    count: items.length,
+    items,
+    leadItem,
     minCuota: cuotas.length ? Math.min(...cuotas) : null,
-    subcategories,
   };
+}
+
+function getResource(resources, id) {
+  return (resources.groups || []).flatMap((group) => group.items || []).find((item) => item.id === id) || null;
+}
+
+function createHomeSectionHeader({ eyebrow, title, intro, id, align = "start" }) {
+  return el("div", {
+    className: `home-section-header home-section-header--${align}`,
+    children: [
+      eyebrow ? el("span", { className: "home-eyebrow", text: eyebrow }) : null,
+      el("h2", { text: title, attrs: id ? { id } : {} }),
+      intro ? el("p", { text: intro }) : null,
+    ],
+  });
+}
+
+function createPlanVisual(item, className = "home-plan-visual") {
+  if (!item?.imageUrl) return null;
+
+  return el("img", {
+    className,
+    attrs: {
+      src: item.imageUrl,
+      alt: item.imageAlt || item.displayName,
+      loading: "lazy",
+    },
+  });
 }
 
 function renderHero(data) {
@@ -82,35 +81,38 @@ function renderHero(data) {
   if (!target) return;
 
   const { site, planCatalog } = data;
-  const agency = site.agency || {};
   const primaryCta = getPrimaryCta(site);
   const secondaryCta = getSecondaryCta(site);
   const categories = getCatalogCategories(planCatalog);
-  const stats = catalogStats(planCatalog);
-  const officialLogo = site.brand?.officialLogo;
-  const featured = getFeaturedCatalogItems(planCatalog, 3);
+  const stats = (site.club?.stats || []).filter((item) => item.status === "verified").slice(0, 2);
+  const heroItems = categories
+    .map((category) => getCategoryStats(planCatalog, category).leadItem)
+    .filter(Boolean)
+    .slice(0, 3);
 
   clear(target);
   target.append(
     el("div", {
-      className: "container home-hero__inner home-hero__inner--v2",
+      className: "container home-hero-v5",
       children: [
         el("div", {
-          className: "home-hero__copy",
+          className: "home-hero-v5__copy",
           children: [
-            el("span", { className: "badge badge--light", text: agency.legalDescriptor || "Agencia mercantil" }),
+            el("span", {
+              className: "home-eyebrow home-eyebrow--light",
+              text: site.agency?.legalDescriptor || "Agencia mercantil de Club San Jorge",
+            }),
             el("h1", {
               attrs: { id: "home-title" },
-              text: "Suscribite, ahorrá y participá",
+              text: site.club?.headline || "Suscribite, ahorrá y ganá",
             }),
             el("p", {
-              className: "home-hero__lead",
+              className: "home-hero-v5__lead",
               text:
-                agency.commercialPromise ||
                 "Planes de Capitalización y Ahorro Club San Jorge para autos, motos y dinero, con atención comercial de Agencias Abed.",
             }),
             el("div", {
-              className: "cluster",
+              className: "home-action-row",
               children: [
                 createButton({ label: primaryCta.label, href: primaryCta.href, variant: "primary" }),
                 createButton({ label: "Ver planes", href: "/planes/", variant: "secondary" }),
@@ -118,34 +120,31 @@ function renderHero(data) {
               ],
             }),
             el("div", {
-              className: "hero-assurance",
+              className: "home-hero-v5__proof",
               children: [
-                el("span", { text: "Autos, motos y dinero" }),
-                el("span", { text: "Sorteos mensuales" }),
-                el("span", { text: "Atención personalizada" }),
+                ...stats.map((item) => createMiniFact({ label: item.label, value: item.value })),
+                createMiniFact({ label: "Rubros principales", value: "Auto, moto y dinero" }),
               ],
             }),
           ],
         }),
         el("aside", {
-          className: "hero-showcase",
-          attrs: { "aria-label": "Planes destacados" },
+          className: "home-hero-v5__showcase",
+          attrs: { "aria-label": "Planes destacados de Club San Jorge" },
           children: [
-            officialLogo
+            site.brand?.officialLogo
               ? el("img", {
-                  className: "hero-showcase__logo",
-                  attrs: { src: officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
+                  className: "home-hero-v5__logo",
+                  attrs: { src: site.brand.officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
                 })
               : null,
             el("div", {
-              className: "hero-product-stack",
-              children: featured.map((item) =>
+              className: "home-product-strip",
+              children: heroItems.map((item) =>
                 el("article", {
-                  className: "hero-product",
+                  className: "home-product-strip__item",
                   children: [
-                    item.imageUrl
-                      ? el("img", { attrs: { src: item.imageUrl, alt: item.imageAlt || item.displayName, loading: "eager" } })
-                      : null,
+                    createPlanVisual(item, "home-product-strip__image"),
                     el("div", {
                       children: [
                         el("span", { text: item.category }),
@@ -156,14 +155,6 @@ function renderHero(data) {
                 }),
               ),
             }),
-            el("div", {
-              className: "hero-proof-grid",
-              children: [
-                createMiniFact({ label: "Opciones activas", value: String(stats.total) }),
-                createMiniFact({ label: "Rubros", value: String(stats.categoryCount) }),
-                createMiniFact({ label: "Cuotas desde", value: stats.minCuota ? formatMoneyARS(stats.minCuota) : FALLBACK_TEXT.confirm }),
-              ],
-            }),
           ],
         }),
       ],
@@ -171,52 +162,76 @@ function renderHero(data) {
   );
 }
 
-function renderCategoryEntry(data) {
+function renderPlanRoutes(data) {
   const target = qs("[data-trust-section]");
   if (!target) return;
 
   const categories = getCatalogCategories(data.planCatalog);
+  const copy = {
+    autos: {
+      kicker: "Plan Auto",
+      title: "Para proyectar un 0 km",
+      body: "Opciones con referencias de autos y utilitarios, cuota mensual, valor nominal y chances de sorteo.",
+      cta: "Ver autos",
+    },
+    motos: {
+      kicker: "Plan Moto",
+      title: "Para acceder a tu moto",
+      body: "Planes orientados a motos, con importes de catálogo y condiciones para revisar antes de avanzar.",
+      cta: "Ver motos",
+    },
+    dinero: {
+      kicker: "Plan Dinero",
+      title: "Para formar capital",
+      body: "Alternativas de orden de compra / capital para quienes prefieren consultar por monto disponible.",
+      cta: "Ver dinero",
+    },
+  };
 
   clear(target);
   target.append(
-    createSectionHeader({
+    createHomeSectionHeader({
       eyebrow: "Nuestros planes",
-      title: "Elegí el rubro que querés consultar",
+      title: "Elegí cómo querés participar",
       id: "category-entry-title",
-      intro: "Tres líneas principales para consultar opciones vigentes de Capitalización y Ahorro.",
+      intro: "Una primera orientación para encontrar rápido el tipo de plan que querés consultar.",
+      align: "center",
     }),
     el("div", {
-      className: "category-entry-grid",
+      className: "home-plan-routes",
       children: categories.map((category) => {
-        const summary = categorySummary(data.planCatalog, category);
-        const leadItem = getCatalogItemsByCategory(data.planCatalog, category.slug).find((item) => item.imageUrl);
+        const stats = getCategoryStats(data.planCatalog, category);
+        const content = copy[category.slug] || {
+          kicker: category.label,
+          title: category.label,
+          body: category.summary || category.description,
+          cta: "Ver planes",
+        };
+
         return el("article", {
-          className: `category-entry category-entry--${category.theme || "default"} category-entry--v3`,
+          className: `home-route-card home-route-card--${category.theme || "default"}`,
           children: [
-            leadItem
-              ? el("img", {
-                  className: "category-entry__image",
-                  attrs: { src: leadItem.imageUrl, alt: leadItem.imageAlt || leadItem.displayName, loading: "lazy" },
-                })
-              : null,
-            el("span", { className: "badge", text: `${summary.count} opciones` }),
-            el("h3", { text: category.label }),
-            el("p", { text: category.summary || category.description }),
+            createPlanVisual(stats.leadItem),
             el("div", {
-              className: "category-entry__facts",
+              className: "home-route-card__body",
               children: [
-                createMiniFact({
-                  label: "Cuotas desde",
-                  value: summary.minCuota ? formatMoneyARS(summary.minCuota) : FALLBACK_TEXT.confirm,
+                el("span", { className: "home-eyebrow", text: content.kicker }),
+                el("h3", { text: content.title }),
+                el("p", { text: content.body }),
+                el("div", {
+                  className: "home-route-card__facts",
+                  children: [
+                    createMiniFact({ label: "Opciones", value: String(stats.items.length) }),
+                    createMiniFact({
+                      label: "Cuotas desde",
+                      value: stats.minCuota ? formatMoneyARS(stats.minCuota) : FALLBACK_TEXT.confirm,
+                      state: stats.minCuota ? UI_STATES.READY : UI_STATES.PARTIAL,
+                    }),
+                  ],
                 }),
-                createMiniFact({
-                  label: "Subgrupos",
-                  value: summary.subcategories.length ? String(summary.subcategories.length) : "A consultar",
-                  state: summary.subcategories.length ? UI_STATES.READY : UI_STATES.PARTIAL,
-                }),
+                createButton({ label: content.cta, href: categoryHref(category.slug), variant: "secondary" }),
               ],
             }),
-            createButton({ label: `Explorar ${category.shortLabel || category.label}`, href: categoryHref(category.slug), variant: "secondary" }),
           ],
         });
       }),
@@ -228,77 +243,90 @@ function renderHowItWorks(data) {
   const target = qs("[data-how-it-works]");
   if (!target) return;
 
+  const drawFaq = getFaqById(data.faq, "como-se-realizan-los-sorteos-mensuales");
   const endFaq = getFaqById(data.faq, "que-se-obtiene-al-final-del-plan-330");
-  const noDebtFaq = getFaqById(data.faq, "si-dejo-de-pagar-tengo-deuda");
+
+  const steps = [
+    ["Elegís una línea", "Auto, moto o dinero, según tu objetivo."],
+    ["Pagás tu cuota", "Con cada cuota ahorrás dentro del sistema."],
+    ["Participás todos los meses", drawFaq?.answer || "Los sorteos mensuales se realizan según condiciones vigentes."],
+    ["Avanzás con información clara", endFaq?.answer || "La adjudicación y el cierre del plan se revisan con documentación vigente."],
+  ];
 
   clear(target);
   target.append(
-    createSectionHeader({
-      eyebrow: "El sistema",
-      title: "Ahorrás con tu cuota y participás en sorteos",
-      id: "how-title",
-      intro:
-        "Una forma simple de ver los puntos centrales del sistema antes de iniciar una consulta comercial.",
-    }),
     el("div", {
-      className: "agency-system-grid",
+      className: "home-process",
       children: [
-        el("article", {
-          className: "editorial-panel editorial-panel--official",
-          children: [
-            el("span", { className: "badge", text: "Capitalización y Ahorro" }),
-            el("h3", { text: "Cuota, valor nominal y sorteos" }),
-            el("p", {
-              text:
-                endFaq?.answer ||
-                "El objeto es formar un capital equivalente al Valor Nominal del Título, según condiciones vigentes.",
-            }),
-            noDebtFaq ? el("p", { className: "muted", text: noDebtFaq.answer }) : null,
-          ],
+        createHomeSectionHeader({
+          eyebrow: "El sistema",
+          title: "Una forma simple de entenderlo",
+          id: "how-title",
+          intro: "La home no necesita explicar todo el contrato: tiene que dejar claro el recorrido y llevarte al plan correcto.",
         }),
-        el("article", {
-          className: "editorial-panel editorial-panel--agency",
+        el("div", {
+          className: "home-step-list",
+          children: steps.map(([title, body], index) =>
+            el("article", {
+              className: "home-step",
+              children: [
+                el("span", { text: String(index + 1).padStart(2, "0") }),
+                el("h3", { text: title }),
+                el("p", { text: body }),
+              ],
+            }),
+          ),
+        }),
+      ],
+    }),
+  );
+}
+
+function renderAgencyValue(data) {
+  const target = qs("[data-featured-plans]");
+  if (!target) return;
+
+  const primaryCta = getPrimaryCta(data.site);
+  const values = [
+    ["Información ordenada", "Te mostramos rubro, cuota, valor nominal y chances sin obligarte a recorrer todo el catálogo."],
+    ["Atención comercial", "Agencias Abed continúa la consulta por WhatsApp o formulario, según el canal que prefieras."],
+    ["Decisión más clara", "Si todavía no sabés qué plan elegir, podés consultar por objetivo y recibir orientación inicial."],
+  ];
+
+  clear(target);
+  target.append(
+    el("div", {
+      className: "home-agency-block",
+      children: [
+        el("div", {
+          className: "home-agency-block__copy",
           children: [
-            el("span", { className: "badge", text: "Atención comercial" }),
-            el("h3", { text: "Canal de atención Agencias Abed" }),
-            el("p", {
-              text:
-                "Acompañamos la consulta, la selección del plan y los pasos de presuscripción con información clara y atención personalizada.",
+            createHomeSectionHeader({
+              eyebrow: data.site.agency?.name || "Agencias Abed",
+              title: "Atención comercial para consultar con más claridad",
+              id: "plans-title",
+              intro:
+                "La página está pensada para que puedas entender las opciones principales y continuar la consulta con datos concretos.",
             }),
             el("div", {
-              className: "cluster",
+              className: "home-action-row",
               children: [
-                createButton({ label: "Ver planes", href: "/planes/", variant: "secondary" }),
-                createButton({ label: "Completar formulario", href: "/contacto/?intent=consulta", variant: "primary" }),
+                createButton({ label: primaryCta.label, href: primaryCta.href, variant: "primary" }),
+                createButton({ label: "Completar formulario", href: "/contacto/?intent=consulta", variant: "secondary" }),
               ],
             }),
           ],
         }),
+        el("div", {
+          className: "home-value-grid",
+          children: values.map(([title, body]) =>
+            el("article", {
+              className: "home-value-card",
+              children: [el("h3", { text: title }), el("p", { text: body })],
+            }),
+          ),
+        }),
       ],
-    }),
-    createSystemExplainer(),
-  );
-}
-
-function renderFeaturedCatalog(data) {
-  const target = qs("[data-featured-plans]");
-  if (!target) return;
-
-  const categories = getCatalogCategories(data.planCatalog);
-  const featured = getFeaturedCatalogItems(data.planCatalog, 6);
-
-  clear(target);
-  target.append(
-    createSectionHeader({
-      eyebrow: "Destacados",
-      title: "Planes disponibles para consultar",
-      id: "plans-title",
-      intro: "Una selección de autos, motos y dinero. El catálogo completo incluye todas las opciones activas.",
-    }),
-    createFeaturedCatalogGrid(featured, categories),
-    el("div", {
-      className: "section-actions",
-      children: [createButton({ label: "Ver todos los planes", href: "/planes/", variant: "primary" })],
     }),
   );
 }
@@ -307,91 +335,63 @@ function renderTrust(data) {
   const target = qs("[data-resources-hub]");
   if (!target) return;
 
-  const { site } = data;
-  const stats = (site.club?.stats || []).filter((item) => item.status === "verified");
-  const officialLogo = site.brand?.officialLogo;
-  const featuredVideo = (data.videos?.items || []).find((item) => item.status === "verified" && isValidUrl(item.youtubeUrl));
+  const stats = (data.site.club?.stats || []).filter((item) => item.status === "verified");
 
   clear(target);
   target.append(
     el("div", {
-      className: "trust-band trust-band--v2",
+      className: "home-trust-v5",
       children: [
         el("div", {
-          className: "trust-band__copy",
+          className: "home-trust-v5__copy",
           children: [
-            officialLogo
-              ? el("img", {
-                  className: "trust-band__logo",
-                  attrs: { src: officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
-                })
-              : null,
-            el("span", { className: "badge badge--light", text: site.agency?.coverageLabel || "Atención online" }),
-            el("h2", { attrs: { id: "trust-title" }, text: "Trayectoria, presencia y atención comercial" }),
+            el("span", { className: "home-eyebrow", text: "Respaldo institucional" }),
+            el("h2", { attrs: { id: "trust-title" }, text: "Club San Jorge en números" }),
             el("p", {
               text:
-                "Club San Jorge cuenta con presencia nacional, miles de suscriptores y una red comercial para acompañar cada consulta.",
+                "Presencia nacional, miles de suscriptores y una red comercial activa para planes de Capitalización y Ahorro.",
             }),
           ],
         }),
         el("div", {
-          className: "stats-grid",
+          className: "home-trust-v5__stats",
           children: stats.map((item) => createMiniFact({ label: item.label, value: item.value })),
         }),
-        featuredVideo
-          ? el("div", {
-              className: "video-card",
-              children: [
-                el("iframe", {
-                  attrs: {
-                    src: featuredVideo.youtubeUrl,
-                    title: featuredVideo.title,
-                    loading: "lazy",
-                    allow:
-                      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-                    allowfullscreen: true,
-                  },
-                }),
-              ],
-            })
-          : null,
       ],
     }),
   );
 }
 
-function renderDraws(data) {
-  const target = qs("[data-draws-preview]");
-  if (!target) return;
+function renderAccessPanel(data) {
+  const drawsTarget = qs("[data-draws-preview]");
+  const adjudicationsTarget = qs("[data-adjudications-preview]");
+  if (!drawsTarget || !adjudicationsTarget) return;
 
   const draws = data.draws || {};
   const adjudications = data.adjudications || {};
-  const hasRealLocalData = adjudications.meta?.status && !isMockStatus(adjudications.meta.status);
+  const adjudicationsReady = adjudications.meta?.status && !isMockStatus(adjudications.meta.status);
   const lastState = resolveValueState(draws.lastDraw?.date, draws.lastDraw?.status);
   const nextState = resolveValueState(draws.nextDraw?.date, draws.nextDraw?.status);
 
-  clear(target);
-  target.append(
+  clear(drawsTarget);
+  clear(adjudicationsTarget);
+
+  drawsTarget.append(
     el("article", {
-      className: "results-panel",
+      className: "home-access-panel",
       children: [
+        el("span", { className: "home-eyebrow", text: "Sorteos" }),
+        el("h2", { attrs: { id: "draws-title" }, text: "Fechas y resultados" }),
+        el("p", { text: "Consultá información de sorteos y adjudicados sin cargar la home con listados largos." }),
         el("div", {
+          className: "home-access-panel__facts",
           children: [
-            el("span", { className: "badge", text: "Sorteos y adjudicados" }),
-            el("h2", { attrs: { id: "draws-title" }, text: "Sorteos mensuales y adjudicados" }),
-            el("p", { text: draws.schedule?.officialRule || "Los sorteos se publican segun condiciones vigentes del sistema." }),
+            createMiniFact({ label: "Último sorteo", value: draws.lastDraw?.date || FALLBACK_TEXT.updating, state: lastState }),
+            createMiniFact({ label: "Próximo sorteo", value: draws.nextDraw?.date || FALLBACK_TEXT.updating, state: nextState }),
           ],
         }),
         el("div", {
-          className: "facts-row",
-          children: [
-            createMiniFact({ label: "Ultimo sorteo", value: draws.lastDraw?.date || FALLBACK_TEXT.updating, state: lastState }),
-            createMiniFact({ label: "Proximo sorteo", value: draws.nextDraw?.date || FALLBACK_TEXT.updating, state: nextState }),
-            createMiniFact({ label: "Adjudicados locales", value: hasRealLocalData ? "Disponibles" : "En validacion", state: hasRealLocalData ? UI_STATES.READY : UI_STATES.PARTIAL }),
-          ],
-        }),
-        el("div", {
-          className: "cluster",
+          className: "home-action-row",
           children: [
             createButton({ label: "Ver sorteos", href: "/sorteos/", variant: "secondary" }),
             createButton({ label: "Ver adjudicados", href: "/adjudicados/", variant: "secondary" }),
@@ -400,31 +400,24 @@ function renderDraws(data) {
       ],
     }),
   );
-}
 
-function renderAdjudications(data) {
-  const target = qs("[data-adjudications-preview]");
-  if (!target) return;
-
-  const officialLink = findResource(data.resources, "adjudicados-oficial");
-
-  clear(target);
-  target.append(
+  adjudicationsTarget.append(
     el("article", {
-      className: "home-panel stack home-panel--editorial",
+      className: "home-access-panel home-access-panel--dark",
       children: [
-        createSectionHeader({
-          eyebrow: "Consulta rapida",
-      title: "Resultados y consultas oficiales",
-      intro: "Acceso directo a sorteos, adjudicados y documentación publicada por Club San Jorge.",
-        }),
+        el("span", { className: "home-eyebrow home-eyebrow--light", text: "Consultas útiles" }),
+        el("h2", { text: "Accesos rápidos" }),
+        el("p", { text: "Toda la información operativa queda disponible, pero separada de la decisión principal." }),
         el("div", {
-          className: "cluster",
+          className: "home-access-links",
           children: [
-            createButton({ label: "Abrir adjudicados", href: "/adjudicados/", variant: "secondary" }),
-            officialLink && classifyLinkItem(officialLink) === UI_STATES.READY
-              ? createButton({ label: "Fuente oficial", href: officialLink.url, variant: "secondary" })
-              : null,
+            createButton({ label: "Preguntas frecuentes", href: "/faq/", variant: "secondary" }),
+            createButton({ label: "Recursos oficiales", href: "/recursos/", variant: "secondary" }),
+            createMiniFact({
+              label: "Adjudicados locales",
+              value: adjudicationsReady ? "Disponibles" : "En validación",
+              state: adjudicationsReady ? UI_STATES.READY : UI_STATES.PARTIAL,
+            }),
           ],
         }),
       ],
@@ -432,29 +425,27 @@ function renderAdjudications(data) {
   );
 }
 
-function findResource(resources, id) {
-  return (resources.groups || []).flatMap((group) => group.items || []).find((item) => item.id === id) || null;
-}
-
 function renderFaq(data) {
   const target = qs("[data-faq-highlight]");
   if (!target) return;
 
-  const faqs = PRIORITY_FAQ_IDS.map((id) => getFaqById(data.faq, id)).filter(Boolean);
+  const faqs = HOME_FAQ_IDS.map((id) => getFaqById(data.faq, id)).filter(Boolean);
 
   clear(target);
   target.append(
-    createSectionHeader({
-      eyebrow: "Dudas clave",
-      title: "Antes de suscribirte",
+    createHomeSectionHeader({
+      eyebrow: "Dudas frecuentes",
+      title: "Lo mínimo que conviene saber antes de consultar",
       id: "faq-title",
-      intro: "Información breve sobre funcionamiento, sorteos, pagos y documentación.",
+      intro: "Respuestas breves para reducir incertidumbre sin convertir la portada en una página legal.",
+      align: "center",
     }),
     el("div", {
-      className: "accordion-shell faq-home",
-      children: faqs.slice(0, 6).map((item) =>
-        el("details", {
-          children: [el("summary", { text: item.question }), el("p", { text: item.answer })],
+      className: "home-faq-grid",
+      children: faqs.map((item) =>
+        el("article", {
+          className: "home-faq-card",
+          children: [el("h3", { text: item.question }), el("p", { text: item.answer })],
         }),
       ),
     }),
@@ -465,49 +456,47 @@ function renderFaq(data) {
   );
 }
 
-function createResourceCard(item) {
-  const linkState = classifyLinkItem(item);
-  const enabled = linkState === UI_STATES.READY;
-  const action = enabled
-    ? el("a", {
-        className: "button button--secondary",
-        text: "Abrir recurso",
-        attrs: { href: item.url, target: "_blank", rel: "noopener noreferrer" },
-      })
-    : el("span", { className: "badge badge--warning", text: FALLBACK_TEXT.updating });
-
-  return el("article", {
-    className: "resource-card",
-    attrs: { "data-state": enabled ? UI_STATES.READY : UI_STATES.PARTIAL },
-    children: [el("h3", { text: item.title }), el("p", { text: item.description }), action],
-  });
-}
-
 function renderResources(data) {
   const target = qs("[data-final-cta]");
   if (!target) return;
 
-  const management = getResourcesByGroup(data.resources, "gestiones");
-  const official = getResourcesByGroup(data.resources, "informacion-oficial");
-  const items = [...management, ...official].filter((item) =>
-    item.featured || ["descargar-boleta", "medios-de-pago", "catalogo-oficial", "terminos-condiciones"].includes(item.id),
-  );
+  const resources = [
+    getResource(data.resources, "descargar-boleta"),
+    getResource(data.resources, "medios-de-pago"),
+    getResource(data.resources, "catalogo-oficial"),
+  ].filter(Boolean);
+  const official = getResourcesByGroup(data.resources, "informacion-oficial").find((item) => item.id === "terminos-condiciones");
+  if (official) resources.push(official);
 
   clear(target);
   target.append(
-    createSectionHeader({
-      eyebrow: "Centro de recursos",
+    createHomeSectionHeader({
+      eyebrow: "Para suscriptores",
       title: "Gestiones y documentación",
       id: "resources-title",
-      intro: "Accesos útiles para consultar información oficial, pagos, boletas y condiciones.",
+      intro: "Accesos importantes disponibles sin mezclarlos con la elección inicial del plan.",
     }),
     el("div", {
-      className: "resource-grid resource-grid--wide",
-      children: items.map(createResourceCard),
-    }),
-    el("div", {
-      className: "section-actions",
-      children: [createButton({ label: "Ver recursos", href: "/recursos/", variant: "secondary" })],
+      className: "home-resource-list",
+      children: resources.map((item) => {
+        const enabled = classifyLinkItem(item) === UI_STATES.READY;
+        return el("article", {
+          className: "home-resource-link",
+          attrs: { "data-state": enabled ? UI_STATES.READY : UI_STATES.PARTIAL },
+          children: [
+            el("div", {
+              children: [el("h3", { text: item.title }), el("p", { text: item.description })],
+            }),
+            enabled
+              ? el("a", {
+                  className: "button button--secondary",
+                  text: "Abrir",
+                  attrs: { href: item.url, target: "_blank", rel: "noopener noreferrer" },
+                })
+              : el("span", { className: "badge badge--warning", text: FALLBACK_TEXT.updating }),
+          ],
+        });
+      }),
     }),
   );
 }
@@ -516,48 +505,29 @@ function renderFinalCta(data) {
   const target = qs("[data-contact-cta]");
   if (!target) return;
 
-  const { site } = data;
-  const primaryCta = getPrimaryCta(site);
-  const secondaryCta = getSecondaryCta(site);
-  const whatsappReady = isValidUrl(primaryCta.href);
+  const primaryCta = getPrimaryCta(data.site);
+  const secondaryCta = getSecondaryCta(data.site);
 
   clear(target);
   target.append(
     el("article", {
-      className: "final-cta final-cta--v3",
+      className: "home-final-v5",
       children: [
         el("div", {
-          className: "final-cta__copy",
           children: [
-            el("span", { className: "badge", text: "Asesoramiento asistido" }),
-            el("h2", { attrs: { id: "contact-title" }, text: "Consultá el plan que te interesa" }),
+            el("span", { className: "home-eyebrow home-eyebrow--light", text: "Contacto comercial" }),
+            el("h2", { attrs: { id: "contact-title" }, text: "Consultá por el plan que te interesa" }),
             el("p", {
               text:
-                "Elegí una opción del catálogo o dejá tus datos para recibir atención comercial de Agencias Abed.",
+                "Escribí por WhatsApp o completá el formulario para continuar la consulta sobre autos, motos o dinero.",
             }),
           ],
         }),
         el("div", {
-          className: "conversion-choice-grid",
+          className: "home-final-v5__actions",
           children: [
-            el("article", {
-              className: "conversion-choice conversion-choice--primary",
-              children: [
-                el("span", { className: "badge badge--light", text: "Respuesta rápida" }),
-                el("h3", { text: "Hablar por WhatsApp" }),
-                el("p", { text: "Para consultas rápidas sobre autos, motos, dinero o presuscripción." }),
-                createButton({ label: primaryCta.label, href: whatsappReady ? primaryCta.href : "/contacto/", variant: "primary" }),
-              ],
-            }),
-            el("article", {
-              className: "conversion-choice",
-              children: [
-                el("span", { className: "badge", text: "Consulta ordenada" }),
-                el("h3", { text: "Completar formulario" }),
-                el("p", { text: "Para dejar tus datos y el plan de interés con más detalle." }),
-                createButton({ label: secondaryCta.label, href: secondaryCta.href, variant: "secondary" }),
-              ],
-            }),
+            createButton({ label: primaryCta.label, href: primaryCta.href, variant: "primary" }),
+            createButton({ label: secondaryCta.label, href: secondaryCta.href, variant: "secondary" }),
           ],
         }),
       ],
@@ -568,12 +538,11 @@ function renderFinalCta(data) {
 export async function initHomePage() {
   const data = await loadAllForHome();
   renderHero(data);
-  renderCategoryEntry(data);
+  renderPlanRoutes(data);
   renderHowItWorks(data);
-  renderFeaturedCatalog(data);
+  renderAgencyValue(data);
   renderTrust(data);
-  renderDraws(data);
-  renderAdjudications(data);
+  renderAccessPanel(data);
   renderFaq(data);
   renderResources(data);
   renderFinalCta(data);

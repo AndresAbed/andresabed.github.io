@@ -5,9 +5,7 @@ import { isValidUrl } from "../utils/validators.js";
 const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
   { label: "Planes", href: "/planes/" },
-  { label: "Sorteos", href: "/sorteos/" },
   { label: "Adjudicados", href: "/adjudicados/" },
-  { label: "Recursos", href: "/recursos/" },
   { label: "FAQ", href: "/faq/" },
   { label: "Contacto", href: "/contacto/" },
 ];
@@ -17,10 +15,10 @@ function isCurrentPath(href) {
   return current === href || (href !== "/" && current.startsWith(href));
 }
 
-function createNav() {
+function createNav({ className = "site-nav", label = "Navegacion principal" } = {}) {
   return el("nav", {
-    className: "site-nav",
-    attrs: { "aria-label": "Navegacion principal" },
+    className,
+    attrs: { "aria-label": label },
     children: NAV_ITEMS.map((item) =>
       el("a", {
         text: item.label,
@@ -33,50 +31,158 @@ function createNav() {
   });
 }
 
+function createMenuButton({ className = "site-header__menu-button", label = "Abrir menú" } = {}) {
+  return el("button", {
+    className,
+    attrs: { type: "button", "aria-label": label },
+    children: [
+      el("span", { className: "site-header__menu-icon", attrs: { "aria-hidden": "true" } }),
+      el("span", { text: "Menú" }),
+    ],
+  });
+}
+
+function createWhatsappLink({ hasCtaTarget, target, cta, compact = false }) {
+  return el("a", {
+    className: `button ${hasCtaTarget ? "site-header__whatsapp" : "button--disabled"} ${compact ? "site-header__whatsapp--compact" : ""}`,
+    attrs: hasCtaTarget
+      ? { href: target, "aria-label": cta.label || "Hablar por WhatsApp" }
+      : { href: "#", "aria-disabled": "true", title: "Canal en configuracion" },
+    children: [
+      hasCtaTarget ? el("span", { className: "site-header__whatsapp-icon", attrs: { "aria-hidden": "true" } }) : null,
+      el("span", { className: compact ? "site-header__whatsapp-text" : "", text: hasCtaTarget ? "WhatsApp" : cta.label || "Consultar plan" }),
+    ],
+  });
+}
+
+function createBrandLogo(officialLogo) {
+  return el("a", {
+    className: "brand-lockup",
+    attrs: { href: "/", "aria-label": "Club San Jorge Capitalización y Ahorro - Inicio" },
+    children: [
+      officialLogo
+        ? el("img", {
+            className: "brand-lockup__logo",
+            attrs: { src: officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
+          })
+        : null,
+    ],
+  });
+}
+
 function createHeader(site) {
-  const agency = site?.agency || {};
   const cta = site?.cta?.primary || {};
   const target = normalizeInternalTarget(cta.target);
   const hasCtaTarget = isValidUrl(target);
   const officialLogo = site?.brand?.officialLogo;
 
-  return el("header", {
+  const header = el("header", {
     className: "site-header",
     children: [
       el("div", {
         className: "container site-header__inner",
         children: [
-          el("a", {
-            className: "brand-lockup",
-            attrs: { href: "/", "aria-label": "Ir al inicio" },
+          createBrandLogo(officialLogo),
+          el("div", {
+            className: "site-header__desktop",
             children: [
-              officialLogo
-                ? el("img", {
-                    className: "brand-lockup__logo",
-                    attrs: { src: officialLogo, alt: "Club San Jorge Capitalización y Ahorro" },
-                  })
-                : null,
-              el("span", { className: "brand-lockup__name", text: agency.name || "Agencias Abed" }),
-              el("span", { className: "brand-lockup__eyebrow", text: agency.legalDescriptor || "Agencia mercantil" }),
+              el("div", {
+                className: "site-header__nav-shell",
+                children: [createNav()],
+              }),
+              el("div", {
+                className: "site-header__actions",
+                children: [createWhatsappLink({ hasCtaTarget, target, cta })],
+              }),
             ],
           }),
-          createNav(),
           el("div", {
-            className: "site-header__actions",
+            className: "site-header__mobile-actions",
             children: [
-              el("a", {
-                className: `button ${hasCtaTarget ? "button--primary" : "button--disabled"}`,
-                text: cta.label || "Consultar plan",
-                attrs: hasCtaTarget
-                  ? { href: target }
-                  : { href: "#", "aria-disabled": "true", title: "Canal en configuracion" },
-              }),
+              createWhatsappLink({ hasCtaTarget, target, cta, compact: true }),
+              createMenuButton(),
             ],
           }),
         ],
       }),
     ],
   });
+
+  const overlay = el("div", { className: "site-menu-overlay", attrs: { "aria-hidden": "true" } });
+  const drawer = el("aside", {
+    className: "site-menu-drawer",
+    attrs: { id: "site-menu-drawer", "aria-label": "Menú de navegación" },
+    children: [
+      el("div", {
+        className: "site-header__drawer-head",
+        children: [
+          el("span", { className: "site-header__drawer-title", text: "Menú" }),
+          el("button", { className: "site-header__drawer-close", text: "Cerrar", attrs: { type: "button", "aria-label": "Cerrar menú" } }),
+        ],
+      }),
+      createNav({ className: "site-drawer-nav", label: "Navegacion mobile" }),
+      el("div", {
+        className: "site-header__drawer-cta",
+        children: [
+          el("span", { text: "Atención comercial" }),
+          el("p", { text: "Consultá por nuestros planes y recibí asesoramiento personalizado." }),
+          createWhatsappLink({ hasCtaTarget, target, cta }),
+        ],
+      }),
+    ],
+  });
+  const menuLayer = el("div", {
+    className: "site-menu-layer",
+    children: [overlay, drawer],
+  });
+
+  const fragment = document.createDocumentFragment();
+  fragment.append(header, menuLayer);
+  setupHeaderMenu({ header, overlay, drawer });
+  return fragment;
+}
+
+function setupHeaderMenu({ header, overlay, drawer }) {
+  const button = header.querySelector(".site-header__menu-button");
+  const closeButton = drawer.querySelector(".site-header__drawer-close");
+  const desktopQuery = window.matchMedia("(min-width: 981px)");
+  if (!button || !overlay || !drawer || !closeButton) return;
+
+  button.setAttribute("aria-controls", drawer.id);
+  button.setAttribute("aria-expanded", "false");
+
+  const setOpen = (open) => {
+    header.dataset.menuOpen = open ? "true" : "false";
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    button.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    document.body.classList.toggle("site-menu-open", open);
+    if (open) window.requestAnimationFrame(() => closeButton.focus({ preventScroll: true }));
+  };
+
+  button.addEventListener("click", () => {
+    setOpen(header.dataset.menuOpen !== "true");
+  });
+
+  overlay.addEventListener("click", () => setOpen(false));
+  closeButton.addEventListener("click", () => setOpen(false));
+
+  drawer.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+
+  const handleDesktopChange = (event) => {
+    if (event.matches) setOpen(false);
+  };
+
+  if (desktopQuery.addEventListener) {
+    desktopQuery.addEventListener("change", handleDesktopChange);
+  } else {
+    desktopQuery.addListener(handleDesktopChange);
+  }
 }
 
 function createFooter(site) {
@@ -102,9 +208,7 @@ function createFooter(site) {
             attrs: { "aria-label": "Navegacion secundaria" },
             children: [
               el("a", { text: "Planes", attrs: { href: "/planes/" } }),
-              el("a", { text: "Sorteos", attrs: { href: "/sorteos/" } }),
               el("a", { text: "Adjudicados", attrs: { href: "/adjudicados/" } }),
-              el("a", { text: "Recursos", attrs: { href: "/recursos/" } }),
               el("a", { text: "FAQ", attrs: { href: "/faq/" } }),
               el("a", { text: "Contacto", attrs: { href: "/contacto/?intent=consulta" } }),
             ],

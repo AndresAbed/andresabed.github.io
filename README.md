@@ -6,7 +6,7 @@ Base estatica para construir el sitio comercial e informativo de una agencia mer
 
 - `index.html`: Home V1 real comercial e informativa.
 - `planes/`: catalogo V2 por categorias Autos, Motos y Dinero, mas paginas detalle heredadas.
-- `sorteos/`, `adjudicados/`, `recursos/`, `faq/`, `contacto/`: paginas internas base.
+- `sorteos/`, `adjudicados/`, `recursos/`, `preguntas-frecuentes/`, `contacto/`: paginas internas base.
 - `assets/css/`: tokens, base, layout, componentes, utilities y ajustes de pagina.
 - `assets/js/`: shell, data layer, helpers de estado, componentes y scripts de pagina.
 - `assets/img/placeholders/`: placeholders visuales temporales.
@@ -73,7 +73,7 @@ Los helpers de estado estan en `assets/js/utils/status.js` y contemplan:
 
 El sitio mantiene dos capas conceptuales:
 
-- Capa oficial / sistema Club San Jorge: planes, FAQ del sistema, sorteos, adjudicados, recursos oficiales y datos institucionales del data pack.
+- Capa oficial / sistema Club San Jorge: planes, preguntas frecuentes del sistema, sorteos, adjudicados, recursos oficiales y datos institucionales del data pack.
 - Capa agencia / comercial-operativa: hero comercial, CTAs, contacto, pre-solicitud asistida, formulario, copy de confianza y explicacion del acompanamiento de Agencias Abed.
 
 La separacion esta reflejada en componentes, copy, catalogo y datos de contacto. No requiere crear otra app ni duplicar contenido.
@@ -126,7 +126,7 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 
 ## Hecho en Etapa 2
 
-- Home V1 real con hero comercial, confianza, planes destacados, como funciona, sorteos, adjudicados, FAQ, recursos y CTA final.
+- Home V1 real con hero comercial, confianza, planes destacados, como funciona, sorteos, adjudicados, preguntas frecuentes, recursos y CTA final.
 - Secciones conectadas a `data_pack_v2/`.
 - Fallbacks para sorteos incompletos, adjudicados mock, links faltantes y canales de contacto pendientes.
 - Separacion visible entre informacion oficial del sistema y contenido operativo de agencia.
@@ -144,7 +144,7 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 - Pagina real de sorteos con resumen, estados parciales y aclaraciones.
 - Pagina de adjudicados con selector año/mes, tabla preparada y proteccion contra datos mock.
 - Pagina de recursos agrupados, con links verificados y estados pendientes.
-- FAQ general agrupada por categoria con preguntas sensibles priorizadas.
+- Preguntas frecuentes agrupadas por categoria con preguntas sensibles priorizadas.
 - Componentes reutilizables de paginas informativas en `assets/js/components/info-components.js`.
 
 ## Hecho en Etapa 5
@@ -168,7 +168,7 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 ## Rebuild V2
 
 - `REBUILD_V2_PLAN.md` documenta auditoria, diagnostico y plan de reconstruccion.
-- Home reconstruida con narrativa comercial: hero fuerte, categorias, sistema, catalogo destacado, respaldo, sorteos/adjudicados, FAQ, recursos y contacto.
+- Home reconstruida con narrativa comercial: hero fuerte, categorias, sistema, catalogo destacado, respaldo, sorteos/adjudicados, preguntas frecuentes, recursos y contacto.
 - `/planes/` reconstruida como catalogo navegable por categorias.
 - Nuevo data model `data_pack_v2/plan_catalog.json`.
 - Contacto actualizado para recibir opciones de catalogo.

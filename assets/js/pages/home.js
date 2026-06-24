@@ -506,7 +506,7 @@ function renderAccessPanel(data) {
         el("div", {
           className: "home-access-links",
           children: [
-            createButton({ label: "Preguntas frecuentes", href: "/faq/", variant: "secondary" }),
+            createButton({ label: "Preguntas frecuentes", href: "/preguntas-frecuentes/", variant: "secondary" }),
             createButton({ label: "Recursos oficiales", href: "/recursos/", variant: "secondary" }),
             createMiniFact({
               label: "Adjudicados locales",
@@ -546,7 +546,7 @@ function renderFaq(data) {
     }),
     el("div", {
       className: "section-actions",
-      children: [createButton({ label: "Ver FAQ completa", href: "/faq/", variant: "secondary" })],
+      children: [createButton({ label: "Ver preguntas frecuentes", href: "/preguntas-frecuentes/", variant: "secondary" })],
     }),
   );
 }

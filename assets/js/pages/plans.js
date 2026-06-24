@@ -209,7 +209,7 @@ function createPlanFaqSection(faqData) {
       createFaqBlock(faqs),
       el("div", {
         className: "section-actions",
-        children: [createButton({ label: "Ver FAQ completa", href: "/faq/", variant: "secondary" })],
+        children: [createButton({ label: "Ver preguntas frecuentes", href: "/preguntas-frecuentes/", variant: "secondary" })],
       }),
     ],
   });

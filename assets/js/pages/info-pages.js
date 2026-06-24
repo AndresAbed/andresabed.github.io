@@ -205,7 +205,7 @@ export async function initFaqPage() {
   clear(target);
   target.append(
     createSectionHeader({
-      eyebrow: "FAQ general",
+      eyebrow: "Preguntas frecuentes",
       title: "Respuestas claras para entender el sistema",
       intro: "Priorizamos capital, sorteos, adjudicacion, pagos y proceso comercial.",
     }),

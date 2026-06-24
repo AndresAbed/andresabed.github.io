@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
   { label: "Planes", href: "/planes/" },
   { label: "Adjudicados", href: "/adjudicados/" },
-  { label: "FAQ", href: "/faq/" },
+  { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
   { label: "Contacto", href: "/contacto/" },
 ];
 
@@ -50,7 +50,7 @@ function createWhatsappLink({ hasCtaTarget, target, cta, compact = false }) {
       : { href: "#", "aria-disabled": "true", title: "Canal en configuracion" },
     children: [
       hasCtaTarget ? el("span", { className: "site-header__whatsapp-icon", attrs: { "aria-hidden": "true" } }) : null,
-      el("span", { className: compact ? "site-header__whatsapp-text" : "", text: hasCtaTarget ? "WhatsApp" : cta.label || "Consultar plan" }),
+      el("span", { className: compact ? "site-header__whatsapp-text" : "", text: hasCtaTarget ? "Escribinos" : cta.label || "Consultar plan" }),
     ],
   });
 }
@@ -209,7 +209,7 @@ function createFooter(site) {
             children: [
               el("a", { text: "Planes", attrs: { href: "/planes/" } }),
               el("a", { text: "Adjudicados", attrs: { href: "/adjudicados/" } }),
-              el("a", { text: "FAQ", attrs: { href: "/faq/" } }),
+              el("a", { text: "Preguntas frecuentes", attrs: { href: "/preguntas-frecuentes/" } }),
               el("a", { text: "Contacto", attrs: { href: "/contacto/?intent=consulta" } }),
             ],
           }),

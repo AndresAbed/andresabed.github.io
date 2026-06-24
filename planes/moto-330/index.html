@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html.app-loading body{background:#be002f;overflow:hidden}html.app-loading body>*{opacity:0;pointer-events:none}html.app-loading body::before{background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.13),transparent 17rem),linear-gradient(180deg,#be002f,#8f0024);content:"";inset:0;position:fixed;z-index:9998}html.app-loading body::after{animation:appLoaderSpin .8s linear infinite;border:3px solid rgba(255,255,255,.3);border-radius:999px;border-top-color:#fff;content:"";height:48px;left:50%;margin:-24px 0 0 -24px;position:fixed;top:50%;width:48px;z-index:9999}@keyframes appLoaderSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){html.app-loading body::after{animation:none}}
+    </style>
+    <script>document.documentElement.classList.add("app-loading");window.setTimeout(function(){document.documentElement.classList.remove("app-loading")},8000);</script>
     <title>Plan orientado a moto | Club San Jorge | Agencias Abed</title>
     <meta name="description" content="Detalle de opción orientada a moto dentro de planes de Capitalización y Ahorro Club San Jorge.">
     <link rel="canonical" href="/planes/moto-330/">

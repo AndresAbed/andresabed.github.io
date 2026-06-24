@@ -6,6 +6,13 @@ import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } 
 import { initPlanDetail, initPlansHub } from "./pages/plans.js";
 import { initBasePage } from "./pages/base.js";
 
+function finishAppLoading() {
+  window.requestAnimationFrame(() => {
+    document.documentElement.classList.remove("app-loading");
+    document.documentElement.classList.add("app-ready");
+  });
+}
+
 async function boot() {
   try {
     const site = await loadSite();
@@ -23,7 +30,7 @@ async function boot() {
       await initAdjudicationsPage(site);
     } else if (document.body.dataset.page === "recursos") {
       await initResourcesPage(site);
-    } else if (document.body.dataset.page === "faq") {
+    } else if (document.body.dataset.page === "preguntas-frecuentes") {
       await initFaqPage(site);
     } else if (document.body.dataset.page === "contacto") {
       await initContactPage(site);
@@ -33,6 +40,8 @@ async function boot() {
   } catch (error) {
     console.error(error);
     document.documentElement.classList.add("has-data-error");
+  } finally {
+    finishAppLoading();
   }
 }
 

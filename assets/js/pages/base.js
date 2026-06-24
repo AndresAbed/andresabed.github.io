@@ -24,9 +24,9 @@ const PAGE_COPY = {
     body: "Hub base para pagos, gestiones y fuentes oficiales con manejo de links faltantes.",
     state: UI_STATES.PARTIAL,
   },
-  faq: {
-    title: "FAQ",
-    body: "Base para accordions accesibles alimentados por categorias del data pack.",
+  "preguntas-frecuentes": {
+    title: "Preguntas frecuentes",
+    body: "Base para respuestas accesibles alimentadas por categorias del data pack.",
     state: UI_STATES.PARTIAL,
   },
   contacto: {

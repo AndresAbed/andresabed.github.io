@@ -7,7 +7,7 @@ import {
   normalizeInternalTarget,
 } from "../data/api.js";
 import { classifyLinkItem } from "../data/validators.js";
-import { categoryHref, createButton, createMiniFact, formatMoneyARS } from "../components/plan-components.js";
+import { categoryHref, createButton, createMiniFact } from "../components/plan-components.js";
 import { clear, el, qs } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
 import { isMockStatus } from "../utils/validators.js";
@@ -36,15 +36,11 @@ function getSecondaryCta(site) {
 
 function getCategoryStats(planCatalog, category) {
   const items = getCatalogItemsByCategory(planCatalog, category.slug);
-  const cuotas = items
-    .map((item) => Number(item.cuota?.value))
-    .filter((value) => Number.isFinite(value) && value > 0);
   const leadItem = items.find((item) => item.imageUrl) || items[0];
 
   return {
     items,
     leadItem,
-    minCuota: cuotas.length ? Math.min(...cuotas) : null,
   };
 }
 
@@ -195,6 +191,21 @@ function createHeroDraws(draws, primaryCta) {
   });
 }
 
+const CATEGORY_CARD_IMAGES = Object.freeze({
+  autos: {
+    imageUrl: "/assets/img/plans/plan-auto-hilux-cronos.png",
+    imageAlt: "Auto y camioneta disponibles en planes Club San Jorge",
+  },
+  motos: {
+    imageUrl: "/assets/img/plans/plan-moto-honda-xr-cb.png",
+    imageAlt: "Motos disponibles en planes Club San Jorge",
+  },
+  dinero: {
+    imageUrl: "/assets/img/plans/plan-dinero-billetes.png",
+    imageAlt: "Billetes representando capital en dinero",
+  },
+});
+
 function renderHero(data) {
   const target = qs("[data-home-hero]");
   if (!target) return;
@@ -261,35 +272,37 @@ function renderPlanRoutes(data) {
   const target = qs("[data-trust-section]");
   if (!target) return;
 
-  const categories = getCatalogCategories(data.planCatalog);
+  const preferredOrder = ["motos", "autos", "dinero"];
+  const categories = [...getCatalogCategories(data.planCatalog)].sort((a, b) => {
+    const aIndex = preferredOrder.indexOf(a.slug);
+    const bIndex = preferredOrder.indexOf(b.slug);
+    return (aIndex === -1 ? preferredOrder.length : aIndex) - (bIndex === -1 ? preferredOrder.length : bIndex);
+  });
   const copy = {
     autos: {
-      kicker: "Plan Auto",
-      title: "Para proyectar un 0 km",
-      body: "Opciones con referencias de autos y utilitarios, cuota mensual, valor nominal y chances de sorteo.",
-      cta: "Ver autos",
+      title: "Plan Auto",
+      body: "Opciones para auto o utilitario, pensadas para quienes quieren planificar su próximo vehículo.",
+      cta: "Ver planes",
     },
     motos: {
-      kicker: "Plan Moto",
-      title: "Para acceder a tu moto",
-      body: "Planes orientados a motos, con importes de catálogo y condiciones para revisar antes de avanzar.",
-      cta: "Ver motos",
+      title: "Plan Moto",
+      body: "Acercate a tu moto con una alternativa de ahorro clara, accesible y acompañada desde el primer paso.",
+      cta: "Ver planes",
     },
     dinero: {
-      kicker: "Plan Dinero",
-      title: "Para formar capital",
-      body: "Alternativas de orden de compra / capital para quienes prefieren consultar por monto disponible.",
-      cta: "Ver dinero",
+      title: "Plan Dinero",
+      body: "Formá capital para tus proyectos con opciones pensadas para ahorrar de manera ordenada.",
+      cta: "Ver planes",
     },
   };
 
   clear(target);
   target.append(
     createHomeSectionHeader({
-      eyebrow: "Nuestros planes",
-      title: "Elegí cómo querés participar",
+      eyebrow: "Con nosotros podés",
+      title: "Elegí el plan a tu medida",
       id: "category-entry-title",
-      intro: "Una primera orientación para encontrar rápido el tipo de plan que querés consultar.",
+      intro: "Conocé todas las opciones que Club San Jorge tiene para vos.",
       align: "center",
     }),
     el("div", {
@@ -297,34 +310,30 @@ function renderPlanRoutes(data) {
       children: categories.map((category) => {
         const stats = getCategoryStats(data.planCatalog, category);
         const content = copy[category.slug] || {
-          kicker: category.label,
           title: category.label,
           body: category.summary || category.description,
           cta: "Ver planes",
         };
+        const image = CATEGORY_CARD_IMAGES[category.slug] || stats.leadItem;
 
         return el("article", {
           className: `home-route-card home-route-card--${category.theme || "default"}`,
           children: [
-            createPlanVisual(stats.leadItem),
+            el("div", {
+              className: "home-route-card__media",
+              children: [createPlanVisual(image, "home-route-card__image")],
+            }),
             el("div", {
               className: "home-route-card__body",
               children: [
-                el("span", { className: "home-eyebrow", text: content.kicker }),
                 el("h3", { text: content.title }),
                 el("p", { text: content.body }),
                 el("div", {
-                  className: "home-route-card__facts",
+                  className: "home-route-card__action",
                   children: [
-                    createMiniFact({ label: "Opciones", value: String(stats.items.length) }),
-                    createMiniFact({
-                      label: "Cuotas desde",
-                      value: stats.minCuota ? formatMoneyARS(stats.minCuota) : FALLBACK_TEXT.confirm,
-                      state: stats.minCuota ? UI_STATES.READY : UI_STATES.PARTIAL,
-                    }),
+                    createButton({ label: content.cta, href: categoryHref(category.slug), variant: "secondary" }),
                   ],
                 }),
-                createButton({ label: content.cta, href: categoryHref(category.slug), variant: "secondary" }),
               ],
             }),
           ],

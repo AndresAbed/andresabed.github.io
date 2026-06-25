@@ -31,7 +31,7 @@
           "type": "external",
           "title": "Medios de pago",
           "description": "Consultá los medios de pago habilitados por Club San Jorge.",
-          "url": "https://clubsanjorge.com.ar/medios-de-pago",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/medios-de-pago",
           "featured": true,
           "status": "verified"
         },
@@ -40,7 +40,7 @@
           "type": "external",
           "title": "Adherite al débito automático",
           "description": "Gestioná el débito automático para no perder ningún sorteo por falta de pago.",
-          "url": "https://clubsanjorge.com.ar/debito-automatico-cya",
+          "url": "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/debito-automatico-cya",
           "featured": false,
           "status": "verified"
         },

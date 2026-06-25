@@ -266,45 +266,70 @@ function createHeroDraws(draws, primaryCta) {
     className: "home-hero-drawcard",
     attrs: { "aria-label": "Información de sorteos Club San Jorge" },
     children: [
-      drawBadge ? el("span", { className: "home-hero-drawcard__badge", text: drawBadge }) : null,
       el("div", {
-        className: "home-hero-drawcard__numbers",
-        children: stimuli.map((item) =>
+        className: "home-hero-drawcard__last",
+        attrs: { "data-state": lastState },
+        children: [
+          drawBadge ? el("span", { className: "home-hero-drawcard__badge", text: drawBadge }) : null,
           el("div", {
-            className: "home-hero-drawcard__number",
-            attrs: {
-              "data-state": resolveValueState(item.winningNumber, item.status),
-              title: item.label,
-            },
+            className: "home-hero-drawcard__head",
             children: [
-              el("strong", { text: item.winningNumber || FALLBACK_TEXT.updating }),
-              el("span", { text: item.label }),
+              el("div", {
+                className: "home-hero-drawcard__title",
+                children: [el("span", { text: "Último sorteo" })],
+              }),
+              el("strong", {
+                className: "home-hero-drawcard__last-date",
+                text: lastDrawDate.date || FALLBACK_TEXT.updating,
+              }),
             ],
           }),
-        ),
+          el("div", {
+            className: "home-hero-drawcard__numbers",
+            children: stimuli.map((item) =>
+              el("div", {
+                className: "home-hero-drawcard__number",
+                attrs: {
+                  "data-state": resolveValueState(item.winningNumber, item.status),
+                  title: item.label,
+                },
+                children: [
+                  el("strong", { text: item.winningNumber || FALLBACK_TEXT.updating }),
+                  el("span", { text: item.label }),
+                ],
+              }),
+            ),
+          }),
+        ],
       }),
       el("div", {
-        className: "home-hero-drawcard__dates",
+        className: "home-hero-drawcard__next",
         children: [
           el("div", {
             className: "home-hero-drawcard__date",
-            attrs: { "data-state": lastState },
-            children: [
-              el("span", { text: "Último sorteo" }),
-              el("strong", { text: lastDrawDate.date || FALLBACK_TEXT.updating }),
-            ],
-          }),
-          el("div", {
-            className: "home-hero-drawcard__date home-hero-drawcard__date--next",
             attrs: { "data-state": nextState },
             children: [
               el("span", { text: "Próximo sorteo" }),
               el("strong", { text: nextDrawDate.date || FALLBACK_TEXT.updating }),
             ],
           }),
+          el("div", {
+            className: "home-hero-drawcard__actions",
+            children: [
+              createButton({ label: "Quiero mi plan", href: primaryCta.href, variant: "primary" }),
+              el("a", {
+                className: "button button--secondary home-hero-drawcard__payment",
+                text: "Pagá tu boleta",
+                attrs: {
+                  href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/paga-tu-cuota",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                },
+              }),
+            ],
+          }),
         ],
       }),
-      createButton({ label: "Quiero mi plan", href: primaryCta.href, variant: "primary" }),
     ],
   });
 }
@@ -362,15 +387,15 @@ function renderHero(data) {
                   className: "home-hero-v5__actions",
                   children: [
                     createButton({ label: "Ver planes", href: "/planes/", variant: "primary" }),
-                    createButton({ label: "Cómo funciona", href: "#how-title", variant: "green" }),
+                    createButton({ label: "Cómo funciona", href: "/preguntas-frecuentes/", variant: "green" }),
                   ],
                 }),
+                createHeroVideo(video),
               ],
             }),
             createHeroDraws(draws, primaryCta),
           ],
         }),
-        createHeroVideo(video),
       ],
     }),
     el("div", {
@@ -465,39 +490,125 @@ function renderHowItWorks(data) {
   const target = qs("[data-how-it-works]");
   if (!target) return;
 
-  const drawFaq = getFaqById(data.faq, "como-se-realizan-los-sorteos-mensuales");
-  const endFaq = getFaqById(data.faq, "que-se-obtiene-al-final-del-plan-330");
-
   const steps = [
-    ["Elegís una línea", "Auto, moto o dinero, según tu objetivo."],
-    ["Pagás tu cuota", "Con cada cuota ahorrás dentro del sistema."],
-    ["Participás todos los meses", drawFaq?.answer || "Los sorteos mensuales se realizan según condiciones vigentes."],
-    ["Avanzás con información clara", endFaq?.answer || "La adjudicación y el cierre del plan se revisan con documentación vigente."],
+    {
+      title: "Elegís un plan y comenzás a pagar",
+      body: "Podés suscribirte a una opción de auto, moto o dinero. Cada plan tiene valor nominal, plazo y cuota mensual según sus condiciones.",
+    },
+    {
+      title: "Con cada cuota formás capital",
+      body:
+        "Las cuotas se destinan a la formación del capital del plan. Si tu título está vigente y al día, participás de los sorteos mensuales del sistema.",
+    },
+    {
+      title: "Si tu título resulta favorecido, se aplican las condiciones del plan",
+      body:
+        "La adjudicación o estímulo depende de la modalidad del plan y de la documentación vigente. Por eso es importante revisar bien las condiciones antes de suscribirte.",
+    },
+    {
+      title: "Al finalizar el plazo, el plan alcanza su objetivo de capitalización",
+      body:
+        "El objetivo del contrato es formar capital equivalente al valor nominal del título según las condiciones vigentes del plan.",
+    },
   ];
+  const clarifications = [
+    {
+      title: "Planes 330 no amortizantes",
+      body:
+        "En los planes de 330 cuotas, si un título resulta favorecido por sorteo, el plan continúa vigente a todos sus efectos.",
+    },
+    {
+      title: "Podés volver a resultar favorecido",
+      body: "Si seguís pagando normalmente y tu número vuelve a salir, puede volver a resultar favorecido.",
+    },
+    {
+      title: "Rescate según avance del plan",
+      body:
+        "El rescate no aplica desde el inicio: en los planes 330 puede solicitarse desde la cuota 18, según condiciones vigentes.",
+    },
+    {
+      title: "Cuota y valor nominal",
+      body:
+        "La cuota depende del plan y del valor nominal. En algunos casos puede existir endoso de ampliación automática para actualizar bien o valor.",
+    },
+  ];
+  const primaryCta = getPrimaryCta(data.site);
 
   clear(target);
   target.append(
     el("div", {
       className: "home-process",
       children: [
-        createHomeSectionHeader({
-          eyebrow: "El sistema",
-          title: "Una forma simple de entenderlo",
-          id: "how-title",
-          intro: "La home no necesita explicar todo el contrato: tiene que dejar claro el recorrido y llevarte al plan correcto.",
+        el("section", {
+          className: "home-process__system",
+          attrs: { "aria-labelledby": "how-title" },
+          children: [
+            createHomeSectionHeader({
+              eyebrow: "Cómo funciona",
+              title: "Entendé cómo funciona el sistema antes de elegir tu plan",
+              id: "how-title",
+              intro:
+                "Los planes de Club San Jorge combinan pago de cuotas, formación de capital y participación en sorteos mensuales. Antes de suscribirte, conviene entender qué pagás, cómo participa tu título y qué ocurre si resulta favorecido.",
+            }),
+            el("ol", {
+              className: "home-step-list",
+              children: steps.map((step, index) =>
+                el("li", {
+                  className: "home-step",
+                  children: [
+                    el("span", { className: "home-step__number", text: String(index + 1).padStart(2, "0") }),
+                    el("div", {
+                      className: "home-step__copy",
+                      children: [
+                        el("h3", { text: step.title }),
+                        el("p", { text: step.body }),
+                      ],
+                    }),
+                  ],
+                }),
+              ),
+            }),
+          ],
         }),
-        el("div", {
-          className: "home-step-list",
-          children: steps.map(([title, body], index) =>
-            el("article", {
-              className: "home-step",
+        el("section", {
+          className: "home-process__before",
+          attrs: { "aria-labelledby": "before-title" },
+          children: [
+            el("div", {
+              className: "home-process__before-head",
               children: [
-                el("span", { text: String(index + 1).padStart(2, "0") }),
-                el("h3", { text: title }),
-                el("p", { text: body }),
+                el("span", { className: "home-eyebrow", text: "Antes de elegir" }),
+                el("h3", { attrs: { id: "before-title" }, text: "Antes de suscribirte, hay algunos puntos que conviene tener claros" }),
+                el("p", {
+                  text: "Son detalles importantes para comparar planes con más criterio y avanzar con una consulta mejor orientada.",
+                }),
               ],
             }),
-          ),
+            el("div", {
+              className: "home-process__note-grid",
+              children: clarifications.map((item, index) =>
+                el("article", {
+                  className: "home-process__note",
+                  children: [
+                    el("span", { className: "home-process__note-mark", text: String(index + 1).padStart(2, "0") }),
+                    el("div", {
+                      children: [
+                        el("h4", { text: item.title }),
+                        el("p", { text: item.body }),
+                      ],
+                    }),
+                  ],
+                }),
+              ),
+            }),
+            el("div", {
+              className: "home-process__actions",
+              children: [
+                createButton({ label: "Ver preguntas frecuentes", href: "/preguntas-frecuentes/", variant: "secondary" }),
+                createButton({ label: "Consultar por un plan", href: primaryCta.href, variant: "primary" }),
+              ],
+            }),
+          ],
         }),
       ],
     }),

@@ -469,7 +469,7 @@ body.site-menu-open .site-menu-drawer {
 @media (min-width: 981px) {
   .site-header__inner {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr);
     column-gap: clamp(28px, 4vw, 56px);
   }
 
@@ -478,12 +478,17 @@ body.site-menu-open .site-menu-drawer {
   }
 
   .site-header__desktop {
-    display: contents;
+    align-items: center;
+    display: flex;
+    gap: 0;
+    grid-column: 2;
+    justify-content: flex-end;
+    min-width: 0;
   }
 
   .site-header__nav-shell {
-    grid-column: 2;
     justify-self: end;
+    max-width: max-content;
   }
 
   .site-nav {
@@ -492,9 +497,8 @@ body.site-menu-open .site-menu-drawer {
 
   .site-header__actions {
     border-left: 1px solid rgb(41 41 41 / 0.12);
-    grid-column: 3;
-    margin-left: clamp(2px, 0.8vw, 12px);
-    padding-left: clamp(20px, 2vw, 28px);
+    margin-left: 28px;
+    padding-left: 28px;
     justify-self: end;
   }
 

@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "version": "home-adjudications-v1",
+    "status": "verified_from_user_screenshots",
+    "source": "Capturas provistas para Home"
+  },
+  "section": {
+    "eyebrow": "Adjudicados",
+    "title": "Conocé a nuestros adjudicados",
+    "intro": "Historias reales de suscriptores que ya recibieron su premio.",
+    "cta": {
+      "label": "Ver más adjudicados",
+      "href": "/adjudicados/"
+    }
+  },
+  "items": [
+    {
+      "id": "gonzalez-cesar-sebastian",
+      "name": "González César Sebastián",
+      "installment": "5",
+      "drawDate": "28-02-2026",
+      "prize": "VW Amarok Trendline",
+      "residence": "Villa De Soto/Córdoba",
+      "imageUrl": "/assets/img/adjudicados/gonzalez-cesar-sebastian-vw-amarok.webp",
+      "imageAlt": "González César Sebastián junto a una VW Amarok entregada por Club San Jorge"
+    },
+    {
+      "id": "acevedo-gladys-maria",
+      "name": "Acevedo Gladys María",
+      "installment": "2",
+      "drawDate": "28-03-2026",
+      "prize": "Gilera Smash 110 + $100.000",
+      "residence": "Puerto Vilelas/Chaco",
+      "imageUrl": "/assets/img/adjudicados/acevedo-gladys-maria-gilera-smash.webp",
+      "imageAlt": "Acevedo Gladys María junto a una Gilera Smash 110 adjudicada"
+    },
+    {
+      "id": "cabral-marcia-andrea",
+      "name": "Cabral Marcia Andrea",
+      "installment": "38",
+      "drawDate": "28-03-2026",
+      "prize": "Honda XR Tornado 300 + $200.000",
+      "residence": "Saenz Peña/Buenos Aires",
+      "imageUrl": "/assets/img/adjudicados/cabral-marcia-andrea-honda-xr.webp",
+      "imageAlt": "Cabral Marcia Andrea junto a una Honda XR Tornado 300 adjudicada"
+    },
+    {
+      "id": "gilardi-adrian-esteban",
+      "name": "Gilardi Adrián Estebán",
+      "installment": "137",
+      "drawDate": "28-03-2026",
+      "prize": "VW Saveiro Trendile",
+      "residence": "CABA/CABA",
+      "imageUrl": "/assets/img/adjudicados/gilardi-adrian-esteban-vw-saveiro.webp",
+      "imageAlt": "Gilardi Adrián Estebán junto a una VW Saveiro adjudicada"
+    },
+    {
+      "id": "gonzalez-leonardo-arturo",
+      "name": "González Leonardo Arturo",
+      "installment": "3",
+      "drawDate": "28-03-2026",
+      "prize": "Orden de compra",
+      "residence": "San Jorge/Santa Fe",
+      "imageUrl": "/assets/img/adjudicados/gonzalez-leonardo-arturo-orden-compra.webp",
+      "imageAlt": "González Leonardo Arturo en una entrega de adjudicación"
+    },
+    {
+      "id": "maidana-irma-del-lujan",
+      "name": "Maidana Irma Del Luján",
+      "installment": "15",
+      "drawDate": "28-03-2026",
+      "prize": "Honda Tornado XR 300 + $200.000",
+      "residence": "Ituzaingó/Corrientes",
+      "imageUrl": "/assets/img/adjudicados/maidana-irma-del-lujan-honda-tornado.webp",
+      "imageAlt": "Maidana Irma Del Luján junto a una Honda Tornado XR 300 adjudicada"
+    },
+    {
+      "id": "marquez-carlos",
+      "name": "Márquez Carlos",
+      "installment": "110",
+      "drawDate": "28-03-2026",
+      "prize": "Renault Kwid Iconic Outsider",
+      "residence": "Federación/Entre Ríos",
+      "imageUrl": "/assets/img/adjudicados/marquez-carlos-renault-kwid.webp",
+      "imageAlt": "Márquez Carlos en una entrega de adjudicación"
+    },
+    {
+      "id": "pinto-claudia-marcela",
+      "name": "Pinto Claudia Marcela",
+      "installment": "32",
+      "drawDate": "28-03-2026",
+      "prize": "Orden de compra",
+      "residence": "Sastre/Santa Fe",
+      "imageUrl": "/assets/img/adjudicados/pinto-claudia-marcela-orden-compra.webp",
+      "imageAlt": "Pinto Claudia Marcela en una entrega de adjudicación"
+    }
+  ]
+}

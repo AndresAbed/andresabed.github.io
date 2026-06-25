@@ -10,6 +10,7 @@ export const DATASETS = Object.freeze({
   resources: "resources.json",
   draws: "draws.json",
   adjudications: "adjudications.json",
+  homeAdjudications: "home-adjudications.json",
   videos: "videos.json",
   homeSections: "home-sections.json",
   agencyContact: "agency-contact.json",
@@ -44,12 +45,13 @@ export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
 export const loadDraws = () => loadDataset("draws");
 export const loadAdjudications = () => loadDataset("adjudications");
+export const loadHomeAdjudications = () => loadDataset("homeAdjudications");
 export const loadVideos = () => loadDataset("videos");
 export const loadHomeSections = () => loadDataset("homeSections");
 export const loadAgencyContact = () => loadDataset("agencyContact");
 
 export async function loadAllForHome() {
-  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeSections, videos] = await Promise.all([
+  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, homeSections, videos] = await Promise.all([
     loadSite(),
     loadPlans(),
     loadPlanCatalog(),
@@ -57,11 +59,12 @@ export async function loadAllForHome() {
     loadResources(),
     loadDraws(),
     loadAdjudications(),
+    loadHomeAdjudications(),
     loadHomeSections(),
     loadVideos(),
   ]);
 
-  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeSections, videos };
+  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, homeSections, videos };
 }
 
 export function getPlanBySlug(plansData, slug) {

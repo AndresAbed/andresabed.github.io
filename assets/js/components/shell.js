@@ -1,6 +1,6 @@
 import { normalizeInternalTarget } from "../data/api.js";
 import { el, qs } from "../utils/dom.js";
-import { isValidUrl } from "../utils/validators.js";
+import { isBlank, isValidUrl } from "../utils/validators.js";
 
 const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
@@ -72,6 +72,72 @@ function createBrandLogo({ logo, scrolledLogo }) {
           })
         : null,
     ],
+  });
+}
+
+function isExternalTarget(href) {
+  if (String(href).startsWith("mailto:")) return false;
+  if (!isValidUrl(href)) return false;
+  return new URL(href, window.location.origin).origin !== window.location.origin;
+}
+
+function createFooterLink({ label, href, className }) {
+  const valid = isValidUrl(href) || String(href).startsWith("mailto:");
+  const external = valid && isExternalTarget(href);
+
+  return el("a", {
+    className,
+    text: label,
+    attrs: valid
+      ? {
+          href,
+          target: external ? "_blank" : null,
+          rel: external ? "noopener noreferrer" : null,
+        }
+      : {
+          href: "#",
+          "aria-disabled": "true",
+        },
+  });
+}
+
+function createFooterColumn({ title, links }) {
+  return el("div", {
+    className: "site-footer__column",
+    children: [
+      el("h2", { text: title }),
+      el("ul", {
+        className: "site-footer__link-list",
+        children: links.map((link) =>
+          el("li", {
+            children: [createFooterLink(link)],
+          }),
+        ),
+      }),
+    ],
+  });
+}
+
+function createSocialLink({ label, href, icon }) {
+  const valid = isValidUrl(href);
+  const external = valid && isExternalTarget(href);
+
+  return el("a", {
+    className: `site-footer__social ${valid ? "" : "site-footer__social--disabled"}`,
+    attrs: valid
+      ? {
+          href,
+          target: external ? "_blank" : null,
+          rel: external ? "noopener noreferrer" : null,
+          "aria-label": label,
+        }
+      : {
+          href: "#",
+          "aria-label": `${label} en actualización`,
+          "aria-disabled": "true",
+          title: `${label} en actualización`,
+        },
+    children: [el("span", { className: "site-footer__social-icon", attrs: { "data-social": icon, "aria-hidden": "true" } })],
   });
 }
 
@@ -219,35 +285,112 @@ function setupHeaderMenu({ header, overlay, drawer }) {
 function createFooter(site) {
   const legal = site?.legal || {};
   const agency = site?.agency || {};
+  const cta = site?.cta?.primary || {};
+  const whatsappTarget = normalizeInternalTarget(cta.target);
+  const hasWhatsapp = isValidUrl(whatsappTarget);
+  const email = agency.contactEmail;
+  const hasEmail = !isBlank(email);
+  const footerLogo = site?.brand?.logoVariants?.footerVerticalColor || site?.brand?.navbarLogoScrolled || site?.brand?.officialLogo;
+  const year = new Date().getFullYear();
+
+  const mainLinks = [
+    { label: "Inicio", href: "/" },
+    { label: "Planes", href: "/planes/" },
+    { label: "Adjudicados", href: "/adjudicados/" },
+    { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
+    { label: "Contacto", href: "/contacto/" },
+  ];
+
+  const subscriberLinks = [
+    { label: "Pagá tu boleta", href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/paga-tu-cuota" },
+    { label: "Descargá tu boleta", href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/boleta_de_pago" },
+    { label: "Medios de pago", href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/medios-de-pago" },
+    { label: "Débito automático", href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/debito-automatico-cya" },
+    { label: "Boleta digital", href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/adherite-a-la-boleta-digital" },
+  ];
 
   return el("footer", {
     className: "site-footer",
     children: [
+      el("div", {
+        className: "site-footer__brand-line",
+        attrs: { "aria-hidden": "true" },
+      }),
       el("div", {
         className: "container site-footer__inner",
         children: [
           el("div", {
             className: "site-footer__brand",
             children: [
-              el("strong", { text: agency.displayLockup || "Club San Jorge | Agencias Abed" }),
-              el("p", { text: legal.siteRoleText || "Sitio informativo y comercial de agencia mercantil." }),
-              el("p", { text: legal.disclaimerText || "La informacion debe revisarse junto con condiciones vigentes." }),
+              footerLogo
+                ? el("img", {
+                    className: "site-footer__logo",
+                    attrs: {
+                      src: footerLogo,
+                      alt: agency.displayLockup || "Club San Jorge | Agencias Abed",
+                    },
+                  })
+                : el("strong", { text: agency.displayLockup || "Club San Jorge | Agencias Abed" }),
+              el("p", {
+                className: "site-footer__brand-note",
+                text: "Comercialización de planes de Capitalización y Ahorro.",
+              }),
             ],
           }),
-          el("nav", {
-            className: "site-footer__nav",
-            attrs: { "aria-label": "Navegacion secundaria" },
+          createFooterColumn({ title: "Sitio", links: mainLinks }),
+          createFooterColumn({ title: "Gestiones", links: subscriberLinks }),
+          el("div", {
+            className: "site-footer__contact",
             children: [
-              el("a", { text: "Planes", attrs: { href: "/planes/" } }),
-              el("a", { text: "Adjudicados", attrs: { href: "/adjudicados/" } }),
-              el("a", { text: "Preguntas frecuentes", attrs: { href: "/preguntas-frecuentes/" } }),
-              el("a", { text: "Contacto", attrs: { href: "/contacto/?intent=consulta" } }),
+              el("h2", { text: "Contacto" }),
+              el("div", {
+                className: "site-footer__contact-list",
+                children: [
+                  el("div", {
+                    className: "site-footer__contact-item",
+                    children: [
+                      el("span", { text: "Email" }),
+                      hasEmail
+                        ? createFooterLink({
+                            label: email,
+                            href: `mailto:${email}`,
+                          })
+                        : el("p", { text: "Email en actualización" }),
+                    ],
+                  }),
+                ],
+              }),
+              el("div", {
+                className: "site-footer__socials",
+                attrs: { "aria-label": "Redes sociales" },
+                children: [
+                  createSocialLink({ label: "Instagram", href: agency.instagramUrl, icon: "instagram" }),
+                  createSocialLink({ label: "Facebook", href: agency.facebookUrl, icon: "facebook" }),
+                  createSocialLink({ label: "YouTube", href: agency.youtubeUrl, icon: "youtube" }),
+                  createSocialLink({ label: "WhatsApp", href: hasWhatsapp ? whatsappTarget : "", icon: "whatsapp" }),
+                ],
+              }),
+              createFooterLink({
+                label: "Botón de arrepentimiento",
+                href: "/contacto/?intent=arrepentimiento",
+                className: "button site-footer__regret",
+              }),
             ],
+          }),
+        ],
+      }),
+      el("div", {
+        className: "container site-footer__bottom",
+        children: [
+          el("p", {
+            className: "site-footer__copyright",
+            text: `© ${year} ${agency.displayLockup || "Club San Jorge | Agencias Abed"}.`,
           }),
           el("p", {
-            className: "site-footer__note",
+            className: "site-footer__legal",
             text:
-              "Transparencia: la consulta desde este sitio no implica contratacion final. Los datos pendientes se muestran como informacion en actualizacion.",
+              legal.disclaimerText ||
+              "La información debe revisarse junto con la documentación y condiciones vigentes de Club San Jorge.",
           }),
         ],
       }),

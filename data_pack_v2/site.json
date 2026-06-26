@@ -12,13 +12,14 @@
     "name": "Agencias Abed",
     "displayLockup": "Club San Jorge | Agencias Abed",
     "tagline": "Planes de Capitalización y Ahorro Club San Jorge con atención comercial de Agencias Abed.",
-    "legalDescriptor": "Agencia mercantil de Club San Jorge",
+    "legalDescriptor": "Agencia mercantil Club San Jorge",
     "coverageLabel": "Atención online a todo el país",
     "primaryWhatsapp": "+54 9 11 1234-5678",
     "secondaryWhatsapp": "",
     "contactEmail": "",
-    "instagramUrl": "",
-    "facebookUrl": "",
+    "instagramUrl": "https://www.instagram.com/clubsanjorge/",
+    "facebookUrl": "https://www.facebook.com/clubsanjorge",
+    "youtubeUrl": "https://www.youtube.com/channel/UCfo9TZoLQh_WMwdgs7_u3ww/featured",
     "status": "pending_validation",
     "commercialPromise": "Suscribite, ahorrá y participá por autos, motos o dinero, con atención personalizada durante la elección del plan.",
     "processLabel": "Capitalización y Ahorro"
@@ -34,7 +35,9 @@
       "agenciasAbed": "/assets/img/brand/logo-agencias-abed.svg",
       "agenciasAbedWhite": "/assets/img/brand/logo-agencias-abed-white.svg",
       "agenciasAbedBlack": "/assets/img/brand/logo-agencias-abed-black.svg",
-      "agenciasAbedColorIsoWhite": "/assets/img/brand/logo-agencias-abed-color-white.svg"
+      "agenciasAbedColorIsoWhite": "/assets/img/brand/logo-agencias-abed-color-white.svg",
+      "footerVerticalColor": "/assets/img/brand/logo-footer-vertical-color.svg",
+      "loaderVerticalWhite": "/assets/img/brand/logo-loader-vertical-white.svg"
     },
     "manualClaim": "Con nosotros podés",
     "palette": {

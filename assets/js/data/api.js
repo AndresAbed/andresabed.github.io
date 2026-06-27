@@ -11,6 +11,7 @@ export const DATASETS = Object.freeze({
   draws: "draws.json",
   adjudications: "adjudications.json",
   homeAdjudications: "home-adjudications.json",
+  socialReviews: "social-reviews.json",
   videos: "videos.json",
   homeSections: "home-sections.json",
   agencyContact: "agency-contact.json",
@@ -46,12 +47,13 @@ export const loadResources = () => loadDataset("resources");
 export const loadDraws = () => loadDataset("draws");
 export const loadAdjudications = () => loadDataset("adjudications");
 export const loadHomeAdjudications = () => loadDataset("homeAdjudications");
+export const loadSocialReviews = () => loadDataset("socialReviews");
 export const loadVideos = () => loadDataset("videos");
 export const loadHomeSections = () => loadDataset("homeSections");
 export const loadAgencyContact = () => loadDataset("agencyContact");
 
 export async function loadAllForHome() {
-  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, homeSections, videos] = await Promise.all([
+  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, socialReviews, homeSections, videos] = await Promise.all([
     loadSite(),
     loadPlans(),
     loadPlanCatalog(),
@@ -60,11 +62,12 @@ export async function loadAllForHome() {
     loadDraws(),
     loadAdjudications(),
     loadHomeAdjudications(),
+    loadSocialReviews(),
     loadHomeSections(),
     loadVideos(),
   ]);
 
-  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, homeSections, videos };
+  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, socialReviews, homeSections, videos };
 }
 
 export function getPlanBySlug(plansData, slug) {

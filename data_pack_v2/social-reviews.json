@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "version": "v1-home",
+    "purpose": "Comentarios de clientes publicados en redes para prueba social de la Home.",
+    "source": "Comentarios provistos manualmente desde redes sociales."
+  },
+  "section": {
+    "eyebrow": "Opiniones",
+    "title": "Experiencias compartidas",
+    "intro": "Descubrí lo que nuestros clientes tienen para decir"
+  },
+  "items": [
+    {
+      "name": "Ivana",
+      "avatar": "female",
+      "source": "facebook",
+      "sourceLabel": "Facebook",
+      "quote": "La mejor empresa de capitalización y ahorro. Cumplen con todo lo que prometen.",
+      "status": "verified"
+    },
+    {
+      "name": "Mariela",
+      "avatar": "female",
+      "source": "instagram",
+      "sourceLabel": "Instagram",
+      "quote": "Así como yo, he visto a mucha gente hacer realidad el sueño del 0 km con Club San Jorge. Muy recomendado.",
+      "status": "verified"
+    },
+    {
+      "name": "Máximo",
+      "avatar": "male",
+      "source": "facebook",
+      "sourceLabel": "Facebook",
+      "quote": "Excelente empresa. Cumple todo lo que promete, además cuotas bajísimas.",
+      "status": "verified"
+    },
+    {
+      "name": "Laura",
+      "avatar": "female",
+      "source": "instagram",
+      "sourceLabel": "Instagram",
+      "quote": "Lo recomiendo 100%. La verdad que es como dicen, cumplen su palabra.",
+      "status": "verified"
+    },
+    {
+      "name": "Daniel",
+      "avatar": "male",
+      "source": "facebook",
+      "sourceLabel": "Facebook",
+      "quote": "Yo gané y cumplieron con todo.",
+      "status": "verified"
+    },
+    {
+      "name": "Liliana",
+      "avatar": "female",
+      "source": "facebook",
+      "sourceLabel": "Facebook",
+      "quote": "Excelente empresa, jamás tuve un problema. Al contrario, varias veces me acerqué a las oficinas y el trato ha sido de diez. Muchas gracias.",
+      "status": "verified"
+    }
+  ]
+}

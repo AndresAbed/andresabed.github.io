@@ -1,7 +1,7 @@
 import { loadSite } from "./data/api.js";
 import { renderShell } from "./components/shell.js?v=social-reviews-v29";
 import { initContactPage } from "./pages/contact.js";
-import { initHomePage } from "./pages/home.js?v=social-reviews-v29";
+import { initHomePage } from "./pages/home.js?v=recruitment-v36";
 import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js";
 import { initPlanDetail, initPlansHub } from "./pages/plans.js";
 import { initBasePage } from "./pages/base.js";

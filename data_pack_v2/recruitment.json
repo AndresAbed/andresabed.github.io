@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "version": "v1-home",
+    "purpose": "Bloque de captacion de perfiles comerciales para vender planes con la agencia."
+  },
+  "section": {
+    "title": "Trabajá con nosotros",
+    "intro": "Si tenés experiencia en ventas y querés aumentar tus ingresos, sumate como productor a nuestro equipo comercial.",
+    "ctaLabel": "Quiero postularme",
+    "image": {
+      "src": "/assets/img/recruitment-productor-auto.png",
+      "alt": "Persona con llaves de auto nuevo"
+    },
+    "benefits": [
+      "Comisiones competitivas",
+      "Pago al momento de la operación",
+      "Capacitación y acompañamiento constante"
+    ]
+  },
+  "formContent": {
+    "eyebrow": "Postulación comercial",
+    "title": "Dejanos tus datos",
+    "intro": "Completá tus datos y contanos brevemente tu experiencia para que podamos conocerte.",
+    "disclaimer": "Enviar este formulario no implica incorporación automática ni constituye una oferta laboral."
+  },
+  "highlights": [],
+  "form": {
+    "enabled": true,
+    "mode": "endpoint",
+    "provider": "formspree",
+    "endpoint": "https://formspree.io/f/meebgdzo",
+    "method": "POST",
+    "recipientEmail": "abedandres@gmail.com",
+    "recipientStatus": "configured_in_formspree",
+    "status": "pending_validation"
+  },
+  "messages": {
+    "success": "Postulación enviada. Vamos a revisar tus datos y contactarte si el perfil coincide.",
+    "unavailable": "La postulación quedó preparada, pero el envío automático todavía está en configuración.",
+    "error": "No pudimos preparar la postulación. Revisá los datos e intentá nuevamente."
+  }
+}

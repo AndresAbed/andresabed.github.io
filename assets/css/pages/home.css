@@ -2212,6 +2212,7 @@ body.site-video-open {
   gap: clamp(18px, 2vw, 26px);
   margin-inline: auto;
   max-width: 1040px;
+  overflow: hidden;
   padding: clamp(22px, 3vw, 38px);
   position: relative;
   transform: translateY(-10px);

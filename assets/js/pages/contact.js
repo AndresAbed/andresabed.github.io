@@ -1,4 +1,4 @@
-import { getCatalogItems, loadAgencyContact, loadPlanCatalog } from "../data/api.js?v=artemis-live-data-v1";
+import { getCatalogItems, loadAgencyContact, loadPlanCatalog } from "../data/api.js";
 import {
   CONTACT_STATES,
   clearFieldErrors,

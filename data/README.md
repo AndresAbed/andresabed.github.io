@@ -1,6 +1,6 @@
-# Club San Jorge / Agencias Abed — Data Pack V2
+# Club San Jorge / Agencias Abed — Data
 
-Incluye JSON base para construir la web estática:
+Incluye JSON editables para construir la web estática:
 - site.json
 - plans.json
 - plan_catalog.json
@@ -8,7 +8,9 @@ Incluye JSON base para construir la web estática:
 - resources.json
 - adjudications.json
 - videos.json
-- home-sections.json
+- social-reviews.json
+- recruitment.json
+- agency-contact.json
 
 Convención:
 - verified: dato validado

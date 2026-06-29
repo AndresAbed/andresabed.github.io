@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const inputPath = process.argv[2] || "/private/tmp/csj-official/catalog.json";
-const outputPath = process.argv[3] || "data_pack_v2/plan_catalog.json";
+const outputPath = process.argv[3] || "data/plan_catalog.json";
 const officialImageBase = "https://artemis.clubsanjorge.com.ar/images/";
 
 const raw = JSON.parse(fs.readFileSync(inputPath, "utf8"));

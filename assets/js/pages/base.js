@@ -1,4 +1,4 @@
-import { getPlanBySlug, loadPlans } from "../data/api.js?v=artemis-live-data-v1";
+import { getPlanBySlug, loadPlans } from "../data/api.js";
 import { createStatusBox } from "../components/status-box.js";
 import { clear, qs } from "../utils/dom.js";
 import { UI_STATES } from "../utils/status.js";

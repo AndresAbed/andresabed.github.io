@@ -1,4 +1,4 @@
-import { normalizeInternalTarget } from "../data/api.js?v=artemis-live-data-v1";
+import { normalizeInternalTarget } from "../data/api.js";
 import { el, qs } from "../utils/dom.js";
 import { isBlank, isValidUrl } from "../utils/validators.js";
 

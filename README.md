@@ -7,12 +7,14 @@ Base estatica para construir el sitio comercial e informativo de una agencia mer
 - `index.html`: Home V1 real comercial e informativa.
 - `planes/`: catalogo V2 por categorias Autos, Motos y Dinero, mas paginas detalle heredadas.
 - `sorteos/`, `adjudicados/`, `recursos/`, `preguntas-frecuentes/`, `contacto/`: paginas internas base.
-- `assets/css/`: tokens, base, layout, componentes, utilities y ajustes de pagina.
+- `assets/css/`: tokens, base, layout, componentes, utilities y estilos de pagina.
+- `assets/css/pages/`: estilos segmentados para Home y paginas internas/catalogo.
 - `assets/js/`: shell, data layer, helpers de estado, componentes y scripts de pagina.
+- `assets/js/pages/home/`: modulos de la Home separados por bloque.
 - `assets/img/placeholders/`: placeholders visuales temporales.
-- `data_pack_v2/`: source-of-truth editable de contenido. No se duplica ni se migra.
-- `data_pack_v2/plan_catalog.json`: source principal V2 para renderizar catalogo comercial.
-- `data_pack_v2/agency-contact.json`: configuracion operativa de contacto/pre-solicitud de la agencia.
+- `data/`: source-of-truth editable de contenido local. No se duplica ni se migra.
+- `data/plan_catalog.json`: source principal V2 para renderizar catalogo comercial.
+- `data/agency-contact.json`: configuracion operativa de contacto/pre-solicitud de la agencia.
 
 ## Como correr localmente
 
@@ -38,10 +40,10 @@ python3 -m http.server 8010
 
 ## Data layer
 
-El data layer esta en `assets/js/data/api.js` y consume directamente:
+El data layer esta en `assets/js/data/api.js` y consume directamente contenido local desde:
 
 ```text
-/data_pack_v2/*.json
+/data/*.json
 ```
 
 Incluye funciones como:
@@ -54,9 +56,10 @@ Incluye funciones como:
 - `loadDraws()`
 - `loadAdjudications()`
 - `loadVideos()`
-- `loadHomeSections()`
 - `loadAgencyContact()`
-- `loadAllForHome()`
+- `loadHomeData()`
+
+La Home tambien consume datos oficiales vivos desde Artemis para resultados de sorteos y adjudicados destacados.
 
 Los helpers de estado estan en `assets/js/utils/status.js` y contemplan:
 
@@ -67,20 +70,22 @@ Los helpers de estado estan en `assets/js/utils/status.js` y contemplan:
 
 ### Source of truth
 
-`data_pack_v2/` es el source-of-truth editable del proyecto. La V2 no duplica ni migra JSON a otra carpeta: las paginas consumen directamente los archivos publicados en esa carpeta.
+`data/` es el source-of-truth editable del proyecto para contenido local, catalogo, FAQ, recursos, contacto, recruitment y textos comerciales. La V2 no duplica ni migra JSON a otra carpeta: las paginas consumen directamente los archivos publicados en esa carpeta.
+
+Excepcion actual: sorteos y adjudicados destacados de la Home se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
 
 ### Separacion conceptual
 
 El sitio mantiene dos capas conceptuales:
 
-- Capa oficial / sistema Club San Jorge: planes, preguntas frecuentes del sistema, sorteos, adjudicados, recursos oficiales y datos institucionales del data pack.
+- Capa oficial / sistema Club San Jorge: planes, preguntas frecuentes del sistema, recursos oficiales, datos institucionales del data pack y datos vivos de sorteos/adjudicados cuando provienen de Artemis.
 - Capa agencia / comercial-operativa: hero comercial, CTAs, contacto, pre-solicitud asistida, formulario, copy de confianza y explicacion del acompanamiento de Agencias Abed.
 
 La separacion esta reflejada en componentes, copy, catalogo y datos de contacto. No requiere crear otra app ni duplicar contenido.
 
 ### Catalogo V2
 
-La Home y `/planes/` consumen `data_pack_v2/plan_catalog.json`.
+La Home y `/planes/` consumen `data/plan_catalog.json`.
 
 `plans.json` queda como compatibilidad para paginas detalle heredadas y para contenido explicativo historico, pero ya no es la arquitectura principal de planes.
 
@@ -119,7 +124,7 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 - Rutas base navegables.
 - Header, navegacion y footer renderizados desde `site.json`.
 - CSS base con tokens, layout y componentes iniciales.
-- Data layer JS para consumir `data_pack_v2/` sin duplicar datos.
+- Data layer JS para consumir `data/` sin duplicar datos.
 - Helpers para valores vacios, estados, URLs y fallbacks.
 - Home tecnica minima con snapshots de capa oficial y capa agencia.
 - Placeholders visuales para planes, videos y OG.
@@ -127,7 +132,7 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 ## Hecho en Etapa 2
 
 - Home V1 real con hero comercial, confianza, planes destacados, como funciona, sorteos, adjudicados, preguntas frecuentes, recursos y CTA final.
-- Secciones conectadas a `data_pack_v2/`.
+- Secciones conectadas a `data/`.
 - Fallbacks para sorteos incompletos, adjudicados mock, links faltantes y canales de contacto pendientes.
 - Separacion visible entre informacion oficial del sistema y contenido operativo de agencia.
 
@@ -151,7 +156,7 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 
 - Pagina real de contacto / pre-solicitud asistida.
 - Formulario V1 con validacion frontend, estados y armado de payload.
-- Configuracion operativa separada en `data_pack_v2/agency-contact.json`.
+- Configuracion operativa separada en `data/agency-contact.json`.
 - Arquitectura preparada para endpoint, mailto o modo placeholder.
 - CTAs del sitio orientados a `/contacto/` con intencion y plan cuando aplica.
 
@@ -161,16 +166,15 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 - Skip link global para navegacion por teclado.
 - Metas SEO/social basicos en todas las paginas HTML.
 - Canonicals relativos por pagina, preparados para reemplazo por dominio final si se define.
-- `robots.txt`, `sitemap.xml`, `favicon.svg` y `site.webmanifest`.
+- `robots.txt`, `sitemap.xml`, favicon PNG y `site.webmanifest`.
 - Ajuste del OG image del data pack para apuntar al asset existente.
 - Documentacion de reglas de renderizado, estados de UI y checklist de publicacion.
 
 ## Rebuild V2
 
-- `REBUILD_V2_PLAN.md` documenta auditoria, diagnostico y plan de reconstruccion.
 - Home reconstruida con narrativa comercial: hero fuerte, categorias, sistema, catalogo destacado, respaldo, sorteos/adjudicados, preguntas frecuentes, recursos y contacto.
 - `/planes/` reconstruida como catalogo navegable por categorias.
-- Nuevo data model `data_pack_v2/plan_catalog.json`.
+- Nuevo data model `data/plan_catalog.json`.
 - Contacto actualizado para recibir opciones de catalogo.
 - Copy global reducido en disclaimers repetidos y ajustado a tono comercial sobrio.
 - Paginas internas alineadas con la nueva arquitectura y CTAs.
@@ -190,13 +194,13 @@ Texto base para datos incompletos: `Informacion en actualizacion`.
 - Endpoint real del formulario.
 - Rojo institucional definitivo.
 - Links de gestiones pendientes.
-- Datos reales de sorteos y adjudicados.
+- Verificar periodicamente que los endpoints de Artemis sigan disponibles y con la misma estructura.
 - Assets finales de imagenes.
 
 ## Checklist antes de publicar
 
 - Confirmar dominio final y actualizar `robots.txt`, `sitemap.xml` y, si corresponde, canonicals.
-- Confirmar datos comerciales de `data_pack_v2/agency-contact.json`.
+- Confirmar datos comerciales de `data/agency-contact.json`.
 - Confirmar textos legales con responsable comercial o asesor correspondiente.
 - Validar datos pendientes del data pack y reemplazar `mock` / `pending_validation` donde aplique.
 - Correr el sitio con servidor estatico y revisar todas las rutas principales.

@@ -9,7 +9,7 @@ import {
   loadFaq,
   loadPlanCatalog,
   loadPlans,
-} from "../data/api.js?v=artemis-live-data-v1";
+} from "../data/api.js";
 import {
   categoryHref,
   createButton,

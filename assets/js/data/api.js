@@ -1,6 +1,6 @@
 import { isBlank } from "../utils/validators.js";
 
-export const DATA_ROOT = "/data_pack_v2";
+export const DATA_ROOT = "/data";
 
 export const DATASETS = Object.freeze({
   site: "site.json",
@@ -12,7 +12,6 @@ export const DATASETS = Object.freeze({
   socialReviews: "social-reviews.json",
   recruitment: "recruitment.json",
   videos: "videos.json",
-  homeSections: "home-sections.json",
   agencyContact: "agency-contact.json",
 });
 
@@ -92,7 +91,6 @@ export const loadHomeAdjudications = () => loadOfficialHomeAdjudications();
 export const loadSocialReviews = () => loadDataset("socialReviews");
 export const loadRecruitment = () => loadDataset("recruitment");
 export const loadVideos = () => loadDataset("videos");
-export const loadHomeSections = () => loadDataset("homeSections");
 export const loadAgencyContact = () => loadDataset("agencyContact");
 
 function artemisIssuesUrl(query, options = {}) {
@@ -248,23 +246,19 @@ async function loadOfficialHomeAdjudications() {
   }
 }
 
-export async function loadAllForHome() {
-  const [site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, socialReviews, recruitment, homeSections, videos] = await Promise.all([
+export async function loadHomeData() {
+  const [site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, videos] = await Promise.all([
     loadSite(),
-    loadPlans(),
     loadPlanCatalog(),
-    loadFaq(),
     loadResources(),
     loadDraws(),
-    loadAdjudications(),
     loadHomeAdjudications(),
     loadSocialReviews(),
     loadRecruitment(),
-    loadHomeSections(),
     loadVideos(),
   ]);
 
-  return { site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, socialReviews, recruitment, homeSections, videos };
+  return { site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, videos };
 }
 
 export function getPlanBySlug(plansData, slug) {

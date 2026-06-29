@@ -1,4 +1,4 @@
-import { normalizeInternalTarget } from "../data/api.js?v=artemis-live-data-v1";
+import { normalizeInternalTarget } from "../data/api.js";
 import { el } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
 import { isPendingStatus, isValidUrl } from "../utils/validators.js";

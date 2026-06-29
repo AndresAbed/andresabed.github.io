@@ -66,7 +66,8 @@ This project must **not** feel like a generic SaaS landing page or a quick templ
 - No Next.js
 - No SPA requirement
 - No backend required for V1
-- Data source is local JSON under `data_pack_v2/`
+- Editable site content is local JSON under `data/`
+- Live operational data for Home draws and featured adjudications comes from the official Artemis endpoints
 
 ### Current product scope
 The current site is **not** a full online enrollment flow.
@@ -83,7 +84,9 @@ A future backend or enrollment/payment flow may be added later, but current impl
 
 ## 5. Source of truth
 
-`data_pack_v2/` is the editable source of truth for site content and operational data.
+`data/` is the editable source of truth for local site content, catalog content, contact configuration, resources, FAQ, recruitment copy and non-live editorial data.
+
+Home draw results and featured adjudications are loaded from the official Artemis API. Do not recreate local JSON or image copies for those datasets unless a deliberate fallback strategy is added.
 
 Do not create shadow copies of the same business data in multiple places.
 
@@ -91,12 +94,11 @@ If a page needs:
 - plan information
 - FAQ
 - resources
-- draws
-- adjudications
+- non-live adjudication/reference data
 - contact configuration
 - site-wide brand or legal copy
 
-use the corresponding JSON from `data_pack_v2/`.
+use the corresponding JSON from `data/`. If a page needs live draw/adjudication data already covered by Artemis, use the data layer instead of reintroducing duplicated local files.
 
 ---
 

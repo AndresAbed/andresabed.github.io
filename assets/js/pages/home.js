@@ -5,7 +5,7 @@ import {
   getResourcesByGroup,
   loadAllForHome,
   normalizeInternalTarget,
-} from "../data/api.js";
+} from "../data/api.js?v=artemis-live-data-v1";
 import { classifyLinkItem } from "../data/validators.js";
 import { categoryHref, createButton, createMiniFact } from "../components/plan-components.js";
 import { clear, el, qs } from "../utils/dom.js";

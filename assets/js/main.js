@@ -1,10 +1,10 @@
-import { loadSite } from "./data/api.js";
-import { renderShell } from "./components/shell.js?v=social-reviews-v29";
-import { initContactPage } from "./pages/contact.js";
-import { initHomePage } from "./pages/home.js?v=recruitment-v36";
-import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js";
-import { initPlanDetail, initPlansHub } from "./pages/plans.js";
-import { initBasePage } from "./pages/base.js";
+import { loadSite } from "./data/api.js?v=artemis-live-data-v1";
+import { renderShell } from "./components/shell.js?v=artemis-live-data-v1";
+import { initContactPage } from "./pages/contact.js?v=artemis-live-data-v1";
+import { initHomePage } from "./pages/home.js?v=artemis-live-data-v1";
+import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js?v=artemis-live-data-v1";
+import { initPlanDetail, initPlansHub } from "./pages/plans.js?v=artemis-live-data-v1";
+import { initBasePage } from "./pages/base.js?v=artemis-live-data-v1";
 
 function finishAppLoading() {
   window.requestAnimationFrame(() => {

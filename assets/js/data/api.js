@@ -8,9 +8,7 @@ export const DATASETS = Object.freeze({
   planCatalog: "plan_catalog.json",
   faq: "faq.json",
   resources: "resources.json",
-  draws: "draws.json",
   adjudications: "adjudications.json",
-  homeAdjudications: "home-adjudications.json",
   socialReviews: "social-reviews.json",
   recruitment: "recruitment.json",
   videos: "videos.json",
@@ -19,6 +17,49 @@ export const DATASETS = Object.freeze({
 });
 
 const cache = new Map();
+
+const ARTEMIS_BASE_URL = "https://artemis.clubsanjorge.com.ar";
+const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_BASE_URL}/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/issue`;
+const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
+
+const EMPTY_DRAWS = Object.freeze({
+  meta: {
+    source: "artemis_api",
+    status: "pending_validation",
+  },
+  schedule: {
+    officialRule: "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires / LOTBA, en la última jugada del último sábado de cada mes, salvo excepciones aprobadas.",
+    status: "verified",
+  },
+  lastDraw: {
+    date: "",
+    status: "pending_validation",
+    source: "artemis_api",
+  },
+  nextDraw: {
+    date: "",
+    status: "pending_validation",
+    source: "artemis_api",
+  },
+  stimuli: [],
+});
+
+const EMPTY_HOME_ADJUDICATIONS = Object.freeze({
+  meta: {
+    source: "artemis_api",
+    status: "pending_validation",
+  },
+  section: {
+    eyebrow: "Adjudicados",
+    title: "Conocé a nuestros adjudicados",
+    intro: "Historias reales de suscriptores que ya recibieron su premio.",
+    cta: {
+      label: "Ver más adjudicados",
+      href: "/adjudicados/",
+    },
+  },
+  items: [],
+});
 
 export async function fetchJson(path) {
   if (cache.has(path)) return cache.get(path);
@@ -45,14 +86,167 @@ export const loadPlans = () => loadDataset("plans");
 export const loadPlanCatalog = () => loadDataset("planCatalog");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
-export const loadDraws = () => loadDataset("draws");
+export const loadDraws = () => loadOfficialDraws();
 export const loadAdjudications = () => loadDataset("adjudications");
-export const loadHomeAdjudications = () => loadDataset("homeAdjudications");
+export const loadHomeAdjudications = () => loadOfficialHomeAdjudications();
 export const loadSocialReviews = () => loadDataset("socialReviews");
 export const loadRecruitment = () => loadDataset("recruitment");
 export const loadVideos = () => loadDataset("videos");
 export const loadHomeSections = () => loadDataset("homeSections");
 export const loadAgencyContact = () => loadDataset("agencyContact");
+
+function artemisIssuesUrl(query, options = {}) {
+  const url = new URL(ARTEMIS_MEDIA_ISSUE_URL);
+  url.searchParams.set("q", JSON.stringify(query));
+  url.searchParams.set("h", JSON.stringify(options));
+  return url.toString();
+}
+
+async function fetchArtemisIssues(query, options) {
+  return fetchJson(artemisIssuesUrl(query, options));
+}
+
+function normalizeArtemisText(value) {
+  const text = String(value || "").trim();
+  if (!/[ÃÂ]/.test(text)) return text;
+
+  try {
+    const bytes = Uint8Array.from([...text].map((character) => character.charCodeAt(0) & 0xff));
+    return new TextDecoder("utf-8").decode(bytes).trim();
+  } catch {
+    return text;
+  }
+}
+
+function slugify(value) {
+  return normalizeArtemisText(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function dateFromArtemisSegment(value) {
+  return normalizeArtemisText(value).split(";")[0]?.trim() || "";
+}
+
+function parseDrawsFromArtemis(payload, fallback) {
+  const issueDescr = payload?.[0]?.issue_descr || [];
+  const numbers = normalizeArtemisText(issueDescr[0])
+    .split(";")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const lastDate = dateFromArtemisSegment(issueDescr[1]);
+  const nextDate = dateFromArtemisSegment(issueDescr[2]);
+
+  if (!numbers.length && !lastDate && !nextDate) return fallback;
+
+  return {
+    ...fallback,
+    meta: {
+      ...(fallback?.meta || {}),
+      source: "artemis_api",
+      status: "verified",
+    },
+    lastDraw: {
+      ...(fallback?.lastDraw || {}),
+      date: lastDate ? `${lastDate} LOTBA` : fallback?.lastDraw?.date,
+      status: "verified",
+      source: "artemis_api",
+    },
+    nextDraw: {
+      ...(fallback?.nextDraw || {}),
+      date: nextDate || fallback?.nextDraw?.date,
+      status: "verified",
+      source: "artemis_api",
+    },
+    stimuli: numbers.map((winningNumber, index) => ({
+      position: index + 1,
+      label: `${index + 1}° Estímulo`,
+      winningNumber,
+      status: "verified",
+      source: "artemis_api",
+    })),
+  };
+}
+
+function installmentFromArtemisDetail(value) {
+  const rawInstallment = normalizeArtemisText(value).split(";")[0]?.trim() || "";
+  const numericInstallment = Number(rawInstallment);
+  return Number.isFinite(numericInstallment) && rawInstallment ? String(numericInstallment) : rawInstallment;
+}
+
+function drawDateFromArtemisDetail(value) {
+  return normalizeArtemisText(value).split(";")[1]?.trim() || "";
+}
+
+function parseHomeAdjudicationsFromArtemis(payload, fallback) {
+  const items = (Array.isArray(payload) ? payload : [])
+    .map((entry, index) => {
+      const issueDescr = entry?.issue_descr || [];
+      const name = normalizeArtemisText(issueDescr[0]);
+      const residence = normalizeArtemisText(issueDescr[2]);
+      const detail = normalizeArtemisText(issueDescr[3]);
+      const prize = normalizeArtemisText(issueDescr[4]);
+      const imageNumber = normalizeArtemisText(issueDescr[5]);
+      const installment = installmentFromArtemisDetail(detail);
+      const drawDate = drawDateFromArtemisDetail(detail);
+
+      if (!name || !installment || !drawDate || !prize || !imageNumber) return null;
+
+      return {
+        id: slugify(`${name}-${imageNumber}`) || `adjudicado-${index + 1}`,
+        name,
+        installment,
+        drawDate,
+        prize,
+        residence,
+        imageUrl: `${ARTEMIS_WINNER_IMAGE_BASE}/${imageNumber}.webp`,
+        imageAlt: `${name} en una entrega de adjudicación de Club San Jorge`,
+        source: "artemis_api",
+      };
+    })
+    .filter(Boolean);
+
+  if (!items.length) return fallback;
+
+  return {
+    ...fallback,
+    meta: {
+      ...(fallback?.meta || {}),
+      source: "artemis_api",
+      status: "verified",
+    },
+    items,
+  };
+}
+
+async function loadOfficialDraws() {
+  try {
+    const payload = await fetchArtemisIssues(
+      { related_project: "SORTEO", issue_summary: "ULTIMO" },
+      { columns: ["issue_descr"] },
+    );
+    return parseDrawsFromArtemis(payload, EMPTY_DRAWS);
+  } catch (error) {
+    console.warn("No se pudo cargar el sorteo desde Artemis.", error);
+    return EMPTY_DRAWS;
+  }
+}
+
+async function loadOfficialHomeAdjudications() {
+  try {
+    const payload = await fetchArtemisIssues(
+      { assigned_to: 6, status: "CLOSED", related_project: "ADJUDI" },
+      { columns: ["issue_descr"], offset: 0, limit: 8 },
+    );
+    return parseHomeAdjudicationsFromArtemis(payload, EMPTY_HOME_ADJUDICATIONS);
+  } catch (error) {
+    console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
+    return EMPTY_HOME_ADJUDICATIONS;
+  }
+}
 
 export async function loadAllForHome() {
   const [site, plans, planCatalog, faq, resources, draws, adjudications, homeAdjudications, socialReviews, recruitment, homeSections, videos] = await Promise.all([

@@ -503,10 +503,9 @@
   grid-template-columns: minmax(255px, 0.4fr) minmax(0, 0.6fr);
   grid-template-rows: auto;
   min-height: 0;
-  margin-block: clamp(12px, 2.4vw, 30px);
   overflow: visible;
   z-index: 2;
-  width: 100%;
+  width: 95%;
 }
 
 .plan-list-card--autos {
@@ -522,9 +521,9 @@
 }
 
 .plan-list-card--dinero {
-  --card-accent: #9a6a1d;
-  --card-accent-soft: rgb(154 106 29 / 0.12);
-  --category-accent: #9a6a1d;
+  --card-accent: #6f4bb3;
+  --card-accent-soft: rgb(111 75 179 / 0.12);
+  --category-accent: #6f4bb3;
 }
 
 .plan-list-card::before {
@@ -547,6 +546,7 @@
   align-items: center;
   background-color: #f2f2ed;
   border-bottom: 0;
+  box-sizing: border-box;
   display: flex;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   min-height: var(--plan-card-media-height);
@@ -558,6 +558,8 @@
 }
 
 .plan-list-card:not(.plan-list-card--featured) .plan-list-card__media {
+  height: var(--plan-card-media-height);
+  min-height: 0;
   z-index: 2;
 }
 
@@ -613,16 +615,17 @@
   transform: scale(2) translateX(4%);
 }
 
+.plan-list-card--dinero .plan-list-card__media img,
+.plan-list-card--dinero:not(.plan-list-card--featured):hover .plan-list-card__media img {
+  max-height: clamp(136px, 12vw, 158px);
+  transform: scale(1.12) translateY(1%);
+  width: min(80%, 310px);
+}
+
 .plan-list-card--featured .plan-list-card__media::before,
 .plan-list-card--featured .plan-list-card__media::after {
-  display: block;
-  height: 100%;
-  opacity: 0;
-  top: 0;
-  transform: none;
-  transition: opacity 180ms ease, clip-path 560ms cubic-bezier(0.18, 0.9, 0.2, 1);
-  width: 60%;
-  z-index: 1;
+  content: none;
+  display: none;
 }
 
 .plan-list-card--featured .plan-list-card__media::before {
@@ -637,15 +640,11 @@
 }
 
 .plan-list-card--featured:hover .plan-list-card__media::before {
-  clip-path: polygon(0 0, 86% 0, 100% 100%, 0 100%);
-  opacity: 1;
-  transform: none;
+  content: none;
 }
 
 .plan-list-card--featured:hover .plan-list-card__media::after {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 14% 100%);
-  opacity: 1;
-  transform: none;
+  content: none;
 }
 
 .plan-list-card__media img {
@@ -686,6 +685,11 @@
   max-height: clamp(225px, 23vw, 340px);
   transform: scale(2.4) translateX(3%);
   transform-origin: center;
+}
+
+.plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
+.plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+  transform: scale(2.46) translateX(3%);
 }
 
 .plan-list-card__tag {
@@ -798,8 +802,8 @@
 }
 
 .plan-list-card--featured .plan-list-card__ribbon {
-  right: 20px;
-  top: -20px;
+  right: 0;
+  top: clamp(-20px, 1.8vw, -20px);
   transform: none;
   transform-origin: left center;
 }
@@ -826,12 +830,12 @@
 
 .plan-list-card--featured .plan-list-card__body {
   align-content: stretch;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
   grid-column: 1;
   grid-row: 1;
   min-height: 0;
-  padding: clamp(24px, 2.5vw, 32px);
+  padding: 0;
 }
 
 .plan-list-card__info {
@@ -861,8 +865,8 @@
 }
 
 .plan-list-card--featured .plan-list-card__info {
-  gap: clamp(14px, 1.35vw, 20px);
-  grid-template-rows: minmax(3.9rem, auto) auto auto minmax(40px, auto);
+  gap: clamp(12px, 1.2vw, 16px);
+  grid-template-rows: auto auto auto 1fr;
 }
 
 .plan-list-card__identity {
@@ -877,6 +881,10 @@
   border-bottom: 1px solid rgb(41 41 41 / 0.08);
   order: 0;
   padding-block-end: clamp(0.56rem, 0.8vw, 0.72rem);
+}
+
+.plan-list-card--featured .plan-list-card__identity {
+  padding-inline: clamp(18px, 2.2vw, 28px);
 }
 
 .plan-list-card__meta {
@@ -913,12 +921,12 @@
 .plan-list-card h3 {
   align-content: start;
   display: grid;
-  font-size: clamp(1.64rem, 2.08vw, 2.34rem);
+  font-size: clamp(1.34rem, 1.58vw, 1.86rem);
   font-weight: 450;
   letter-spacing: 0;
-  line-height: 1.06;
+  line-height: 1.08;
   margin: 0;
-  min-height: clamp(2.85rem, 4.2vw, 4.35rem);
+  min-height: clamp(2.5rem, 3.25vw, 3.45rem);
   order: 0;
 }
 
@@ -927,8 +935,14 @@
 }
 
 .plan-list-card--featured h3 {
-  font-size: clamp(1.72rem, 2.12vw, 2.42rem);
-  min-height: clamp(3.9rem, 4.8vw, 5.2rem);
+  background: var(--color-brand-green);
+  border-radius: var(--radius-lg) 0 0 0;
+  color: #ffffff;
+  font-size: clamp(1.32rem, 1.78vw, 1.92rem);
+  font-weight: 400;
+  line-height: 1.12;
+  min-height: 0;
+  padding: clamp(20px, 2.35vw, 29px) clamp(22px, 2.65vw, 32px);
 }
 
 .plan-list-card__price {
@@ -1093,22 +1107,58 @@
 }
 
 .plan-list-card--featured .plan-list-card__price {
-  align-items: center;
-  flex-direction: row;
-  gap: clamp(0.8rem, 1.4vw, 1.2rem);
+  align-items: stretch;
+  background: var(--color-brand-red);
+  border: 0;
+  border-radius: 0 18px 18px 0;
+  color: #ffffff;
+  display: grid;
+  gap: clamp(0.68rem, 0.9vw, 0.9rem);
+  grid-template-columns: 1fr;
   min-width: 0;
-  padding: clamp(18px, 1.75vw, 23px);
+  margin-inline-end: clamp(14px, 2vw, 26px);
+  padding: clamp(17px, 1.9vw, 25px) clamp(20px, 2.45vw, 30px) clamp(14px, 1.7vw, 21px);
+  transition: none;
+}
+
+.plan-list-card--featured:hover .plan-list-card__price {
+  background: var(--color-brand-red);
+}
+
+.plan-list-card--featured .plan-list-card__price-label,
+.plan-list-card--featured .plan-list-card__nominal span,
+.plan-list-card--featured .plan-list-card__price strong,
+.plan-list-card--featured .plan-list-card__nominal b {
+  color: #ffffff;
 }
 
 .plan-list-card--featured .plan-list-card__price strong {
-  font-size: clamp(1.55rem, 2vw, 2.12rem);
+  font-size: clamp(2.08rem, 2.86vw, 3.12rem);
+  font-weight: 600;
 }
 
 .plan-list-card--featured .plan-list-card__nominal {
-  align-items: flex-end;
-  gap: 0.42rem;
-  justify-items: end;
-  min-width: 104px;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgb(255 255 255 / 0.24);
+  border-radius: 0;
+  display: flex;
+  gap: 0.58rem;
+  justify-content: space-between;
+  justify-items: initial;
+  min-width: 0;
+  padding: clamp(0.62rem, 0.76vw, 0.78rem) 0 0;
+}
+
+.plan-list-card--featured .plan-list-card__nominal span {
+  color: rgb(255 255 255 / 0.76);
+  font-size: clamp(0.55rem, 0.64vw, 0.66rem);
+}
+
+.plan-list-card--featured .plan-list-card__nominal b {
+  font-size: clamp(0.82rem, 0.92vw, 1rem);
+  font-weight: 520;
 }
 
 .plan-detail-card__metrics {
@@ -1210,6 +1260,14 @@
   transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
+.plan-list-card--featured .plan-list-card__action {
+  align-self: end;
+  justify-self: stretch;
+  margin: auto clamp(18px, 2.2vw, 28px) clamp(16px, 1.9vw, 22px);
+  min-height: 40px;
+  width: auto;
+}
+
 .plan-list-card__action::before {
   content: none;
 }
@@ -1224,14 +1282,14 @@
 }
 
 .plan-list-card__action:hover {
-  background: #0f1413;
+  background: #171d1c;
   color: #ffffff;
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .plan-list-card__action:hover::after {
-  color: var(--color-brand-green);
-  transform: translate(3px, -1px);
+  color: currentColor;
+  transform: translateY(-1px);
 }
 
 .plan-detail-drawer {
@@ -1556,12 +1614,20 @@ body.plan-drawer-open {
   }
 
   .plan-list-card--featured .plan-list-card__ribbon {
-    left: calc(40% + clamp(16px, 2vw, 24px));
+    left: calc(40% + clamp(16px, 2.2vw, 26px));
+    right: auto;
   }
 
   .plan-list-card__media img {
     max-height: clamp(136px, 17vw, 168px);
     width: min(70%, 280px);
+  }
+
+  .plan-list-card--dinero .plan-list-card__media img,
+  .plan-list-card--dinero:not(.plan-list-card--featured):hover .plan-list-card__media img {
+    max-height: clamp(138px, 14vw, 158px);
+    transform: scale(1.1) translateY(1%);
+    width: min(80%, 310px);
   }
 
   .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
@@ -1570,10 +1636,30 @@ body.plan-drawer-open {
     transform: scale(1.44) translateX(1%);
   }
 
+  .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
+  .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+    transform: scale(1.48) translateX(1%);
+  }
+
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
     transform: scale(1.62) translateX(2%);
   }
 
+  .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+    transform: scale(1.66) translateX(2%);
+  }
+
+}
+
+@media (hover: none) and (max-width: 1120px) {
+  .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
+  .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+    transform: scale(1.44) translateX(1%);
+  }
+
+  .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+    transform: scale(1.62) translateX(2%);
+  }
 }
 
 @media (max-width: 760px) {
@@ -1692,23 +1778,32 @@ body.plan-drawer-open {
     border-bottom: 1px solid rgb(41 41 41 / 0.06);
     border-left: 0;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    min-height: 250px;
+    min-height: 275px;
     overflow: visible;
   }
 
   .plan-list-card--featured .plan-list-card__media img {
-    max-height: 150px;
-    transform: scale(1.58) translateX(4%);
-    width: min(70%, 250px);
+    max-height: 170px;
+    transform: scale(1.68) translateX(4%);
+    width: min(78%, 320px);
   }
 
   .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.72) translateX(4%);
+    transform: scale(1.82) translateX(4%);
+  }
+
+  .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
+  .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+    transform: scale(1.82) translateX(4%);
   }
 
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.82) translateX(4%);
+    transform: scale(1.92) translateX(4%);
+  }
+
+  .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+    transform: scale(1.92) translateX(4%);
   }
 
   .plan-list-card--featured h3 {
@@ -1718,18 +1813,48 @@ body.plan-drawer-open {
   .plan-list-card--featured .plan-list-card__body {
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     min-height: 0;
+    padding: 0;
+  }
+
+  .plan-list-card--featured h3 {
+    border-radius: 0;
+    padding: clamp(22px, 6vw, 30px) var(--space-4);
+  }
+
+  .plan-list-card--featured .plan-list-card__price {
+    border-radius: 0;
+    margin-inline-end: 0;
     padding: var(--space-4);
   }
 
+  .plan-list-card--featured .plan-list-card__identity {
+    padding-inline: var(--space-4);
+  }
+
+  .plan-list-card--featured .plan-list-card__action {
+    margin: auto var(--space-4) var(--space-4);
+  }
+
   .plan-list-card__media {
-    min-height: 235px;
-    padding-block-start: 62px;
+    min-height: 270px;
+    padding-block-start: 58px;
   }
 
   .plan-list-card__media img {
-    max-height: 138px;
-    transform: scale(1.58) translateX(4%);
-    width: min(70%, 240px);
+    max-height: 184px;
+    transform: scale(1.82) translateX(4%);
+    width: min(84%, 360px);
+  }
+
+  .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
+    transform: scale(1.82) translateX(4%);
+  }
+
+  .plan-list-card--dinero .plan-list-card__media img,
+  .plan-list-card--dinero:not(.plan-list-card--featured):hover .plan-list-card__media img {
+    max-height: 162px;
+    transform: scale(1.08) translateY(1%);
+    width: min(86%, 330px);
   }
 
   .plan-list-card__body {
@@ -1766,19 +1891,23 @@ body.plan-drawer-open {
   }
 
   .plan-list-card--featured .plan-list-card__ribbon {
-    left: clamp(14px, 1.6vw, 20px);
-    top: clamp(12px, 1.3vw, 16px);
+    left: clamp(14px, 4vw, 22px);
+    max-width: calc(100% - 32px);
+    min-width: clamp(168px, 52vw, 210px);
+    right: auto;
+    top: -18px;
     transform: none;
+    width: auto;
   }
 
   .plan-list-card__ribbon strong {
-    font-size: 2.08rem;
-    min-width: 58px;
+    font-size: clamp(1.86rem, 8vw, 2.1rem);
+    min-width: 56px;
   }
 
   .plan-list-card__ribbon span {
-    font-size: 0.9rem;
-    max-width: 104px;
+    font-size: clamp(0.78rem, 3.7vw, 0.9rem);
+    max-width: 102px;
   }
 
   .plan-detail-card {

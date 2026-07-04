@@ -12,11 +12,28 @@ const ANGLES = Object.freeze([
   { id: "rear", label: "Trasera", file: "rear.webp", position: "rear" },
 ]);
 
+const MONEY_IMAGE = Object.freeze({
+  id: "money",
+  label: "Plan de dinero",
+  file: "plan-dinero-billetes.webp",
+  position: "money",
+  src: "/assets/img/plans/plan-dinero-billetes.webp",
+});
+
 function folderFor(article) {
   return PLAN_IMAGE_FOLDERS[article] || DEFAULT_FOLDER;
 }
 
 export function getPlanMedia(plan) {
+  if (plan?.category === "dinero") {
+    return {
+      folder: "",
+      defaultAngle: MONEY_IMAGE.id,
+      defaultImage: MONEY_IMAGE,
+      images: [MONEY_IMAGE],
+    };
+  }
+
   const folder = folderFor(plan?.article);
   const basePath = `/assets/img/plans/${folder}`;
   const images = ANGLES.map((angle) => ({

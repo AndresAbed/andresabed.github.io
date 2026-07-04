@@ -26,6 +26,15 @@
     "method": "POST",
     "status": "pending_validation"
   },
+  "planInquiryForm": {
+    "enabled": true,
+    "mode": "endpoint",
+    "provider": "formspree",
+    "endpoint": "https://formspree.io/f/meebgdzo",
+    "method": "POST",
+    "source": "catalogo_planes",
+    "status": "temporary_shared_endpoint"
+  },
   "messages": {
     "success": "Recibimos tu consulta. Un asesor va a revisar la informacion antes de avanzar.",
     "unavailable": "La consulta quedo preparada, pero el envio automatico todavia esta en configuracion.",

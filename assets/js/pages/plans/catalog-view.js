@@ -141,10 +141,51 @@ function createFilters() {
   });
 }
 
-function createMetric(label, value, tone = "") {
+function chanceTooltipText(chances) {
+  const count = Number(chances);
+  if (!Number.isFinite(count) || count <= 1) return "";
+
+  const endPosition = count === 3 ? "tercer" : count === 5 ? "quinto" : `${count}°`;
+  return `Con tu mismo número tenés ${count} oportunidades distintas de ganar: desde el premio mayor de tu plan en el primer puesto, hasta importantes sumas de dinero en efectivo del segundo al ${endPosition} puesto.`;
+}
+
+function createMetric(label, value, tone = "", tooltipText = "") {
+  const tooltipId = tooltipText
+    ? `plan-metric-tooltip-${label.toLowerCase().replaceAll(" ", "-")}-${Math.random().toString(36).slice(2)}`
+    : "";
+
   return el("div", {
     className: tone ? `plan-metric plan-metric--${tone}` : "plan-metric",
-    children: [el("span", { text: label }), el("strong", { text: value })],
+    children: [
+      el("div", {
+        className: "plan-metric__heading",
+        children: [
+          el("span", { className: "plan-metric__label", text: label }),
+          tooltipText
+            ? el("span", {
+                className: "plan-metric__tooltip-wrap",
+                children: [
+                  el("button", {
+                    className: "plan-metric__tooltip-trigger",
+                    text: "i",
+                    attrs: {
+                      type: "button",
+                      "aria-label": `Qué significa ${label.toLowerCase()}`,
+                      "aria-describedby": tooltipId,
+                    },
+                  }),
+                  el("span", {
+                    className: "plan-metric__tooltip",
+                    text: tooltipText,
+                    attrs: { id: tooltipId, role: "tooltip" },
+                  }),
+                ],
+              })
+            : null,
+        ].filter(Boolean),
+      }),
+      el("strong", { text: value }),
+    ],
   });
 }
 
@@ -379,7 +420,7 @@ function createDetail(plan, contactConfig) {
                 children: [
                   createMetric("Cuota mensual", moneyOrConfirm(plan.monthlyFee), "primary"),
                   createMetric("Valor nominal", moneyOrConfirm(plan.nominalValue)),
-                  createMetric("Chances de premio", chanceLabel(plan.prizeChances)),
+                  createMetric("Chances de premio", chanceLabel(plan.prizeChances), "", chanceTooltipText(plan.prizeChances)),
                   createMetric("Código", String(plan.article || "-")),
                 ],
               }),
@@ -516,6 +557,10 @@ function initFiltering(root) {
 function initDetail(root, items, contactConfig) {
   const drawer = qs("[data-plan-detail-drawer]", root);
   if (!drawer) return;
+
+  if (drawer.parentElement !== document.body) {
+    document.body.appendChild(drawer);
+  }
 
   function openPlan(article, { pushUrl = true } = {}) {
     const plan = items.find((item) => String(item.article) === String(article));

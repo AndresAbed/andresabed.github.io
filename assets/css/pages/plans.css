@@ -483,6 +483,7 @@
   box-shadow: 0 12px 30px rgb(41 41 41 / 0.07);
   display: grid;
   grid-template-rows: auto auto 1fr;
+  height: 100%;
   isolation: isolate;
   min-width: 0;
   overflow: hidden;
@@ -492,20 +493,22 @@
 }
 
 .plan-list-card:hover {
-  border-color: rgb(190 0 47 / 0.28);
+  border-color: rgb(41 41 41 / 0.12);
   box-shadow: 0 18px 44px rgb(41 41 41 / 0.11);
   transform: translateY(-3px);
   z-index: 6;
 }
 
 .plan-list-card--featured {
+  align-self: stretch;
   grid-column: span 2;
   grid-template-columns: minmax(255px, 0.4fr) minmax(0, 0.6fr);
   grid-template-rows: auto;
   min-height: 0;
   overflow: visible;
   z-index: 2;
-  width: 95%;
+  justify-self: start;
+  width: calc(100% - clamp(18px, 2.2vw, 30px));
 }
 
 .plan-list-card--autos {
@@ -528,10 +531,10 @@
 
 .plan-list-card::before {
   background: linear-gradient(90deg, var(--color-brand-red) 0%, var(--color-brand-red) 42%, var(--color-brand-green) 100%);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  clip-path: inset(0 round var(--radius-lg) var(--radius-lg) 0 0);
+  border-radius: var(--radius-lg);
+  clip-path: inset(0 0 calc(100% - 3px) 0 round var(--radius-lg));
   content: "";
-  height: 3px;
+  height: 100%;
   inset: 0 0 auto;
   position: absolute;
   pointer-events: none;
@@ -539,7 +542,7 @@
 }
 
 .plan-list-card--featured::before {
-  display: none;
+  display: block;
 }
 
 .plan-list-card__media {
@@ -834,8 +837,9 @@
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
   grid-column: 1;
   grid-row: 1;
-  min-height: 0;
-  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  padding: clamp(20px, 2.4vw, 30px);
 }
 
 .plan-list-card__info {
@@ -860,12 +864,12 @@
   background: transparent;
   border: 0;
   border-radius: 0;
-  min-height: 0;
+  min-height: 100%;
   padding: 0;
 }
 
 .plan-list-card--featured .plan-list-card__info {
-  gap: clamp(12px, 1.2vw, 16px);
+  gap: clamp(12px, 1.28vw, 18px);
   grid-template-rows: auto auto auto 1fr;
 }
 
@@ -884,7 +888,10 @@
 }
 
 .plan-list-card--featured .plan-list-card__identity {
-  padding-inline: clamp(18px, 2.2vw, 28px);
+  border-bottom: 1px solid rgb(41 41 41 / 0.08);
+  order: 1;
+  padding-block-end: clamp(0.56rem, 0.8vw, 0.72rem);
+  padding-inline: 0;
 }
 
 .plan-list-card__meta {
@@ -935,14 +942,15 @@
 }
 
 .plan-list-card--featured h3 {
-  background: var(--color-brand-green);
-  border-radius: var(--radius-lg) 0 0 0;
-  color: #ffffff;
-  font-size: clamp(1.32rem, 1.78vw, 1.92rem);
-  font-weight: 400;
-  line-height: 1.12;
-  min-height: 0;
-  padding: clamp(20px, 2.35vw, 29px) clamp(22px, 2.65vw, 32px);
+  background: transparent;
+  border-radius: 0;
+  color: var(--color-ink);
+  font-size: clamp(1.48rem, 1.9vw, 2.12rem);
+  font-weight: 450;
+  line-height: 1.08;
+  min-height: clamp(3.1rem, 4vw, 4.3rem);
+  order: 2;
+  padding: 0;
 }
 
 .plan-list-card__price {
@@ -1108,21 +1116,22 @@
 
 .plan-list-card--featured .plan-list-card__price {
   align-items: stretch;
-  background: var(--color-brand-red);
+  background: transparent;
   border: 0;
-  border-radius: 0 18px 18px 0;
+  border-radius: 18px;
   color: #ffffff;
   display: grid;
-  gap: clamp(0.68rem, 0.9vw, 0.9rem);
+  gap: 0;
   grid-template-columns: 1fr;
   min-width: 0;
-  margin-inline-end: clamp(14px, 2vw, 26px);
-  padding: clamp(17px, 1.9vw, 25px) clamp(20px, 2.45vw, 30px) clamp(14px, 1.7vw, 21px);
+  margin: 0;
+  order: 0;
+  padding: 0;
   transition: none;
 }
 
 .plan-list-card--featured:hover .plan-list-card__price {
-  background: var(--color-brand-red);
+  background: transparent;
 }
 
 .plan-list-card--featured .plan-list-card__price-label,
@@ -1133,22 +1142,26 @@
 }
 
 .plan-list-card--featured .plan-list-card__price strong {
-  font-size: clamp(2.08rem, 2.86vw, 3.12rem);
+  font-size: clamp(1.92rem, 2.58vw, 2.86rem);
   font-weight: 600;
+}
+
+.plan-list-card--featured .plan-list-card__price .plan-list-card__price-main {
+  background: var(--color-brand-red);
+  padding: clamp(17px, 1.9vw, 24px) clamp(18px, 2.25vw, 28px) clamp(13px, 1.6vw, 19px);
 }
 
 .plan-list-card--featured .plan-list-card__nominal {
   align-items: center;
-  background: transparent;
+  background: var(--color-brand-green);
   border: 0;
-  border-top: 1px solid rgb(255 255 255 / 0.24);
   border-radius: 0;
   display: flex;
   gap: 0.58rem;
   justify-content: space-between;
   justify-items: initial;
   min-width: 0;
-  padding: clamp(0.62rem, 0.76vw, 0.78rem) 0 0;
+  padding: clamp(0.76rem, 0.88vw, 0.92rem) clamp(18px, 2.25vw, 28px);
 }
 
 .plan-list-card--featured .plan-list-card__nominal span {
@@ -1263,7 +1276,7 @@
 .plan-list-card--featured .plan-list-card__action {
   align-self: end;
   justify-self: stretch;
-  margin: auto clamp(18px, 2.2vw, 28px) clamp(16px, 1.9vw, 22px);
+  margin: auto 0 0;
   min-height: 40px;
   width: auto;
 }
@@ -1611,11 +1624,13 @@ body.plan-drawer-open {
   .plan-list-card--featured {
     grid-column: span 2;
     grid-template-columns: minmax(230px, 0.4fr) minmax(0, 0.6fr);
+    justify-self: stretch;
+    width: 100%;
   }
 
   .plan-list-card--featured .plan-list-card__ribbon {
-    left: calc(40% + clamp(16px, 2.2vw, 26px));
-    right: auto;
+    left: auto;
+    right: 0;
   }
 
   .plan-list-card__media img {
@@ -1807,32 +1822,32 @@ body.plan-drawer-open {
   }
 
   .plan-list-card--featured h3 {
-    font-size: clamp(1.3rem, 8vw, 1.7rem);
+    font-size: clamp(1.36rem, 7vw, 1.75rem);
   }
 
   .plan-list-card--featured .plan-list-card__body {
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     min-height: 0;
-    padding: 0;
+    padding: var(--space-4);
   }
 
   .plan-list-card--featured h3 {
     border-radius: 0;
-    padding: clamp(22px, 6vw, 30px) var(--space-4);
+    padding: 0;
   }
 
   .plan-list-card--featured .plan-list-card__price {
-    border-radius: 0;
+    border-radius: 16px;
     margin-inline-end: 0;
-    padding: var(--space-4);
+    padding: 0;
   }
 
   .plan-list-card--featured .plan-list-card__identity {
-    padding-inline: var(--space-4);
+    padding-inline: 0;
   }
 
   .plan-list-card--featured .plan-list-card__action {
-    margin: auto var(--space-4) var(--space-4);
+    margin: auto 0 0;
   }
 
   .plan-list-card__media {
@@ -1891,10 +1906,10 @@ body.plan-drawer-open {
   }
 
   .plan-list-card--featured .plan-list-card__ribbon {
-    left: clamp(14px, 4vw, 22px);
+    left: auto;
     max-width: calc(100% - 32px);
     min-width: clamp(168px, 52vw, 210px);
-    right: auto;
+    right: 0;
     top: -18px;
     transform: none;
     width: auto;

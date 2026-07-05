@@ -344,7 +344,6 @@ function createRecruitmentForm(config, resultSlot) {
             text: "Enviar postulación",
             attrs: { type: "submit", "data-recruitment-state": "idle" },
           }),
-          el("button", { className: "button button--secondary", text: "Limpiar datos", attrs: { type: "reset" } }),
         ],
       }),
     ],

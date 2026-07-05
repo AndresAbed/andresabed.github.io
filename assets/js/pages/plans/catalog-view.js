@@ -427,19 +427,7 @@ function createDetail(plan, contactConfig) {
               el("section", {
                 className: "plan-detail-card__form",
                 attrs: { "aria-labelledby": `plan-form-title-${plan.article}` },
-                children: [
-                  el("div", {
-                    className: "plan-detail-card__form-head",
-                    children: [
-                      el("h3", { text: "Dejá tus datos", attrs: { id: `plan-form-title-${plan.article}` } }),
-                      el("p", {
-                        text:
-                          "Completá el formulario y un asesor comercial te contactará para revisar el plan elegido, valores vigentes y próximos pasos.",
-                      }),
-                    ],
-                  }),
-                  createPlanInquiryForm(plan, contactConfig),
-                ],
+                children: [createPlanInquiryForm(plan, contactConfig)],
               }),
             ],
           }),

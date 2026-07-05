@@ -167,7 +167,7 @@
 .plans-catalog-clear {
   background: #ffffff;
   border: 1px solid rgb(41 41 41 / 0.08);
-  border-radius: 10px;
+  border-radius: var(--button-shape);
   color: rgb(82 66 66 / 0.82);
   cursor: pointer;
   font-size: 0.82rem;
@@ -255,7 +255,7 @@
   align-items: center;
   background: #ffffff;
   border: 1px solid rgb(41 41 41 / 0.09);
-  border-radius: 12px;
+  border-radius: var(--button-shape);
   color: var(--color-ink);
   cursor: pointer;
   display: flex;
@@ -1272,7 +1272,7 @@
   align-items: center;
   background: #171d1c;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--button-shape);
   box-shadow: none;
   color: #ffffff;
   display: inline-flex;
@@ -1408,7 +1408,7 @@ body.plan-drawer-open {
 .plan-detail-card__close {
   background: #151a17;
   border: 1px solid rgb(255 255 255 / 0.14);
-  border-radius: 0 12px 0 12px;
+  border-radius: var(--button-shape);
   color: #ffffff;
   cursor: pointer;
   font-size: 0.84rem;
@@ -1516,6 +1516,7 @@ body.plan-drawer-open {
   display: grid;
   gap: clamp(10px, 1.3vw, 14px);
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: visible;
 }
 
 .plan-detail-card__metrics .plan-metric {
@@ -1550,6 +1551,7 @@ body.plan-drawer-open {
 .plan-metric__tooltip-wrap {
   display: inline-flex;
   position: relative;
+  z-index: 3;
 }
 
 .plan-metric__tooltip-trigger {
@@ -1600,7 +1602,12 @@ body.plan-drawer-open {
     visibility 160ms ease;
   visibility: hidden;
   width: max-content;
-  z-index: 30;
+  z-index: 60;
+}
+
+.plan-detail-card__metrics .plan-metric:nth-child(3) {
+  overflow: visible;
+  z-index: 8;
 }
 
 .plan-metric__tooltip-wrap:hover .plan-metric__tooltip,
@@ -1748,7 +1755,7 @@ body.plan-drawer-open {
 .plan-inquiry-form textarea {
   background: #ffffff;
   border-color: rgb(41 41 41 / 0.18);
-  border-radius: 0 10px 0 10px;
+  border-radius: var(--radius-sm);
   min-height: 44px;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
@@ -1787,9 +1794,15 @@ body.plan-drawer-open {
 }
 
 .plan-inquiry-form__seller-toggle input {
+  accent-color: var(--color-brand-green);
+  appearance: auto;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   flex: 0 0 auto;
   height: 18px;
   min-height: 18px;
+  padding: 0;
   width: 18px;
 }
 
@@ -1813,19 +1826,23 @@ body.plan-drawer-open {
 
 .plan-inquiry-form__consent {
   align-items: start;
-  background: #fbfbf8;
-  border: 1px solid rgb(41 41 41 / 0.1);
-  border-radius: 0 12px 0 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   column-gap: 0.75rem;
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr);
   letter-spacing: 0;
-  padding: 0.95rem 1rem;
+  padding: 0;
   text-transform: none;
 }
 
 .plan-inquiry-form__consent input {
   accent-color: var(--color-brand-green);
+  appearance: auto;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   grid-column: 1;
   height: 18px;
   margin: 0.1rem 0 0;
@@ -1839,6 +1856,7 @@ body.plan-drawer-open {
   font-size: 0.82rem;
   font-weight: 560;
   line-height: 1.35;
+  text-transform: none;
 }
 
 .plan-inquiry-form__consent .field-error {
@@ -1854,7 +1872,7 @@ body.plan-drawer-open {
 .plan-inquiry-form .button {
   background: #151a17;
   border-color: #151a17;
-  border-radius: 0 12px 0 12px;
+  border-radius: var(--button-shape);
   justify-self: end;
   min-width: min(100%, 240px);
 }
@@ -2022,7 +2040,7 @@ body.plan-drawer-open {
 
   .plan-detail-card__metrics {
     gap: 10px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .plan-detail-card__metrics .plan-metric {
@@ -2038,7 +2056,6 @@ body.plan-drawer-open {
 
   .plan-detail-card__metrics .plan-metric:nth-child(3) {
     display: grid;
-    grid-column: auto;
     min-height: 0;
     overflow: visible;
   }
@@ -2061,23 +2078,23 @@ body.plan-drawer-open {
   }
 
   .plan-metric__tooltip-wrap {
-    position: relative;
+    position: static;
   }
 
   .plan-metric__tooltip {
     bottom: auto;
-    left: 16px;
+    left: 0.9rem;
     max-width: none;
-    position: fixed;
-    right: 16px;
-    top: 50%;
-    transform: translateY(calc(-50% + 6px));
+    position: absolute;
+    right: 0.9rem;
+    top: calc(100% - 0.5rem);
+    transform: translateY(6px);
     width: auto;
   }
 
   .plan-metric__tooltip-wrap:hover .plan-metric__tooltip,
   .plan-metric__tooltip-wrap:focus-within .plan-metric__tooltip {
-    transform: translateY(-50%);
+    transform: translateY(0);
   }
 
   .plans-catalog-filters__meta {

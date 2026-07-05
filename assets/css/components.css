@@ -1,7 +1,7 @@
 .button {
   align-items: center;
   border: 1px solid transparent;
-  border-radius: var(--radius-md);
+  border-radius: var(--button-shape);
   cursor: pointer;
   display: inline-flex;
   font-weight: 600;

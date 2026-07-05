@@ -6,7 +6,7 @@ import { formatMoneyARS } from "../../components/plan-components.js";
 const CATEGORY_FILTERS = Object.freeze([
   { value: "all", label: "Todos", detail: "Todas las opciones" },
   { value: "autos", label: "Autos", detail: "0 km y utilitarios" },
-  { value: "motos", label: "Motos", detail: "Planes con moto" },
+  { value: "motos", label: "Motos", detail: "Planes de motos" },
   { value: "dinero", label: "Dinero", detail: "Órdenes de compra" },
 ]);
 
@@ -89,7 +89,7 @@ function createFilters() {
                     attrs: {
                       id: "plans-catalog-search",
                       type: "search",
-                      placeholder: "Buscar por modelo, código o categoría...",
+                      placeholder: "Buscar modelo, código o categoría",
                       "data-plan-search": "",
                     },
                   }),

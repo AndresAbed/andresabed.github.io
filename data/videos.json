@@ -8,7 +8,6 @@
       "title": "Club San Jorge Capitalización y Ahorro",
       "description": "Video institucional para presentar el sistema de Capitalización y Ahorro.",
       "youtubeUrl": "https://www.youtube.com/embed/l6HmMRVueT4",
-      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
       "status": "verified"
     },
     {
@@ -16,7 +15,6 @@
       "title": "Cómo funciona Club San Jorge",
       "description": "Video explicativo sobre el funcionamiento del sistema y los planes.",
       "youtubeUrl": "https://www.youtube.com/embed/6OqVYPsZ190",
-      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
       "status": "verified"
     },
     {
@@ -24,7 +22,6 @@
       "title": "Conocé los planes de Capitalización y Ahorro",
       "description": "Video general de presentación de los planes.",
       "youtubeUrl": "https://www.youtube.com/embed/JAKg9W9lOKQ",
-      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
       "status": "verified"
     },
     {
@@ -32,7 +29,6 @@
       "title": "Historias y experiencias",
       "description": "Material audiovisual oficial para reforzar contexto antes de consultar.",
       "youtubeUrl": "https://www.youtube.com/embed/dab1gMqQmPU",
-      "thumbnail": "/assets/img/placeholders/video-thumb.svg",
       "status": "verified"
     }
   ]

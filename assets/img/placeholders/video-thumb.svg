@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
-  <title id="title">Placeholder de video</title>
-  <desc id="desc">Miniatura generica para videos pendientes de URL validada.</desc>
-  <rect width="800" height="450" fill="#18212f"/>
-  <circle cx="400" cy="225" r="70" fill="#ffffff" opacity=".92"/>
-  <path d="M380 185v80l70-40z" fill="#b4232a"/>
-  <rect x="72" y="342" width="360" height="20" rx="10" fill="#ffffff" opacity=".5"/>
-  <rect x="72" y="378" width="240" height="16" rx="8" fill="#ffffff" opacity=".3"/>
-</svg>

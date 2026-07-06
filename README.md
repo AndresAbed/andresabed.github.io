@@ -1,20 +1,20 @@
 # Club San Jorge | Agencias Abed
 
-Base estatica para construir el sitio comercial e informativo de una agencia mercantil de Club San Jorge.
+Sitio estatico comercial e informativo para una agencia mercantil de Club San Jorge.
+
+El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizacion y Ahorro, explorar el catalogo de opciones y contactar a la agencia para una consulta asistida. No es un checkout, una app transaccional ni una inscripcion online final.
 
 ## Estructura
 
-- `index.html`: Home V1 real comercial e informativa.
-- `planes/`: catalogo V2 por categorias Autos, Motos y Dinero, mas paginas detalle heredadas.
-- `sorteos/`, `adjudicados/`, `recursos/`, `preguntas-frecuentes/`, `contacto/`: paginas internas base.
+- `index.html`: Home comercial/informativa.
+- `planes/`: catalogo por categorias y paginas detalle heredadas.
+- `sorteos/`, `adjudicados/`, `recursos/`, `preguntas-frecuentes/`, `contacto/`: paginas internas.
 - `assets/css/`: tokens, base, layout, componentes, utilities y estilos de pagina.
-- `assets/css/pages/`: estilos segmentados para Home y paginas internas/catalogo.
-- `assets/js/`: shell, data layer, helpers de estado, componentes y scripts de pagina.
-- `assets/js/pages/home/`: modulos de la Home separados por bloque.
-- `assets/img/placeholders/`: placeholders visuales temporales.
-- `data/`: source-of-truth editable de contenido local. No se duplica ni se migra.
-- `data/plan_catalog.json`: source principal V2 para renderizar catalogo comercial.
-- `data/agency-contact.json`: configuracion operativa de contacto/pre-solicitud de la agencia.
+- `assets/js/`: data layer, shell, componentes, helpers y modulos por pagina.
+- `assets/js/pages/plans/`: logica del catalogo, separada en assets, filtros, tarjetas, detalle, formularios y normalizacion.
+- `assets/img/`: logos, imagenes de planes, favicon, OG image y recursos visuales.
+- `data/`: contenido editable local del sitio.
+- `scripts/`: utilidades de mantenimiento del catalogo.
 
 ## Como correr localmente
 
@@ -38,169 +38,91 @@ Si el puerto `8000` esta ocupado, usar otro puerto:
 python3 -m http.server 8010
 ```
 
-## Data layer
+## Data
 
-El data layer esta en `assets/js/data/api.js` y consume directamente contenido local desde:
+La carpeta `data/` es el source-of-truth editable para contenido local. El sitio la consume desde `assets/js/data/api.js` con `fetch("/data/*.json")`.
 
-```text
-/data/*.json
-```
+Archivos principales:
 
-Incluye funciones como:
+- `site.json`: datos globales del sitio, marca, CTAs, SEO y textos legales.
+- `agency-contact.json`: canales de contacto y configuracion de formularios.
+- `plan_catalog.json`: catalogo principal usado por `/planes/`.
+- `plans.json`: contenido heredado de paginas detalle por categoria.
+- `faq.json`: preguntas frecuentes.
+- `resources.json`: enlaces y recursos oficiales.
+- `videos.json`: videos institucionales/explicativos.
+- `social-reviews.json`: pruebas sociales y testimonios.
+- `recruitment.json`: bloque y formulario de productores.
+- `adjudications.json`: fallback local para la pagina de adjudicados.
 
-- `loadSite()`
-- `loadPlans()`
-- `loadPlanCatalog()`
-- `loadFaq()`
-- `loadResources()`
-- `loadDraws()`
-- `loadAdjudications()`
-- `loadVideos()`
-- `loadAgencyContact()`
-- `loadHomeData()`
+Los resultados de sorteos y adjudicados destacados de la Home se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
 
-La Home tambien consume datos oficiales vivos desde Artemis para resultados de sorteos y adjudicados destacados.
+## Estados de datos
 
-Los helpers de estado estan en `assets/js/utils/status.js` y contemplan:
+El proyecto usa estados para distinguir informacion final de informacion pendiente:
 
-- `ready`
-- `partial`
-- `empty`
-- `disabled`
+- `verified`: dato validado o suficientemente confiable.
+- `pending_validation`: dato plausible, pendiente de confirmar antes de publicar como definitivo.
+- `mock`: dato de estructura o ejemplo para vistas todavia no terminadas.
+- `partial_mock`: mezcla de estructura real con datos de ejemplo.
+- `temporary_shared_endpoint`: endpoint operativo pero provisorio.
 
-### Source of truth
+Estos estados no son errores por si mismos. Sirven para que el sitio pueda avanzar sin presentar datos provisorios como definitivos.
 
-`data/` es el source-of-truth editable del proyecto para contenido local, catalogo, FAQ, recursos, contacto, recruitment y textos comerciales. La V2 no duplica ni migra JSON a otra carpeta: las paginas consumen directamente los archivos publicados en esa carpeta.
+## Formularios
 
-Excepcion actual: sorteos y adjudicados destacados de la Home se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
+`data/agency-contact.json` contiene tres bloques distintos:
 
-### Separacion conceptual
+- `form`: formulario general de `/contacto/`. Hoy esta en modo `placeholder` porque no hay WhatsApp, email comercial ni endpoint final definidos.
+- `planInquiryForm`: formulario de consulta dentro del detalle de un plan. Hoy envia a Formspree con un endpoint provisorio.
+- `planEnrollmentForm`: formulario de inscripcion final. Esta apagado porque el sitio no incluye inscripcion online en esta etapa.
 
-El sitio mantiene dos capas conceptuales:
+La pre-solicitud o consulta asistida no implica contratacion ni inscripcion final.
 
-- Capa oficial / sistema Club San Jorge: planes, preguntas frecuentes del sistema, recursos oficiales, datos institucionales del data pack y datos vivos de sorteos/adjudicados cuando provienen de Artemis.
-- Capa agencia / comercial-operativa: hero comercial, CTAs, contacto, pre-solicitud asistida, formulario, copy de confianza y explicacion del acompanamiento de Agencias Abed.
+## Catalogo
 
-La separacion esta reflejada en componentes, copy, catalogo y datos de contacto. No requiere crear otra app ni duplicar contenido.
+`/planes/` usa `data/plan_catalog.json` y los modulos de `assets/js/pages/plans/`.
 
-### Catalogo V2
-
-La Home y `/planes/` consumen `data/plan_catalog.json`.
-
-`plans.json` queda como compatibilidad para paginas detalle heredadas y para contenido explicativo historico, pero ya no es la arquitectura principal de planes.
-
-El catalogo V2 agrupa por:
+El catalogo agrupa opciones por:
 
 - `autos`
 - `motos`
 - `dinero`
 
-Cada item soporta `displayName`, `category`, `brand`, `model`, `planLabel`, `months`, `valorNominal`, `cuota`, `status`, `featured`, `notes`, `faqRefs`, `contactPreset` y `sourceStatus`.
-
-Si faltan valores nominales, cuota exacta, marca o modelo, el dato se muestra como `A confirmar` y no se completa con informacion inventada.
+Las imagenes de detalle se resuelven por codigo de articulo y carpetas de `assets/img/plans/`. Cuando una carpeta tiene `metadata.json`, se usa para asociar logo/marca y configuracion visual del producto.
 
 ## Reglas de renderizado
 
 - Valores `""`, `null` o no definidos se tratan como informacion no disponible.
-- Items con `status: pending_validation` pueden mostrarse si ayudan a orientar, pero deben llevar texto de actualizacion o aclaracion.
-- Items con `status: mock` no se presentan como informacion definitiva. Se muestran solo como estructura, ejemplo o estado pendiente.
-- Secciones parcialmente completas se muestran cuando hay suficiente contexto util. Subbloques incompletos se ocultan o reemplazan por fallback.
-- Sorteos sin fecha o numeros, adjudicados con meses faltantes, recursos sin link, videos sin URL y planes con campos incompletos usan estados parciales.
-- CTAs sin destino configurado se muestran deshabilitados o se redirigen al flujo asistido cuando existe una alternativa segura.
-- Las acciones comerciales no prometen contratacion final: la pre-solicitud es orientativa y requiere validacion posterior.
+- Si falta un dato importante, se muestra `A confirmar` o un estado parcial, no se inventa contenido.
+- Items `mock` o `partial_mock` no deben presentarse como informacion definitiva.
+- CTAs sin destino real se deshabilitan, se marcan como canal en configuracion o se redirigen a una alternativa segura.
+- Las acciones comerciales deben mantener claro que la consulta es asistida y requiere validacion posterior.
 
-## Estados de UI
+## Pendientes antes de publicar
 
-- `ready`: datos suficientes para mostrar el bloque y habilitar acciones.
-- `partial`: se muestra el bloque con fallback, aviso o subbloques ocultos.
-- `empty`: se muestra un estado vacio cuando la seccion es importante para la navegacion o se oculta si no aporta valor.
-- `disabled`: se renderiza la accion sin ejecucion, con `aria-disabled` y texto de canal en configuracion.
+- Definir dominio final y actualizar `robots.txt`, `sitemap.xml` y, si corresponde, canonicals.
+- Definir WhatsApp comercial real.
+- Confirmar endpoint final o politica de recepcion de leads.
+- Revisar textos legales con responsable comercial o asesor correspondiente.
+- Validar datos marcados como `mock`, `partial_mock` o `pending_validation` que correspondan a vistas publicables.
+- Revisar compatibilidad de la imagen OG si se necesita un PNG/JPG final para redes.
+- Correr el sitio con servidor estatico y revisar rutas principales.
 
-Texto base para datos incompletos: `Informacion en actualizacion`.
+## Checks utiles
 
-## Hecho en Etapa 1
+Verificar whitespace del diff:
 
-- Estructura de carpetas estatica.
-- Rutas base navegables.
-- Header, navegacion y footer renderizados desde `site.json`.
-- CSS base con tokens, layout y componentes iniciales.
-- Data layer JS para consumir `data/` sin duplicar datos.
-- Helpers para valores vacios, estados, URLs y fallbacks.
-- Home tecnica minima con snapshots de capa oficial y capa agencia.
-- Placeholders visuales para planes, videos y OG.
+```bash
+git diff --check
+```
 
-## Hecho en Etapa 2
+Verificar sintaxis de modulos JS como ESM:
 
-- Home V1 real con hero comercial, confianza, planes destacados, como funciona, sorteos, adjudicados, preguntas frecuentes, recursos y CTA final.
-- Secciones conectadas a `data/`.
-- Fallbacks para sorteos incompletos, adjudicados mock, links faltantes y canales de contacto pendientes.
-- Separacion visible entre informacion oficial del sistema y contenido operativo de agencia.
-
-## Hecho en Etapa 3
-
-- Hub inicial de planes en `/planes/`.
-- Comparador simple tipo opcion B con datos de `plans.json` como antecedente V1.
-- Paginas de detalle heredadas para auto, moto y dinero.
-- Componentes reutilizables de planes en `assets/js/components/plan-components.js`.
-- Fallbacks para campos pendientes o incompletos en moto y dinero.
-
-## Hecho en Etapa 4
-
-- Pagina real de sorteos con resumen, estados parciales y aclaraciones.
-- Pagina de adjudicados con selector año/mes, tabla preparada y proteccion contra datos mock.
-- Pagina de recursos agrupados, con links verificados y estados pendientes.
-- Preguntas frecuentes agrupadas por categoria con preguntas sensibles priorizadas.
-- Componentes reutilizables de paginas informativas en `assets/js/components/info-components.js`.
-
-## Hecho en Etapa 5
-
-- Pagina real de contacto / pre-solicitud asistida.
-- Formulario V1 con validacion frontend, estados y armado de payload.
-- Configuracion operativa separada en `data/agency-contact.json`.
-- Arquitectura preparada para endpoint, mailto o modo placeholder.
-- CTAs del sitio orientados a `/contacto/` con intencion y plan cuando aplica.
-
-## Hecho en Etapa 6
-
-- Hardening de navegacion, CTAs y footer legal.
-- Skip link global para navegacion por teclado.
-- Metas SEO/social basicos en todas las paginas HTML.
-- Canonicals relativos por pagina, preparados para reemplazo por dominio final si se define.
-- `robots.txt`, `sitemap.xml`, favicon PNG y `site.webmanifest`.
-- Ajuste del OG image del data pack para apuntar al asset existente.
-- Documentacion de reglas de renderizado, estados de UI y checklist de publicacion.
-
-## Rebuild V2
-
-- Home reconstruida con narrativa comercial: hero fuerte, categorias, sistema, catalogo destacado, respaldo, sorteos/adjudicados, preguntas frecuentes, recursos y contacto.
-- `/planes/` reconstruida como catalogo navegable por categorias.
-- Nuevo data model `data/plan_catalog.json`.
-- Contacto actualizado para recibir opciones de catalogo.
-- Copy global reducido en disclaimers repetidos y ajustado a tono comercial sobrio.
-- Paginas internas alineadas con la nueva arquitectura y CTAs.
-
-## Corresponde a una futura integracion
-
-- Configurar WhatsApp real, email comercial o endpoint.
-- Reemplazar modo placeholder por POST real.
-- Definir politica de almacenamiento y tratamiento de leads.
-- Reemplazar `https://example.com` en `sitemap.xml` y `robots.txt` por el dominio final.
-- Definir si los canonicals pasan a URL absoluta con dominio productivo.
-- Reemplazar imagen OG SVG por PNG/JPG final si se necesita compatibilidad maxima en redes sociales.
-
-## Pendientes de validacion
-
-- WhatsApp y canales de contacto.
-- Endpoint real del formulario.
-- Rojo institucional definitivo.
-- Links de gestiones pendientes.
-- Verificar periodicamente que los endpoints de Artemis sigan disponibles y con la misma estructura.
-- Assets finales de imagenes.
-
-## Checklist antes de publicar
-
-- Confirmar dominio final y actualizar `robots.txt`, `sitemap.xml` y, si corresponde, canonicals.
-- Confirmar datos comerciales de `data/agency-contact.json`.
-- Confirmar textos legales con responsable comercial o asesor correspondiente.
-- Validar datos pendientes del data pack y reemplazar `mock` / `pending_validation` donde aplique.
-- Correr el sitio con servidor estatico y revisar todas las rutas principales.
+```bash
+mkdir -p /tmp/club-sj-js-check
+for file in $(find assets/js scripts -name '*.js' -o -name '*.mjs'); do
+  cp "$file" /tmp/club-sj-js-check/check.mjs
+  node --check /tmp/club-sj-js-check/check.mjs || exit 1
+done
+```

@@ -237,6 +237,42 @@ function createCardMeta(plan) {
   });
 }
 
+function createCardHeading(plan, media) {
+  const productName = detailProductName(plan, media.brand);
+
+  return el("div", {
+    className: "plan-list-card__heading",
+    children: [el("h3", { text: productName })],
+  });
+}
+
+function createCardBrandMark(media) {
+  if (!media.brand) return null;
+
+  return el("span", {
+    className: "plan-list-card__brand-mark",
+    attrs: media.brand
+      ? {
+          role: "img",
+          "aria-label": media.brand.logoAlt,
+          "data-brand-key": brandKey(media.brand),
+          style: `--brand-logo: url("${media.brand.logo}"); --brand-logo-ratio: ${media.brand.logoRatio || 5}`,
+        }
+      : {},
+    children: [el("span", { className: "plan-list-card__brand-shape", attrs: { "aria-hidden": "true" } })],
+  });
+}
+
+function createChanceRibbon(chanceCount) {
+  return el("span", {
+    className: "plan-list-card__ribbon",
+    children: [
+      el("strong", { text: String(chanceCount) }),
+      el("span", { text: chanceCount === 1 ? "chance de ganar" : "chances de ganar" }),
+    ],
+  });
+}
+
 function createPlanCard(plan) {
   const media = getPlanMedia(plan);
   const chanceCount = Number(plan.prizeChances);
@@ -253,8 +289,9 @@ function createPlanCard(plan) {
     },
     children: [
       el("div", {
-        className: "plan-list-card__media",
+        className: media.brand ? "plan-list-card__media has-brand" : "plan-list-card__media",
         children: [
+          createCardBrandMark(media),
           el("img", {
             attrs: {
               src: media.defaultImage.src,
@@ -265,22 +302,14 @@ function createPlanCard(plan) {
         ],
       }),
       !hasFeaturedChances ? createCardPrice(plan) : null,
-      hasFeaturedChances
-        ? el("span", {
-            className: "plan-list-card__ribbon",
-            children: [
-              el("strong", { text: String(chanceCount) }),
-              el("span", { text: chanceCount === 1 ? "chance de ganar" : "chances de ganar" }),
-            ],
-          })
-        : null,
+      hasFeaturedChances ? createChanceRibbon(chanceCount) : null,
       el("div", {
         className: "plan-list-card__body",
         children: [
           el("div", {
             className: "plan-list-card__info",
             children: [
-              el("h3", { text: plan.displayName }),
+              createCardHeading(plan, media),
               hasFeaturedChances ? createCardPrice(plan) : null,
               el("div", {
                 className: "plan-list-card__identity",
@@ -417,7 +446,13 @@ function createDetail(plan, contactConfig) {
 
   return el("article", {
     className: "plan-detail-card",
-    attrs: { "data-plan-detail-card": "", tabindex: "-1", "aria-labelledby": `plan-detail-title-${plan.article}` },
+    attrs: {
+      "data-plan-detail-card": "",
+      "data-plan-article": plan.article,
+      "data-image-folder": media.folder,
+      tabindex: "-1",
+      "aria-labelledby": `plan-detail-title-${plan.article}`,
+    },
     children: [
       el("div", {
         className: "plan-detail-card__top",
@@ -466,11 +501,13 @@ function createDetail(plan, contactConfig) {
             children: [
               el("div", {
                 className: "plan-detail-card__image",
+                attrs: { "data-image-position": media.defaultImage.position, "data-image-folder": media.folder },
                 children: [
                   el("img", {
                     attrs: {
                       src: media.defaultImage.src,
                       alt: plan.displayName,
+                      "data-angle-position": media.defaultImage.position,
                       "data-plan-angle-image": "",
                     },
                   }),
@@ -539,6 +576,7 @@ function initAngleSelector(detail) {
     if (index !== currentIndex) {
       image.src = button.dataset.angleSrc;
       image.alt = button.dataset.angleLabel || image.alt;
+      image.dataset.anglePosition = button.dataset.anglePosition || "";
       buttons.forEach((item) => {
         item.classList.toggle("is-active", item === button);
         item.setAttribute("aria-pressed", item === button ? "true" : "false");

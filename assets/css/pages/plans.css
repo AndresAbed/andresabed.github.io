@@ -493,8 +493,8 @@
    media owns product presence and hover; body owns comparison.
    Keep the info order stable: name, values, metadata, CTA. */
 .plan-list-card {
-  --plan-card-media-height: clamp(198px, 16vw, 238px);
-  --plan-card-media-pad-y: calc(clamp(44px, 3.5vw, 56px) + clamp(24px, 2.2vw, 32px));
+  --plan-card-media-height: clamp(222px, 17.6vw, 262px);
+  --plan-card-media-pad-y: calc(clamp(72px, 5vw, 86px) + clamp(24px, 2.2vw, 32px));
   --plan-card-hover-fill-height: calc(var(--plan-card-media-height) + var(--plan-card-media-pad-y));
   --plan-card-price-height: 72px;
   background: #ffffff;
@@ -563,6 +563,7 @@
 
 .plan-list-card--featured::before {
   display: block;
+  z-index: 10;
 }
 
 .plan-list-card__media {
@@ -580,10 +581,52 @@
   transition: background-color 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.plan-list-card__brand-mark {
+  --brand-mark-height: clamp(30px, 2.1vw, 38px);
+  --brand-mark-max-width: 166px;
+  --brand-mark-min-width: 80px;
+  --brand-mark-pad-x: 8px;
+  --brand-mark-pad-y: 5px;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e3e1da;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: var(--color-brand-red);
+  display: inline-flex;
+  height: var(--brand-mark-height);
+  justify-content: flex-start;
+  left: clamp(12px, 1.25vw, 18px);
+  max-width: calc(100% - clamp(32px, 3.2vw, 44px));
+  padding: var(--brand-mark-pad-y) var(--brand-mark-pad-x);
+  pointer-events: none;
+  position: absolute;
+  top: clamp(10px, 1.15vw, 16px);
+  width: clamp(
+    var(--brand-mark-min-width),
+    calc((var(--brand-mark-height) - (var(--brand-mark-pad-y) * 2)) * var(--brand-logo-ratio, 5) + (var(--brand-mark-pad-x) * 2)),
+    var(--brand-mark-max-width)
+  );
+  z-index: 7;
+}
+
+.plan-list-card__brand-shape {
+  background: currentColor;
+  display: block;
+  height: 100%;
+  mask: var(--brand-logo) left center / contain no-repeat;
+  -webkit-mask: var(--brand-logo) left center / contain no-repeat;
+  width: 100%;
+}
+
 .plan-list-card:not(.plan-list-card--featured) .plan-list-card__media {
   height: var(--plan-card-media-height);
   min-height: 0;
   z-index: 2;
+}
+
+.plan-list-card__media.has-brand {
+  padding-block-start: clamp(72px, 5vw, 86px);
 }
 
 .plan-list-card__media::before,
@@ -636,6 +679,11 @@
 
 .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
   transform: scale(2) translateX(4%);
+}
+
+.plan-list-card:not(.plan-list-card--featured) .plan-list-card__media.has-brand img,
+.plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media.has-brand img {
+  transform: scale(2) translate(4%, 3%);
 }
 
 .plan-list-card--dinero .plan-list-card__media img,
@@ -698,6 +746,17 @@
   position: relative;
 }
 
+.plan-list-card--featured .plan-list-card__brand-mark {
+  --brand-mark-height: clamp(42px, 3vw, 54px);
+  --brand-mark-max-width: 230px;
+  --brand-mark-min-width: 108px;
+  --brand-mark-pad-x: 12px;
+  --brand-mark-pad-y: 8px;
+  left: auto;
+  right: clamp(18px, 2vw, 28px);
+  top: clamp(18px, 2vw, 28px);
+}
+
 .plan-list-card--featured .plan-list-card__media img {
   max-height: clamp(210px, 22vw, 326px);
   width: min(76%, 420px);
@@ -706,13 +765,13 @@
 .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
 .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
   max-height: clamp(225px, 23vw, 340px);
-  transform: scale(2.4) translateX(3%);
+  transform: scale(2.4) translate(3%, 3%);
   transform-origin: center;
 }
 
 .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
 .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-  transform: scale(2.46) translateX(3%);
+  transform: scale(2.46) translate(3%, 3%);
 }
 
 .plan-list-card__tag {
@@ -825,10 +884,17 @@
 }
 
 .plan-list-card--featured .plan-list-card__ribbon {
-  right: 0;
-  top: clamp(-20px, 1.8vw, -20px);
-  transform: none;
+  align-self: start;
+  left: 20%;
+  justify-self: start;
+  margin: 0;
+  order: 0;
+  position: absolute;
+  right: auto;
+  top: -25px;
+  transform: translateX(-50%);
   transform-origin: left center;
+  z-index: 12;
 }
 
 .plan-list-card--featured .plan-list-card__ribbon strong {
@@ -860,6 +926,7 @@
   height: 100%;
   min-height: 100%;
   padding: clamp(20px, 2.4vw, 30px);
+  z-index: 9;
 }
 
 .plan-list-card__info {
@@ -885,11 +952,11 @@
   border: 0;
   border-radius: 0;
   min-height: 100%;
-  padding: 0;
+  padding-block-start: clamp(38px, 4.4vw, 48px);
 }
 
 .plan-list-card--featured .plan-list-card__info {
-  gap: clamp(12px, 1.28vw, 18px);
+  gap: clamp(13px, 1.35vw, 18px);
   grid-template-rows: auto auto auto 1fr;
 }
 
@@ -909,9 +976,25 @@
 
 .plan-list-card--featured .plan-list-card__identity {
   border-bottom: 1px solid rgb(41 41 41 / 0.08);
-  order: 1;
+  order: 2;
   padding-block-end: clamp(0.56rem, 0.8vw, 0.72rem);
   padding-inline: 0;
+}
+
+.plan-list-card__heading {
+  align-content: start;
+  display: grid;
+  min-height: clamp(2.5rem, 3.25vw, 3.45rem);
+  order: 0;
+}
+
+.plan-list-card:not(.plan-list-card--featured) .plan-list-card__heading {
+  order: 1;
+}
+
+.plan-list-card--featured .plan-list-card__heading {
+  min-height: clamp(3.1rem, 4vw, 4.3rem);
+  order: 3;
 }
 
 .plan-list-card__meta {
@@ -953,12 +1036,12 @@
   letter-spacing: 0;
   line-height: 1.08;
   margin: 0;
-  min-height: clamp(2.5rem, 3.25vw, 3.45rem);
+  min-height: 0;
   order: 0;
 }
 
 .plan-list-card:not(.plan-list-card--featured) h3 {
-  order: 1;
+  order: 0;
 }
 
 .plan-list-card--featured h3 {
@@ -968,8 +1051,8 @@
   font-size: clamp(1.48rem, 1.9vw, 2.12rem);
   font-weight: 450;
   line-height: 1.08;
-  min-height: clamp(3.1rem, 4vw, 4.3rem);
-  order: 2;
+  min-height: 0;
+  order: 0;
   padding: 0;
 }
 
@@ -1138,14 +1221,15 @@
   align-items: stretch;
   background: transparent;
   border: 0;
-  border-radius: 18px;
+  border-radius: clamp(22px, 2.2vw, 30px);
   color: #ffffff;
   display: grid;
   gap: 0;
   grid-template-columns: 1fr;
   min-width: 0;
   margin: 0;
-  order: 0;
+  order: 1;
+  overflow: hidden;
   padding: 0;
   transition: none;
 }
@@ -1295,9 +1379,11 @@
 
 .plan-list-card--featured .plan-list-card__action {
   align-self: end;
+  grid-row: auto;
   justify-self: stretch;
   margin: auto 0 0;
   min-height: 40px;
+  order: 4;
   width: auto;
 }
 
@@ -1306,12 +1392,7 @@
 }
 
 .plan-list-card__action::after {
-  color: currentColor;
-  content: "→";
-  font-size: 1.25em;
-  font-weight: 400;
-  transform: translateY(-1px);
-  transition: transform 160ms ease;
+  content: none;
 }
 
 .plan-list-card__action:hover {
@@ -1321,8 +1402,7 @@
 }
 
 .plan-list-card__action:hover::after {
-  color: currentColor;
-  transform: translateY(-1px);
+  content: none;
 }
 
 .plan-detail-drawer {
@@ -1404,13 +1484,16 @@ body.plan-drawer-open {
 
 .plan-detail-card__title-copy {
   align-content: center;
-  border-inline-start: 1px solid rgb(41 41 41 / 0.14);
   display: grid;
   justify-items: end;
   min-width: 0;
-  padding-inline-start: clamp(1rem, 2vw, 1.55rem);
   row-gap: 0.16rem;
   text-align: end;
+}
+
+.plan-detail-card__title-panel.has-brand .plan-detail-card__title-copy {
+  border-inline-start: 1px solid rgb(41 41 41 / 0.14);
+  padding-inline-start: clamp(1rem, 2vw, 1.55rem);
 }
 
 .plan-detail-card__top h2 {
@@ -1472,6 +1555,12 @@ body.plan-drawer-open {
   z-index: 1;
 }
 
+.plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__visual {
+  grid-template-rows: minmax(380px, 1fr) auto;
+  min-height: clamp(530px, 55vw, 690px);
+  padding-block-start: clamp(118px, 9vw, 150px);
+}
+
 .plan-detail-card__brand-panel {
   align-items: center;
   color: #be002f;
@@ -1508,11 +1597,22 @@ body.plan-drawer-open {
   padding: clamp(8px, 1.5vw, 18px);
 }
 
+.plan-detail-card__image[data-image-position="money"] {
+  align-items: flex-start;
+  min-height: clamp(430px, 43vw, 560px);
+  padding-block-start: clamp(88px, 8vw, 128px);
+}
+
 .plan-detail-card__image img {
   filter: drop-shadow(0 22px 18px rgb(41 41 41 / 0.12));
   max-height: clamp(360px, 43vw, 560px);
   object-fit: contain;
   width: 100%;
+}
+
+.plan-detail-card__image img[data-angle-position="money"] {
+  max-height: clamp(280px, 32vw, 430px);
+  width: min(88%, 700px);
 }
 
 .plan-detail-card__image-note {
@@ -2096,9 +2196,26 @@ body.plan-drawer-open {
     width: 100%;
   }
 
+  .plan-list-card:not(.plan-list-card--featured) {
+    --plan-card-media-height: clamp(240px, 25vw, 282px);
+  }
+
   .plan-list-card--featured .plan-list-card__ribbon {
-    left: auto;
-    right: 0;
+    left: 20%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .plan-list-card__brand-mark {
+    --brand-mark-height: clamp(32px, 3.6vw, 42px);
+    --brand-mark-max-width: 178px;
+    --brand-mark-min-width: 84px;
+  }
+
+  .plan-list-card--featured .plan-list-card__brand-mark {
+    --brand-mark-height: clamp(44px, 5vw, 58px);
+    --brand-mark-max-width: 240px;
+    --brand-mark-min-width: 112px;
   }
 
   .plan-list-card__media img {
@@ -2116,20 +2233,20 @@ body.plan-drawer-open {
   .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
     max-height: clamp(220px, 29vw, 320px);
-    transform: scale(1.44) translateX(1%);
+    transform: scale(1.44) translate(1%, 3%);
   }
 
   .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.48) translateX(1%);
+    transform: scale(1.48) translate(1%, 3%);
   }
 
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.62) translateX(2%);
+    transform: scale(1.62) translate(2%, 3%);
   }
 
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.66) translateX(2%);
+    transform: scale(1.66) translate(2%, 3%);
   }
 
 }
@@ -2307,8 +2424,8 @@ body.plan-drawer-open {
   }
 
   .plan-list-card:not(.plan-list-card--featured) {
-    --plan-card-media-height: 235px;
-    --plan-card-media-pad-y: 86px;
+    --plan-card-media-height: 276px;
+    --plan-card-media-pad-y: 104px;
     --plan-card-hover-fill-height: calc(var(--plan-card-media-height) + var(--plan-card-media-pad-y));
     --plan-card-price-height: 66px;
   }
@@ -2323,32 +2440,36 @@ body.plan-drawer-open {
     border-bottom: 1px solid rgb(41 41 41 / 0.06);
     border-left: 0;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    min-height: 275px;
+    min-height: 300px;
     overflow: visible;
+  }
+
+  .plan-list-card--featured .plan-list-card__media.has-brand {
+    padding-block-start: 84px;
   }
 
   .plan-list-card--featured .plan-list-card__media img {
     max-height: 170px;
-    transform: scale(1.68) translateX(4%);
+    transform: scale(1.68) translate(4%, 4%);
     width: min(78%, 320px);
   }
 
   .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.82) translateX(4%);
+    transform: scale(1.82) translate(4%, 4%);
   }
 
   .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.82) translateX(4%);
+    transform: scale(1.82) translate(4%, 4%);
   }
 
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.92) translateX(4%);
+    transform: scale(1.92) translate(4%, 4%);
   }
 
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.92) translateX(4%);
+    transform: scale(1.92) translate(4%, 4%);
   }
 
   .plan-list-card--featured h3 {
@@ -2359,6 +2480,11 @@ body.plan-drawer-open {
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     min-height: 0;
     padding: var(--space-4);
+  }
+
+  .plan-list-card--featured .plan-list-card__info {
+    gap: clamp(14px, 3.6vw, 20px);
+    padding-block-start: 0;
   }
 
   .plan-list-card--featured h3 {
@@ -2385,6 +2511,31 @@ body.plan-drawer-open {
     padding-block-start: 58px;
   }
 
+  .plan-list-card__media.has-brand {
+    padding-block-start: 78px;
+  }
+
+  .plan-list-card__brand-mark {
+    --brand-mark-height: 36px;
+    --brand-mark-max-width: 178px;
+    --brand-mark-min-width: 86px;
+    left: 12px;
+    --brand-mark-pad-x: 9px;
+    --brand-mark-pad-y: 6px;
+    top: 10px;
+  }
+
+  .plan-list-card--featured .plan-list-card__brand-mark {
+    --brand-mark-height: 46px;
+    --brand-mark-max-width: 218px;
+    --brand-mark-min-width: 106px;
+    left: auto;
+    right: 18px;
+    --brand-mark-pad-x: 12px;
+    --brand-mark-pad-y: 8px;
+    top: 18px;
+  }
+
   .plan-list-card__media img {
     max-height: 184px;
     transform: scale(1.82) translateX(4%);
@@ -2393,6 +2544,11 @@ body.plan-drawer-open {
 
   .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
     transform: scale(1.82) translateX(4%);
+  }
+
+  .plan-list-card:not(.plan-list-card--featured) .plan-list-card__media.has-brand img,
+  .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media.has-brand img {
+    transform: scale(1.82) translate(4%, 4%);
   }
 
   .plan-list-card--dinero .plan-list-card__media img,
@@ -2430,29 +2586,17 @@ body.plan-drawer-open {
     min-width: 0;
   }
 
-  .plan-list-card__ribbon {
-    min-height: 52px;
-    min-width: 198px;
-  }
-
   .plan-list-card--featured .plan-list-card__ribbon {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: center;
     left: auto;
+    margin-block: clamp(14px, 3.2vw, 20px) clamp(2px, 1vw, 6px);
     max-width: calc(100% - 32px);
-    min-width: clamp(168px, 52vw, 210px);
-    right: 0;
-    top: -18px;
+    position: relative;
+    right: auto;
+    top: auto;
     transform: none;
-    width: auto;
-  }
-
-  .plan-list-card__ribbon strong {
-    font-size: clamp(1.86rem, 8vw, 2.1rem);
-    min-width: 56px;
-  }
-
-  .plan-list-card__ribbon span {
-    font-size: clamp(0.78rem, 3.7vw, 0.9rem);
-    max-width: 102px;
   }
 
   .plan-detail-card {
@@ -2498,7 +2642,7 @@ body.plan-drawer-open {
     grid-template-columns: minmax(132px, 1fr) minmax(0, 1.18fr);
   }
 
-  .plan-detail-card__title-copy {
+  .plan-detail-card__title-panel.has-brand .plan-detail-card__title-copy {
     padding-inline-start: 0.68rem;
   }
 
@@ -2525,6 +2669,15 @@ body.plan-drawer-open {
     overflow-x: hidden;
     padding: clamp(170px, 28vw, 220px) 0 var(--space-4);
     width: 100%;
+  }
+
+  .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__visual {
+    min-height: auto;
+    padding-block-start: clamp(218px, 35vw, 270px);
+  }
+
+  .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__image {
+    min-height: 330px;
   }
 
   .plan-detail-card__brand-panel {
@@ -2556,6 +2709,11 @@ body.plan-drawer-open {
     min-width: 0;
     overflow: hidden;
     width: 100%;
+  }
+
+  .plan-detail-card__image[data-image-position="money"] {
+    min-height: 360px;
+    padding-block-start: clamp(72px, 20vw, 110px);
   }
 
   .plan-detail-card__image img {
@@ -2627,7 +2785,7 @@ body.plan-drawer-open {
     grid-template-columns: minmax(220px, 1fr) minmax(0, 1.12fr);
   }
 
-  .plan-detail-card__title-copy {
+  .plan-detail-card__title-panel.has-brand .plan-detail-card__title-copy {
     padding-inline-start: 1rem;
   }
 

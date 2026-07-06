@@ -2,13 +2,15 @@ const DEFAULT_FOLDER = "894-toyota-yaris-hatchback";
 
 const PLAN_IMAGE_FOLDERS = Object.freeze({
   894: DEFAULT_FOLDER,
+  922: "922-ford-ranger",
+  928: "928-ford-ranger",
 });
 
 const ANGLES = Object.freeze([
-  { id: "front_left", label: "Frente izquierdo", file: "front_left.webp", position: "front-left" },
+  { id: "front_left", label: "Frente izquierdo", file: "front-left.webp", position: "front-left" },
   { id: "front", label: "Frente", file: "front.webp", position: "front" },
-  { id: "front_right", label: "Frente derecho", file: "front_right.webp", position: "front-right" },
-  { id: "rear_right", label: "Trasera derecha", file: "rear_right.webp", position: "rear-right" },
+  { id: "front_right", label: "Frente derecho", file: "front-right.webp", position: "front-right" },
+  { id: "rear_right", label: "Trasera derecha", file: "rear-right.webp", position: "rear-right" },
   { id: "rear", label: "Trasera", file: "rear.webp", position: "rear" },
 ]);
 
@@ -21,18 +23,18 @@ const MONEY_IMAGE = Object.freeze({
 });
 
 const BRAND_LOGOS = Object.freeze([
-  { name: "Volkswagen", aliases: ["VOLKSWAGEN", "VW.", "VW "], logo: "/assets/img/brand-logos/volkswagen.svg" },
-  { name: "Chevrolet", aliases: ["CHEVROLET", "CHEV."], logo: "/assets/img/brand-logos/chevrolet.svg" },
-  { name: "Citroen", aliases: ["CITROEN"], logo: "/assets/img/brand-logos/citroen.svg" },
-  { name: "Peugeot", aliases: ["PEUGEOT"], logo: "/assets/img/brand-logos/peugeot.svg" },
-  { name: "Renault", aliases: ["RENAULT"], logo: "/assets/img/brand-logos/renault.svg" },
-  { name: "Toyota", aliases: ["TOYOTA"], logo: "/assets/img/brand-logos/toyota.svg" },
-  { name: "Honda", aliases: ["HONDA"], logo: "/assets/img/brand-logos/honda.svg" },
-  { name: "Gilera", aliases: ["GILERA"], logo: "/assets/img/brand-logos/gilera.svg" },
-  { name: "Yamaha", aliases: ["YAMAHA"], logo: "/assets/img/brand-logos/yamaha.svg" },
-  { name: "Bajaj", aliases: ["BAJAJ"], logo: "/assets/img/brand-logos/bajaj.svg" },
-  { name: "Ford", aliases: ["FORD"], logo: "/assets/img/brand-logos/ford.svg" },
-  { name: "Fiat", aliases: ["FIAT", "F."], logo: "/assets/img/brand-logos/fiat.svg" },
+  { name: "Volkswagen", aliases: ["VOLKSWAGEN", "VW.", "VW "], logo: "/assets/img/brand-logos/volkswagen.svg", logoRatio: 5.94 },
+  { name: "Chevrolet", aliases: ["CHEVROLET", "CHEV."], logo: "/assets/img/brand-logos/chevrolet.svg", logoRatio: 11.01 },
+  { name: "Citroen", aliases: ["CITROEN"], logo: "/assets/img/brand-logos/citroen.svg", logoRatio: 8.01 },
+  { name: "Peugeot", aliases: ["PEUGEOT"], logo: "/assets/img/brand-logos/peugeot.svg", logoRatio: 9.43 },
+  { name: "Renault", aliases: ["RENAULT"], logo: "/assets/img/brand-logos/renault.svg", logoRatio: 7.86 },
+  { name: "Toyota", aliases: ["TOYOTA"], logo: "/assets/img/brand-logos/toyota.svg", logoRatio: 5.64 },
+  { name: "Honda", aliases: ["HONDA"], logo: "/assets/img/brand-logos/honda.svg", logoRatio: 8.22 },
+  { name: "Gilera", aliases: ["GILERA"], logo: "/assets/img/brand-logos/gilera.svg", logoRatio: 9.51 },
+  { name: "Yamaha", aliases: ["YAMAHA"], logo: "/assets/img/brand-logos/yamaha.svg", logoRatio: 5.27 },
+  { name: "Bajaj", aliases: ["BAJAJ"], logo: "/assets/img/brand-logos/bajaj.svg", logoRatio: 6.72 },
+  { name: "Ford", aliases: ["FORD"], logo: "/assets/img/brand-logos/ford.svg", logoRatio: 2.92 },
+  { name: "Fiat", aliases: ["FIAT", "F."], logo: "/assets/img/brand-logos/fiat.svg", logoRatio: 1.63 },
 ]);
 
 function folderFor(article, { fallback = true } = {}) {
@@ -58,17 +60,20 @@ function brandFromPlan(plan) {
     name: match.name,
     logo: match.logo,
     logoAlt: match.name,
+    logoRatio: match.logoRatio,
   };
 }
 
 function brandFromMetadata(metadata) {
   const brand = metadata?.brand || {};
   if (!brand.logo) return null;
+  const mappedBrand = BRAND_LOGOS.find((item) => item.logo === brand.logo || item.name.toLowerCase() === String(brand.name || "").toLowerCase());
 
   return {
-    name: brand.name || "",
+    name: brand.name || mappedBrand?.name || "",
     logo: brand.logo,
-    logoAlt: brand.name || "Logo de marca",
+    logoAlt: brand.name || mappedBrand?.name || "Logo de marca",
+    logoRatio: brand.logoRatio || mappedBrand?.logoRatio || 5,
   };
 }
 

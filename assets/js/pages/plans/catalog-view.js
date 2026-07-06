@@ -37,6 +37,15 @@ function cardClass(plan) {
   return classes.join(" ");
 }
 
+function brandKey(brand) {
+  return (brand?.name || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 function createFilterButton(filter, activeValue, groupName) {
   return el("button", {
     className: `catalog-filter-chip catalog-filter-chip--${groupName}`,
@@ -418,6 +427,7 @@ function createDetail(plan, contactConfig) {
             children: [
               el("div", {
                 className: media.brand ? "plan-detail-card__title-panel has-brand" : "plan-detail-card__title-panel",
+                attrs: media.brand ? { "data-brand-key": brandKey(media.brand) } : {},
                 children: [
                   media.brand
                     ? el("div", {

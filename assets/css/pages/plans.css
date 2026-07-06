@@ -1491,6 +1491,14 @@ body.plan-drawer-open {
   width: min(100%, 260px);
 }
 
+.plan-detail-card__title-panel.has-brand[data-brand-key="fiat"] .plan-detail-card__brand-panel {
+  width: clamp(110px, 10vw, 150px);
+}
+
+.plan-detail-card__title-panel.has-brand[data-brand-key="fiat"] .plan-detail-card__brand-shape {
+  width: min(100%, 150px);
+}
+
 .plan-detail-card__image {
   align-items: center;
   background: transparent;
@@ -2528,6 +2536,10 @@ body.plan-drawer-open {
     width: min(100%, clamp(140px, 42vw, 230px));
   }
 
+  .plan-detail-card__title-panel.has-brand[data-brand-key="fiat"] .plan-detail-card__brand-shape {
+    width: min(100%, clamp(96px, 30vw, 136px));
+  }
+
   .plan-detail-card__content {
     box-sizing: border-box;
     inline-size: 100vw;
@@ -2626,6 +2638,10 @@ body.plan-drawer-open {
 
   .plan-detail-card__brand-shape {
     width: min(100%, clamp(190px, 35vw, 270px));
+  }
+
+  .plan-detail-card__title-panel.has-brand[data-brand-key="fiat"] .plan-detail-card__brand-shape {
+    width: min(100%, clamp(124px, 18vw, 156px));
   }
 
   .plan-detail-card__top h2 {

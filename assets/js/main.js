@@ -3,7 +3,7 @@ import { renderShell } from "./components/shell.js";
 import { initContactPage } from "./pages/contact.js";
 import { initHomePage } from "./pages/home.js";
 import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js";
-import { initPlanDetail } from "./pages/plans.js";
+import { initPlanDetail } from "./pages/plan-detail.js";
 import { initPlansHub } from "./pages/plans/index.js";
 import { initBasePage } from "./pages/base.js";
 

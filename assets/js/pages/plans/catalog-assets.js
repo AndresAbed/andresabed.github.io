@@ -25,7 +25,7 @@ const MONEY_IMAGE = Object.freeze({
 const BRAND_LOGOS = Object.freeze([
   { name: "Volkswagen", aliases: ["VOLKSWAGEN", "VW.", "VW "], logo: "/assets/img/brand-logos/volkswagen.svg", logoRatio: 5.94 },
   { name: "Chevrolet", aliases: ["CHEVROLET", "CHEV."], logo: "/assets/img/brand-logos/chevrolet.svg", logoRatio: 11.01 },
-  { name: "Citroen", aliases: ["CITROEN"], logo: "/assets/img/brand-logos/citroen.svg", logoRatio: 8.01 },
+  { name: "Citroën", aliases: ["CITROEN"], logo: "/assets/img/brand-logos/citroen.svg", logoRatio: 8.01 },
   { name: "Peugeot", aliases: ["PEUGEOT"], logo: "/assets/img/brand-logos/peugeot.svg", logoRatio: 9.43 },
   { name: "Renault", aliases: ["RENAULT"], logo: "/assets/img/brand-logos/renault.svg", logoRatio: 7.86 },
   { name: "Toyota", aliases: ["TOYOTA"], logo: "/assets/img/brand-logos/toyota.svg", logoRatio: 5.64 },
@@ -104,7 +104,8 @@ export async function withPlanMediaMetadata(items) {
     const folder = folderFor(item?.article, { fallback: false });
     const metadata = folder ? metadataByFolder.get(folder) : null;
     const brand = brandFromMetadata(metadata) || brandFromPlan(item);
-    return brand ? { ...item, mediaMetadata: { brand } } : item;
+    const fit = metadata?.mediaFit || "";
+    return brand || fit ? { ...item, mediaMetadata: { brand, fit } } : item;
   });
 }
 
@@ -129,6 +130,7 @@ export function getPlanMedia(plan) {
   return {
     folder,
     brand: plan?.mediaMetadata?.brand || null,
+    fit: plan?.mediaMetadata?.fit || "",
     defaultAngle: "front_left",
     defaultImage: images.find((image) => image.id === "front_left") || images[0],
     images,

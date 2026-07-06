@@ -1,6 +1,6 @@
 import { el } from "../../utils/dom.js";
 import { getPlanMedia } from "./catalog-assets.js";
-import { categoryClass, moneyOrConfirm } from "./catalog-format.js";
+import { brandKey, categoryClass, moneyOrConfirm } from "./catalog-format.js";
 
 function cardClass(plan) {
   const classes = ["plan-list-card", `plan-list-card--${plan.category || "default"}`];
@@ -68,6 +68,7 @@ function createPlanCard(plan) {
   const media = getPlanMedia(plan);
   const chanceCount = Number(plan.prizeChances);
   const hasFeaturedChances = chanceCount === 5;
+  const brand = brandKey(media.brand);
 
   return el("article", {
     className: cardClass(plan),
@@ -75,6 +76,8 @@ function createPlanCard(plan) {
       "data-plan-card": "",
       "data-article": plan.article,
       "data-category": plan.category,
+      "data-brand": brand,
+      "data-media-fit": media.fit || "",
       "data-subcategory": plan.subcategory || "",
       "data-search": plan.searchText,
     },
@@ -107,7 +110,7 @@ function createPlanCard(plan) {
               }),
               el("button", {
                 className: "button plan-list-card__action",
-                text: "Ver más",
+                text: "Preinscripción",
                 attrs: { type: "button", "data-open-plan": plan.article },
               }),
             ],
@@ -124,7 +127,7 @@ function createEmptyState() {
     attrs: { "data-catalog-empty": "", hidden: true },
     children: [
       el("h3", { text: "No se encontraron resultados" }),
-      el("p", { text: "Probá cambiar la categoría, la búsqueda o la subcategoría seleccionada." }),
+      el("p", { text: "Probá cambiar la categoría, la búsqueda o la marca seleccionada." }),
     ],
   });
 }

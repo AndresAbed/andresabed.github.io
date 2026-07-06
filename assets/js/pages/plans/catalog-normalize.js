@@ -7,12 +7,14 @@ const CATEGORY_SLUGS = Object.freeze({
 const SUBCATEGORY_SLUGS = Object.freeze({
   "Baja Gama": "baja-gama",
   "Alta Gama": "alta-gama",
+  "Gama Alta": "alta-gama",
   Utilitarios: "utilitarios",
 });
 
 const SUBCATEGORY_LABELS = Object.freeze({
   "Baja Gama": "Gama baja",
   "Alta Gama": "Gama alta",
+  "Gama Alta": "Gama alta",
 });
 
 const EXACT_NAME_ALIASES = Object.freeze({

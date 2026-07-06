@@ -6,7 +6,7 @@ import { createFilters, initFiltering } from "./catalog-filters.js";
 export function createPlansCatalog(catalog, contactConfig) {
   const root = el("div", {
     className: "plans-catalog-page",
-    children: [createFilters(), createCatalogGrid(catalog.items)],
+    children: [createFilters(catalog.items), createCatalogGrid(catalog.items)],
   });
 
   initFiltering(root);

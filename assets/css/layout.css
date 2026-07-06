@@ -450,17 +450,6 @@ body.site-menu-open .site-menu-drawer {
   width: min(100%, 142px);
 }
 
-.site-footer__brand-note {
-  border-top: 2px solid var(--color-brand-green);
-  color: rgb(248 250 252 / 0.64);
-  font-size: 0.84rem;
-  font-weight: 500;
-  line-height: 1.55;
-  margin: var(--space-2) 0 0;
-  max-width: 25ch;
-  padding-top: var(--space-3);
-}
-
 .site-footer__column,
 .site-footer__contact {
   min-width: 0;

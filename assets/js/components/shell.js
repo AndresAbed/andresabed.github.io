@@ -331,10 +331,6 @@ function createFooter(site) {
                     },
                   })
                 : el("strong", { text: agency.displayLockup || "Club San Jorge | Agencias Abed" }),
-              el("p", {
-                className: "site-footer__brand-note",
-                text: "Comercialización de planes de Capitalización y Ahorro.",
-              }),
             ],
           }),
           createFooterColumn({ title: "Sitio", links: mainLinks }),

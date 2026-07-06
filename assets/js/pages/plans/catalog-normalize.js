@@ -22,6 +22,11 @@ const EXACT_NAME_ALIASES = Object.freeze({
 });
 
 const DISPLAY_WORDS = Object.freeze({
+  "CHEV.": "Chevrolet",
+  "F.": "Fiat",
+  "VW.": "Volkswagen",
+  CHEV: "Chevrolet",
+  F: "Fiat",
   FIAT: "Fiat",
   TOYOTA: "Toyota",
   CHEVROLET: "Chevrolet",
@@ -29,7 +34,7 @@ const DISPLAY_WORDS = Object.freeze({
   HONDA: "Honda",
   GILERA: "Gilera",
   VOLKSWAGEN: "Volkswagen",
-  VW: "VW",
+  VW: "Volkswagen",
   XR: "XR",
   XRE: "XRE",
   ABS: "ABS",

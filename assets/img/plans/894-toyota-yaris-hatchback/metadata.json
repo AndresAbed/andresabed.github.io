@@ -1,6 +1,6 @@
 {
-	"paintId": "pspc0112",
-	"zoomLevel": "30",
-	"width": "1000",
-	"modelYear": "2020"
+	"brand": {
+		"name": "Toyota",
+		"logo": "/assets/img/brand-logos/toyota.svg"
+	}
 }

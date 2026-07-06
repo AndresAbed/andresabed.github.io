@@ -345,6 +345,12 @@ function angleTabLabel(image) {
 function createAngleSelector(plan, media) {
   if (!media.images.length || media.images.length === 1) return null;
 
+  const defaultIndex = Math.max(
+    media.images.findIndex((image) => image.id === media.defaultAngle),
+    0,
+  );
+  const defaultProgress = media.images.length > 1 ? (defaultIndex / (media.images.length - 1)) * 100 : 0;
+
   return el("div", {
     className: "plan-angle-tabs",
     attrs: { role: "group", "aria-label": `Vistas disponibles de ${plan.displayName}` },
@@ -364,12 +370,41 @@ function createAngleSelector(plan, media) {
           },
         }),
       ),
+      el("input", {
+        className: "plan-angle-range",
+        attrs: {
+          type: "range",
+          min: "0",
+          max: "100",
+          step: "0.1",
+          value: String(defaultProgress),
+          "data-angle-range": "",
+          "aria-label": `Cambiar ángulo de ${plan.displayName}`,
+        },
+      }),
     ],
   });
 }
 
+function detailProductName(plan, brand) {
+  const displayName = plan.displayName || "Plan a confirmar";
+  const brandName = brand?.name;
+  if (!brandName) return displayName;
+
+  const aliases = {
+    Fiat: ["Fiat", "F."],
+    Volkswagen: ["Volkswagen", "VW", "VW."],
+  };
+  const brandAliases = aliases[brandName] || [brandName];
+  const escapedAliases = brandAliases.map((alias) => alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`^(${escapedAliases.join("|")})\\s+`, "i");
+  const withoutBrand = displayName.replace(pattern, "").trim();
+  return withoutBrand || displayName;
+}
+
 function createDetail(plan, contactConfig) {
   const media = getPlanMedia(plan);
+  const productName = detailProductName(plan, media.brand);
 
   return el("article", {
     className: "plan-detail-card",
@@ -379,9 +414,31 @@ function createDetail(plan, contactConfig) {
         className: "plan-detail-card__top",
         children: [
           el("div", {
+            className: "plan-detail-card__identity",
             children: [
-              el("span", { className: `badge ${categoryClass(plan)}`, text: `${plan.categoryLabel}${plan.subcategoryLabel ? ` · ${plan.subcategoryLabel}` : ""}` }),
-              el("h2", { text: plan.displayName, attrs: { id: `plan-detail-title-${plan.article}` } }),
+              el("div", {
+                className: media.brand ? "plan-detail-card__title-panel has-brand" : "plan-detail-card__title-panel",
+                children: [
+                  media.brand
+                    ? el("div", {
+                        className: "plan-detail-card__brand-panel",
+                        attrs: {
+                          role: "img",
+                          "aria-label": media.brand.logoAlt,
+                          style: `--brand-logo: url("${media.brand.logo}")`,
+                        },
+                        children: [el("span", { className: "plan-detail-card__brand-shape", attrs: { "aria-hidden": "true" } })],
+                      })
+                    : null,
+                  el("div", {
+                    className: "plan-detail-card__title-copy",
+                    children: [
+                      el("span", { className: `badge ${categoryClass(plan)}`, text: `${plan.categoryLabel}${plan.subcategoryLabel ? ` · ${plan.subcategoryLabel}` : ""}` }),
+                      el("h2", { text: productName, attrs: { id: `plan-detail-title-${plan.article}` } }),
+                    ],
+                  }),
+                ],
+              }),
             ],
           }),
           el("button", {
@@ -410,6 +467,7 @@ function createDetail(plan, contactConfig) {
                 ],
               }),
               createAngleSelector(plan, media),
+              el("span", { className: "plan-detail-card__image-note", text: "* Imagen ilustrativa" }),
             ],
           }),
           el("div", {
@@ -452,18 +510,59 @@ function clearPlanFromUrl() {
 function initAngleSelector(detail) {
   const image = qs("[data-plan-angle-image]", detail);
   const buttons = qsa("[data-angle-button]", detail);
+  const range = qs("[data-angle-range]", detail);
   if (!image || !buttons.length) return;
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
+  const clampProgress = (value) => Math.min(100, Math.max(0, Number(value) || 0));
+  const indexToProgress = (index) => (buttons.length > 1 ? (index / (buttons.length - 1)) * 100 : 0);
+  const progressToIndex = (progress) =>
+    Math.min(buttons.length - 1, Math.max(0, Math.round((clampProgress(progress) / 100) * (buttons.length - 1))));
+  let currentIndex = -1;
+
+  const setRangeProgress = (progress) => {
+    if (!range) return;
+    const safeProgress = clampProgress(progress);
+    range.value = String(safeProgress);
+  };
+
+  const setActiveAngle = (button, index, { syncRange = true } = {}) => {
+    if (index !== currentIndex) {
       image.src = button.dataset.angleSrc;
       image.alt = button.dataset.angleLabel || image.alt;
       buttons.forEach((item) => {
         item.classList.toggle("is-active", item === button);
         item.setAttribute("aria-pressed", item === button ? "true" : "false");
       });
-    });
+      currentIndex = index;
+    }
+
+    if (range) {
+      if (syncRange) setRangeProgress(indexToProgress(index));
+      range.setAttribute("aria-valuetext", button.dataset.angleLabel || button.textContent.trim());
+    }
+  };
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => setActiveAngle(button, index));
   });
+
+  if (range) {
+    const updateFromRange = () => {
+      const progress = clampProgress(range.value);
+      const index = progressToIndex(progress);
+      setRangeProgress(progress);
+      setActiveAngle(buttons[index], index, { syncRange: false });
+    };
+
+    range.addEventListener("input", updateFromRange);
+    range.addEventListener("change", updateFromRange);
+  }
+
+  const activeIndex = Math.max(
+    buttons.findIndex((button) => button.classList.contains("is-active")),
+    0,
+  );
+  setActiveAngle(buttons[activeIndex], activeIndex);
 }
 
 function initFiltering(root) {

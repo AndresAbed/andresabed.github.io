@@ -1,4 +1,5 @@
 import { loadPlanCatalog } from "../../data/api.js";
+import { withPlanMediaMetadata } from "./catalog-assets.js";
 import { normalizeLivePlan, normalizeSnapshotPlan, sortPlans } from "./catalog-normalize.js";
 
 const ARTEMIS_PLAN_CATALOG_URL =
@@ -53,24 +54,26 @@ function normalizeFallbackSnapshot(snapshot) {
 export async function loadCatalogPlans() {
   try {
     const rows = await fetchLiveRows();
+    const items = await withPlanMediaMetadata(normalizeLiveRows(rows));
     return {
       meta: {
         source: "artemis_api",
         status: "verified",
         loadedAt: new Date().toISOString(),
       },
-      items: normalizeLiveRows(rows),
+      items,
     };
   } catch (error) {
     console.warn("No se pudo cargar el catalogo vivo desde Artemis.", error);
     const fallback = await loadPlanCatalog();
+    const items = await withPlanMediaMetadata(normalizeFallbackSnapshot(fallback));
     return {
       meta: {
         source: "local_snapshot_fallback",
         status: "partial",
         loadedAt: new Date().toISOString(),
       },
-      items: normalizeFallbackSnapshot(fallback),
+      items,
     };
   }
 }

@@ -581,52 +581,10 @@
   transition: background-color 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.plan-list-card__brand-mark {
-  --brand-mark-height: clamp(30px, 2.1vw, 38px);
-  --brand-mark-max-width: 166px;
-  --brand-mark-min-width: 80px;
-  --brand-mark-pad-x: 8px;
-  --brand-mark-pad-y: 5px;
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #e3e1da;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: var(--color-brand-red);
-  display: inline-flex;
-  height: var(--brand-mark-height);
-  justify-content: flex-start;
-  left: clamp(12px, 1.25vw, 18px);
-  max-width: calc(100% - clamp(32px, 3.2vw, 44px));
-  padding: var(--brand-mark-pad-y) var(--brand-mark-pad-x);
-  pointer-events: none;
-  position: absolute;
-  top: clamp(10px, 1.15vw, 16px);
-  width: clamp(
-    var(--brand-mark-min-width),
-    calc((var(--brand-mark-height) - (var(--brand-mark-pad-y) * 2)) * var(--brand-logo-ratio, 5) + (var(--brand-mark-pad-x) * 2)),
-    var(--brand-mark-max-width)
-  );
-  z-index: 7;
-}
-
-.plan-list-card__brand-shape {
-  background: currentColor;
-  display: block;
-  height: 100%;
-  mask: var(--brand-logo) left center / contain no-repeat;
-  -webkit-mask: var(--brand-logo) left center / contain no-repeat;
-  width: 100%;
-}
-
 .plan-list-card:not(.plan-list-card--featured) .plan-list-card__media {
   height: var(--plan-card-media-height);
   min-height: 0;
   z-index: 2;
-}
-
-.plan-list-card__media.has-brand {
-  padding-block-start: clamp(72px, 5vw, 86px);
 }
 
 .plan-list-card__media::before,
@@ -679,11 +637,6 @@
 
 .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
   transform: scale(2) translateX(4%);
-}
-
-.plan-list-card:not(.plan-list-card--featured) .plan-list-card__media.has-brand img,
-.plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media.has-brand img {
-  transform: scale(2) translate(4%, 3%);
 }
 
 .plan-list-card--dinero .plan-list-card__media img,
@@ -744,17 +697,6 @@
   overflow: visible;
   padding: clamp(24px, 2.8vw, 36px) clamp(18px, 2.2vw, 28px);
   position: relative;
-}
-
-.plan-list-card--featured .plan-list-card__brand-mark {
-  --brand-mark-height: clamp(42px, 3vw, 54px);
-  --brand-mark-max-width: 230px;
-  --brand-mark-min-width: 108px;
-  --brand-mark-pad-x: 12px;
-  --brand-mark-pad-y: 8px;
-  left: auto;
-  right: clamp(18px, 2vw, 28px);
-  top: clamp(18px, 2vw, 28px);
 }
 
 .plan-list-card--featured .plan-list-card__media img {
@@ -885,14 +827,14 @@
 
 .plan-list-card--featured .plan-list-card__ribbon {
   align-self: start;
-  left: 20%;
+  left: auto;
   justify-self: start;
   margin: 0;
   order: 0;
   position: absolute;
-  right: auto;
+  right: clamp(24px, 3vw, 42px);
   top: -25px;
-  transform: translateX(-50%);
+  transform: none;
   transform-origin: left center;
   z-index: 12;
 }
@@ -952,7 +894,7 @@
   border: 0;
   border-radius: 0;
   min-height: 100%;
-  padding-block-start: clamp(38px, 4.4vw, 48px);
+  padding-block-start: 0;
 }
 
 .plan-list-card--featured .plan-list-card__info {
@@ -2201,21 +2143,9 @@ body.plan-drawer-open {
   }
 
   .plan-list-card--featured .plan-list-card__ribbon {
-    left: 20%;
-    right: auto;
-    transform: translateX(-50%);
-  }
-
-  .plan-list-card__brand-mark {
-    --brand-mark-height: clamp(32px, 3.6vw, 42px);
-    --brand-mark-max-width: 178px;
-    --brand-mark-min-width: 84px;
-  }
-
-  .plan-list-card--featured .plan-list-card__brand-mark {
-    --brand-mark-height: clamp(44px, 5vw, 58px);
-    --brand-mark-max-width: 240px;
-    --brand-mark-min-width: 112px;
+    left: auto;
+    right: clamp(20px, 3vw, 34px);
+    transform: none;
   }
 
   .plan-list-card__media img {
@@ -2444,10 +2374,6 @@ body.plan-drawer-open {
     overflow: visible;
   }
 
-  .plan-list-card--featured .plan-list-card__media.has-brand {
-    padding-block-start: 84px;
-  }
-
   .plan-list-card--featured .plan-list-card__media img {
     max-height: 170px;
     transform: scale(1.68) translate(4%, 4%);
@@ -2511,31 +2437,6 @@ body.plan-drawer-open {
     padding-block-start: 58px;
   }
 
-  .plan-list-card__media.has-brand {
-    padding-block-start: 78px;
-  }
-
-  .plan-list-card__brand-mark {
-    --brand-mark-height: 36px;
-    --brand-mark-max-width: 178px;
-    --brand-mark-min-width: 86px;
-    left: 12px;
-    --brand-mark-pad-x: 9px;
-    --brand-mark-pad-y: 6px;
-    top: 10px;
-  }
-
-  .plan-list-card--featured .plan-list-card__brand-mark {
-    --brand-mark-height: 46px;
-    --brand-mark-max-width: 218px;
-    --brand-mark-min-width: 106px;
-    left: auto;
-    right: 18px;
-    --brand-mark-pad-x: 12px;
-    --brand-mark-pad-y: 8px;
-    top: 18px;
-  }
-
   .plan-list-card__media img {
     max-height: 184px;
     transform: scale(1.82) translateX(4%);
@@ -2544,11 +2445,6 @@ body.plan-drawer-open {
 
   .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
     transform: scale(1.82) translateX(4%);
-  }
-
-  .plan-list-card:not(.plan-list-card--featured) .plan-list-card__media.has-brand img,
-  .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media.has-brand img {
-    transform: scale(1.82) translate(4%, 4%);
   }
 
   .plan-list-card--dinero .plan-list-card__media img,
@@ -2588,14 +2484,14 @@ body.plan-drawer-open {
 
   .plan-list-card--featured .plan-list-card__ribbon {
     grid-column: 1;
-    grid-row: auto;
-    justify-self: center;
+    grid-row: 1;
+    justify-self: end;
     left: auto;
-    margin-block: clamp(14px, 3.2vw, 20px) clamp(2px, 1vw, 6px);
+    margin: 0;
     max-width: calc(100% - 32px);
-    position: relative;
-    right: auto;
-    top: auto;
+    position: absolute;
+    right: clamp(14px, 4.8vw, 24px);
+    top: -20px;
     transform: none;
   }
 

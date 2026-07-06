@@ -1,6 +1,6 @@
 import { el } from "../../utils/dom.js";
 import { getPlanMedia } from "./catalog-assets.js";
-import { brandKey, categoryClass, detailProductName, moneyOrConfirm } from "./catalog-format.js";
+import { categoryClass, moneyOrConfirm } from "./catalog-format.js";
 
 function cardClass(plan) {
   const classes = ["plan-list-card", `plan-list-card--${plan.category || "default"}`];
@@ -47,27 +47,10 @@ function createCardMeta(plan) {
   });
 }
 
-function createCardHeading(plan, media) {
-  const productName = detailProductName(plan, media.brand);
-
+function createCardHeading(plan) {
   return el("div", {
     className: "plan-list-card__heading",
-    children: [el("h3", { text: productName })],
-  });
-}
-
-function createCardBrandMark(media) {
-  if (!media.brand) return null;
-
-  return el("span", {
-    className: "plan-list-card__brand-mark",
-    attrs: {
-      role: "img",
-      "aria-label": media.brand.logoAlt,
-      "data-brand-key": brandKey(media.brand),
-      style: `--brand-logo: url("${media.brand.logo}"); --brand-logo-ratio: ${media.brand.logoRatio || 5}`,
-    },
-    children: [el("span", { className: "plan-list-card__brand-shape", attrs: { "aria-hidden": "true" } })],
+    children: [el("h3", { text: plan.displayName || "Plan a confirmar" })],
   });
 }
 
@@ -97,9 +80,8 @@ function createPlanCard(plan) {
     },
     children: [
       el("div", {
-        className: media.brand ? "plan-list-card__media has-brand" : "plan-list-card__media",
+        className: "plan-list-card__media",
         children: [
-          createCardBrandMark(media),
           el("img", {
             attrs: {
               src: media.defaultImage.src,
@@ -117,7 +99,7 @@ function createPlanCard(plan) {
           el("div", {
             className: "plan-list-card__info",
             children: [
-              createCardHeading(plan, media),
+              createCardHeading(plan),
               hasFeaturedChances ? createCardPrice(plan) : null,
               el("div", {
                 className: "plan-list-card__identity",

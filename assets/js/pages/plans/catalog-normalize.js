@@ -26,6 +26,7 @@ const DISPLAY_WORDS = Object.freeze({
   "F.": "Fiat",
   "VW.": "Volkswagen",
   CHEV: "Chevrolet",
+  CITROEN: "Citroën",
   F: "Fiat",
   FIAT: "Fiat",
   TOYOTA: "Toyota",
@@ -35,10 +36,21 @@ const DISPLAY_WORDS = Object.freeze({
   GILERA: "Gilera",
   VOLKSWAGEN: "Volkswagen",
   VW: "Volkswagen",
+  AT: "AT",
+  CVT: "CVT",
+  DX: "DX",
+  FZ: "FZ",
+  HDI: "HDI",
+  LS: "LS",
+  MT: "MT",
+  TB: "TB",
+  TD: "TD",
+  TDI: "TDI",
+  TN: "TN",
+  "T-CROSS": "T-Cross",
   XR: "XR",
   XRE: "XRE",
   ABS: "ABS",
-  DX: "DX",
   CD: "CD",
 });
 
@@ -86,9 +98,15 @@ export function normalizePlanName(rawName, article) {
   if (/^ORDEN\s+DE\s+COMPRA/i.test(officialName)) return "Orden de compra";
 
   const normalized = officialName
+    .replace(/\b(?:D|N|TB|TD|TN)\b/gi, "")
+    .replace(/\bFURGON\b/gi, "Furgón")
+    .replace(/\bFURG\.\s*/gi, "Furgón ")
     .replace(/\bXR\s*300\s*TORNADO\b/gi, "XR 300 Tornado")
     .replace(/\bXR300TORNADO\b/gi, "XR 300 Tornado")
+    .replace(/\bXR\s*(\d{3})\b/gi, "XR $1")
+    .replace(/\bFZ\s*25\b/gi, "FZ 25")
     .replace(/\bSMASH\s*110\b/gi, "Smash 110")
+    .replace(/\bWAVE\s*110\b/gi, "Wave 110")
     .replace(/\b\d+\s*P\b/gi, "")
     .replace(/\b\d+\s*PUERTAS?\b/gi, "")
     .replace(/\b(?:DOS|TRES|CUATRO|CINCO)\s+PUERTAS?\b/gi, "")
@@ -97,6 +115,7 @@ export function normalizePlanName(rawName, article) {
     .replace(/\bCABINA\s+(?:SIMPLE|DOBLE)\b/gi, "")
     .replace(/\b\d+\s*(?:CHA|CHANC|CHANCE|CHANCES)\b/gi, "")
     .replace(/\+/g, " + ")
+    .replace(/\+\s*(\d{4,})/g, (_, amount) => `+ $${Number(amount).toLocaleString("es-AR")}`)
     .replace(/\$(\d{4,})/g, (_, amount) => `$${Number(amount).toLocaleString("es-AR")}`)
     .replace(/\s+/g, " ")
     .trim();

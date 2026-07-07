@@ -1910,17 +1910,27 @@ body.plan-drawer-open {
 }
 
 .plan-inquiry-form__grid {
+  align-items: start;
   display: grid;
   gap: clamp(1rem, 1.7vw, 1.35rem);
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.plan-inquiry-form label {
+.plan-inquiry-form label:not(.plan-inquiry-form__consent, .plan-inquiry-form__seller-toggle) {
+  align-content: start;
   color: rgb(41 41 41 / 0.82);
+  display: grid;
   font-size: 0.78rem;
   font-weight: 700;
+  grid-template-rows: minmax(1.2rem, auto) minmax(44px, auto) minmax(1.2em, auto);
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.plan-inquiry-form label:not(.plan-inquiry-form__consent, .plan-inquiry-form__seller-toggle) > span:first-child {
+  align-items: end;
+  display: flex;
+  min-height: 1.2rem;
 }
 
 .plan-inquiry-form input,
@@ -1929,6 +1939,7 @@ body.plan-drawer-open {
   background: #ffffff;
   border-color: rgb(41 41 41 / 0.18);
   border-radius: var(--radius-sm);
+  display: block;
   min-height: 44px;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }

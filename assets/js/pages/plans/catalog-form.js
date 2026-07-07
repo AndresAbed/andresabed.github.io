@@ -51,7 +51,7 @@ const FORM_COPY = Object.freeze({
     tab: "Preinscripción",
     title: "Preinscripción",
     description:
-      "Dejanos tus datos y un asesor comercial se va a comunicar para ayudarte a revisar el plan elegido y avanzar con una propuesta acorde a lo que estás buscando.",
+      "Completá tus datos y un asesor comercial te contactará para revisar la opción elegida, resolver tus dudas y orientarte con una propuesta acorde a lo que estás buscando.",
     source: "catalogo_planes_preinscripcion",
     submit: "Enviar",
     submitting: "Enviando...",
@@ -394,7 +394,7 @@ function createPlanForm(plan, contactConfig, formType) {
         text:
           isEnrollment
             ? "Este formulario prepara la solicitud de inscripción del plan elegido. La lógica de pago y validación final se configurará en una etapa posterior."
-            : "Con estos datos podremos brindarte asesoramiento personalizado sobre el plan elegido. Recordá que desde la primera cuota podés participar de los sorteos mensuales si el título se encuentra vigente y al día.",
+            : "Esta preinscripción no finaliza la operación: nos permite preparar una consulta personalizada sobre el plan. Si el título está vigente y la cuota se encuentra al día, podés participar de los sorteos mensuales desde la primera cuota.",
       }),
       el("button", {
         className: "button button--primary",

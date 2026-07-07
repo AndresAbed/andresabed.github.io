@@ -23,11 +23,11 @@ const CATEGORY_CARD_IMAGES = Object.freeze({
   },
   dinero: {
     imageUrl: "/assets/img/plans/plan-dinero-billetes.webp",
-    imageAlt: "Billetes representando capital en dinero",
+    imageAlt: "Billetes representando una orden de compra",
   },
 });
 export function renderPlanRoutes(data) {
-  const target = qs("[data-trust-section]");
+  const target = qs("[data-plan-routes]");
   if (!target) return;
 
   const preferredOrder = ["motos", "autos", "dinero"];
@@ -38,17 +38,17 @@ export function renderPlanRoutes(data) {
   });
   const copy = {
     autos: {
-      title: "Plan Auto",
+      title: "Autos",
       body: "Opciones para auto o utilitario, pensadas para quienes quieren planificar su próximo vehículo.",
       cta: "Ver planes",
     },
     motos: {
-      title: "Plan Moto",
+      title: "Motos",
       body: "Acercate a tu moto con una alternativa de ahorro clara, accesible y acompañada desde el primer paso.",
       cta: "Ver planes",
     },
     dinero: {
-      title: "Plan Dinero",
+      title: "Órdenes de compra",
       body: "Formá capital para tus proyectos con opciones pensadas para ahorrar de manera ordenada.",
       cta: "Ver planes",
     },

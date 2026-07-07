@@ -20,6 +20,7 @@ const cache = new Map();
 const ARTEMIS_BASE_URL = "https://artemis.clubsanjorge.com.ar";
 const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_BASE_URL}/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/issue`;
 const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
+const ARTEMIS_TIMEOUT_MS = 4500;
 
 const EMPTY_DRAWS = Object.freeze({
   meta: {
@@ -60,15 +61,28 @@ const EMPTY_HOME_ADJUDICATIONS = Object.freeze({
   items: [],
 });
 
-export async function fetchJson(path) {
+export async function fetchJson(path, options = {}) {
   if (cache.has(path)) return cache.get(path);
 
-  const request = fetch(path).then(async (response) => {
-    if (!response.ok) {
-      throw new Error(`No se pudo cargar ${path} (${response.status})`);
-    }
-    return response.json();
-  });
+  const controller = options.timeoutMs ? new AbortController() : null;
+  const timeout = controller
+    ? window.setTimeout(() => controller.abort(), options.timeoutMs)
+    : null;
+
+  const request = fetch(path, controller ? { signal: controller.signal } : undefined)
+    .then(async (response) => {
+      if (!response.ok) {
+        throw new Error(`No se pudo cargar ${path} (${response.status})`);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      cache.delete(path);
+      throw error;
+    })
+    .finally(() => {
+      if (timeout) window.clearTimeout(timeout);
+    });
 
   cache.set(path, request);
   return request;
@@ -101,7 +115,7 @@ function artemisIssuesUrl(query, options = {}) {
 }
 
 async function fetchArtemisIssues(query, options) {
-  return fetchJson(artemisIssuesUrl(query, options));
+  return fetchJson(artemisIssuesUrl(query, options), { timeoutMs: ARTEMIS_TIMEOUT_MS });
 }
 
 function normalizeArtemisText(value) {

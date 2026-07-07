@@ -386,7 +386,7 @@ function createFooter(site) {
             className: "site-footer__legal",
             text:
               legal.disclaimerText ||
-              "La información debe revisarse junto con la documentación y condiciones vigentes de Club San Jorge.",
+              "La información publicada es orientativa y puede actualizarse según las condiciones vigentes de Club San Jorge.",
           }),
         ],
       }),

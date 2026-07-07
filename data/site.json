@@ -21,7 +21,7 @@
     "facebookUrl": "https://www.facebook.com/clubsanjorge",
     "youtubeUrl": "https://www.youtube.com/channel/UCfo9TZoLQh_WMwdgs7_u3ww/featured",
     "status": "pending_validation",
-    "commercialPromise": "Suscribite, ahorrá y participá por autos, motos o dinero, con atención personalizada durante la elección del plan.",
+    "commercialPromise": "Compará opciones de autos, motos y órdenes de compra, con atención personalizada durante la elección del plan.",
     "processLabel": "Capitalización y Ahorro"
   },
   "brand": {
@@ -37,7 +37,7 @@
       "agenciasAbedBlack": "/assets/img/brand/logo-agencias-abed-black.svg",
       "agenciasAbedColorIsoWhite": "/assets/img/brand/logo-agencias-abed-color-white.svg",
       "footerVerticalColor": "/assets/img/brand/logo-footer-vertical-color.svg",
-      "loaderVerticalWhite": "/assets/img/brand/logo-loader-vertical-white.svg"
+      "loaderVerticalWhite": "/assets/img/brand/logo-loader-vertical-white.svg?v=20260707"
     },
     "manualClaim": "Con nosotros podés",
     "palette": {
@@ -69,7 +69,7 @@
   },
   "club": {
     "headline": "Suscribite, ahorrá y ganá",
-    "supportingClaim": "Con cada cuota, ahorrás y todos los meses estás un paso más cerca de ser uno de nuestros adjudicados.",
+    "supportingClaim": "Con cada cuota, ahorrás y todos los meses estás un paso más cerca de ser uno de nuestros cientos de adjudicados.",
     "stats": [
       {
         "label": "Suscriptores",
@@ -126,11 +126,11 @@
   },
   "seo": {
     "defaultTitle": "Club San Jorge | Agencias Abed",
-    "defaultDescription": "Planes de Capitalización y Ahorro Club San Jorge: autos, motos y dinero con atención comercial de Agencias Abed.",
+    "defaultDescription": "Planes de Capitalización y Ahorro Club San Jorge: autos, motos y órdenes de compra con atención comercial de Agencias Abed.",
     "defaultOgImage": "/assets/img/og/default-og.svg"
   },
   "legal": {
     "siteRoleText": "Este sitio representa comercialmente a una agencia mercantil de Club San Jorge y brinda información orientativa sobre planes, procesos y recursos vinculados a Club San Jorge.",
-    "disclaimerText": "La información de este sitio debe leerse junto con la documentación y condiciones vigentes de Club San Jorge. Ante cualquier duda, recomendamos revisar el contrato y consultar antes de contratar."
+    "disclaimerText": "La información publicada es orientativa y puede actualizarse según las condiciones vigentes de Club San Jorge. Si tenés dudas, podemos ayudarte a revisar la documentación correspondiente."
   }
 }

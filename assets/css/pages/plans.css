@@ -724,27 +724,12 @@
 }
 
 .plan-list-card__tag-dot {
-  background: var(--category-color, var(--color-brand-red));
+  background: #625d60;
   border-radius: 999px;
   content: "";
   box-shadow: none;
   height: 5px;
   width: 5px;
-}
-
-.plan-category--autos {
-  --category-color: #2f6fb3;
-  --category-bg: rgb(47 111 179 / 0.12);
-}
-
-.plan-category--motos {
-  --category-color: var(--color-brand-green-dark);
-  --category-bg: #e5f1e9;
-}
-
-.plan-category--dinero {
-  --category-color: #6f4bb3;
-  --category-bg: rgb(111 75 179 / 0.12);
 }
 
 .badge.plan-category--autos {

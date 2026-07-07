@@ -1,7 +1,6 @@
 import { createButton } from "../../components/plan-components.js";
 import { clear, el, qs } from "../../utils/dom.js";
 import { FALLBACK_TEXT, resolveValueState } from "../../utils/status.js";
-import { getPrimaryCta } from "./shared.js";
 
 function getHeroVideo(videosData) {
   return (
@@ -123,7 +122,7 @@ function createHeroVideo(video) {
         className: "home-hero-video__text",
         children: [
           el("strong", { text: "Vos también podés ser el próximo" }),
-          el("small", { text: "Conocé cómo funciona Club San Jorge" }),
+          el("small", { text: "Conocé más sobre Club San Jorge" }),
         ],
       }),
     ],
@@ -185,7 +184,26 @@ function createHeroVideo(video) {
   return videoBlock;
 }
 
-function createHeroDraws(draws, primaryCta) {
+function createHeroLead(site) {
+  const defaultLead = "Con cada cuota, ahorrás y todos los meses estás un paso más cerca de ser uno de nuestros cientos de adjudicados.";
+  const lead = site.club?.supportingClaim || defaultLead;
+  const highlight = "más cerca de ser uno de nuestros cientos de adjudicados.";
+  const highlightIndex = lead.indexOf(highlight);
+
+  if (highlightIndex === -1) {
+    return el("p", { className: "home-hero-v5__lead", text: lead });
+  }
+
+  return el("p", {
+    className: "home-hero-v5__lead",
+    children: [
+      lead.slice(0, highlightIndex),
+      el("strong", { text: highlight }),
+    ],
+  });
+}
+
+function createHeroDraws(draws) {
   const stimuli = (draws?.stimuli || []).sort((a, b) => (a.position || 0) - (b.position || 0)).slice(0, 3);
   const lastState = resolveValueState(draws?.lastDraw?.date, draws?.lastDraw?.status);
   const nextState = resolveValueState(draws?.nextDraw?.date, draws?.nextDraw?.status);
@@ -247,10 +265,9 @@ function createHeroDraws(draws, primaryCta) {
           el("div", {
             className: "home-hero-drawcard__actions",
             children: [
-              createButton({ label: "Quiero mi plan", href: primaryCta.href, variant: "primary" }),
               el("a", {
                 className: "button button--secondary home-hero-drawcard__payment",
-                text: "Pagá tu boleta",
+                text: "Pagar mi boleta",
                 attrs: {
                   href: "https://clubsanjorge.com.ar/capitalizacion-y-ahorro/paga-tu-cuota",
                   target: "_blank",
@@ -271,7 +288,6 @@ export function renderHero(data) {
   const { site, draws, videos } = data;
   const stats = getHeroStats(site);
   const video = getHeroVideo(videos);
-  const primaryCta = getPrimaryCta(site);
   const headline = site.club?.headline || "Suscribite, ahorrá y ganá";
 
   clear(target);
@@ -289,15 +305,7 @@ export function renderHero(data) {
                   attrs: { id: "home-title" },
                   text: headline.toLocaleUpperCase("es-AR"),
                 }),
-                el("p", {
-                  className: "home-hero-v5__lead",
-                  children: [
-                    "Cuota a cuota vas formando tu ahorro y participás todos los meses por ",
-                    el("strong", {
-                      text: "adjudicaciones que pueden acercarte a tu auto, tu moto o capital en dinero.",
-                    }),
-                  ],
-                }),
+                createHeroLead(site),
                 el("div", {
                   className: "home-hero-v5__actions",
                   children: [
@@ -308,7 +316,7 @@ export function renderHero(data) {
                 createHeroVideo(video),
               ],
             }),
-            createHeroDraws(draws, primaryCta),
+            createHeroDraws(draws),
           ],
         }),
       ],

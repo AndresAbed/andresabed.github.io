@@ -60,7 +60,7 @@ function createSocialReviewCard(item, index) {
               el("h3", { text: item.name }),
               el("span", {
                 className: "home-social-review__tag",
-                text: "Cliente adjudicado",
+                text: "Opinión en redes",
               }),
             ],
           }),
@@ -94,7 +94,7 @@ export function renderSocialReviews(data) {
           eyebrow: section.eyebrow || "Opiniones",
           title: section.title || "Experiencias compartidas",
           id: "home-social-reviews-title",
-          intro: section.intro || "Descubrí lo que nuestros clientes tienen para decir",
+          intro: section.intro || "Comentarios reales compartidos por clientes en redes.",
           align: "center",
         }),
         el("div", {
@@ -109,7 +109,7 @@ export function renderSocialReviews(data) {
                 }),
                 el("h3", { text: "Lo que comparten nuestros clientes" }),
                 el("p", {
-                  text: "Personas que ya vivieron la experiencia Club San Jorge",
+                  text: "Comentarios publicados por clientes en redes sociales.",
                 }),
                 el("div", {
                   className: "home-social-proof__controls",

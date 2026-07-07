@@ -64,7 +64,7 @@
 }
 
 .site-header--scrolled {
-  background: #1f1f1f;
+  background: #292929;
   border-bottom-color: rgb(255 255 255 / 0.1);
   box-shadow: 0 18px 52px rgb(0 0 0 / 0.2);
 }
@@ -712,6 +712,10 @@ body.site-menu-open .site-menu-drawer {
     min-width: 0;
   }
 
+  .brand-lockup__logo {
+    width: clamp(238px, 28vw, 288px);
+  }
+
   .site-header__desktop {
     display: none;
   }
@@ -726,12 +730,64 @@ body.site-menu-open .site-menu-drawer {
   }
 
   .site-footer__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 4.8vw, 44px);
+    grid-template-areas:
+      "brand"
+      "site"
+      "management"
+      "contact";
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-block-start: clamp(44px, 7vw, 68px);
+    text-align: center;
   }
 
-  .site-footer__brand,
+  .site-footer__brand {
+    grid-area: brand;
+  }
+
+  .site-footer__inner > .site-footer__column:nth-child(2) {
+    grid-area: site;
+    justify-self: center;
+    width: min(100%, 360px);
+  }
+
+  .site-footer__inner > .site-footer__column:nth-child(3) {
+    grid-area: management;
+    justify-self: center;
+    width: min(100%, 360px);
+  }
+
   .site-footer__contact {
-    grid-column: span 2;
+    grid-area: contact;
+    justify-self: center;
+    text-align: center;
+    width: min(100%, 520px);
+  }
+
+  .site-footer h2,
+  .site-footer__link-list,
+  .site-footer__contact-item {
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .site-footer__actions,
+  .site-footer__socials {
+    justify-content: center;
+  }
+
+  .site-footer__bottom {
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-footer__legal,
+  .site-footer__copyright {
+    justify-self: center;
+    text-align: center;
   }
 
 }
@@ -744,7 +800,7 @@ body.site-menu-open .site-menu-drawer {
 
 @media (max-width: 640px) {
   .brand-lockup__logo {
-    width: 188px;
+    width: clamp(196px, 48vw, 232px);
   }
 
   .site-header__inner {
@@ -768,15 +824,22 @@ body.site-menu-open .site-menu-drawer {
 
   .site-footer__inner {
     gap: var(--space-6);
+    grid-template-areas:
+      "brand"
+      "site"
+      "management"
+      "contact";
     grid-template-columns: 1fr;
     justify-items: center;
     padding-block-start: var(--space-7);
     text-align: center;
   }
 
-  .site-footer__brand,
+  .site-footer__inner > .site-footer__column:nth-child(2),
+  .site-footer__inner > .site-footer__column:nth-child(3),
   .site-footer__contact {
-    grid-column: auto;
+    justify-self: center;
+    width: 100%;
   }
 
   .site-footer__logo {
@@ -814,7 +877,7 @@ body.site-menu-open .site-menu-drawer {
 
 @media (max-width: 380px) {
   .brand-lockup__logo {
-    width: 166px;
+    width: clamp(176px, 50vw, 190px);
   }
 
   .site-header__menu-button {

@@ -38,12 +38,12 @@ export function renderSubscriberResources(data) {
           children: [
             el("h3", { attrs: { id: "subscriber-tools-title" }, text: "Tus gestiones, más a mano" }),
             el("p", {
-              text: "Accedé a pagos, boletas y medios oficiales sin buscar entre secciones.",
+              text: "Accedé rápido a pagos, boletas y opciones de gestión vinculadas a tu suscripción.",
             }),
             primaryEnabled
               ? el("a", {
                   className: "button button--primary home-subscriber-tools__primary",
-                  text: "Pagar boleta",
+                  text: "Pagar mi boleta",
                   attrs: { href: primary.url, target: "_blank", rel: "noopener noreferrer" },
                 })
               : el("span", { className: "badge badge--warning", text: FALLBACK_TEXT.updating }),

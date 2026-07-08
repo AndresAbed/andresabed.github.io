@@ -141,14 +141,16 @@ async function renderAdjudicationSelection(target, selectedYear, selectedMonth) 
             selector,
           ],
         }),
-        el("p", {
-          className: "adjudications-note",
-          text: "Los prenombrados deberán estar encuadrados dentro de la reglamentación vigente.",
-        }),
         el("section", {
           className: "adjudications-results",
           attrs: { "aria-label": "Listado de adjudicados" },
-          children: [createAdjudicationsTable({ columns, rows })],
+          children: [
+            createAdjudicationsTable({ columns, rows }),
+            el("p", {
+              className: "adjudications-note",
+              text: "* Los prenombrados quedan sujetos a la reglamentación vigente.",
+            }),
+          ],
         }),
       ],
     }),

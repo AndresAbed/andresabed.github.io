@@ -71,9 +71,9 @@ export function createFilters(items = []) {
       el("div", {
         className: "plans-catalog-intro",
         children: [
-          el("h1", { text: "Compará los planes disponibles", attrs: { id: "plans-catalog-filter-title" } }),
+          el("h1", { text: "Encontrá un plan a tu medida", attrs: { id: "plans-catalog-filter-title" } }),
           el("p", {
-            text: "Compará autos, motos y órdenes de compra para elegir la alternativa que mejor se ajuste a lo que buscás.",
+            text: "Explorá autos, motos y órdenes de compra para elegir la alternativa que mejor se ajuste a lo que necesitás.",
           }),
         ],
       }),

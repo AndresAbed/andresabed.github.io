@@ -507,7 +507,7 @@
 }
 
 .adjudications-section {
-  --adjudications-panel-offset: clamp(82px, 6.6vw, 106px);
+  --adjudications-panel-offset: clamp(82px, 7.5vw, 160px);
   margin-block-start: calc(-2 * var(--adjudications-panel-offset));
   padding-block-start: 0;
   position: relative;
@@ -628,14 +628,15 @@
 
 .adjudications-note {
   color: var(--color-muted);
-  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
-  line-height: 1.5;
+  font-size: 0.84rem;
+  line-height: 1.45;
   margin: 0;
-  text-align: center;
+  max-width: 62ch;
 }
 
 .adjudications-results {
   display: grid;
+  gap: 0.72rem;
 }
 
 .adjudications-table {

@@ -308,14 +308,19 @@
   content: none;
 }
 
+.catalog-filter-chip--category .catalog-filter-chip__mark {
+  height: 35px;
+  width: 35px;
+}
+
 .catalog-filter-chip--category .catalog-filter-chip__mark::before {
   background: currentColor;
   content: "";
   display: block;
-  height: 17px;
+  height: 20px;
   mask: var(--filter-icon) center / contain no-repeat;
   -webkit-mask: var(--filter-icon) center / contain no-repeat;
-  width: 17px;
+  width: 20px;
 }
 
 .catalog-filter-chip--category[data-filter-value="all"] {

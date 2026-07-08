@@ -53,9 +53,8 @@ Archivos principales:
 - `videos.json`: videos institucionales/explicativos.
 - `social-reviews.json`: pruebas sociales y testimonios.
 - `recruitment.json`: bloque y formulario de productores.
-- `adjudications.json`: fallback local para la pagina de adjudicados.
 
-Los resultados de sorteos y adjudicados destacados de la Home se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
+Los resultados de sorteos, adjudicados destacados de la Home y la tabla de adjudicados se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
 
 ## Estados de datos
 

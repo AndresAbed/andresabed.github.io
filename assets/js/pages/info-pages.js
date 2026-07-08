@@ -2,13 +2,12 @@ import {
   getAdjudicationColumns,
   getAdjudicationMonths,
   getAdjudicationYears,
-  getAdjudicationsFor,
   getDrawStimuli,
   getFaqCategories,
   getFeaturedResources,
   getResourceById,
   getResourceGroups,
-  loadAdjudications,
+  loadAdjudicationsForPeriod,
   loadDraws,
   loadFaq,
   loadResources,
@@ -23,12 +22,11 @@ import {
   createResourceCard,
   createResourceGroup,
   createSectionHeader,
-  safeRows,
 } from "../components/info-components.js";
 import { createButton, createMiniFact } from "../components/plan-components.js";
 import { clear, el, qs } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
-import { hasValue, isMockStatus } from "../utils/validators.js";
+import { hasValue } from "../utils/validators.js";
 
 const PRIORITY_FAQ_IDS = [
   "que-se-obtiene-al-final-del-plan-330",
@@ -40,6 +38,14 @@ const PRIORITY_FAQ_IDS = [
 
 function latestMonth(months = []) {
   return months.length ? Math.max(...months.map(Number)) : null;
+}
+
+function latestPublishedMonth(months = [], year) {
+  const today = new Date();
+  const isCurrentYear = Number(year) === today.getFullYear();
+  const currentMonth = today.getMonth() + 1;
+  const defaultMonth = isCurrentYear && currentMonth > 1 ? currentMonth - 1 : latestMonth(months);
+  return months.includes(defaultMonth) ? defaultMonth : latestMonth(months);
 }
 
 function createOfficialLink(resources, id, label) {
@@ -95,43 +101,57 @@ export async function initDrawsPage() {
   );
 }
 
-function renderAdjudicationSelection(target, data, resources, selectedYear, selectedMonth) {
-  const years = getAdjudicationYears(data);
+async function renderAdjudicationSelection(target, selectedYear, selectedMonth) {
+  const years = getAdjudicationYears();
   const year = selectedYear || years[0];
-  const monthInfo = getAdjudicationMonths(data, year);
+  const monthsByYear = Object.fromEntries(years.map((availableYear) => [String(availableYear), getAdjudicationMonths(availableYear).months || []]));
+  const monthInfo = { months: monthsByYear[String(year)] || [] };
   const months = monthInfo.months || [];
-  const month = selectedMonth || latestMonth(months);
-  const allRows = getAdjudicationsFor(data, year, month);
-  const rows = safeRows(allRows);
-  const columns = getAdjudicationColumns(data);
-  const localState = isMockStatus(data.meta?.status) || isMockStatus(monthInfo.status) ? UI_STATES.PARTIAL : UI_STATES.READY;
+  const month = selectedMonth || latestPublishedMonth(months, year);
+  const adjudications = await loadAdjudicationsForPeriod(year, month);
+  const rows = adjudications.rows || [];
+  const columns = getAdjudicationColumns();
 
   const selector = createMonthYearSelector({
     years,
     selectedYear: year,
     months,
     selectedMonth: month,
-    onChange: (newYear, newMonth) => renderAdjudicationSelection(target, data, resources, newYear, newMonth),
+    monthsByYear,
+    onChange: (newYear, newMonth) => renderAdjudicationSelection(target, newYear, newMonth),
   });
 
   clear(target);
   target.append(
-    createSectionHeader({
-      eyebrow: "Consulta por periodo",
-      title: "Selecciona año y mes",
-      intro: "La estructura soporta consulta por periodo. Si la carga local es mock o parcial, no se muestra como historico real.",
+    el("div", {
+      className: "adjudications-shell",
+      children: [
+        el("section", {
+          className: "adjudications-control-panel",
+          attrs: { "aria-labelledby": "adjudications-filter-title" },
+          children: [
+            el("div", {
+              className: "adjudications-control-panel__head",
+              children: [
+                el("span", { className: "adjudications-kicker", text: "Consulta por periodo" }),
+                el("h2", { id: "adjudications-filter-title", text: "Filtrar adjudicados" }),
+                el("p", { text: "Seleccioná mes y año para consultar los resultados correspondientes." }),
+              ],
+            }),
+            selector,
+          ],
+        }),
+        el("p", {
+          className: "adjudications-note",
+          text: "Los prenombrados deberán estar encuadrados dentro de la reglamentación vigente.",
+        }),
+        el("section", {
+          className: "adjudications-results",
+          attrs: { "aria-label": "Listado de adjudicados" },
+          children: [createAdjudicationsTable({ columns, rows })],
+        }),
+      ],
     }),
-    selector,
-    createDataStatusBanner({
-      title: localState === UI_STATES.READY ? "Datos locales disponibles" : "Carga local en validacion",
-      body:
-        localState === UI_STATES.READY
-          ? "El periodo seleccionado tiene datos listos para mostrarse."
-          : "El data pack actual incluye estructura y datos mock/parciales. Se evita publicarlos como oficiales.",
-      state: localState,
-      action: createOfficialLink(resources, "adjudicados-oficial", "Ver adjudicados oficiales"),
-    }),
-    createAdjudicationsTable({ columns, rows }),
   );
 }
 
@@ -139,24 +159,9 @@ export async function initAdjudicationsPage() {
   const target = qs("[data-adjudications-page]");
   if (!target) return;
 
-  const [adjudications, resources] = await Promise.all([loadAdjudications(), loadResources()]);
   clear(target);
 
-  const selectorSlot = el("div", { className: "stack" });
-  target.append(
-    createSectionHeader({
-      eyebrow: "Adjudicados",
-      title: "Consulta publicaciones de adjudicados",
-      intro: "La seccion queda preparada para historico local y prioriza fuente oficial cuando falta carga validada.",
-    }),
-    selectorSlot,
-    createFinalHelpCta({
-      title: "¿Tenes dudas sobre un adjudicado?",
-      body: "Te orientamos para revisar la publicacion disponible y entender el siguiente paso.",
-    }),
-  );
-
-  renderAdjudicationSelection(selectorSlot, adjudications, resources);
+  await renderAdjudicationSelection(target);
 }
 
 export async function initResourcesPage() {

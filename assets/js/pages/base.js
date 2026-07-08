@@ -14,11 +14,6 @@ const PAGE_COPY = {
     body: "Estructura preparada para mostrar regla oficial y resultados cuando esten validados.",
     state: UI_STATES.PARTIAL,
   },
-  adjudicados: {
-    title: "Adjudicados",
-    body: "Base preparada para tabla futura o enlace oficial, sin publicar datos mock como reales.",
-    state: UI_STATES.EMPTY,
-  },
   recursos: {
     title: "Recursos",
     body: "Hub base para pagos, gestiones y fuentes oficiales con manejo de links faltantes.",

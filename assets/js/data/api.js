@@ -8,7 +8,6 @@ export const DATASETS = Object.freeze({
   planCatalog: "plan_catalog.json",
   faq: "faq.json",
   resources: "resources.json",
-  adjudications: "adjudications.json",
   socialReviews: "social-reviews.json",
   recruitment: "recruitment.json",
   videos: "videos.json",
@@ -21,6 +20,13 @@ const ARTEMIS_BASE_URL = "https://artemis.clubsanjorge.com.ar";
 const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_BASE_URL}/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/issue`;
 const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
 const ARTEMIS_TIMEOUT_MS = 4500;
+const ADJUDICATION_LOOKBACK_YEARS = 3;
+const ADJUDICATION_COLUMNS = Object.freeze([
+  { key: "name", label: "Nombre" },
+  { key: "address", label: "Domicilio" },
+  { key: "locality", label: "Localidad" },
+  { key: "installment", label: "Cuota" },
+]);
 
 const EMPTY_DRAWS = Object.freeze({
   meta: {
@@ -100,7 +106,7 @@ export const loadPlanCatalog = () => loadDataset("planCatalog");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
 export const loadDraws = () => loadOfficialDraws();
-export const loadAdjudications = () => loadDataset("adjudications");
+export const loadAdjudicationsForPeriod = (year, month) => loadOfficialAdjudicationsForPeriod(year, month);
 export const loadHomeAdjudications = () => loadOfficialHomeAdjudications();
 export const loadSocialReviews = () => loadDataset("socialReviews");
 export const loadRecruitment = () => loadDataset("recruitment");
@@ -193,6 +199,36 @@ function drawDateFromArtemisDetail(value) {
   return normalizeArtemisText(value).split(";")[1]?.trim() || "";
 }
 
+function padTwoDigits(value) {
+  return String(value).padStart(2, "0");
+}
+
+function issueSummaryFromPeriod(year, month) {
+  return `01/${padTwoDigits(month)}/${year}`;
+}
+
+function parseAdjudicationsFromArtemis(payload) {
+  return (Array.isArray(payload) ? payload : [])
+    .map((entry) => {
+      const issueDescr = entry?.issue_descr || [];
+      const name = normalizeArtemisText(issueDescr[0]);
+      const address = normalizeArtemisText(issueDescr[1]);
+      const locality = normalizeArtemisText(issueDescr[2]);
+      const installment = installmentFromArtemisDetail(issueDescr[3]);
+
+      if (!name) return null;
+
+      return {
+        name,
+        address,
+        locality,
+        installment,
+        source: "artemis_api",
+      };
+    })
+    .filter(Boolean);
+}
+
 function parseHomeAdjudicationsFromArtemis(payload, fallback) {
   const items = (Array.isArray(payload) ? payload : [])
     .map((entry, index) => {
@@ -257,6 +293,34 @@ async function loadOfficialHomeAdjudications() {
   } catch (error) {
     console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
     return EMPTY_HOME_ADJUDICATIONS;
+  }
+}
+
+async function loadOfficialAdjudicationsForPeriod(year, month) {
+  try {
+    const payload = await fetchArtemisIssues(
+      { related_project: "ADJUDI", issue_summary: issueSummaryFromPeriod(year, month) },
+      { columns: ["issue_descr"] },
+    );
+
+    return {
+      meta: {
+        source: "artemis_api",
+        status: "verified",
+      },
+      columns: ADJUDICATION_COLUMNS,
+      rows: parseAdjudicationsFromArtemis(payload),
+    };
+  } catch (error) {
+    console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
+    return {
+      meta: {
+        source: "artemis_api",
+        status: "pending_validation",
+      },
+      columns: ADJUDICATION_COLUMNS,
+      rows: [],
+    };
   }
 }
 
@@ -373,24 +437,25 @@ export function getDrawStimuli(drawsData) {
   return [...(drawsData?.stimuli || [])].sort((a, b) => (a.position || 0) - (b.position || 0));
 }
 
-export function getAdjudicationYears(adjudicationsData) {
-  return (adjudicationsData?.availableYears || []).map((item) => item.year).filter(Boolean);
+export function getAdjudicationYears() {
+  const currentYear = new Date().getFullYear();
+  const startYear = currentYear - ADJUDICATION_LOOKBACK_YEARS + 1;
+  return Array.from({ length: ADJUDICATION_LOOKBACK_YEARS }, (_, index) => currentYear - index).filter((year) => year >= startYear);
 }
 
-export function getAdjudicationMonths(adjudicationsData, year) {
-  const entry = adjudicationsData?.availableMonthsByYear?.[String(year)];
+export function getAdjudicationMonths(year) {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const maxMonth = Number(year) === currentYear ? today.getMonth() : 12;
+
   return {
-    months: entry?.months || [],
-    status: entry?.status || "unknown",
+    months: Array.from({ length: maxMonth }, (_, index) => index + 1),
+    status: "verified",
   };
 }
 
-export function getAdjudicationsFor(adjudicationsData, year, month) {
-  return adjudicationsData?.data?.[String(year)]?.[String(month)] || [];
-}
-
-export function getAdjudicationColumns(adjudicationsData) {
-  return adjudicationsData?.meta?.tableColumns || [];
+export function getAdjudicationColumns() {
+  return ADJUDICATION_COLUMNS;
 }
 
 export function normalizeInternalTarget(target) {

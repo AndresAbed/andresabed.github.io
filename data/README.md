@@ -6,7 +6,6 @@ Incluye JSON editables para construir la web estática:
 - plan_catalog.json
 - faq.json
 - resources.json
-- adjudications.json
 - videos.json
 - social-reviews.json
 - recruitment.json
@@ -24,5 +23,5 @@ Catalogo V2:
 - Usar `pending_validation` o `sourceStatus` prudente cuando falten datos especificos.
 
 Datos via API:
-- Sorteos y adjudicados destacados de la Home se consumen desde Artemis.
-- No mantener copias locales de `draws.json`, `home-adjudications.json` ni fotos locales de adjudicados salvo que vuelvan a ser necesarias como fallback editorial.
+- Sorteos, adjudicados destacados de la Home y la tabla de adjudicados se consumen desde Artemis.
+- No mantener copias locales de `draws.json`, `adjudications.json`, `home-adjudications.json` ni fotos locales de adjudicados salvo que vuelvan a ser necesarias como fallback editorial.

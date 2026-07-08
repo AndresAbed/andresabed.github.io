@@ -91,7 +91,7 @@ export function createDrawSummary(draws) {
   });
 }
 
-export function createMonthYearSelector({ years, selectedYear, months, selectedMonth, onChange }) {
+export function createMonthYearSelector({ years, selectedYear, months, selectedMonth, monthsByYear = {}, onChange }) {
   const yearSelect = el("select", {
     attrs: { id: "adjudication-year", name: "year" },
     children: years.map((year) => el("option", { text: String(year), attrs: { value: year, selected: Number(year) === Number(selectedYear) } })),
@@ -99,30 +99,60 @@ export function createMonthYearSelector({ years, selectedYear, months, selectedM
 
   const monthSelect = el("select", {
     attrs: { id: "adjudication-month", name: "month" },
-    children: months.map((month) =>
-      el("option", { text: monthName(month), attrs: { value: month, selected: Number(month) === Number(selectedMonth) } }),
-    ),
   });
 
-  yearSelect.addEventListener("change", () => onChange(Number(yearSelect.value), null));
-  monthSelect.addEventListener("change", () => onChange(Number(yearSelect.value), Number(monthSelect.value)));
+  function updateMonthOptions(year, preferredMonth) {
+    const availableMonths = monthsByYear[String(year)] || months;
+    const selected = availableMonths.includes(Number(preferredMonth)) ? Number(preferredMonth) : availableMonths[availableMonths.length - 1];
 
-  return el("form", {
-    className: "filter-panel",
+    monthSelect.replaceChildren(
+      ...availableMonths.map((month) =>
+        el("option", { text: monthName(month), attrs: { value: month, selected: Number(month) === Number(selected) } }),
+      ),
+    );
+  }
+
+  updateMonthOptions(selectedYear, selectedMonth);
+
+  yearSelect.addEventListener("change", () => {
+    updateMonthOptions(Number(yearSelect.value), monthSelect.value);
+  });
+
+  const form = el("form", {
+    className: "filter-panel adjudications-filter",
     attrs: { "aria-label": "Seleccionar periodo de adjudicados" },
     children: [
-      el("label", { children: [el("span", { text: "Año" }), yearSelect] }),
       el("label", { children: [el("span", { text: "Mes" }), monthSelect] }),
+      el("label", { children: [el("span", { text: "Año" }), yearSelect] }),
+      el("button", {
+        className: "button button--primary adjudications-filter__submit",
+        text: "Filtrar",
+        attrs: { type: "submit" },
+      }),
     ],
   });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    onChange(Number(yearSelect.value), Number(monthSelect.value));
+  });
+
+  return form;
 }
 
 export function createAdjudicationsTable({ columns, rows }) {
   if (!rows.length) {
-    return createDataStatusBanner({
-      title: "Sin datos reales para mostrar",
-      body: "El periodo seleccionado no tiene datos validados en la carga local. Revisá la fuente oficial o consultanos.",
-      state: UI_STATES.EMPTY,
+    return el("div", {
+      className: "table-shell adjudications-table adjudications-table--empty",
+      children: [
+        el("div", {
+          className: "adjudications-empty",
+          children: [
+            el("h3", { text: "Sin adjudicados para este periodo" }),
+            el("p", { text: "Probá con otro mes o año para revisar las publicaciones disponibles." }),
+          ],
+        }),
+      ],
     });
   }
 

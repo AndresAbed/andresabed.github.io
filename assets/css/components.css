@@ -116,21 +116,11 @@
   padding: var(--space-4);
 }
 
-.status-box,
 .empty-state {
   background: #ffffff;
   border: 1px dashed var(--color-line);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-}
-
-.status-box[data-state="partial"] {
-  border-color: #e4bd72;
-}
-
-.status-box[data-state="disabled"],
-.status-box[data-state="empty"] {
-  background: #f8fafc;
 }
 
 .table-shell {

@@ -4,7 +4,6 @@ export const DATA_ROOT = "/data";
 
 export const DATASETS = Object.freeze({
   site: "site.json",
-  plans: "plans.json",
   planCatalog: "plan_catalog.json",
   faq: "faq.json",
   resources: "resources.json",
@@ -101,7 +100,6 @@ export async function loadDataset(name) {
 }
 
 export const loadSite = () => loadDataset("site");
-export const loadPlans = () => loadDataset("plans");
 export const loadPlanCatalog = () => loadDataset("planCatalog");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
@@ -339,19 +337,6 @@ export async function loadHomeData() {
   return { site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, videos };
 }
 
-export function getPlanBySlug(plansData, slug) {
-  return plansData?.plans?.find((plan) => plan.slug === slug) || null;
-}
-
-export function getVisiblePlans(plansData) {
-  return [...(plansData?.plans || [])].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-}
-
-export function getFeaturedPlan(plansData) {
-  const slug = plansData?.meta?.featuredPlanSlug;
-  return getPlanBySlug(plansData, slug) || plansData?.plans?.find((plan) => plan.featured) || null;
-}
-
 export function getCatalogCategories(catalogData) {
   return [...(catalogData?.categories || [])].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 }
@@ -396,17 +381,6 @@ export function getFaqById(faqData, id) {
 export function getFeaturedFaqs(faqData) {
   const ids = faqData?.featuredFaqIds || [];
   return ids.map((id) => getFaqById(faqData, id)).filter(Boolean);
-}
-
-export function getFaqsForPlan(faqData, plan) {
-  return (plan?.faqRefs || []).map((id) => getFaqById(faqData, id)).filter(Boolean);
-}
-
-export function getPlanDisclaimers(plan) {
-  return [
-    ...(plan?.whatYouGetAtEnd || []),
-    ...(plan?.importantClarifications || []),
-  ].filter((item) => item?.text);
 }
 
 export function getResourcesByGroup(resourcesData, slug) {

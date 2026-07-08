@@ -3,9 +3,7 @@ import { renderShell } from "./components/shell.js";
 import { initContactPage } from "./pages/contact.js";
 import { initHomePage } from "./pages/home.js";
 import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js";
-import { initPlanDetail } from "./pages/plan-detail.js";
 import { initPlansHub } from "./pages/plans/index.js";
-import { initBasePage } from "./pages/base.js";
 
 function finishAppLoading() {
   window.requestAnimationFrame(() => {
@@ -23,8 +21,6 @@ async function boot() {
       await initHomePage(site);
     } else if (document.body.dataset.page === "planes") {
       await initPlansHub(site);
-    } else if (document.body.dataset.page === "plan-detail") {
-      await initPlanDetail(site);
     } else if (document.body.dataset.page === "sorteos") {
       await initDrawsPage(site);
     } else if (document.body.dataset.page === "adjudicados") {
@@ -35,8 +31,6 @@ async function boot() {
       await initFaqPage(site);
     } else if (document.body.dataset.page === "contacto") {
       await initContactPage(site);
-    } else {
-      await initBasePage(site);
     }
   } catch (error) {
     console.error(error);

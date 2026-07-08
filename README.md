@@ -7,7 +7,7 @@ El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizacio
 ## Estructura
 
 - `index.html`: Home comercial/informativa.
-- `planes/`: catalogo por categorias y paginas detalle heredadas.
+- `planes/`: catalogo principal por categorias.
 - `sorteos/`, `adjudicados/`, `recursos/`, `preguntas-frecuentes/`, `contacto/`: paginas internas.
 - `assets/css/`: tokens, base, layout, componentes, utilities y estilos de pagina.
 - `assets/js/`: data layer, shell, componentes, helpers y modulos por pagina.
@@ -46,8 +46,7 @@ Archivos principales:
 
 - `site.json`: datos globales del sitio, marca, CTAs, SEO y textos legales.
 - `agency-contact.json`: canales de contacto y configuracion de formularios.
-- `plan_catalog.json`: catalogo principal usado por `/planes/`.
-- `plans.json`: contenido heredado de paginas detalle por categoria.
+- `plan_catalog.json`: catalogo principal usado por `/planes/`, Home y formularios de consulta.
 - `faq.json`: preguntas frecuentes.
 - `resources.json`: enlaces y recursos oficiales.
 - `videos.json`: videos institucionales/explicativos.

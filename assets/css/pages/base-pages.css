@@ -120,8 +120,7 @@
 }
 
 .stats-grid,
-.facts-row,
-.plan-card__facts {
+.facts-row {
   display: grid;
   gap: var(--space-3);
 }
@@ -156,49 +155,15 @@
   border-color: #f0d9ad;
 }
 
-.plans-grid,
 .steps-grid,
 .resource-grid {
   display: grid;
   gap: var(--space-4);
 }
 
-.system-flow,
 .editorial-split {
   display: grid;
   gap: var(--space-4);
-}
-
-.plan-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-lg);
-  display: grid;
-  gap: var(--space-4);
-  padding: var(--space-5);
-}
-
-.plan-card--featured {
-  border-color: rgb(180 35 42 / 0.45);
-  box-shadow: var(--shadow-soft);
-  position: relative;
-}
-
-.plan-card__top,
-.plan-card__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.plan-card__top {
-  align-items: start;
-  justify-content: space-between;
-}
-
-.plan-card__top h3 {
-  flex-basis: 100%;
-  font-size: 1.35rem;
 }
 
 .step-card,
@@ -212,18 +177,6 @@
 
 .step-card {
   border-top: 5px solid var(--color-brand-green);
-}
-
-.system-flow .step-card:nth-child(2) {
-  border-top-color: var(--color-brand-red);
-}
-
-.system-flow .step-card:nth-child(3) {
-  border-top-color: var(--color-warning);
-}
-
-.system-flow .step-card:nth-child(4) {
-  border-top-color: var(--color-ink);
 }
 
 .system-note,
@@ -303,8 +256,7 @@
     linear-gradient(135deg, rgb(143 29 35 / 0.96), rgb(24 33 47 / 0.96));
 }
 
-.plans-hub-hero,
-.plan-detail-hero {
+.plans-hub-hero {
   align-items: start;
   display: grid;
   gap: var(--space-5);
@@ -324,8 +276,7 @@
   gap: var(--space-5);
 }
 
-.plans-hub-hero__copy,
-.plan-detail-hero__copy {
+.plans-hub-hero__copy {
   max-width: 780px;
 }
 
@@ -333,92 +284,6 @@
   display: grid;
   gap: var(--space-5);
   margin-block-end: var(--space-7);
-}
-
-.plan-comparator {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.compare-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-lg);
-  display: grid;
-  gap: var(--space-3);
-  padding: var(--space-5);
-}
-
-.compare-card--featured {
-  border-color: rgb(180 35 42 / 0.45);
-  box-shadow: var(--shadow-soft);
-}
-
-.compare-row {
-  border-top: 1px solid var(--color-line);
-  display: grid;
-  gap: var(--space-1);
-  padding-block-start: var(--space-3);
-}
-
-.compare-row span {
-  color: var(--color-muted);
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.compare-row strong {
-  color: var(--color-ink);
-  font-size: 0.98rem;
-  font-weight: 700;
-  line-height: 1.45;
-}
-
-.compare-row[data-state="partial"],
-.compare-row[data-state="empty"],
-.compare-row[data-state="disabled"] {
-  background: #fffaf2;
-  border-radius: var(--radius-sm);
-  border-top-color: #f0d9ad;
-  padding: var(--space-3);
-}
-
-.plan-summary-grid,
-.plan-facts {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.info-list {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.info-list__item {
-  background: #ffffff;
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
-  display: grid;
-  gap: var(--space-2);
-  padding: var(--space-4);
-}
-
-.info-list__item[data-state="partial"] {
-  background: #fffaf2;
-  border-color: #f0d9ad;
-}
-
-.info-list__item p {
-  margin-block-end: 0;
-}
-
-.plan-faq {
-  max-width: 900px;
-}
-
-.plan-cta {
-  margin-block-start: var(--space-5);
 }
 
 .info-page-grid {
@@ -837,22 +702,10 @@
   text-align: center;
 }
 
-.page-placeholder {
-  padding-block: var(--space-7);
-}
-
 @media (min-width: 900px) {
   .home-hero__inner {
     align-items: center;
     grid-template-columns: 1.2fr 0.8fr;
-  }
-
-  .system-flow {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .system-flow--compact {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .editorial-split {
@@ -865,10 +718,6 @@
 
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .plans-grid {
-    grid-template-columns: 1.15fr 0.9fr 0.9fr;
   }
 
   .steps-grid {
@@ -917,17 +766,8 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .plans-hub-hero,
-  .plan-detail-hero {
+  .plans-hub-hero {
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  }
-
-  .plan-comparator {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .plan-summary-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .steps-grid--four {

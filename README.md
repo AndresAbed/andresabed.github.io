@@ -46,6 +46,7 @@ Archivos principales:
 
 - `site.json`: datos globales del sitio, marca, CTAs, SEO y textos legales.
 - `agency-contact.json`: canales de contacto y configuracion de formularios.
+- `artemis-backup.json`: respaldo local de sorteos y adjudicados para usar si Artemis no responde.
 - `plan_catalog.json`: catalogo principal usado por `/planes/`, Home y formularios de consulta.
 - `faq.json`: preguntas frecuentes.
 - `resources.json`: enlaces y recursos oficiales.
@@ -54,6 +55,23 @@ Archivos principales:
 - `recruitment.json`: bloque y formulario de productores.
 
 Los resultados de sorteos, adjudicados destacados de la Home y la tabla de adjudicados se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
+Si Artemis no responde, el sitio usa `data/artemis-backup.json` y `data/plan_catalog.json` como respaldo local.
+
+## Backups de Artemis
+
+Actualizar respaldos manualmente:
+
+```bash
+node scripts/update-artemis-backups.mjs
+```
+
+Ese comando actualiza:
+
+- `data/artemis-backup.json`
+
+`data/plan_catalog.json` queda como snapshot curado del catalogo y tambien como fallback cuando Artemis no responde.
+
+Tambien existe un workflow mensual en `.github/workflows/update-artemis-backups.yml` para correr el mismo proceso el primer dia de cada mes y commitear cambios si Artemis devuelve informacion nueva.
 
 ## Estados de datos
 

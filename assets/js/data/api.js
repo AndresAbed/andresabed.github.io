@@ -4,6 +4,7 @@ export const DATA_ROOT = "/data";
 
 export const DATASETS = Object.freeze({
   site: "site.json",
+  artemisBackup: "artemis-backup.json",
   planCatalog: "plan_catalog.json",
   faq: "faq.json",
   resources: "resources.json",
@@ -19,6 +20,7 @@ const ARTEMIS_BASE_URL = "https://artemis.clubsanjorge.com.ar";
 const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_BASE_URL}/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/issue`;
 const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
 const ARTEMIS_TIMEOUT_MS = 4500;
+const ARTEMIS_BACKUP_SOURCE = "local_artemis_backup";
 const ADJUDICATION_LOOKBACK_YEARS = 3;
 const ADJUDICATION_COLUMNS = Object.freeze([
   { key: "name", label: "Nombre" },
@@ -100,6 +102,7 @@ export async function loadDataset(name) {
 }
 
 export const loadSite = () => loadDataset("site");
+export const loadArtemisBackup = () => loadDataset("artemisBackup");
 export const loadPlanCatalog = () => loadDataset("planCatalog");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
@@ -120,6 +123,34 @@ function artemisIssuesUrl(query, options = {}) {
 
 async function fetchArtemisIssues(query, options) {
   return fetchJson(artemisIssuesUrl(query, options), { timeoutMs: ARTEMIS_TIMEOUT_MS });
+}
+
+async function loadSafeArtemisBackup() {
+  try {
+    return await loadArtemisBackup();
+  } catch (error) {
+    console.warn("No se pudo cargar el backup local de Artemis.", error);
+    return null;
+  }
+}
+
+function backupMeta(backup, kind) {
+  return {
+    source: ARTEMIS_BACKUP_SOURCE,
+    status: "partial",
+    fallbackOf: kind,
+    generatedAt: backup?.meta?.generatedAt || "",
+  };
+}
+
+function withBackupMeta(value, backup, kind) {
+  return {
+    ...value,
+    meta: {
+      ...(value?.meta || {}),
+      ...backupMeta(backup, kind),
+    },
+  };
 }
 
 function normalizeArtemisText(value) {
@@ -277,6 +308,10 @@ async function loadOfficialDraws() {
     return parseDrawsFromArtemis(payload, EMPTY_DRAWS);
   } catch (error) {
     console.warn("No se pudo cargar el sorteo desde Artemis.", error);
+    const backup = await loadSafeArtemisBackup();
+    if (backup?.draws?.stimuli?.length || backup?.draws?.lastDraw?.date) {
+      return withBackupMeta(backup.draws, backup, "draws");
+    }
     return EMPTY_DRAWS;
   }
 }
@@ -290,6 +325,10 @@ async function loadOfficialHomeAdjudications() {
     return parseHomeAdjudicationsFromArtemis(payload, EMPTY_HOME_ADJUDICATIONS);
   } catch (error) {
     console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
+    const backup = await loadSafeArtemisBackup();
+    if (backup?.homeAdjudications?.items?.length) {
+      return withBackupMeta(backup.homeAdjudications, backup, "home_adjudications");
+    }
     return EMPTY_HOME_ADJUDICATIONS;
   }
 }
@@ -311,6 +350,20 @@ async function loadOfficialAdjudicationsForPeriod(year, month) {
     };
   } catch (error) {
     console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
+    const backup = await loadSafeArtemisBackup();
+    const periodKey = `${year}-${padTwoDigits(month)}`;
+    const period = backup?.adjudications?.periods?.[periodKey];
+    if (period) {
+      return {
+        meta: {
+          ...backupMeta(backup, "adjudications"),
+          periodKey,
+        },
+        columns: backup?.adjudications?.columns || ADJUDICATION_COLUMNS,
+        rows: period.rows || [],
+      };
+    }
+
     return {
       meta: {
         source: "artemis_api",

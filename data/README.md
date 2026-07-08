@@ -2,6 +2,7 @@
 
 Incluye JSON editables para construir la web estática:
 - site.json
+- artemis-backup.json
 - plan_catalog.json
 - faq.json
 - resources.json
@@ -22,4 +23,6 @@ Catalogo V2:
 
 Datos via API:
 - Sorteos, adjudicados destacados de la Home y la tabla de adjudicados se consumen desde Artemis.
+- Si Artemis falla, `artemis-backup.json` funciona como respaldo local de esos datos.
+- `plan_catalog.json` queda como snapshot curado del catalogo y fallback de planes cuando Artemis no responde.
 - No mantener copias locales de `draws.json`, `adjudications.json`, `home-adjudications.json` ni fotos locales de adjudicados salvo que vuelvan a ser necesarias como fallback editorial.

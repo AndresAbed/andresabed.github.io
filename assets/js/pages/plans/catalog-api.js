@@ -4,6 +4,7 @@ import { normalizeLivePlan, normalizeSnapshotPlan, sortPlans } from "./catalog-n
 
 const ARTEMIS_PLAN_CATALOG_URL =
   "https://artemis.clubsanjorge.com.ar/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/listapre";
+const ARTEMIS_PLAN_TIMEOUT_MS = 4500;
 
 const PLAN_COLUMNS = Object.freeze([
   "activo",
@@ -26,10 +27,15 @@ function catalogUrl() {
 }
 
 async function fetchLiveRows() {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), ARTEMIS_PLAN_TIMEOUT_MS);
   const response = await fetch(catalogUrl(), {
+    signal: controller.signal,
     headers: {
       Accept: "application/json, text/javascript, */*; q=0.01",
     },
+  }).finally(() => {
+    window.clearTimeout(timeout);
   });
 
   if (!response.ok) {

@@ -2,16 +2,16 @@
 
 Sitio estatico comercial e informativo para una agencia mercantil de Club San Jorge.
 
-El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizacion y Ahorro, explorar el catalogo de opciones y contactar a la agencia para una consulta asistida. No es un checkout, una app transaccional ni una inscripcion online final.
+El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizacion y Ahorro, explorar el catalogo de opciones y dejar una preinscripcion o consulta asistida desde el detalle de un plan. No es un checkout, una app transaccional ni una inscripcion online final.
 
 ## Estructura
 
 - `index.html`: Home comercial/informativa.
 - `planes/`: catalogo principal por categorias.
-- `sorteos/`, `adjudicados/`, `recursos/`, `como-funciona/`, `contacto/`: paginas internas.
-- `assets/css/`: tokens, base, layout, componentes, utilities y estilos de pagina.
-- `assets/js/`: data layer, shell, componentes, helpers y modulos por pagina.
-- `assets/js/pages/plans/`: logica del catalogo, separada en assets, filtros, tarjetas, detalle, formularios y normalizacion.
+- `adjudicados/`, `como-funciona/`: paginas internas informativas.
+- `assets/css/`: entrada CSS y parciales agrupados por `core`, `components` y `pages`.
+- `assets/js/`: entrada JS y modulos internos agrupados por `components`, `data`, `pages` y `utils`.
+- `assets/js/modules/pages/plans/`: logica del catalogo, separada en assets, filtros, tarjetas, detalle, formularios y normalizacion.
 - `assets/img/`: logos, imagenes de planes, favicon, OG image y recursos visuales.
 - `assets/docs/`: documentos descargables, como el contrato del Plan 330.
 - `data/`: contenido editable local del sitio.
@@ -41,12 +41,12 @@ python3 -m http.server 8010
 
 ## Data
 
-La carpeta `data/` es el source-of-truth editable para contenido local. El sitio la consume desde `assets/js/data/api.js` con `fetch("/data/*.json")`.
+La carpeta `data/` es el source-of-truth editable para contenido local. El sitio la consume desde `assets/js/modules/data/api.js` con `fetch("/data/*.json")`.
 
 Archivos principales:
 
 - `site.json`: datos globales del sitio, marca, CTAs, SEO y textos legales.
-- `agency-contact.json`: canales de contacto y configuracion de formularios.
+- `agency-contact.json`: canales comerciales y configuracion de formularios asociados a planes.
 - `artemis-backup.json`: respaldo local de sorteos y adjudicados para usar si Artemis no responde.
 - `plan_catalog.json`: catalogo principal usado por `/planes/`, Home y formularios de consulta.
 - `faq.json`: guia del sistema y preguntas frecuentes del Plan 330.
@@ -56,7 +56,7 @@ Archivos principales:
 - `recruitment.json`: bloque y formulario de productores.
 
 Los resultados de sorteos, adjudicados destacados de la Home y la tabla de adjudicados se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
-Si Artemis no responde, el sitio usa `data/artemis-backup.json` y `data/plan_catalog.json` como respaldo local.
+Si Artemis no responde, el sitio usa `data/artemis-backup.json` para sorteos/adjudicados y `data/plan_catalog.json` como catalogo curado de planes.
 
 ## Backups de Artemis
 
@@ -88,17 +88,16 @@ Estos estados no son errores por si mismos. Sirven para que el sitio pueda avanz
 
 ## Formularios
 
-`data/agency-contact.json` contiene tres bloques distintos:
+`data/agency-contact.json` contiene la configuración operativa de formularios comerciales vinculados al catalogo:
 
-- `form`: formulario general de `/contacto/`. Hoy esta en modo `placeholder` porque no hay WhatsApp, email comercial ni endpoint final definidos.
 - `planInquiryForm`: formulario de consulta dentro del detalle de un plan. Hoy envia a Formspree con un endpoint provisorio.
 - `planEnrollmentForm`: formulario de inscripcion final. Esta apagado porque el sitio no incluye inscripcion online en esta etapa.
 
-La pre-solicitud o consulta asistida no implica contratacion ni inscripcion final.
+La preinscripcion o consulta asistida no implica contratacion ni inscripcion final. La vista general de contacto fue retirada; las rutas comerciales se concentran en el catalogo y en las gestiones oficiales configuradas en `resources.json`.
 
 ## Catalogo
 
-`/planes/` usa `data/plan_catalog.json` y los modulos de `assets/js/pages/plans/`.
+`/planes/` usa `data/plan_catalog.json` y los modulos de `assets/js/modules/pages/plans/`.
 
 El catalogo agrupa opciones por:
 

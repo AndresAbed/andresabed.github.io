@@ -5,7 +5,7 @@ export function getPrimaryCta(site) {
   const cta = site?.cta?.primary;
   return {
     label: cta?.label || "Hablar por WhatsApp",
-    href: normalizeInternalTarget(cta?.target) || "/contacto/?intent=consulta",
+    href: normalizeInternalTarget(cta?.target) || "/planes/",
   };
 }
 

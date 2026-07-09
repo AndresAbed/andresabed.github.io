@@ -109,20 +109,11 @@
       "label": "Hablar por WhatsApp",
       "target": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge."
     },
-    "secondary": {
-      "label": "Completar formulario",
-      "target": "/contacto/?intent=consulta"
-    },
     "whatsapp": {
       "label": "Hablar por WhatsApp",
       "target": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
       "status": "mock"
     }
-  },
-  "forms": {
-    "leadEndpoint": "",
-    "provider": "google_apps_script",
-    "status": "pending_validation"
   },
   "seo": {
     "defaultTitle": "Club San Jorge | Agencias Abed",

@@ -11,13 +11,19 @@ Incluye JSON editables para construir la web estática:
 - recruitment.json
 - agency-contact.json
 
+Uso principal:
+- `site.json`: marca, SEO, navegacion, CTAs globales y textos legales.
+- `agency-contact.json`: canales comerciales y formularios vinculados a planes. No existe una vista general de contacto.
+- `plan_catalog.json`: catalogo curado de planes usado por `/planes/`, Home y modales de detalle.
+- `artemis-backup.json`: fallback local para sorteos y adjudicados cuando Artemis no responde.
+
 Convención:
 - verified: dato validado
 - pending_validation: revisar antes de publicar
 - mock: placeholder para avanzar
 
 Catalogo V2:
-- `plan_catalog.json` es el modelo principal para Home V2, `/planes/` y contacto.
+- `plan_catalog.json` es el modelo principal para Home V2 y `/planes/`.
 - No completar `valorNominal`, `cuota`, `brand` o `model` sin fuente validada.
 - Usar `pending_validation` o `sourceStatus` prudente cuando falten datos especificos.
 

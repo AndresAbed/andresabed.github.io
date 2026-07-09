@@ -7,7 +7,6 @@ const NAV_ITEMS = [
   { label: "Planes", href: "/planes/" },
   { label: "Adjudicados", href: "/adjudicados/" },
   { label: "Cómo funciona", href: "/como-funciona/" },
-  { label: "Contacto", href: "/contacto/" },
 ];
 
 function isCurrentPath(href) {
@@ -298,7 +297,6 @@ function createFooter(site) {
     { label: "Planes", href: "/planes/" },
     { label: "Adjudicados", href: "/adjudicados/" },
     { label: "Cómo funciona", href: "/como-funciona/" },
-    { label: "Contacto", href: "/contacto/" },
   ];
 
   const subscriberLinks = [
@@ -365,11 +363,6 @@ function createFooter(site) {
                   createSocialLink({ label: "YouTube", href: agency.youtubeUrl, icon: "youtube" }),
                   createSocialLink({ label: "WhatsApp", href: hasWhatsapp ? whatsappTarget : "", icon: "whatsapp" }),
                 ],
-              }),
-              createFooterLink({
-                label: "Botón de arrepentimiento",
-                href: "/contacto/?intent=arrepentimiento",
-                className: "button site-footer__regret",
               }),
             ],
           }),

@@ -421,21 +421,6 @@ export function getCategoryBySlug(catalogData, slug) {
   return getCatalogCategories(catalogData).find((category) => category.slug === slug) || null;
 }
 
-export function flattenFaqs(faqData) {
-  return (faqData?.categories || []).flatMap((category) =>
-    (category.items || []).map((item) => ({ ...item, categorySlug: category.slug, categoryTitle: category.title })),
-  );
-}
-
-export function getFaqById(faqData, id) {
-  return flattenFaqs(faqData).find((item) => item.id === id) || null;
-}
-
-export function getFeaturedFaqs(faqData) {
-  const ids = faqData?.featuredFaqIds || [];
-  return ids.map((id) => getFaqById(faqData, id)).filter(Boolean);
-}
-
 export function getResourcesByGroup(resourcesData, slug) {
   return resourcesData?.groups?.find((group) => group.slug === slug)?.items || [];
 }
@@ -454,10 +439,6 @@ export function getFeaturedResources(resourcesData) {
 
 export function getFaqCategories(faqData) {
   return [...(faqData?.categories || [])].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-}
-
-export function getPrioritizedFaqs(faqData, ids = []) {
-  return ids.map((id) => getFaqById(faqData, id)).filter(Boolean);
 }
 
 export function getDrawStimuli(drawsData) {
@@ -487,12 +468,6 @@ export function getAdjudicationColumns() {
 
 export function normalizeInternalTarget(target) {
   if (isBlank(target)) return "";
-
-  // Legacy compatibility for older data packs that pointed to the old assisted-request route.
-  if (String(target).startsWith("/iniciar-solicitud")) {
-    const url = new URL(String(target), window.location.origin);
-    return `/contacto/${url.search}`;
-  }
 
   return target;
 }

@@ -2,7 +2,7 @@ name: Update Artemis backups
 
 on:
   schedule:
-    - cron: "20 8 1 * *"
+    - cron: "0 23 1 * *"
   workflow_dispatch:
 
 permissions:

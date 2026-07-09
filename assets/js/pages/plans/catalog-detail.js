@@ -160,6 +160,7 @@ function createDetail(plan, contactConfig) {
       "data-plan-detail-card": "",
       "data-plan-article": plan.article,
       "data-image-folder": media.folder,
+      "data-media-fit": media.fit || "",
       style: mediaStyle(media),
       tabindex: "-1",
       "aria-labelledby": `plan-detail-title-${plan.article}`,

@@ -6,8 +6,12 @@
     "name": "Ford",
     "logo": "/assets/img/brand-logos/ford.svg"
   },
+  "mediaScale": {
+    "detailWidth": "100%",
+    "detailMaxHeight": "clamp(430px, 49vw, 640px)"
+  },
   "mediaPosition": {
-    "detailOffsetY": "clamp(34px, 4vw, 68px)"
+    "detailOffsetY": "clamp(22px, 3vw, 48px)"
   },
   "images": [
     {

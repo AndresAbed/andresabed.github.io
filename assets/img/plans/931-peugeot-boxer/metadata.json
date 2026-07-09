@@ -6,6 +6,13 @@
     "name": "Peugeot",
     "logo": "/assets/img/brand-logos/peugeot.svg"
   },
+  "mediaScale": {
+    "detailWidth": "100%",
+    "detailMaxHeight": "clamp(390px, 44vw, 580px)"
+  },
+  "mediaPosition": {
+    "detailOffsetY": "clamp(18px, 2vw, 34px)"
+  },
   "images": [
     {
       "id": "front_left",

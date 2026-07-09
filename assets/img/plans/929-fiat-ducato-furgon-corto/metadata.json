@@ -6,6 +6,13 @@
     "name": "Fiat",
     "logo": "/assets/img/brand-logos/fiat.svg"
   },
+  "mediaScale": {
+    "detailWidth": "100%",
+    "detailMaxHeight": "clamp(380px, 43vw, 560px)"
+  },
+  "mediaPosition": {
+    "detailOffsetY": "clamp(16px, 1.8vw, 30px)"
+  },
   "images": [
     {
       "id": "front_left",

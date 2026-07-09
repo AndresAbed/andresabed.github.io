@@ -2674,6 +2674,11 @@ body.plan-drawer-open {
     max-height: 500px;
   }
 
+  .plan-detail-card[data-media-fit="large-vehicle"] .plan-detail-card__image img {
+    max-width: 84%;
+    width: 84%;
+  }
+
   .plan-detail-card__image-note {
     font-size: 0.66rem;
     margin-block-start: 0.5rem;

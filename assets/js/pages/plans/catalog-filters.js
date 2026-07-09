@@ -8,6 +8,15 @@ const CATEGORY_FILTERS = Object.freeze([
   { value: "dinero", label: "Dinero", detail: "Órdenes de compra" },
 ]);
 
+const CATEGORY_VALUES = new Set(CATEGORY_FILTERS.map((filter) => filter.value));
+
+function initialCategoryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const value = params.get("categoria") || params.get("category") || window.location.hash.replace("#", "");
+  const category = decodeURIComponent(value || "").trim().toLowerCase();
+  return CATEGORY_VALUES.has(category) ? category : "all";
+}
+
 function createFilterButton(filter, activeValue, groupName) {
   return el("button", {
     className: `catalog-filter-chip catalog-filter-chip--${groupName}`,
@@ -158,7 +167,7 @@ export function initFiltering(root) {
   const clearButton = qs("[data-plan-clear]", root);
   const empty = qs("[data-catalog-empty]", root);
   const state = {
-    category: "all",
+    category: initialCategoryFromUrl(),
     brand: "all",
     query: "",
   };

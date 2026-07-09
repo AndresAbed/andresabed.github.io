@@ -1,0 +1,17 @@
+{
+  "planCode": 950,
+  "displayName": "Fiat Fastback Turbo 270 AT",
+  "officialName": "FIAT FASTBACK TURBO 270 AT",
+  "brand": {
+    "name": "Fiat",
+    "logo": "/assets/img/brand-logos/fiat.svg"
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    }
+  ]
+}

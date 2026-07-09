@@ -1,0 +1,18 @@
+{
+  "planCode": 929,
+  "displayName": "Fiat Ducato Furgón Corto",
+  "officialName": "FIAT DUCATO FURGON CORTO TN TD",
+  "brand": {
+    "name": "Fiat",
+    "logo": "/assets/img/brand-logos/fiat.svg"
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    }
+  ],
+  "mediaFit": "large-vehicle"
+}

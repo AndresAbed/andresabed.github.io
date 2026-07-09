@@ -64,6 +64,37 @@ function createChanceRibbon(chanceCount) {
   });
 }
 
+function createMediaContent(plan, media) {
+  if (media.hasImage && media.defaultImage) {
+    return el("img", {
+      attrs: {
+        src: media.defaultImage.src,
+        alt: `Imagen ilustrativa de ${plan.displayName}`,
+        loading: "lazy",
+      },
+    });
+  }
+
+  return el("div", {
+    className: "plan-list-card__media-placeholder",
+    attrs: { role: "img", "aria-label": `Imagen pendiente para ${plan.displayName}` },
+    children: [
+      el("span", { className: "plan-list-card__media-placeholder-label", text: "Imagen pendiente" }),
+      el("small", { text: `Código ${plan.article || "-"}` }),
+    ],
+  });
+}
+
+function mediaStyle(media) {
+  const scale = media?.scale || {};
+  const rules = [];
+  if (scale.card) rules.push(`--plan-media-card-scale: ${scale.card}`);
+  if (scale.cardHover) rules.push(`--plan-media-card-hover-scale: ${scale.cardHover}`);
+  if (scale.featured) rules.push(`--plan-media-featured-scale: ${scale.featured}`);
+  if (scale.featuredHover) rules.push(`--plan-media-featured-hover-scale: ${scale.featuredHover}`);
+  return rules.join("; ");
+}
+
 function createPlanCard(plan) {
   const media = getPlanMedia(plan);
   const chanceCount = Number(plan.prizeChances);
@@ -78,21 +109,15 @@ function createPlanCard(plan) {
       "data-category": plan.category,
       "data-brand": brand,
       "data-media-fit": media.fit || "",
+      "data-has-media": media.hasImage ? "true" : "false",
       "data-subcategory": plan.subcategory || "",
       "data-search": plan.searchText,
+      style: mediaStyle(media),
     },
     children: [
       el("div", {
         className: "plan-list-card__media",
-        children: [
-          el("img", {
-            attrs: {
-              src: media.defaultImage.src,
-              alt: plan.displayName,
-              loading: "lazy",
-            },
-          }),
-        ],
+        children: [createMediaContent(plan, media)],
       }),
       !hasFeaturedChances ? createCardPrice(plan) : null,
       hasFeaturedChances ? createChanceRibbon(chanceCount) : null,

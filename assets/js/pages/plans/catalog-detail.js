@@ -106,6 +106,50 @@ function createAngleSelector(plan, media) {
   });
 }
 
+function mediaStyle(media) {
+  const scale = media?.scale || {};
+  const position = media?.position || {};
+  const rules = [];
+  if (scale.detailWidth) rules.push(`--plan-media-detail-width: ${scale.detailWidth}`);
+  if (scale.detailMaxHeight) rules.push(`--plan-media-detail-max-height: ${scale.detailMaxHeight}`);
+  if (position.detailOffsetY) rules.push(`--plan-media-detail-offset-y: ${position.detailOffsetY}`);
+  return rules.join("; ");
+}
+
+function createDetailImage(plan, media) {
+  if (media.hasImage && media.defaultImage) {
+    return el("div", {
+      className: "plan-detail-card__image",
+      attrs: { "data-image-position": media.defaultImage.position, "data-image-folder": media.folder },
+      children: [
+        el("img", {
+          attrs: {
+            src: media.defaultImage.src,
+            alt: `Imagen ilustrativa de ${plan.displayName}`,
+            "data-angle-position": media.defaultImage.position,
+            "data-plan-angle-image": "",
+          },
+        }),
+      ],
+    });
+  }
+
+  return el("div", {
+    className: "plan-detail-card__image plan-detail-card__image--placeholder",
+    attrs: { "data-image-position": "placeholder", "data-image-folder": "" },
+    children: [
+      el("div", {
+        className: "plan-detail-card__image-placeholder",
+        attrs: { role: "img", "aria-label": `Imagen pendiente para ${plan.displayName}` },
+        children: [
+          el("span", { text: "Imagen pendiente" }),
+          el("small", { text: `Código ${plan.article || "-"}` }),
+        ],
+      }),
+    ],
+  });
+}
+
 function createDetail(plan, contactConfig) {
   const media = getPlanMedia(plan);
   const productName = detailProductName(plan, media.brand);
@@ -116,6 +160,7 @@ function createDetail(plan, contactConfig) {
       "data-plan-detail-card": "",
       "data-plan-article": plan.article,
       "data-image-folder": media.folder,
+      style: mediaStyle(media),
       tabindex: "-1",
       "aria-labelledby": `plan-detail-title-${plan.article}`,
     },
@@ -165,22 +210,9 @@ function createDetail(plan, contactConfig) {
           el("div", {
             className: "plan-detail-card__visual",
             children: [
-              el("div", {
-                className: "plan-detail-card__image",
-                attrs: { "data-image-position": media.defaultImage.position, "data-image-folder": media.folder },
-                children: [
-                  el("img", {
-                    attrs: {
-                      src: media.defaultImage.src,
-                      alt: plan.displayName,
-                      "data-angle-position": media.defaultImage.position,
-                      "data-plan-angle-image": "",
-                    },
-                  }),
-                ],
-              }),
+              createDetailImage(plan, media),
               createAngleSelector(plan, media),
-              el("span", { className: "plan-detail-card__image-note", text: "* Imagen ilustrativa" }),
+              el("span", { className: "plan-detail-card__image-note", text: media.hasImage ? "* Imagen ilustrativa" : "Imagen pendiente de carga" }),
             ],
           }),
           el("div", {

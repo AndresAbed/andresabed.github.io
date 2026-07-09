@@ -1,0 +1,41 @@
+{
+  "planCode": 919,
+  "displayName": "Renault Duster Oroch",
+  "officialName": "RENAULT DUSTER OROCH",
+  "brand": {
+    "name": "Renault",
+    "logo": "/assets/img/brand-logos/renault.svg"
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    },
+    {
+      "id": "front",
+      "label": "Frente",
+      "position": "front",
+      "file": "front.webp"
+    },
+    {
+      "id": "front_right",
+      "label": "Frente derecho",
+      "position": "front-right",
+      "file": "front-right.webp"
+    },
+    {
+      "id": "rear_right",
+      "label": "Trasera derecha",
+      "position": "rear-right",
+      "file": "rear-right.webp"
+    },
+    {
+      "id": "rear",
+      "label": "Trasera",
+      "position": "rear",
+      "file": "rear.webp"
+    }
+  ]
+}

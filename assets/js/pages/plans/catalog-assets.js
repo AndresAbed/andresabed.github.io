@@ -1,9 +1,54 @@
-const DEFAULT_FOLDER = "894-toyota-yaris-hatchback";
-
 const PLAN_IMAGE_FOLDERS = Object.freeze({
-  894: DEFAULT_FOLDER,
+  887: "887-renault-kwid",
+  888: "888-fiat-mobi",
+  891: "891-chevrolet-onix",
+  892: "892-chevrolet-onix-plus",
+  893: "893-renault-sandero",
+  894: "894-toyota-yaris",
+  895: "895-fiat-cronos",
+  897: "897-citroen-c3",
+  898: "898-renault-stepway",
+  900: "900-volkswagen-polo",
+  901: "901-volkswagen-virtus",
+  902: "902-citroen-c3-aircross",
+  903: "903-fiat-fiorino",
+  904: "904-fiat-strada",
+  905: "905-peugeot-208",
+  907: "907-citroen-berlingo",
+  910: "910-toyota-corolla",
+  911: "911-volkswagen-nivus",
+  912: "912-chevrolet-tracker",
+  913: "913-volkswagen-t-cross",
+  914: "914-volkswagen-saveiro",
+  915: "915-renault-kangoo-express",
+  916: "916-peugeot-2008",
+  917: "917-renault-duster",
+  919: "919-renault-oroch",
+  921: "921-fiat-toro-freedom",
   922: "922-ford-ranger",
+  923: "923-toyota-hilux",
+  924: "924-volkswagen-amarok",
+  925: "925-chevrolet-s-10",
+  926: "926-renault-alaskan",
+  927: "927-chevrolet-montana",
   928: "928-ford-ranger",
+  929: "929-fiat-ducato-furgon-corto",
+  930: "930-ford-e-transit",
+  931: "931-peugeot-boxer",
+  932: "932-renault-master",
+  944: "944-renault-logan",
+  945: "945-citroen-c4",
+  946: "946-peugeot-partner",
+  947: "947-renault-kardian",
+  948: "948-toyota-corolla-cross",
+  949: "949-fiat-pulse",
+  950: "950-fiat-fastback-turbo",
+  951: "951-volkswagen-taos",
+  957: "957-toyota-hiace",
+  963: "963-fiat-cronos",
+  964: "964-fiat-cronos",
+  965: "965-fiat-cronos",
+  966: "966-toyota-hilux",
 });
 
 const ANGLES = Object.freeze([
@@ -37,9 +82,8 @@ const BRAND_LOGOS = Object.freeze([
   { name: "Fiat", aliases: ["FIAT", "F."], logo: "/assets/img/brand-logos/fiat.svg", logoRatio: 1.63 },
 ]);
 
-function folderFor(article, { fallback = true } = {}) {
-  const folder = PLAN_IMAGE_FOLDERS[article];
-  return folder || (fallback ? DEFAULT_FOLDER : "");
+function folderFor(article) {
+  return PLAN_IMAGE_FOLDERS[article] || "";
 }
 
 function normalizeBrandSource(plan) {
@@ -91,21 +135,38 @@ async function loadFolderMetadata(folder) {
   }
 }
 
+function normalizeMetadataImages(folder, metadata) {
+  const images = Array.isArray(metadata?.images) && metadata.images.length ? metadata.images : ANGLES;
+  return images
+    .filter((image) => image?.file)
+    .map((image) => {
+      const angle = ANGLES.find((item) => item.id === image.id || item.file === image.file) || {};
+      return {
+        ...angle,
+        ...image,
+        src: `/assets/img/plans/${folder}/${image.file}`,
+      };
+    });
+}
+
 export async function withPlanMediaMetadata(items) {
   const metadataByFolder = new Map();
 
   await Promise.all(
-    [...new Set(items.map((item) => folderFor(item?.article, { fallback: false })).filter(Boolean))].map(async (folder) => {
+    [...new Set(items.map((item) => folderFor(item?.article)).filter(Boolean))].map(async (folder) => {
       metadataByFolder.set(folder, await loadFolderMetadata(folder));
     }),
   );
 
   return items.map((item) => {
-    const folder = folderFor(item?.article, { fallback: false });
+    const folder = folderFor(item?.article);
     const metadata = folder ? metadataByFolder.get(folder) : null;
     const brand = brandFromMetadata(metadata) || brandFromPlan(item);
     const fit = metadata?.mediaFit || "";
-    return brand || fit ? { ...item, mediaMetadata: { brand, fit } } : item;
+    const scale = metadata?.mediaScale || null;
+    const position = metadata?.mediaPosition || null;
+    const images = folder && metadata ? normalizeMetadataImages(folder, metadata) : [];
+    return folder || brand || fit || scale || position ? { ...item, mediaMetadata: { folder, brand, fit, scale, position, images } } : item;
   });
 }
 
@@ -114,6 +175,8 @@ export function getPlanMedia(plan) {
     return {
       folder: "",
       brand: null,
+      fit: "",
+      hasImage: true,
       defaultAngle: MONEY_IMAGE.id,
       defaultImage: MONEY_IMAGE,
       images: [MONEY_IMAGE],
@@ -121,18 +184,37 @@ export function getPlanMedia(plan) {
   }
 
   const folder = folderFor(plan?.article);
-  const basePath = `/assets/img/plans/${folder}`;
-  const images = ANGLES.map((angle) => ({
-    ...angle,
-    src: `${basePath}/${angle.file}`,
-  }));
+  if (!folder) {
+    return {
+      folder: "",
+      brand: plan?.mediaMetadata?.brand || null,
+      fit: "",
+      scale: null,
+      position: null,
+      hasImage: false,
+      defaultAngle: "",
+      defaultImage: null,
+      images: [],
+    };
+  }
+
+  const images =
+    Array.isArray(plan?.mediaMetadata?.images) && plan.mediaMetadata.images.length
+      ? plan.mediaMetadata.images
+      : ANGLES.map((angle) => ({
+          ...angle,
+          src: `/assets/img/plans/${folder}/${angle.file}`,
+        }));
 
   return {
     folder,
     brand: plan?.mediaMetadata?.brand || null,
     fit: plan?.mediaMetadata?.fit || "",
-    defaultAngle: "front_left",
-    defaultImage: images.find((image) => image.id === "front_left") || images[0],
+    scale: plan?.mediaMetadata?.scale || null,
+    position: plan?.mediaMetadata?.position || null,
+    hasImage: images.length > 0,
+    defaultAngle: images.find((image) => image.id === "front_left")?.id || images[0]?.id || "",
+    defaultImage: images.find((image) => image.id === "front_left") || images[0] || null,
     images,
   };
 }

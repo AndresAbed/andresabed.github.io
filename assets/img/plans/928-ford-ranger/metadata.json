@@ -1,7 +1,42 @@
 {
-  "mediaFit": "large-vehicle",
+  "planCode": 928,
+  "displayName": "Ford Ranger 4x4",
+  "officialName": "FORD RANGER D 4x4 CD",
   "brand": {
     "name": "Ford",
     "logo": "/assets/img/brand-logos/ford.svg"
-  }
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    },
+    {
+      "id": "front",
+      "label": "Frente",
+      "position": "front",
+      "file": "front.webp"
+    },
+    {
+      "id": "front_right",
+      "label": "Frente derecho",
+      "position": "front-right",
+      "file": "front-right.webp"
+    },
+    {
+      "id": "rear_right",
+      "label": "Trasera derecha",
+      "position": "rear-right",
+      "file": "rear-right.webp"
+    },
+    {
+      "id": "rear",
+      "label": "Trasera",
+      "position": "rear",
+      "file": "rear.webp"
+    }
+  ],
+  "mediaFit": "large-vehicle"
 }

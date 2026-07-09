@@ -28,14 +28,6 @@ import { clear, el, qs } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
 import { hasValue } from "../utils/validators.js";
 
-const PRIORITY_FAQ_IDS = [
-  "que-se-obtiene-al-final-del-plan-330",
-  "como-se-realizan-los-sorteos-mensuales",
-  "si-salgo-adjudicado-debo-seguir-pagando",
-  "si-mi-numero-sale-otra-vez-que-pasa",
-  "la-inscripcion-se-hace-online",
-];
-
 function latestMonth(months = []) {
   return months.length ? Math.max(...months.map(Number)) : null;
 }
@@ -51,6 +43,272 @@ function latestPublishedMonth(months = [], year) {
 function createOfficialLink(resources, id, label) {
   const item = getResourceById(resources, id);
   return item?.url ? createButton({ label, href: item.url, variant: "secondary" }) : null;
+}
+
+function createGuideOverview(summary = {}) {
+  return el("section", {
+    className: "system-guide-panel system-guide-overview",
+    attrs: { id: "plan-330", "aria-labelledby": "system-guide-overview-title" },
+    children: [
+      el("div", {
+        className: "system-guide-overview__copy",
+        children: [
+          el("h2", { text: summary.title, attrs: { id: "system-guide-overview-title" } }),
+          el("p", { text: summary.intro }),
+          el("dl", {
+            className: "system-guide-reading-list",
+            children: [
+              el("div", {
+                children: [
+                  el("dt", { text: "Qué representa" }),
+                  el("dd", { text: "Un título de capitalización y ahorro asociado a un valor nominal." }),
+                ],
+              }),
+              el("div", {
+                children: [
+                  el("dt", { text: "Qué no es" }),
+                  el("dd", { text: "No es una compra directa ni una entrega automática por pagar cierta cantidad de cuotas." }),
+                ],
+              }),
+              el("div", {
+                children: [
+                  el("dt", { text: "Qué conviene revisar" }),
+                  el("dd", { text: "Valor nominal, cuota, endosos, sorteo, rescate y documentación vigente." }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+      el("aside", {
+        className: "system-guide-overview__aside",
+        attrs: { "aria-label": "Resumen del Plan 330" },
+        children: [
+          el("span", { className: "system-guide-overview__label", text: "Plan" }),
+          el("strong", { text: "330" }),
+          el("p", { text: "Un título de capitalización y ahorro organizado en cuotas mensuales." }),
+          el("div", {
+            className: "system-guide-overview__facts",
+            children: [
+              el("div", { children: [el("span", { text: "Sistema" }), el("b", { text: "Capitalización y ahorro" })] }),
+              el("div", { children: [el("span", { text: "Participación" }), el("b", { text: "Sorteo mensual al día" })] }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
+function createGuideJourney(steps = []) {
+  return el("section", {
+    className: "system-guide-section-block system-guide-journey",
+    attrs: { "aria-labelledby": "system-guide-journey-title" },
+    children: [
+      createSectionHeader({
+        title: "El recorrido, paso a paso",
+        intro: "Una forma simple de leer qué sucede desde que elegís un plan hasta la participación mensual.",
+        id: "system-guide-journey-title",
+      }),
+      el("ol", {
+        className: "system-guide-steps",
+        children: steps.map((step, index) =>
+          el("li", {
+            className: "system-guide-step",
+            children: [
+              el("span", { className: "system-guide-step__number", text: String(index + 1).padStart(2, "0") }),
+              el("div", {
+                children: [el("h3", { text: step.title }), el("p", { text: step.body })],
+              }),
+            ],
+          }),
+        ),
+      }),
+    ],
+  });
+}
+
+function createKeyConcepts(keyConcepts = {}) {
+  return el("section", {
+    className: "system-guide-section-block system-guide-concepts",
+    attrs: { id: "puntos-clave", "aria-labelledby": "system-guide-concepts-title" },
+    children: [
+      createSectionHeader({
+        title: keyConcepts.title,
+        intro: keyConcepts.intro,
+        id: "system-guide-concepts-title",
+      }),
+      el("div", {
+        className: "system-concept-grid",
+        children: (keyConcepts.items || []).map((item, index) =>
+          el("article", {
+            className: "system-concept",
+            children: [
+              el("span", { className: "system-concept__index", text: String(index + 1).padStart(2, "0"), attrs: { "aria-hidden": "true" } }),
+              el("div", {
+                children: [el("h3", { text: item.label }), el("p", { text: item.text })],
+              }),
+            ],
+          }),
+        ),
+      }),
+    ],
+  });
+}
+
+function createImportantNotes(notes = {}) {
+  return el("section", {
+    className: "system-guide-section-block system-guide-notes",
+    attrs: { id: "antes-de-avanzar", "aria-labelledby": "system-guide-notes-title" },
+    children: [
+      el("div", {
+        className: "system-guide-notes__intro",
+        children: [
+          el("span", { text: "Aclaraciones importantes" }),
+          el("h2", { text: notes.title || "Aclaraciones importantes", attrs: { id: "system-guide-notes-title" } }),
+          el("p", {
+            text: "Puntos breves para distinguir lo que muestra el catálogo de lo que define el título y su documentación.",
+          }),
+        ],
+      }),
+      el("ol", {
+        className: "system-guide-notes__body",
+        children: (notes.items || []).map((item, index) =>
+          el("li", {
+            className: "system-guide-note",
+            children: [
+              el("span", { className: "system-guide-note__number", text: String(index + 1).padStart(2, "0"), attrs: { "aria-hidden": "true" } }),
+              el("p", { text: item }),
+            ],
+          }),
+        ),
+      }),
+    ],
+  });
+}
+
+function createContractResource(contract = {}) {
+  const path = contract.path || "";
+  return el("section", {
+    className: "system-guide-section-block system-contract",
+    attrs: { id: "contrato-plan-330", "aria-labelledby": "system-contract-title" },
+    children: [
+      el("div", {
+        className: "system-contract__copy",
+        children: [
+          createSectionHeader({
+            title: contract.title || "Contrato y condiciones",
+            intro: contract.intro,
+            id: "system-contract-title",
+          }),
+          el("div", {
+            className: "system-contract__actions",
+            children: [
+              el("a", {
+                className: "button button--primary",
+                text: contract.openLabel || "Abrir PDF",
+                attrs: { href: path, target: "_blank", rel: "noopener noreferrer" },
+              }),
+              el("a", {
+                className: "button button--secondary",
+                text: contract.downloadLabel || "Descargar contrato",
+                attrs: { href: path, download: "" },
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
+function flattenFaqItems(categories = []) {
+  return categories.flatMap((category) =>
+    (category.items || []).map((item) => ({
+      ...item,
+      categoryTitle: category.title,
+    })),
+  );
+}
+
+function createFeaturedFaqs(categories = [], featuredIds = []) {
+  const itemsById = new Map(flattenFaqItems(categories).map((item) => [item.id, item]));
+  const selected = featuredIds.map((id) => itemsById.get(id)).filter(Boolean);
+  const items = selected.length ? selected : flattenFaqItems(categories).slice(0, 4);
+
+  return el("section", {
+    className: "system-guide-section-block system-guide-featured-faq",
+    attrs: { id: "preguntas-clave", "aria-labelledby": "system-guide-featured-faq-title" },
+    children: [
+      el("div", {
+        className: "system-guide-subsection-head",
+        children: [
+          el("h3", { text: "Preguntas clave", attrs: { id: "system-guide-featured-faq-title" } }),
+          el("p", { text: "Las respuestas más útiles para ubicarse rápido dentro del sistema." }),
+        ],
+      }),
+      el("div", {
+        className: "system-guide-featured-faq__grid",
+        children: items.map((item) =>
+          el("details", {
+            className: "system-guide-featured-question",
+            children: [
+              el("summary", {
+                children: [
+                  el("span", { className: "system-guide-featured-question__topic", text: item.categoryTitle }),
+                  el("strong", { text: item.question }),
+                ],
+              }),
+              el("p", { text: item.answer }),
+            ],
+          }),
+        ),
+      }),
+    ],
+  });
+}
+
+function createSystemFaq(categories, excludedIds = []) {
+  const excluded = new Set(excludedIds);
+  const visibleCategories = categories
+    .map((category) => ({
+      ...category,
+      items: (category.items || []).filter((item) => !excluded.has(item.id)),
+    }))
+    .filter((category) => category.items.length);
+
+  return el("section", {
+    className: "system-guide-section-block system-guide-faq",
+    attrs: { "aria-labelledby": "system-guide-faq-title" },
+    children: [
+      el("div", {
+        className: "system-guide-subsection-head",
+        children: [
+          el("h3", { text: "Respuestas por tema", attrs: { id: "system-guide-faq-title" } }),
+          el("p", { text: "Cuotas, sorteos, endosos, rescate y gestiones, organizados para consultar por partes." }),
+        ],
+      }),
+      ...visibleCategories.map((category) => createFaqGroup(category)),
+    ],
+  });
+}
+
+function createFaqZone(categories = [], featuredIds = []) {
+  return el("section", {
+    className: "system-guide-faq-zone",
+    attrs: { id: "preguntas-frecuentes", "aria-labelledby": "system-guide-faq-zone-title" },
+    children: [
+      el("div", {
+        className: "system-guide-faq-zone__head",
+        children: [
+          el("h2", { text: "Preguntas frecuentes", attrs: { id: "system-guide-faq-zone-title" } }),
+          el("p", { text: "Respuestas puntuales sobre conceptos, sorteos, cuotas y documentación del sistema." }),
+        ],
+      }),
+      createFeaturedFaqs(categories, featuredIds),
+      createSystemFaq(categories, featuredIds),
+    ],
+  });
 }
 
 export async function initDrawsPage() {
@@ -201,41 +459,21 @@ export async function initResourcesPage() {
   );
 }
 
-export async function initFaqPage() {
-  const target = qs("[data-faq-page]");
+export async function initSystemGuidePage() {
+  const target = qs("[data-system-guide-page]");
   if (!target) return;
 
   const faq = await loadFaq();
   const categories = getFaqCategories(faq);
-  const priorityItems = PRIORITY_FAQ_IDS.map((id) => categories.flatMap((category) => category.items || []).find((item) => item.id === id)).filter(Boolean);
+  const guide = faq.guide || {};
 
   clear(target);
   target.append(
-    createSectionHeader({
-      eyebrow: "Preguntas frecuentes",
-      title: "Respuestas claras para entender el sistema",
-      intro: "Priorizamos capital, sorteos, adjudicacion, pagos y proceso comercial.",
-    }),
-    el("section", {
-      className: "plans-section",
-      attrs: { "aria-labelledby": "priority-faq-title" },
-      children: [
-        createSectionHeader({ eyebrow: "Prioritarias", title: "Leer antes de avanzar", id: "priority-faq-title" }),
-        el("div", {
-          className: "accordion-shell faq-home",
-          children: priorityItems.map((item) =>
-            el("details", {
-              attrs: { open: true },
-              children: [el("summary", { text: item.question }), el("p", { text: item.answer })],
-            }),
-          ),
-        }),
-      ],
-    }),
-    ...categories.map((category) => createFaqGroup(category, PRIORITY_FAQ_IDS)),
-    createFinalHelpCta({
-      title: "¿Tu duda no quedo resuelta?",
-      body: "La agencia puede ayudarte a revisar categoria, opcion de catalogo y proximos pasos.",
-    }),
+    createGuideOverview(guide.summary),
+    createGuideJourney(guide.summary?.steps || []),
+    createKeyConcepts(guide.keyConcepts),
+    createImportantNotes(guide.importantNotes),
+    createContractResource(guide.contract),
+    createFaqZone(categories, faq.featuredFaqIds || []),
   );
 }

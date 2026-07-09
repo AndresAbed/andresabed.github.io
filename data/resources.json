@@ -107,19 +107,10 @@
         },
         {
           "id": "pdf-plan-330",
-          "type": "external",
+          "type": "pdf",
           "title": "Solicitud Plan 330",
           "description": "Formulario / documentación oficial del Plan 330.",
-          "url": "https://clubsanjorge.com.ar/sites/default/files/pdf/Plan330.pdf",
-          "featured": false,
-          "status": "verified"
-        },
-        {
-          "id": "pdf-plan-90-120",
-          "type": "external",
-          "title": "Solicitud Plan 90 y 120",
-          "description": "Formulario / documentación oficial para planes 90 y 120.",
-          "url": "https://clubsanjorge.com.ar/sites/default/files/pdf/2020/plan-90-y-120-web.pdf",
+          "url": "/assets/docs/plan-330.pdf",
           "featured": false,
           "status": "verified"
         }

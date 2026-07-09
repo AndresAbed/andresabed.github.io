@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-08T00:00:00-03:00",
+  "title": "Design System: Club San Jorge | Agencias Abed",
+  "extensions": {
+    "colorMeta": {
+      "brand-red": {
+        "role": "primary",
+        "displayName": "Rojo San Jorge",
+        "canonical": "#be002f",
+        "tonalRamp": ["#3b000f", "#68001a", "#8f0024", "#be002f", "#d92e56", "#ef7893", "#ffd0dc", "#fff0f3"]
+      },
+      "brand-green": {
+        "role": "secondary",
+        "displayName": "Verde adjudicacion",
+        "canonical": "#61af54",
+        "tonalRamp": ["#0f351b", "#1b582b", "#26763a", "#3f9648", "#61af54", "#8fca83", "#cce8c8", "#eef7ed"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta principal",
+        "canonical": "#292929",
+        "tonalRamp": ["#111111", "#1b1b1b", "#292929", "#4e5350", "#73786f", "#939389", "#deded6", "#f6f6f2"]
+      },
+      "surface-soft": {
+        "role": "neutral",
+        "displayName": "Superficie suave",
+        "canonical": "#f6f6f2",
+        "tonalRamp": ["#292929", "#4e5350", "#73786f", "#939389", "#c8c8c0", "#deded6", "#f6f6f2", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Heroes y titulos principales de pagina."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Secciones principales, paneles comerciales y bloques de informacion."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explicaciones, formularios, FAQs y contenido de lectura."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges, tablas, filtros y metadata corta."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 8px 24px rgb(41 41 41 / 0.08)",
+        "purpose": "Tarjetas y superficies contenidas."
+      },
+      {
+        "name": "soft-panel",
+        "value": "0 18px 50px rgb(41 41 41 / 0.10)",
+        "purpose": "Paneles destacados y contenedores amplios."
+      },
+      {
+        "name": "drawer",
+        "value": "-24px 0 72px rgb(0 0 0 / 0.28)",
+        "purpose": "Overlay lateral de detalle de plan."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "160ms ease",
+        "purpose": "Hover y estados de botones, chips y links."
+      },
+      {
+        "name": "drawer-in",
+        "value": "260ms ease",
+        "purpose": "Entrada del drawer de detalle."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "720px"
+      },
+      {
+        "name": "tablet",
+        "value": "860px"
+      },
+      {
+        "name": "desktop-nav",
+        "value": "1180px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA principal de catalogo, formularios y acciones comerciales.",
+      "html": "<button class=\"ds-btn-primary\">Ver planes</button>",
+      "css": ".ds-btn-primary{align-items:center;background:var(--color-brand-red,#be002f);border:1px solid var(--color-brand-red,#be002f);border-radius:0 12px 0 12px;color:#fff;cursor:pointer;display:inline-flex;font-family:Poppins,sans-serif;font-weight:600;justify-content:center;min-height:44px;padding:.72rem 1rem;transition:background-color 160ms ease,border-color 160ms ease,transform 160ms ease}.ds-btn-primary:hover{background:var(--color-brand-red-dark,#8f0024);border-color:var(--color-brand-red-dark,#8f0024);transform:translateY(-1px)}.ds-btn-primary:focus-visible{outline:3px solid var(--color-focus,#005fcc);outline-offset:3px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Accion secundaria o neutral, especialmente sobre fondos claros.",
+      "html": "<button class=\"ds-btn-secondary\">Conocer mas</button>",
+      "css": ".ds-btn-secondary{align-items:center;background:#fff;border:1px solid var(--color-line,#deded6);border-radius:0 12px 0 12px;color:var(--color-ink,#292929);cursor:pointer;display:inline-flex;font-family:Poppins,sans-serif;font-weight:600;justify-content:center;min-height:44px;padding:.72rem 1rem;transition:background-color 160ms ease,border-color 160ms ease,transform 160ms ease}.ds-btn-secondary:hover{background:var(--color-surface-soft,#f6f6f2);border-color:var(--color-neutral-mid,#939389);transform:translateY(-1px)}.ds-btn-secondary:focus-visible{outline:3px solid var(--color-focus,#005fcc);outline-offset:3px}"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Filtro de categoria o marca en catalogo.",
+      "html": "<button class=\"ds-filter-chip\" aria-pressed=\"true\"><span class=\"ds-filter-chip__mark\"></span><span><strong>Autos</strong><small>Autos y utilitarios</small></span></button>",
+      "css": ".ds-filter-chip{--filter-color:var(--color-brand-red,#be002f);align-items:center;background:#fff;border:1px solid color-mix(in srgb,var(--filter-color) 38%,#fff);border-radius:0 12px 0 12px;color:var(--filter-color);cursor:pointer;display:flex;gap:.64rem;font-family:Poppins,sans-serif;min-height:44px;padding:.42rem .55rem;position:relative;text-align:left}.ds-filter-chip:before{background:var(--filter-color);border-radius:inherit;content:\"\";inset:0 auto 0 0;position:absolute;width:3px}.ds-filter-chip__mark{background:color-mix(in srgb,var(--filter-color) 10%,#fff);border-radius:0 8px 0 8px;height:35px;width:35px}.ds-filter-chip strong{display:block;font-size:.91rem;font-weight:560;line-height:1.18}.ds-filter-chip small{color:color-mix(in srgb,var(--filter-color) 64%,var(--color-ink,#292929));display:block;font-size:.72rem;font-weight:480}.ds-filter-chip:hover{transform:translateY(-1px)}.ds-filter-chip:focus-visible{outline:3px solid rgb(97 175 84 / .42);outline-offset:3px}"
+    },
+    {
+      "name": "Plan Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Tarjeta de catalogo con regla superior rojo-verde, media y bloque de precio.",
+      "html": "<article class=\"ds-plan-card\"><div class=\"ds-plan-card__media\"></div><div class=\"ds-plan-card__body\"><span class=\"ds-tag\"><i></i> AUTOS</span><h3>Fiat Cronos</h3><button>Preinscripcion</button></div></article>",
+      "css": ".ds-plan-card{background:#fff;border:1px solid rgb(41 41 41 / .09);border-radius:12px;box-shadow:0 12px 30px rgb(41 41 41 / .07);font-family:Poppins,sans-serif;overflow:hidden;position:relative}.ds-plan-card:before{background:linear-gradient(90deg,var(--color-brand-red,#be002f) 0%,var(--color-brand-red,#be002f) 42%,var(--color-brand-green,#61af54) 100%);content:\"\";height:3px;inset:0 0 auto;position:absolute}.ds-plan-card__media{background:#f2f2ed;min-height:180px}.ds-plan-card__body{display:grid;gap:16px;padding:24px}.ds-plan-card h3{color:var(--color-ink,#292929);font-size:1.45rem;line-height:1.12;margin:0}.ds-tag{align-items:center;background:#efeeee;border-radius:10px;color:#625d60;display:inline-flex;font-size:.74rem;font-weight:500;gap:.32rem;padding:.34rem .66rem;width:max-content}.ds-tag i{background:#625d60;border-radius:999px;height:5px;width:5px}.ds-plan-card button{background:#151a17;border:0;border-radius:0 12px 0 12px;color:#fff;font-weight:600;min-height:44px}.ds-plan-card button:hover{background:var(--color-brand-red,#be002f)}"
+    },
+    {
+      "name": "Table Shell",
+      "kind": "custom",
+      "refersTo": "table-shell",
+      "description": "Tabla de adjudicados y datos oficiales.",
+      "html": "<div class=\"ds-table\"><table><thead><tr><th>Nombre</th><th>Localidad</th><th>Cuota</th></tr></thead><tbody><tr><td>Apellido Nombre</td><td>Ciudad/Provincia</td><td>1</td></tr></tbody></table></div>",
+      "css": ".ds-table{background:#fff;border:1px solid rgb(41 41 41 / .1);border-radius:14px;box-shadow:0 12px 28px rgb(41 41 41 / .08);font-family:Poppins,sans-serif;overflow:auto;position:relative}.ds-table:before{background:linear-gradient(90deg,var(--color-brand-red,#be002f),var(--color-brand-green,#61af54));content:\"\";height:4px;inset:0 0 auto;position:absolute}.ds-table table{border-collapse:collapse;min-width:560px;width:100%}.ds-table th{background:#292929;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:.82rem;text-align:left;text-transform:uppercase}.ds-table td{border-bottom:1px solid var(--color-line,#deded6);color:var(--color-ink,#292929);font-size:.9rem;padding:.78rem .82rem}.ds-table tbody tr:nth-child(even){background:#fbfbf8}.ds-table tbody tr:hover{background:rgb(97 175 84 / .08)}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Campos de formularios de consulta y contacto.",
+      "html": "<label class=\"ds-field\"><span>Nombre *</span><input type=\"text\"></label>",
+      "css": ".ds-field{color:var(--color-ink,#292929);display:grid;font-family:Poppins,sans-serif;font-weight:800;gap:8px}.ds-field span{font-size:.9rem;letter-spacing:.02em;text-transform:uppercase}.ds-field input{border:1px solid var(--color-line,#deded6);border-radius:4px;color:var(--color-ink,#292929);font:inherit;min-height:44px;padding:.7rem .8rem;width:100%}.ds-field input:focus{border-color:var(--color-focus,#005fcc);outline:3px solid rgb(0 95 204 / .18);outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Agencia clara, catalogo confiable",
+    "overview": "Sistema visual institucional y comercial para explicar, comparar y asistir. El rojo lleva marca y accion; el verde acompana como acento; el gris oscuro sostiene confianza.",
+    "keyCharacteristics": [
+      "Rojo dominante y verde acento.",
+      "Poppins como unica familia tipografica.",
+      "Botones con esquina diagonal.",
+      "Tarjetas con bordes sobrios, sombras suaves y reglas superiores rojo-verde.",
+      "Mobile-first y foco visible."
+    ],
+    "rules": [
+      {
+        "name": "The Red-First Rule",
+        "body": "El rojo es accion y marca; usarlo antes que verde cuando haya un solo acento.",
+        "section": "colors"
+      },
+      {
+        "name": "The Single-Family Rule",
+        "body": "No introducir otra fuente sin una razon de marca fuerte.",
+        "section": "typography"
+      },
+      {
+        "name": "The Border-Then-Shadow Rule",
+        "body": "Primero borde neutro; sombra solo para separar niveles.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do usar #be002f para acciones principales.",
+      "Do mantener verde como acento.",
+      "Do usar superficies blancas para contenido.",
+      "Do verificar contraste en textos atenuados."
+    ],
+    "donts": [
+      "Don't hacer que los planes parezcan suscripciones SaaS.",
+      "Don't implicar entrega automatica o resultados garantizados.",
+      "Don't usar nuevas franjas laterales gruesas como acento.",
+      "Don't duplicar datos de negocio fuera de data/."
+    ]
+  }
+}

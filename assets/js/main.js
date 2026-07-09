@@ -2,7 +2,7 @@ import { loadSite } from "./data/api.js";
 import { renderShell } from "./components/shell.js";
 import { initContactPage } from "./pages/contact.js";
 import { initHomePage } from "./pages/home.js";
-import { initAdjudicationsPage, initDrawsPage, initFaqPage, initResourcesPage } from "./pages/info-pages.js";
+import { initAdjudicationsPage, initDrawsPage, initResourcesPage, initSystemGuidePage } from "./pages/info-pages.js";
 import { initPlansHub } from "./pages/plans/index.js";
 
 function finishAppLoading() {
@@ -27,8 +27,8 @@ async function boot() {
       await initAdjudicationsPage(site);
     } else if (document.body.dataset.page === "recursos") {
       await initResourcesPage(site);
-    } else if (document.body.dataset.page === "preguntas-frecuentes") {
-      await initFaqPage(site);
+    } else if (document.body.dataset.page === "como-funciona") {
+      await initSystemGuidePage(site);
     } else if (document.body.dataset.page === "contacto") {
       await initContactPage(site);
     }

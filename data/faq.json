@@ -1,12 +1,84 @@
 {
   "meta": {
-    "version": "v3-landing"
+    "version": "v6-system-guide-330"
+  },
+  "guide": {
+    "summary": {
+      "title": "Cómo leer este sistema",
+      "intro": "Se trata de un título de capitalización y ahorro. Durante el plazo previsto formás un capital y, mientras el título esté vigente y al día, participás de los sorteos estímulo del sistema.",
+      "steps": [
+        {
+          "title": "Elegís un plan",
+          "body": "El plan puede estar asociado a un auto, una moto o una orden de compra. Eso ayuda a comparar alternativas; las condiciones concretas surgen del título y su documentación."
+        },
+        {
+          "title": "Se define un valor nominal",
+          "body": "El valor nominal figura en el título y funciona como base para interpretar la opción, calcular la cuota y entender el capital asociado al plan."
+        },
+        {
+          "title": "Abonás cuotas mensuales",
+          "body": "Cada cuota comercial se calcula en relación con el valor nominal e incluye conceptos previstos por el plan, como cuota de ahorro y carga administrativa."
+        },
+        {
+          "title": "Participás de sorteos",
+          "body": "El pago de la cuota correspondiente habilita la participación en el sorteo mensual, siempre que el título cumpla las condiciones de vigencia establecidas."
+        }
+      ]
+    },
+    "keyConcepts": {
+      "title": "Conceptos que conviene tener claros",
+      "intro": "Para leer mejor cada opción, separá lo que ves en el catálogo de lo que define la documentación: valor nominal, cuotas, sorteos, endosos y rescate.",
+      "items": [
+        {
+          "label": "Título",
+          "text": "Es el instrumento del plan. Identifica la opción contratada, el valor nominal, el número de sorteo y las condiciones que regulan la relación con la sociedad."
+        },
+        {
+          "label": "Valor nominal",
+          "text": "Es el capital indicado en el título. También sirve como base para calcular la cuota comercial y entender qué representa la opción elegida."
+        },
+        {
+          "label": "Cuota comercial",
+          "text": "Es el pago mensual del título. Se calcula por cada 1.000 de valor nominal y está compuesto por cuota de ahorro y carga administrativa."
+        },
+        {
+          "label": "Sorteo estímulo",
+          "text": "Es la participación mensual vinculada al número de sorteo del título. Para acceder al beneficio, la cuota del mes debe estar abonada según las condiciones vigentes."
+        },
+        {
+          "label": "Endoso de ampliación",
+          "text": "Es una cláusula opcional para ampliar el valor nominal cuando cambia el valor o modelo del bien asociado al plan. Es clave revisarla si buscás mantener actualizada una opción 0 km."
+        },
+        {
+          "label": "Rescate",
+          "text": "Es la posibilidad de solicitar el valor de rescate del título. Puede pedirse desde la cuota 18 y se calcula según la tabla correspondiente."
+        }
+      ]
+    },
+    "importantNotes": {
+      "title": "A tener en cuenta",
+      "items": [
+        "Este sistema no debe leerse como una compra directa ni como una entrega automática de vehículo por pagar cierta cantidad de cuotas.",
+        "Si una opción está asociada a un auto o una moto, esa asociación ayuda a visualizar el plan; el derecho concreto depende del valor nominal, los endosos aceptados y las condiciones vigentes.",
+        "Para participar de sorteos y acceder a un beneficio por adjudicación, el título debe estar vigente y con la cuota del período abonada en tiempo y forma.",
+        "Si se acepta el endoso de ampliación automática, el bien asociado puede actualizarse cuando cambia su valor o modelo. Si no se acepta, se toma el valor nominal indicado al suscribir.",
+        "La documentación contractual es la base para revisar rescate, valor nominal, derecho de suscripción, endosos, sorteos y alternativas ante una adjudicación."
+      ]
+    },
+    "contract": {
+      "title": "Contrato y condiciones",
+      "intro": "La documentación reúne las condiciones del título: valor nominal, cuotas, sorteos, rescate, endosos y derechos del suscriptor. Podés abrirla online o descargarla para revisar el detalle completo.",
+      "path": "/assets/docs/plan-330.pdf",
+      "downloadLabel": "Descargar contrato",
+      "openLabel": "Abrir PDF"
+    }
   },
   "featuredFaqIds": [
+    "que-es-club-san-jorge",
     "que-se-obtiene-al-final-del-plan-330",
+    "las-cuotas-son-fijas",
     "como-se-realizan-los-sorteos-mensuales",
-    "si-salgo-adjudicado-debo-seguir-pagando",
-    "la-inscripcion-se-hace-online"
+    "si-salgo-adjudicado-debo-seguir-pagando"
   ],
   "categories": [
     {
@@ -16,38 +88,44 @@
       "items": [
         {
           "id": "que-es-club-san-jorge",
-          "question": "¿Qué es Club San Jorge en Capitalización y Ahorro?",
-          "answer": "Club San Jorge ofrece planes de Capitalización y Ahorro en los que el suscriptor abona cuotas para formar un capital y participa de sorteos según las condiciones vigentes del sistema.",
+          "question": "¿Qué es Club San Jorge en capitalización y ahorro?",
+          "answer": "Es un sistema de capitalización y ahorro. El suscriptor abona cuotas para formar un capital y participa de sorteos mensuales cuando el título está vigente y cumple las condiciones de pago correspondientes.",
           "status": "verified"
         },
         {
           "id": "de-cuantas-cuotas-consta-el-plan",
-          "question": "¿De cuántas cuotas consta el plan?",
-          "answer": "La operación oficial menciona planes de 330 meses y también planes a 90 y 120 meses. Para esta agencia, la comercialización principal está enfocada en los planes 330.",
+          "question": "¿Qué significa el 330?",
+          "answer": "Indica la cantidad de cuotas mensuales previstas para el título. Esta web se enfoca en esa modalidad porque es la que se comercializa actualmente desde la agencia.",
           "status": "verified"
         },
         {
           "id": "que-se-obtiene-al-final-del-plan-330",
-          "question": "¿Qué se obtiene al finalizar el plan 330?",
-          "answer": "El objeto del contrato es formar un capital equivalente al valor nominal del título al finalizar el plazo, mediante el pago de cuotas de ahorro. Es importante no interpretar el plan como una promesa de entrega automática de un vehículo por el simple pago de cierta cantidad de cuotas.",
+          "question": "¿Qué se obtiene al finalizar el plazo?",
+          "answer": "Al terminar el plazo, se considera el valor nominal inicial suscripto. Si el titular aceptó endosos de ampliación automática, también se consideran los valores que correspondan por esas ampliaciones, según la documentación del plan.",
           "status": "verified"
         },
         {
-          "id": "cuando-puedo-solicitar-mi-rescate",
-          "question": "¿Cuándo puedo solicitar mi rescate?",
-          "answer": "Para los planes de 330 meses, el rescate puede solicitarse desde la cuota 18. En la web oficial también se indica que en los planes de 90 meses puede solicitarse desde la cuota 9 y en los de 120 meses desde la cuota 12.",
+          "id": "que-significa-no-amortizante",
+          "question": "¿Qué significa que sea no amortizante?",
+          "answer": "Significa que un título favorecido por sorteo no caduca automáticamente por haber resultado adjudicado. Si el suscriptor continúa abonando normalmente, el título puede seguir vigente y participar nuevamente.",
+          "status": "verified"
+        },
+        {
+          "id": "que-es-valor-nominal",
+          "question": "¿Qué es el valor nominal del título?",
+          "answer": "Es el capital indicado en el título. Sirve para calcular la cuota, interpretar la opción contratada y entender el importe base del plan.",
+          "status": "verified"
+        },
+        {
+          "id": "que-es-el-derecho-de-suscripcion",
+          "question": "¿Qué es el derecho de suscripción?",
+          "answer": "Es un concepto previsto por el plan al momento de suscribir. Puede abonarse al suscribirse, prorratearse en cuotas o compensarse al cobrar el valor de rescate, según la opción elegida y la documentación correspondiente.",
           "status": "verified"
         },
         {
           "id": "los-planes-estan-aprobados",
           "question": "¿Los planes están aprobados por algún organismo?",
-          "answer": "La información oficial indica que los planes de Club San Jorge están aprobados por la Inspección General de Justicia, incluyendo la Resolución N° 1080/01 mencionada en la FAQ oficial.",
-          "status": "verified"
-        },
-        {
-          "id": "si-dejo-de-pagar-tengo-deuda",
-          "question": "¿Si dejo de pagar una cuota me queda una deuda?",
-          "answer": "La FAQ oficial indica que si dejás de pagar cuotas no se genera deuda. Aun así, dejar de pagar puede afectar la vigencia del título, la participación en sorteos y otros derechos del plan.",
+          "answer": "Los planes de capitalización y ahorro operan bajo control de la Inspección General de Justicia. La documentación oficial menciona la aprobación correspondiente para los formularios y condiciones del sistema.",
           "status": "verified"
         }
       ]
@@ -60,75 +138,92 @@
         {
           "id": "como-se-realizan-los-sorteos-mensuales",
           "question": "¿Cómo se realizan los sorteos mensuales?",
-          "answer": "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires / LOTBA, en la última jugada del último sábado de cada mes, salvo excepciones previamente aprobadas por la autoridad correspondiente.",
+          "answer": "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires, en la última jugada de cada mes, salvo excepciones previamente aprobadas por la autoridad correspondiente.",
+          "status": "verified"
+        },
+        {
+          "id": "de-cuantas-cifras-es-el-numero-de-sorteo",
+          "question": "¿De cuántas cifras es el número de sorteo?",
+          "answer": "El número de sorteo es de tres cifras y figura asociado al título.",
           "status": "verified"
         },
         {
           "id": "si-salgo-adjudicado-debo-seguir-pagando",
           "question": "¿Si salgo adjudicado debo seguir pagando?",
-          "answer": "Según la FAQ oficial, si salís adjudicado tenés dos opciones: 1) retirar el beneficio obtenido y seguir abonando normalmente, con posibilidad de volver a ganar si tu número vuelve a salir en sorteos mensuales; 2) retirarte del plan y no pagar más.",
+          "answer": "Ante una adjudicación, existen alternativas previstas por el sistema: retirar el beneficio y continuar abonando para seguir participando, o retirarse del plan según las condiciones aplicables. La decisión debe revisarse con la documentación del título.",
           "status": "verified"
         },
         {
           "id": "si-mi-numero-sale-otra-vez-que-pasa",
           "question": "¿Qué pasa si mi número vuelve a salir más adelante?",
-          "answer": "En los planes 330, los títulos favorecidos por sorteo continúan vigentes a todos sus efectos. Si seguís abonando normalmente, podés volver a ganar si tu número se repite en los sorteos mensuales.",
+          "answer": "Al ser no amortizante, el título puede seguir participando si continúa vigente y al día. Por eso, un mismo número puede volver a resultar favorecido en sorteos posteriores.",
           "status": "verified"
         },
         {
           "id": "si-no-pago-la-cuota-y-salgo-sorteado",
           "question": "¿Qué pasa si no pago una cuota y justo ese mes salgo sorteado?",
-          "answer": "La FAQ oficial indica que si no abonás la cuota mensual y tu título resulta adjudicado, no podés recibir el beneficio correspondiente.",
+          "answer": "Para recibir el beneficio por sorteo, el título debe estar al día con los pagos mensuales correspondientes. Si la cuota del período no está abonada según lo previsto, no corresponde acceder al beneficio.",
           "status": "verified"
         },
         {
-          "id": "que-es-la-garantia-de-entrega",
-          "question": "¿Qué es la garantía de entrega?",
-          "answer": "La documentación oficial la vincula al endoso de ampliación automática: si el título resulta favorecido y la cuota está paga antes del sorteo, puede aplicarse la entrega del 0 km, moto o valor correspondiente según condiciones vigentes.",
+          "id": "como-me-entero-si-soy-adjudicado",
+          "question": "¿Cómo me entero si soy adjudicado?",
+          "answer": "Club San Jorge comunica la adjudicación al suscriptor después del sorteo y publica los listados correspondientes. En esta web también podés consultar la sección de adjudicados por mes y año.",
           "status": "verified"
         }
       ]
     },
     {
-      "slug": "plan-dinero",
-      "title": "Plan Dinero / Capital",
+      "slug": "cuotas-rescate-y-gestiones",
+      "title": "Cuotas, rescate y gestiones",
       "sortOrder": 3,
       "items": [
         {
-          "id": "que-es-el-plan-dinero",
-          "question": "¿Qué es el Plan Dinero / Capital?",
-          "answer": "Es un plan de capitalización y ahorro orientado a la formación de un capital en dinero.",
+          "id": "cual-es-el-valor-de-la-cuota",
+          "question": "¿Cuál es el valor de la cuota?",
+          "answer": "Depende del valor nominal y de la opción contratada. La cuota comercial se calcula por cada 1.000 de valor nominal, con los conceptos de cuota de ahorro y carga administrativa previstos por el plan.",
           "status": "verified"
         },
         {
-          "id": "que-se-obtiene-al-final-del-plan-dinero",
-          "question": "¿Qué se obtiene al finalizar el Plan Dinero?",
-          "answer": "Se obtiene el capital / ahorro correspondiente al plan contratado, conforme a sus condiciones vigentes.",
+          "id": "las-cuotas-son-fijas",
+          "question": "¿Las cuotas son fijas?",
+          "answer": "En opciones asociadas a 0 km, el suscriptor puede no actualizar la cuota y conservar el valor nominal indicado al suscribirse, o aceptar un endoso de ampliación automática para acompañar cambios de valor o modelo del bien asociado al plan.",
           "status": "verified"
-        }
-      ]
-    },
-    {
-      "slug": "pagos-y-gestiones",
-      "title": "Pagos y gestiones",
-      "sortOrder": 4,
-      "items": [
+        },
+        {
+          "id": "que-son-los-endosos-de-ampliacion",
+          "question": "¿Qué son los endosos de ampliación?",
+          "answer": "Son una cláusula opcional para ampliar el valor nominal del título cuando el bien asociado al plan modifica su valor por precio o modelo. Es un punto clave si buscás mantener actualizada una opción de auto o moto 0 km.",
+          "status": "verified"
+        },
+        {
+          "id": "cuando-puedo-solicitar-mi-rescate",
+          "question": "¿Cuándo puedo solicitar mi rescate?",
+          "answer": "El rescate puede solicitarse desde la cuota 18. El valor se determina según la tabla de rescate y las condiciones contractuales vigentes.",
+          "status": "verified"
+        },
+        {
+          "id": "si-dejo-de-pagar-tengo-deuda",
+          "question": "¿Si dejo de pagar una cuota me queda una deuda?",
+          "answer": "No se genera una deuda por cuotas futuras, pero dejar de pagar puede afectar la vigencia del título, la participación en sorteos y otros derechos del plan.",
+          "status": "verified"
+        },
         {
           "id": "si-no-recibo-la-boleta",
           "question": "¿Qué hago si no recibo la boleta mensual?",
-          "answer": "La web oficial indica que debés reclamarla a Club San Jorge o a la agencia mercantil correspondiente. También podés utilizar los canales de pago y descarga de boleta disponibles en la web oficial.",
+          "answer": "Podés reclamarla a Club San Jorge o consultar con la agencia. Recordá que no recibir la boleta no elimina la importancia de mantener la cuota al día.",
           "status": "verified"
         },
         {
           "id": "como-puedo-pagar-mi-cuota",
           "question": "¿Cómo puedo pagar mi cuota?",
-          "answer": "Club San Jorge informa medios como Banco Nación, Banco Credicoop, Pago Fácil, Rapipago, Correo Argentino y débitos con tarjeta, además de recursos online para pago, boleta y débito automático.",
+          "answer": "Club San Jorge informa medios como Banco Nación, Banco Credicoop, Pago Fácil, Rapipago, Correo Argentino y débitos con tarjeta. Antes de pagar, verificá siempre que el canal sea oficial o esté correctamente indicado.",
           "status": "verified"
         },
         {
           "id": "el-titulo-se-puede-transferir",
           "question": "¿El título se puede transferir?",
-          "answer": "La FAQ oficial indica que el título es transferible. Antes de hacerlo conviene confirmar requisitos, documentación y estado del plan.",
+          "answer": "Sí, el título puede transferirse. Antes de hacerlo conviene confirmar requisitos, documentación necesaria y estado del plan.",
           "status": "verified"
         }
       ]
@@ -136,18 +231,24 @@
     {
       "slug": "agencia-y-proceso",
       "title": "Agencia y proceso comercial",
-      "sortOrder": 5,
+      "sortOrder": 4,
       "items": [
         {
           "id": "la-inscripcion-se-hace-online",
           "question": "¿La inscripción se hace completamente online desde esta web?",
-          "answer": "En esta primera etapa, la web está pensada para asesorarte, explicarte cómo funciona cada plan y ayudarte a iniciar tu solicitud. La inscripción final sigue un proceso comercial asistido por la agencia.",
+          "answer": "No. Esta web sirve para informarte, comparar opciones e iniciar una consulta. La inscripción se acompaña de forma asistida para revisar la opción elegida y la documentación correspondiente.",
           "status": "verified"
         },
         {
-          "id": "por-que-la-web-insiste-tanto-en-leer-el-contrato",
-          "question": "¿Por qué la web insiste tanto en leer el contrato y la documentación?",
-          "answer": "Porque uno de los objetivos de la agencia es evitar confusiones. La documentación del plan es la referencia más importante para entender qué se obtiene, cómo funcionan los sorteos, cuándo podés rescatar y qué decisiones podés tomar si tu título resulta favorecido.",
+          "id": "por-que-revisar-la-documentacion",
+          "question": "¿Por qué conviene revisar la documentación del plan?",
+          "answer": "Porque la documentación es la fuente principal para entender valor nominal, cuota, derecho de suscripción, endosos, sorteos, rescate, alternativas ante una adjudicación y derechos y obligaciones del suscriptor.",
+          "status": "verified"
+        },
+        {
+          "id": "que-hace-la-agencia",
+          "question": "¿Qué hace la agencia durante la consulta?",
+          "answer": "La agencia te ayuda a revisar una opción del catálogo, entender los puntos principales del sistema y avanzar con una propuesta acorde a lo que estás buscando.",
           "status": "verified"
         }
       ]

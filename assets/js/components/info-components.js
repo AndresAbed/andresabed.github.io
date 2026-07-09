@@ -232,7 +232,7 @@ export function createFaqGroup(category, priorityIds = []) {
     className: "faq-group",
     attrs: { "aria-labelledby": `faq-${category.slug}` },
     children: [
-      createSectionHeader({ eyebrow: "Preguntas frecuentes", title: category.title, id: `faq-${category.slug}` }),
+      createSectionHeader({ title: category.title, id: `faq-${category.slug}` }),
       el("div", {
         className: "accordion-shell",
         children: sorted.map((item) =>

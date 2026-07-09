@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
   { label: "Planes", href: "/planes/" },
   { label: "Adjudicados", href: "/adjudicados/" },
-  { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
+  { label: "Cómo funciona", href: "/como-funciona/" },
   { label: "Contacto", href: "/contacto/" },
 ];
 
@@ -297,7 +297,7 @@ function createFooter(site) {
     { label: "Inicio", href: "/" },
     { label: "Planes", href: "/planes/" },
     { label: "Adjudicados", href: "/adjudicados/" },
-    { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
+    { label: "Cómo funciona", href: "/como-funciona/" },
     { label: "Contacto", href: "/contacto/" },
   ];
 

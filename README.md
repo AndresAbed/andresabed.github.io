@@ -8,11 +8,12 @@ El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizacio
 
 - `index.html`: Home comercial/informativa.
 - `planes/`: catalogo principal por categorias.
-- `sorteos/`, `adjudicados/`, `recursos/`, `preguntas-frecuentes/`, `contacto/`: paginas internas.
+- `sorteos/`, `adjudicados/`, `recursos/`, `como-funciona/`, `contacto/`: paginas internas.
 - `assets/css/`: tokens, base, layout, componentes, utilities y estilos de pagina.
 - `assets/js/`: data layer, shell, componentes, helpers y modulos por pagina.
 - `assets/js/pages/plans/`: logica del catalogo, separada en assets, filtros, tarjetas, detalle, formularios y normalizacion.
 - `assets/img/`: logos, imagenes de planes, favicon, OG image y recursos visuales.
+- `assets/docs/`: documentos descargables, como el contrato del Plan 330.
 - `data/`: contenido editable local del sitio.
 - `scripts/`: utilidades de mantenimiento del catalogo.
 
@@ -48,7 +49,7 @@ Archivos principales:
 - `agency-contact.json`: canales de contacto y configuracion de formularios.
 - `artemis-backup.json`: respaldo local de sorteos y adjudicados para usar si Artemis no responde.
 - `plan_catalog.json`: catalogo principal usado por `/planes/`, Home y formularios de consulta.
-- `faq.json`: preguntas frecuentes.
+- `faq.json`: guia del sistema y preguntas frecuentes del Plan 330.
 - `resources.json`: enlaces y recursos oficiales.
 - `videos.json`: videos institucionales/explicativos.
 - `social-reviews.json`: pruebas sociales y testimonios.

@@ -310,7 +310,7 @@ export function renderHero(data) {
                   className: "home-hero-v5__actions",
                   children: [
                     createButton({ label: "Ver planes", href: "/planes/", variant: "primary" }),
-                    createButton({ label: "Cómo funciona", href: "/preguntas-frecuentes/", variant: "green" }),
+                    createButton({ label: "Cómo funciona", href: "/como-funciona/", variant: "green" }),
                   ],
                 }),
                 createHeroVideo(video),

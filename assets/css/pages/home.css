@@ -1315,11 +1315,11 @@ body.site-video-open {
 }
 
 .home-social-review__avatar--female {
-  --review-avatar-image: url("/assets/img/female-user.svg");
+  --review-avatar-image: url("../../img/female-user.svg");
 }
 
 .home-social-review__avatar--male {
-  --review-avatar-image: url("/assets/img/male-user.svg");
+  --review-avatar-image: url("../../img/male-user.svg");
 }
 
 .home-social-review h3 {

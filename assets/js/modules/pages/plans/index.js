@@ -1,4 +1,4 @@
-import { loadAgencyContact } from "../../data/api.js";
+import { loadAgencyContact, normalizeInternalTarget } from "../../data/api.js";
 import { clear, el, qs } from "../../utils/dom.js";
 import { loadCatalogPlans } from "./catalog-api.js";
 import { createPlansCatalog } from "./catalog-view.js";
@@ -16,7 +16,7 @@ function createCatalogError() {
             text:
               "Intentá recargar la página o consultanos por WhatsApp para revisar las opciones vigentes de autos, motos y dinero.",
           }),
-          el("a", { className: "button button--primary", text: "Volver a intentar", attrs: { href: "/planes/" } }),
+          el("a", { className: "button button--primary", text: "Volver a intentar", attrs: { href: normalizeInternalTarget("/planes/") } }),
         ],
       }),
     ],

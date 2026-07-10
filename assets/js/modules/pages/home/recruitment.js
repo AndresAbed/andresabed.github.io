@@ -1,4 +1,5 @@
 import { clear, el, qs } from "../../utils/dom.js";
+import { normalizeInternalTarget, withSiteBasePath } from "../../data/api.js";
 import { hasValue, isValidUrl } from "../../utils/validators.js";
 
 function recruitmentFieldId(name) {
@@ -329,7 +330,7 @@ function createRecruitmentForm(config, resultSlot) {
           el("span", {
             children: [
               "Acepto que me contacten por esta postulación comercial y que mis datos sean tratados según la ",
-              el("a", { text: "política de privacidad", attrs: { href: "/privacidad/" } }),
+              el("a", { text: "política de privacidad", attrs: { href: normalizeInternalTarget("/privacidad/") } }),
               ".",
             ],
           }),
@@ -451,7 +452,7 @@ export function renderRecruitment(data) {
             image.src
               ? el("div", {
                   className: "home-recruitment__visual",
-                  attrs: { "aria-hidden": "true", style: `--recruitment-image: url('${image.src}')` },
+                  attrs: { "aria-hidden": "true", style: `--recruitment-image: url('${withSiteBasePath(image.src)}')` },
                 })
               : null,
           ],

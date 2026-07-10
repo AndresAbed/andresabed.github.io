@@ -151,10 +151,10 @@
   background: rgb(190 0 47 / 0.68);
   height: 16px;
   inset: 50% auto auto 0.88rem;
-  mask: url("/assets/img/icons/filter-search.svg") center / contain no-repeat;
+  mask: url("../../img/icons/filter-search.svg") center / contain no-repeat;
   position: absolute;
   transform: translateY(-50%);
-  -webkit-mask: url("/assets/img/icons/filter-search.svg") center / contain no-repeat;
+  -webkit-mask: url("../../img/icons/filter-search.svg") center / contain no-repeat;
   width: 16px;
   z-index: 1;
 }
@@ -324,19 +324,19 @@
 }
 
 .catalog-filter-chip--category[data-filter-value="all"] {
-  --filter-icon: url("/assets/img/icons/filter-all.svg");
+  --filter-icon: url("../../img/icons/filter-all.svg");
 }
 
 .catalog-filter-chip--category[data-filter-value="autos"] {
-  --filter-icon: url("/assets/img/icons/filter-cars.svg");
+  --filter-icon: url("../../img/icons/filter-cars.svg");
 }
 
 .catalog-filter-chip--category[data-filter-value="motos"] {
-  --filter-icon: url("/assets/img/icons/filter-motorcycles.svg");
+  --filter-icon: url("../../img/icons/filter-motorcycles.svg");
 }
 
 .catalog-filter-chip--category[data-filter-value="dinero"] {
-  --filter-icon: url("/assets/img/icons/filter-money.svg");
+  --filter-icon: url("../../img/icons/filter-money.svg");
 }
 
 .catalog-filter-chip__copy {

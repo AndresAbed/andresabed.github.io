@@ -1,11 +1,11 @@
-import { normalizeInternalTarget } from "../../data/api.js";
+import { normalizeInternalTarget, withSiteBasePath } from "../../data/api.js";
 import { el } from "../../utils/dom.js";
 
 export function getPrimaryCta(site) {
   const cta = site?.cta?.primary;
   return {
     label: cta?.label || "Hablar por WhatsApp",
-    href: normalizeInternalTarget(cta?.target) || "/planes/",
+    href: normalizeInternalTarget(cta?.target) || normalizeInternalTarget("/planes/"),
   };
 }
 
@@ -26,7 +26,7 @@ export function createPlanVisual(item, className = "home-plan-visual") {
   return el("img", {
     className,
     attrs: {
-      src: item.imageUrl,
+      src: withSiteBasePath(item.imageUrl),
       alt: item.imageAlt || item.displayName,
       loading: "lazy",
     },

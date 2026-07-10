@@ -5,6 +5,7 @@ import {
   getFaqCategories,
   loadAdjudicationsForPeriod,
   loadFaq,
+  normalizeInternalTarget,
 } from "../data/api.js";
 import {
   createAdjudicationsTable,
@@ -169,7 +170,7 @@ function createImportantNotes(notes = {}) {
 }
 
 function createContractResource(contract = {}) {
-  const path = contract.path || "";
+  const path = normalizeInternalTarget(contract.path || "");
   return el("section", {
     className: "system-guide-section-block system-contract",
     attrs: { id: "contrato-plan-330", "aria-labelledby": "system-contract-title" },

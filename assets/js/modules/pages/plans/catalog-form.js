@@ -1,4 +1,5 @@
 import { el } from "../../utils/dom.js";
+import { normalizeInternalTarget } from "../../data/api.js";
 import { hasValue, isValidUrl } from "../../utils/validators.js";
 import { formatMoneyARS } from "../../components/plan-components.js";
 
@@ -248,7 +249,7 @@ function createContactConsent(plan, formType) {
       el("span", {
         children: [
           "Acepto que me contacten para recibir asesoramiento sobre este plan y que mis datos sean tratados según la ",
-          el("a", { text: "política de privacidad", attrs: { href: "/privacidad/" } }),
+          el("a", { text: "política de privacidad", attrs: { href: normalizeInternalTarget("/privacidad/") } }),
           ".",
         ],
       }),

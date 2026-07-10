@@ -1,4 +1,4 @@
-import { normalizeInternalTarget } from "../data/api.js";
+import { getSiteBasePath, normalizeInternalTarget, withSiteBasePath } from "../data/api.js";
 import { el, qs } from "../utils/dom.js";
 import { isBlank, isValidUrl } from "../utils/validators.js";
 
@@ -10,7 +10,9 @@ const NAV_ITEMS = [
 ];
 
 function isCurrentPath(href) {
-  const current = window.location.pathname.replace(/index\.html$/, "");
+  const basePath = getSiteBasePath();
+  const rawPath = window.location.pathname.replace(/index\.html$/, "");
+  const current = basePath && rawPath.startsWith(`${basePath}/`) ? rawPath.slice(basePath.length) || "/" : rawPath;
   return current === href || (href !== "/" && current.startsWith(href));
 }
 
@@ -22,7 +24,7 @@ function createNav({ className = "site-nav", label = "Navegacion principal" } = 
       el("a", {
         text: item.label,
         attrs: {
-          href: item.href,
+          href: normalizeInternalTarget(item.href),
           "aria-current": isCurrentPath(item.href) ? "page" : null,
         },
       }),
@@ -55,18 +57,21 @@ function createWhatsappLink({ hasCtaTarget, target, cta, compact = false }) {
 }
 
 function createBrandLogo({ logo, scrolledLogo }) {
+  const defaultLogo = withSiteBasePath(logo);
+  const nextScrolledLogo = withSiteBasePath(scrolledLogo || logo);
+
   return el("a", {
     className: "brand-lockup",
-    attrs: { href: "/", "aria-label": "Club San Jorge Capitalización y Ahorro - Inicio" },
+    attrs: { href: normalizeInternalTarget("/"), "aria-label": "Club San Jorge Capitalización y Ahorro - Inicio" },
     children: [
       logo
         ? el("img", {
             className: "brand-lockup__logo",
             attrs: {
-              src: logo,
+              src: defaultLogo,
               alt: "Club San Jorge Capitalización y Ahorro",
-              "data-logo-default": logo,
-              "data-logo-scrolled": scrolledLogo || logo,
+              "data-logo-default": defaultLogo,
+              "data-logo-scrolled": nextScrolledLogo,
             },
           })
         : null,
@@ -81,15 +86,16 @@ function isExternalTarget(href) {
 }
 
 function createFooterLink({ label, href, className }) {
-  const valid = isValidUrl(href) || String(href).startsWith("mailto:");
-  const external = valid && isExternalTarget(href);
+  const target = normalizeInternalTarget(href);
+  const valid = isValidUrl(target) || String(target).startsWith("mailto:");
+  const external = valid && isExternalTarget(target);
 
   return el("a", {
     className,
     text: label,
     attrs: valid
       ? {
-          href,
+          href: target,
           target: external ? "_blank" : null,
           rel: external ? "noopener noreferrer" : null,
         }
@@ -118,14 +124,15 @@ function createFooterColumn({ title, links }) {
 }
 
 function createSocialLink({ label, href, icon }) {
-  const valid = isValidUrl(href);
-  const external = valid && isExternalTarget(href);
+  const target = normalizeInternalTarget(href);
+  const valid = isValidUrl(target);
+  const external = valid && isExternalTarget(target);
 
   return el("a", {
     className: `site-footer__social ${valid ? "" : "site-footer__social--disabled"}`,
     attrs: valid
       ? {
-          href,
+          href: target,
           target: external ? "_blank" : null,
           rel: external ? "noopener noreferrer" : null,
           "aria-label": label,
@@ -325,7 +332,7 @@ function createFooter(site) {
                 ? el("img", {
                     className: "site-footer__logo",
                     attrs: {
-                      src: footerLogo,
+                      src: withSiteBasePath(footerLogo),
                       alt: agency.displayLockup || "Club San Jorge | Agencias Abed",
                     },
                   })

@@ -1,3 +1,4 @@
+import { normalizeInternalTarget } from "../data/api.js";
 import { classifyLinkItem } from "../data/validators.js";
 import { el } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
@@ -198,7 +199,7 @@ export function createResourceCard(item) {
         ? el("a", {
             className: "button button--secondary",
             text: "Abrir recurso",
-            attrs: { href: item.url, target: "_blank", rel: "noopener noreferrer" },
+            attrs: { href: normalizeInternalTarget(item.url), target: "_blank", rel: "noopener noreferrer" },
           })
         : el("span", { className: "badge badge--warning", text: "Link pendiente" }),
     ],

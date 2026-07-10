@@ -17,6 +17,35 @@ export const DATASETS = Object.freeze({
 
 const cache = new Map();
 
+function normalizeBasePath(path) {
+  const value = String(path || "").trim();
+  if (!value || value === "/") return "";
+  return `/${value.replace(/^\/+|\/+$/g, "")}`;
+}
+
+export function getSiteBasePath() {
+  const configuredBase = document.querySelector('meta[name="site-base-path"]')?.getAttribute("content");
+  if (configuredBase !== null && configuredBase !== undefined) return normalizeBasePath(configuredBase);
+
+  if (window.location.hostname.endsWith(".github.io")) {
+    const firstSegment = window.location.pathname.split("/").filter(Boolean)[0];
+    return firstSegment ? `/${firstSegment}` : "";
+  }
+
+  return "";
+}
+
+export function withSiteBasePath(target) {
+  if (isBlank(target)) return "";
+  const value = String(target);
+  if (/^(https?:|mailto:|tel:|#)/i.test(value)) return value;
+  if (!value.startsWith("/")) return value;
+
+  const basePath = getSiteBasePath();
+  if (!basePath) return value;
+  return value === "/" ? `${basePath}/` : `${basePath}${value}`;
+}
+
 const ARTEMIS_BASE_URL = "https://artemis.clubsanjorge.com.ar";
 const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_BASE_URL}/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/issue`;
 const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
@@ -70,29 +99,30 @@ const EMPTY_HOME_ADJUDICATIONS = Object.freeze({
 });
 
 export async function fetchJson(path, options = {}) {
-  if (cache.has(path)) return cache.get(path);
+  const requestPath = withSiteBasePath(path);
+  if (cache.has(requestPath)) return cache.get(requestPath);
 
   const controller = options.timeoutMs ? new AbortController() : null;
   const timeout = controller
     ? window.setTimeout(() => controller.abort(), options.timeoutMs)
     : null;
 
-  const request = fetch(path, controller ? { signal: controller.signal } : undefined)
+  const request = fetch(requestPath, controller ? { signal: controller.signal } : undefined)
     .then(async (response) => {
       if (!response.ok) {
-        throw new Error(`No se pudo cargar ${path} (${response.status})`);
+        throw new Error(`No se pudo cargar ${requestPath} (${response.status})`);
       }
       return response.json();
     })
     .catch((error) => {
-      cache.delete(path);
+      cache.delete(requestPath);
       throw error;
     })
     .finally(() => {
       if (timeout) window.clearTimeout(timeout);
     });
 
-  cache.set(path, request);
+  cache.set(requestPath, request);
   return request;
 }
 
@@ -471,5 +501,5 @@ export function getAdjudicationColumns() {
 export function normalizeInternalTarget(target) {
   if (isBlank(target)) return "";
 
-  return target;
+  return withSiteBasePath(target);
 }

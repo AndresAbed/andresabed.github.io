@@ -1,3 +1,5 @@
+import { withSiteBasePath } from "../../data/api.js";
+
 const PLAN_IMAGE_FOLDERS = Object.freeze({
   887: "887-renault-kwid",
   888: "888-fiat-mobi",
@@ -64,7 +66,7 @@ const MONEY_IMAGE = Object.freeze({
   label: "Plan de dinero",
   file: "plan-dinero-billetes.webp",
   position: "money",
-  src: "/assets/img/plans/plan-dinero-billetes.webp",
+  src: withSiteBasePath("/assets/img/plans/plan-dinero-billetes.webp"),
 });
 
 const BRAND_LOGOS = Object.freeze([
@@ -102,7 +104,7 @@ function brandFromPlan(plan) {
 
   return {
     name: match.name,
-    logo: match.logo,
+    logo: withSiteBasePath(match.logo),
     logoAlt: match.name,
     logoRatio: match.logoRatio,
   };
@@ -115,7 +117,7 @@ function brandFromMetadata(metadata) {
 
   return {
     name: brand.name || mappedBrand?.name || "",
-    logo: brand.logo,
+    logo: withSiteBasePath(brand.logo),
     logoAlt: brand.name || mappedBrand?.name || "Logo de marca",
     logoRatio: brand.logoRatio || mappedBrand?.logoRatio || 5,
   };
@@ -125,7 +127,7 @@ async function loadFolderMetadata(folder) {
   if (!folder) return null;
 
   try {
-    const response = await fetch(`/assets/img/plans/${folder}/metadata.json`, {
+    const response = await fetch(withSiteBasePath(`/assets/img/plans/${folder}/metadata.json`), {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return null;
@@ -144,7 +146,7 @@ function normalizeMetadataImages(folder, metadata) {
       return {
         ...angle,
         ...image,
-        src: `/assets/img/plans/${folder}/${image.file}`,
+        src: withSiteBasePath(`/assets/img/plans/${folder}/${image.file}`),
       };
     });
 }
@@ -203,7 +205,7 @@ export function getPlanMedia(plan) {
       ? plan.mediaMetadata.images
       : ANGLES.map((angle) => ({
           ...angle,
-          src: `/assets/img/plans/${folder}/${angle.file}`,
+          src: withSiteBasePath(`/assets/img/plans/${folder}/${angle.file}`),
         }));
 
   return {

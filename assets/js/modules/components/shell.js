@@ -123,6 +123,196 @@ function createFooterColumn({ title, links }) {
   });
 }
 
+function newsletterCopy(config) {
+  const copy = config?.copy || {};
+  return {
+    title: copy.title || "Suscribite y recibí promos exclusivas",
+    description: copy.description || "Recibí novedades y la información necesaria para dar tu próximo paso.",
+    label: copy.label || "Correo electrónico",
+    placeholder: copy.placeholder || "Ingresa tu correo electronico",
+    button: copy.button || "Suscribite",
+    submitting: copy.submitting || "Enviando...",
+    success: copy.success || "Listo, ya estás en la lista de novedades.",
+    error: copy.error || "No pudimos guardar el email. Revisalo e intentá de nuevo.",
+    unavailable: copy.unavailable || "La suscripción por email todavía no está disponible.",
+    consent: copy.consent || "Acepto recibir novedades por email. No implica una solicitud ni inscripción a un plan.",
+    privacyNote: copy.privacyNote || "Podés darte de baja cuando quieras.",
+  };
+}
+
+function setNewsletterState(form, state, message = "") {
+  const status = form.querySelector("[data-newsletter-status]");
+  const button = form.querySelector("button[type='submit']");
+  const defaultText = button?.dataset.defaultText || "Recibir novedades";
+  const submittingText = button?.dataset.submittingText || "Enviando...";
+
+  form.dataset.newsletterState = state;
+  if (status) {
+    status.dataset.newsletterStatus = state;
+    status.textContent = message;
+  }
+  if (button) {
+    button.disabled = state === "submitting";
+    button.textContent = state === "submitting" ? submittingText : defaultText;
+  }
+}
+
+function submitNewsletterForm(form, config, copy) {
+  const endpoint = String(config?.endpoint || "").trim();
+  if (!config?.enabled || !endpoint || !isValidUrl(endpoint)) {
+    setNewsletterState(form, "unavailable", copy.unavailable);
+    return;
+  }
+
+  const emailField = form.elements.email;
+  const email = String(emailField?.value || "").trim().toLowerCase();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    emailField?.setAttribute("aria-invalid", "true");
+    setNewsletterState(form, "error", "Ingresá un email válido.");
+    emailField?.focus();
+    return;
+  }
+
+  emailField?.removeAttribute("aria-invalid");
+  setNewsletterState(form, "submitting", "");
+
+  const body = new URLSearchParams({
+    email,
+    source: config.source || "footer_newsletter",
+    page: window.location.href,
+    consentText: copy.consent,
+    website: String(form.elements.website?.value || ""),
+  });
+
+  fetch(endpoint, {
+    method: config.method || "POST",
+    mode: "no-cors",
+    body,
+  })
+    .then(() => {
+      form.reset();
+      setNewsletterState(form, "success", copy.success);
+    })
+    .catch((error) => {
+      console.warn("No se pudo enviar la suscripcion al newsletter.", error);
+      setNewsletterState(form, "error", copy.error);
+    });
+}
+
+function setupNewsletterForm(form, config, copy) {
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    submitNewsletterForm(form, config, copy);
+  });
+}
+
+function createNewsletterBlock(newsletterConfig) {
+  const config = newsletterConfig || {};
+  const copy = newsletterCopy(config);
+  const enabled = Boolean(config.enabled);
+
+  const form = el("form", {
+    className: "site-footer-newsletter__form",
+    attrs: {
+      "data-newsletter-form": "",
+      novalidate: true,
+    },
+    children: [
+      el("label", {
+        className: "visually-hidden",
+        text: copy.label,
+        attrs: { for: "footer-newsletter-email" },
+      }),
+      el("div", {
+        className: "site-footer-newsletter__control",
+        children: [
+          el("input", {
+            attrs: {
+              id: "footer-newsletter-email",
+              name: "email",
+              type: "email",
+              inputmode: "email",
+              autocomplete: "email",
+              placeholder: copy.placeholder,
+              required: true,
+              disabled: enabled ? null : true,
+              "aria-describedby": "footer-newsletter-status footer-newsletter-note",
+            },
+          }),
+          el("button", {
+            className: "site-footer-newsletter__button",
+            text: copy.button,
+            attrs: {
+              type: "submit",
+              disabled: enabled ? null : true,
+              "data-default-text": copy.button,
+              "data-submitting-text": copy.submitting,
+            },
+          }),
+        ],
+      }),
+      el("input", {
+        className: "site-footer-newsletter__trap",
+        attrs: {
+          name: "website",
+          type: "text",
+          tabindex: "-1",
+          autocomplete: "off",
+          "aria-hidden": "true",
+        },
+      }),
+      el("p", {
+        className: "site-footer-newsletter__note",
+        attrs: { id: "footer-newsletter-note" },
+        text: `${copy.consent} ${copy.privacyNote}`,
+      }),
+      el("p", {
+        className: "site-footer-newsletter__status",
+        attrs: { id: "footer-newsletter-status", "data-newsletter-status": enabled ? "idle" : "unavailable", "aria-live": "polite" },
+        text: enabled ? "" : copy.unavailable,
+      }),
+    ],
+  });
+
+  setupNewsletterForm(form, config, copy);
+
+  return el("section", {
+    className: "container site-footer-newsletter",
+    attrs: { "aria-labelledby": "site-footer-newsletter-title" },
+    children: [
+      el("div", {
+        className: "site-footer-newsletter__copy",
+        children: [
+          el("img", {
+            className: "site-footer-newsletter__icon",
+            attrs: {
+              src: withSiteBasePath("/assets/img/mail-icon.svg"),
+              alt: "",
+              "aria-hidden": "true",
+            },
+          }),
+          el("h2", {
+            attrs: { id: "site-footer-newsletter-title" },
+            children: copy.title.split(" promos ").length === 2
+              ? [
+                  document.createTextNode(`${copy.title.split(" promos ")[0]} `),
+                  el("br", { attrs: { "aria-hidden": "true" } }),
+                  document.createTextNode(`promos ${copy.title.split(" promos ")[1]}`),
+                ]
+              : [document.createTextNode(copy.title)],
+          }),
+          el("p", { text: copy.description }),
+        ],
+      }),
+      form,
+    ],
+  });
+}
+
 function createSocialLink({ label, href, icon }) {
   const target = normalizeInternalTarget(href);
   const valid = isValidUrl(target);
@@ -288,9 +478,10 @@ function setupHeaderMenu({ header, overlay, drawer }) {
   }
 }
 
-function createFooter(site) {
+function createFooter(site, agencyContact = {}) {
   const legal = site?.legal || {};
   const agency = site?.agency || {};
+  const newsletterConfig = agencyContact?.newsletterForm || {};
   const cta = site?.cta?.primary || {};
   const whatsappTarget = normalizeInternalTarget(cta.target);
   const hasWhatsapp = isValidUrl(whatsappTarget);
@@ -322,6 +513,7 @@ function createFooter(site) {
         className: "site-footer__brand-line",
         attrs: { "aria-hidden": "true" },
       }),
+      createNewsletterBlock(newsletterConfig),
       el("div", {
         className: "container site-footer__inner",
         children: [
@@ -395,10 +587,10 @@ function createFooter(site) {
   });
 }
 
-export function renderShell(site) {
+export function renderShell(site, agencyContact) {
   const headerSlot = qs("[data-site-header]");
   const footerSlot = qs("[data-site-footer]");
 
   if (headerSlot) headerSlot.replaceWith(createHeader(site));
-  if (footerSlot) footerSlot.replaceWith(createFooter(site));
+  if (footerSlot) footerSlot.replaceWith(createFooter(site, agencyContact));
 }

@@ -27,6 +27,28 @@
     "source": "catalogo_planes",
     "status": "temporary_shared_endpoint"
   },
+  "newsletterForm": {
+    "enabled": true,
+    "mode": "endpoint",
+    "provider": "google_apps_script",
+    "endpoint": "https://script.google.com/macros/s/AKfycbxFCaFEJgehxEfPPjdA9pXBKykSgqnTFh4-xTZwsZ9IG7GlO76UNvojp7KW1kgyEqRr/exec",
+    "method": "POST",
+    "source": "footer_newsletter",
+    "status": "active",
+    "copy": {
+      "title": "Suscribite y recibí promos exclusivas",
+      "description": "Recibí novedades y la información necesaria para dar tu próximo paso.",
+      "label": "Correo electrónico",
+      "placeholder": "Ingresa tu correo electronico",
+      "button": "Suscribite",
+      "submitting": "Enviando...",
+      "success": "Listo, ya estás en la lista de novedades.",
+      "error": "No pudimos guardar el email. Revisalo e intentá de nuevo.",
+      "unavailable": "La suscripción por email todavía no está disponible.",
+      "consent": "Acepto recibir novedades por email. No implica una solicitud ni inscripción a un plan.",
+      "privacyNote": "Podés darte de baja cuando quieras."
+    }
+  },
   "planEnrollmentForm": {
     "enabled": false,
     "mode": "serverless_pending",

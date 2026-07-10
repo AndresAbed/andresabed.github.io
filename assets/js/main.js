@@ -1,4 +1,4 @@
-import { loadSite } from "./modules/data/api.js";
+import { loadAgencyContact, loadSite } from "./modules/data/api.js";
 import { renderShell } from "./modules/components/shell.js";
 import { initHomePage } from "./modules/pages/home.js";
 import { initAdjudicationsPage, initSystemGuidePage } from "./modules/pages/info-pages.js";
@@ -14,8 +14,14 @@ function finishAppLoading() {
 
 async function boot() {
   try {
-    const site = await loadSite();
-    renderShell(site);
+    const [site, agencyContact] = await Promise.all([
+      loadSite(),
+      loadAgencyContact().catch((error) => {
+        console.warn("No se pudo cargar la configuracion de contacto.", error);
+        return null;
+      }),
+    ]);
+    renderShell(site, agencyContact);
 
     if (document.body.dataset.page === "home") {
       await initHomePage(site);

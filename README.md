@@ -115,9 +115,23 @@ Las imagenes de detalle se resuelven por codigo de articulo y carpetas de `asset
 - CTAs sin destino real se deshabilitan, se marcan como canal en configuracion o se redirigen a una alternativa segura.
 - Las acciones comerciales deben mantener claro que la consulta es asistida y requiere validacion posterior.
 
+## SEO y publicacion
+
+La URL publica configurada para metadatos, `robots.txt` y `sitemap.xml` es:
+
+```text
+https://andresabed.github.io/club_san_jorge/
+```
+
+Si el sitio pasa a un dominio propio, actualizar el mismo origen en:
+
+- `data/site.json` (`seo.siteUrl`)
+- `robots.txt`
+- `sitemap.xml`
+- canonicals, `og:url` y JSON-LD de los HTML principales
+
 ## Pendientes antes de publicar
 
-- Definir dominio final y actualizar `robots.txt`, `sitemap.xml` y, si corresponde, canonicals.
 - Definir WhatsApp comercial real.
 - Confirmar endpoint final o politica de recepcion de leads.
 - Revisar textos legales con responsable comercial o asesor correspondiente.

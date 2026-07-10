@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: replace with the production domain before publishing.
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://andresabed.github.io/club_san_jorge/sitemap.xml

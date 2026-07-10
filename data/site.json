@@ -116,6 +116,7 @@
     }
   },
   "seo": {
+    "siteUrl": "https://andresabed.github.io/club_san_jorge",
     "defaultTitle": "Club San Jorge | Agencias Abed",
     "defaultDescription": "Planes de Capitalización y Ahorro Club San Jorge: autos, motos y órdenes de compra con atención comercial de Agencias Abed.",
     "defaultOgImage": "/assets/img/og/default-og.svg"

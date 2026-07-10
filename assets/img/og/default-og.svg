@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Open Graph placeholder</title>
-  <desc id="desc">Imagen social provisional para Club San Jorge | Agencias Abed.</desc>
-  <rect width="1200" height="630" fill="#18212f"/>
+  <title id="title">Club San Jorge | Agencias Abed</title>
+  <desc id="desc">Imagen social para planes de Capitalización y Ahorro Club San Jorge con Agencias Abed.</desc>
+  <rect width="1200" height="630" fill="#292929"/>
   <rect x="70" y="70" width="1060" height="490" rx="28" fill="#ffffff"/>
   <rect x="112" y="126" width="240" height="18" rx="9" fill="#61af54"/>
-  <text x="112" y="245" fill="#18212f" font-family="Arial, sans-serif" font-size="58" font-weight="700">Club San Jorge</text>
+  <text x="112" y="245" fill="#292929" font-family="Arial, sans-serif" font-size="58" font-weight="700">Club San Jorge</text>
   <text x="112" y="318" fill="#b4232a" font-family="Arial, sans-serif" font-size="44" font-weight="700">Agencias Abed</text>
-  <text x="112" y="392" fill="#465364" font-family="Arial, sans-serif" font-size="28">Base estatica informativa y comercial</text>
+  <text x="112" y="392" fill="#465364" font-family="Arial, sans-serif" font-size="28">Planes de Capitalización y Ahorro</text>
 </svg>

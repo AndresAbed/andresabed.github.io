@@ -51,6 +51,7 @@ const PLAN_IMAGE_FOLDERS = Object.freeze({
   964: "964-fiat-cronos",
   965: "965-fiat-cronos",
   966: "966-toyota-hilux",
+  968: "968-honda-xr300-tornado",
 });
 
 const ANGLES = Object.freeze([

@@ -8,7 +8,6 @@ import {
 } from "../data/api.js";
 import {
   createAdjudicationsTable,
-  createFaqGroup,
   createFinalHelpCta,
   createMonthYearSelector,
   createSectionHeader,
@@ -208,9 +207,31 @@ function flattenFaqItems(categories = []) {
   return categories.flatMap((category) =>
     (category.items || []).map((item) => ({
       ...item,
+      categorySlug: category.slug,
       categoryTitle: category.title,
     })),
   );
+}
+
+const FAQ_CATEGORY_SUMMARIES = {
+  "funcionamiento-general": "Qué es el sistema, cómo leer el plazo, el valor nominal y las condiciones generales.",
+  "sorteos-y-adjudicacion": "Cómo se participa, qué pasa ante una adjudicación y qué condiciones deben cumplirse.",
+  "cuotas-rescate-y-gestiones": "Cuotas, endosos, rescate y gestiones habituales del título.",
+};
+
+function createFaqDetails(item, { featured = false } = {}) {
+  return el("details", {
+    className: featured ? "system-guide-featured-question" : "system-guide-topic-question",
+    children: [
+      el("summary", {
+        children: [
+          featured ? el("span", { className: "system-guide-featured-question__topic", text: item.categoryTitle }) : null,
+          el("span", { className: "system-guide-question-text", text: item.question }),
+        ],
+      }),
+      el("p", { text: item.answer }),
+    ],
+  });
 }
 
 function createFeaturedFaqs(categories = [], featuredIds = []) {
@@ -225,27 +246,12 @@ function createFeaturedFaqs(categories = [], featuredIds = []) {
       el("div", {
         className: "system-guide-subsection-head",
         children: [
+          el("span", { text: "Para ubicarse rápido" }),
           el("h3", { text: "Preguntas clave", attrs: { id: "system-guide-featured-faq-title" } }),
-          el("p", { text: "Las respuestas más útiles para ubicarse rápido dentro del sistema." }),
+          el("p", { text: "Las dudas que conviene resolver primero antes de seguir leyendo el resto." }),
         ],
       }),
-      el("div", {
-        className: "system-guide-featured-faq__grid",
-        children: items.map((item) =>
-          el("details", {
-            className: "system-guide-featured-question",
-            children: [
-              el("summary", {
-                children: [
-                  el("span", { className: "system-guide-featured-question__topic", text: item.categoryTitle }),
-                  el("strong", { text: item.question }),
-                ],
-              }),
-              el("p", { text: item.answer }),
-            ],
-          }),
-        ),
-      }),
+      el("div", { className: "system-guide-featured-faq__list", children: items.map((item) => createFaqDetails(item, { featured: true })) }),
     ],
   });
 }
@@ -266,11 +272,51 @@ function createSystemFaq(categories, excludedIds = []) {
       el("div", {
         className: "system-guide-subsection-head",
         children: [
-          el("h3", { text: "Respuestas por tema", attrs: { id: "system-guide-faq-title" } }),
-          el("p", { text: "Cuotas, sorteos, endosos, rescate y gestiones, organizados para consultar por partes." }),
+          el("span", { text: "Consulta por tema" }),
+          el("h3", { text: "Más respuestas", attrs: { id: "system-guide-faq-title" } }),
+          el("p", { text: "El resto de la información está agrupada para que puedas ir directo al tema que necesitás revisar." }),
         ],
       }),
-      ...visibleCategories.map((category) => createFaqGroup(category)),
+      el("div", {
+        className: "system-guide-faq__layout",
+        children: [
+          el("nav", {
+            className: "system-guide-faq-topics",
+            attrs: { "aria-label": "Temas de preguntas frecuentes" },
+            children: visibleCategories.map((category) =>
+              el("a", {
+                attrs: { href: `#faq-${category.slug}` },
+                children: [
+                  el("span", { text: category.title }),
+                  el("small", { text: `${category.items.length} respuestas` }),
+                ],
+              }),
+            ),
+          }),
+          el("div", {
+            className: "system-guide-faq__topics",
+            children: visibleCategories.map((category) =>
+              el("section", {
+                className: "system-guide-faq-category",
+                attrs: { id: `faq-${category.slug}`, "aria-labelledby": `faq-${category.slug}-title` },
+                children: [
+                  el("header", {
+                    className: "system-guide-faq-category__head",
+                    children: [
+                      el("h4", { text: category.title, attrs: { id: `faq-${category.slug}-title` } }),
+                      el("p", { text: FAQ_CATEGORY_SUMMARIES[category.slug] || "Respuestas agrupadas para consultar este tema." }),
+                    ],
+                  }),
+                  el("div", {
+                    className: "system-guide-topic-list",
+                    children: category.items.map((item) => createFaqDetails(item)),
+                  }),
+                ],
+              }),
+            ),
+          }),
+        ],
+      }),
     ],
   });
 }
@@ -284,7 +330,7 @@ function createFaqZone(categories = [], featuredIds = []) {
         className: "system-guide-faq-zone__head",
         children: [
           el("h2", { text: "Preguntas frecuentes", attrs: { id: "system-guide-faq-zone-title" } }),
-          el("p", { text: "Respuestas puntuales sobre conceptos, sorteos, cuotas y documentación del sistema." }),
+          el("p", { text: "Una guía de consulta rápida para entender conceptos, sorteos, cuotas, rescate y gestiones del sistema." }),
         ],
       }),
       createFeaturedFaqs(categories, featuredIds),

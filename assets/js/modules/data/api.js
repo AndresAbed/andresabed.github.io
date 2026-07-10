@@ -8,6 +8,7 @@ export const DATASETS = Object.freeze({
   planCatalog: "plan_catalog.json",
   faq: "faq.json",
   resources: "resources.json",
+  privacy: "privacy.json",
   socialReviews: "social-reviews.json",
   recruitment: "recruitment.json",
   videos: "videos.json",
@@ -106,6 +107,7 @@ export const loadArtemisBackup = () => loadDataset("artemisBackup");
 export const loadPlanCatalog = () => loadDataset("planCatalog");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
+export const loadPrivacy = () => loadDataset("privacy");
 export const loadDraws = () => loadOfficialDraws();
 export const loadAdjudicationsForPeriod = (year, month) => loadOfficialAdjudicationsForPeriod(year, month);
 export const loadHomeAdjudications = () => loadOfficialHomeAdjudications();

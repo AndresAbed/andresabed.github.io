@@ -3,6 +3,7 @@ import { renderShell } from "./modules/components/shell.js";
 import { initHomePage } from "./modules/pages/home.js";
 import { initAdjudicationsPage, initSystemGuidePage } from "./modules/pages/info-pages.js";
 import { initPlansHub } from "./modules/pages/plans/index.js";
+import { initPrivacyPage } from "./modules/pages/privacy.js";
 
 function finishAppLoading() {
   window.requestAnimationFrame(() => {
@@ -24,6 +25,8 @@ async function boot() {
       await initAdjudicationsPage(site);
     } else if (document.body.dataset.page === "como-funciona") {
       await initSystemGuidePage(site);
+    } else if (document.body.dataset.page === "privacidad") {
+      await initPrivacyPage(site);
     }
   } catch (error) {
     console.error(error);

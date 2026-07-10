@@ -17,4 +17,8 @@
     <loc>https://example.com/como-funciona/</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://example.com/privacidad/</loc>
+    <priority>0.4</priority>
+  </url>
 </urlset>

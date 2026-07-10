@@ -221,31 +221,6 @@ export function createResourceGroup(group) {
   });
 }
 
-export function createFaqGroup(category, priorityIds = []) {
-  const sorted = [...(category.items || [])].sort((a, b) => {
-    const aPriority = priorityIds.includes(a.id) ? 0 : 1;
-    const bPriority = priorityIds.includes(b.id) ? 0 : 1;
-    return aPriority - bPriority;
-  });
-
-  return el("section", {
-    className: "faq-group",
-    attrs: { "aria-labelledby": `faq-${category.slug}` },
-    children: [
-      createSectionHeader({ title: category.title, id: `faq-${category.slug}` }),
-      el("div", {
-        className: "accordion-shell",
-        children: sorted.map((item) =>
-          el("details", {
-            attrs: priorityIds.includes(item.id) ? { open: true } : {},
-            children: [el("summary", { text: item.question }), el("p", { text: item.answer })],
-          }),
-        ),
-      }),
-    ],
-  });
-}
-
 export function createFinalHelpCta({ title = "¿Seguís con dudas?", body, label = "Ver planes", href = "/planes/" } = {}) {
   return el("article", {
     className: "final-cta",

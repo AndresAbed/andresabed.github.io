@@ -297,6 +297,7 @@ function createFooter(site) {
     { label: "Planes", href: "/planes/" },
     { label: "Adjudicados", href: "/adjudicados/" },
     { label: "Cómo funciona", href: "/como-funciona/" },
+    { label: "Privacidad", href: "/privacidad/" },
   ];
 
   const subscriberLinks = [

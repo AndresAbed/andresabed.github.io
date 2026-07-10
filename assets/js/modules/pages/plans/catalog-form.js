@@ -73,8 +73,6 @@ const FORM_COPY = Object.freeze({
   },
 });
 
-const CONTACT_CONSENT_TEXT = "Acepto que me contacten para recibir asesoramiento sobre este plan.";
-
 function fieldId(plan, formType, name) {
   return `plan-${plan.article}-${formType}-${name}`;
 }
@@ -247,7 +245,13 @@ function createContactConsent(plan, formType) {
           "aria-describedby": errorId(plan, formType, "contactConsent"),
         },
       }),
-      el("span", { text: CONTACT_CONSENT_TEXT }),
+      el("span", {
+        children: [
+          "Acepto que me contacten para recibir asesoramiento sobre este plan y que mis datos sean tratados según la ",
+          el("a", { text: "política de privacidad", attrs: { href: "/privacidad/" } }),
+          ".",
+        ],
+      }),
       el("small", {
         className: "field-error",
         attrs: { id: errorId(plan, formType, "contactConsent"), "aria-live": "polite" },

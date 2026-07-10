@@ -326,7 +326,13 @@ function createRecruitmentForm(config, resultSlot) {
               "aria-describedby": recruitmentErrorId("consent"),
             },
           }),
-          el("span", { text: "Acepto que me contacten por esta postulación comercial." }),
+          el("span", {
+            children: [
+              "Acepto que me contacten por esta postulación comercial y que mis datos sean tratados según la ",
+              el("a", { text: "política de privacidad", attrs: { href: "/privacidad/" } }),
+              ".",
+            ],
+          }),
           el("small", { className: "field-error", attrs: { id: recruitmentErrorId("consent"), "aria-live": "polite" } }),
         ],
       }),

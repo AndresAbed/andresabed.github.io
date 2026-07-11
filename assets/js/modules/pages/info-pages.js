@@ -6,6 +6,7 @@ import {
   loadAdjudicationsForPeriod,
   loadFaq,
   normalizeInternalTarget,
+  withSiteBasePath,
 } from "../data/api.js";
 import {
   createAdjudicationsTable,
@@ -15,12 +16,12 @@ import {
 } from "../components/info-components.js";
 import { clear, el, qs } from "../utils/dom.js";
 
-const GUIDE_ALERT_IMAGE = "/assets/img/how-it-works-alert.svg";
+const GUIDE_ALERT_IMAGE = withSiteBasePath("/assets/img/how-it-works-alert.svg");
 const GUIDE_STEP_IMAGES = [
-  "/assets/img/how-it-works-step-plan.svg",
-  "/assets/img/how-it-works-step-valor-nominal.svg",
-  "/assets/img/how-it-works-step-cuotas.svg",
-  "/assets/img/how-it-works-step-sorteos.svg",
+  withSiteBasePath("/assets/img/how-it-works-step-plan.svg"),
+  withSiteBasePath("/assets/img/how-it-works-step-valor-nominal.svg"),
+  withSiteBasePath("/assets/img/how-it-works-step-cuotas.svg"),
+  withSiteBasePath("/assets/img/how-it-works-step-sorteos.svg"),
 ];
 
 function latestMonth(months = []) {

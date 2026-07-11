@@ -105,6 +105,7 @@ function createPlanCard(plan) {
     className: cardClass(plan),
     attrs: {
       "data-plan-card": "",
+      "data-open-plan-card": plan.article,
       "data-article": plan.article,
       "data-category": plan.category,
       "data-brand": brand,
@@ -112,6 +113,10 @@ function createPlanCard(plan) {
       "data-has-media": media.hasImage ? "true" : "false",
       "data-subcategory": plan.subcategory || "",
       "data-search": plan.searchText,
+      tabindex: "0",
+      role: "button",
+      "aria-haspopup": "dialog",
+      "aria-label": `Abrir preinscripción para ${plan.displayName || "este plan"}`,
       style: mediaStyle(media),
     },
     children: [
@@ -133,10 +138,10 @@ function createPlanCard(plan) {
                 className: "plan-list-card__identity",
                 children: [createCategoryTag(plan), createCardMeta(plan)],
               }),
-              el("button", {
+              el("span", {
                 className: "button plan-list-card__action",
                 text: "Preinscripción",
-                attrs: { type: "button", "data-open-plan": plan.article },
+                attrs: { "aria-hidden": "true" },
               }),
             ],
           }),

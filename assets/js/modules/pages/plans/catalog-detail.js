@@ -312,6 +312,12 @@ function initAngleSelector(detail) {
   setActiveAngle(buttons[activeIndex], activeIndex);
 }
 
+function hasInteractiveTarget(target, card) {
+  if (!(target instanceof Element)) return false;
+  const interactive = target.closest("a, button, input, select, textarea, label, [role='button'], [data-ignore-card-click]");
+  return Boolean(interactive && interactive !== card && card.contains(interactive));
+}
+
 export function initDetail(root, items, contactConfig) {
   const drawer = qs("[data-plan-detail-drawer]", root);
   if (!drawer) return;
@@ -352,7 +358,24 @@ export function initDetail(root, items, contactConfig) {
   }
 
   qsa("[data-open-plan]", root).forEach((button) => {
-    button.addEventListener("click", () => openPlan(button.dataset.openPlan));
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openPlan(button.dataset.openPlan);
+    });
+  });
+
+  qsa("[data-open-plan-card]", root).forEach((card) => {
+    card.addEventListener("click", (event) => {
+      if (hasInteractiveTarget(event.target, card)) return;
+      openPlan(card.dataset.openPlanCard);
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      if (hasInteractiveTarget(event.target, card)) return;
+      event.preventDefault();
+      openPlan(card.dataset.openPlanCard);
+    });
   });
 
   window.addEventListener("popstate", () => {

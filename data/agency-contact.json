@@ -22,7 +22,7 @@
     "enabled": true,
     "mode": "endpoint",
     "provider": "google_apps_script",
-    "endpoint": "https://script.google.com/macros/s/AKfycbzemHbZOaEWY7n0XMx1eM4F-_Rr-wwE5HTnPLQxXeISbqi5VBJkcE92hwHJMMnd9_zq/exec",
+    "endpoint": "https://script.google.com/macros/s/AKfycbzvvDAHl9lsyLiV7DF9Kdtc6jTa8pmoebvV2ZNZCMGbwPkGlPf76fr_KK-wnfh0cAUi/exec",
     "method": "POST",
     "status": "active"
   },
@@ -30,7 +30,7 @@
     "enabled": true,
     "mode": "endpoint",
     "provider": "google_apps_script",
-    "endpoint": "https://script.google.com/macros/s/AKfycbzemHbZOaEWY7n0XMx1eM4F-_Rr-wwE5HTnPLQxXeISbqi5VBJkcE92hwHJMMnd9_zq/exec",
+    "endpoint": "https://script.google.com/macros/s/AKfycbzvvDAHl9lsyLiV7DF9Kdtc6jTa8pmoebvV2ZNZCMGbwPkGlPf76fr_KK-wnfh0cAUi/exec",
     "method": "POST",
     "status": "active",
     "copy": {

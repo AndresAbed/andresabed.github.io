@@ -95,10 +95,15 @@ function createRecruitmentTextarea({ name, label, placeholder = "" }) {
 
 function normalizeRecruitmentPayload(form) {
   const formData = new FormData(form);
+  const firstName = String(formData.get("firstName") || "").trim();
+  const lastName = String(formData.get("lastName") || "").trim();
+
   return {
     source: "Formulario web - Postulación comercial",
     createdAt: new Date().toISOString(),
-    fullName: String(formData.get("fullName") || "").trim(),
+    firstName,
+    lastName,
+    fullName: `${firstName} ${lastName}`.trim(),
     phone: String(formData.get("phone") || "").trim(),
     email: String(formData.get("email") || "").trim(),
     province: String(formData.get("province") || "").trim(),
@@ -112,7 +117,8 @@ function normalizeRecruitmentPayload(form) {
 
 function validateRecruitmentPayload(payload) {
   const errors = {};
-  if (!hasValue(payload.fullName)) errors.fullName = "Ingresá tu nombre y apellido.";
+  if (!hasValue(payload.firstName)) errors.firstName = "Ingresá tu nombre.";
+  if (!hasValue(payload.lastName)) errors.lastName = "Ingresá tu apellido.";
   if (!hasValue(payload.phone)) errors.phone = "Ingresá un teléfono o WhatsApp.";
   if (!hasValue(payload.email)) {
     errors.email = "Ingresá un email de contacto.";
@@ -204,6 +210,8 @@ function formatRecruitmentDate(isoDate) {
 function recruitmentPayloadToSearchParams(payload) {
   return new URLSearchParams({
     form: "postulacion_comercial",
+    firstName: payload.firstName,
+    lastName: payload.lastName,
     fullName: payload.fullName,
     phone: payload.phone,
     email: payload.email,
@@ -299,7 +307,8 @@ function createRecruitmentForm(config, resultSlot) {
       el("div", {
         className: "form-grid home-recruitment-form__grid",
         children: [
-          createRecruitmentField({ name: "fullName", label: "Nombre y apellido", required: true, autocomplete: "name" }),
+          createRecruitmentField({ name: "firstName", label: "Nombre", required: true, autocomplete: "given-name" }),
+          createRecruitmentField({ name: "lastName", label: "Apellido", required: true, autocomplete: "family-name" }),
           createRecruitmentField({ name: "phone", label: "Teléfono / WhatsApp", required: true, autocomplete: "tel" }),
           createRecruitmentField({ name: "email", label: "Email", type: "email", required: true, autocomplete: "email" }),
           createRecruitmentSelect({ name: "province", label: "Provincia", required: true, options: ARGENTINA_PROVINCES }),

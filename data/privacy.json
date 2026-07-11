@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "v1",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-11",
     "status": "pending_contact_configuration"
   },
   "hero": {
@@ -16,7 +16,8 @@
       "title": "Qué datos podemos solicitar",
       "body": [
         "Según el formulario que completes, podemos pedir datos de identificación y contacto como nombre, apellido, DNI, provincia, localidad, dirección, teléfono, WhatsApp y email.",
-        "En consultas por planes también podemos registrar el plan que te interesó, su código y la información necesaria para que un asesor pueda responderte con contexto."
+        "En consultas por planes también podemos registrar el plan que te interesó, su código y la información necesaria para que un asesor pueda responderte con contexto.",
+        "Si te suscribís a novedades, registramos tu email, la fecha de alta, el texto de consentimiento asociado y el estado de la suscripción."
       ]
     },
     {
@@ -24,7 +25,16 @@
       "title": "Para qué usamos la información",
       "body": [
         "Usamos los datos para contactarte, responder tu consulta, orientar una preinscripción, preparar una solicitud o evaluar una postulación comercial.",
+        "Cuando completás una preinscripción, también podemos registrar tu email en la lista de novedades para enviarte información relacionada con planes, recursos y comunicaciones comerciales de Agencias Abed.",
         "No usamos la información para finalidades ajenas a la relación comercial solicitada por vos en el formulario correspondiente."
+      ]
+    },
+    {
+      "id": "novedades",
+      "title": "Novedades por email y baja",
+      "body": [
+        "Podemos enviarte novedades por email si dejaste tu correo en el formulario de suscripción o en una preinscripción vinculada a planes.",
+        "Cada registro de la lista de novedades cuenta con un enlace de baja. Si usás ese enlace, marcamos tu email como dado de baja para no seguir enviándote comunicaciones desde esa lista."
       ]
     },
     {
@@ -39,15 +49,24 @@
       "id": "terceros",
       "title": "Servicios y tratamiento por terceros",
       "body": [
-        "Algunos formularios pueden enviarse mediante proveedores externos de formularios o correo. Esos servicios procesan la información para permitirnos recibir y responder los mensajes.",
+        "Los formularios del sitio pueden enviarse y organizarse mediante Google Apps Script y Google Sheets. Esos servicios procesan la información para permitirnos recibir, ordenar y revisar las consultas, preinscripciones, postulaciones y suscripciones.",
+        "También podemos usar servicios externos de email o mensajería para responder consultas y enviar comunicaciones relacionadas con la solicitud que realizaste.",
         "Cuando sea necesario para responder una solicitud, la información puede ser revisada por el equipo comercial correspondiente y, si aplica, contrastada con información oficial de Club San Jorge."
+      ]
+    },
+    {
+      "id": "seguridad",
+      "title": "Acceso y cuidado de la información",
+      "body": [
+        "El acceso a las hojas y registros internos se limita a las personas que necesitan revisar la información para responder consultas, gestionar preinscripciones, evaluar postulaciones o administrar la lista de novedades.",
+        "Procuramos mantener los datos actualizados y evitar pedir información que no sea necesaria para la gestión correspondiente."
       ]
     },
     {
       "id": "conservacion",
       "title": "Conservación de los datos",
       "body": [
-        "Conservamos la información durante el tiempo razonable para atender la consulta, hacer seguimiento comercial y cumplir obligaciones vinculadas a la gestión solicitada.",
+        "Conservamos la información durante el tiempo razonable para atender la consulta, hacer seguimiento comercial, administrar las suscripciones y cumplir obligaciones vinculadas a la gestión solicitada.",
         "Podés pedir la actualización, rectificación o eliminación de tus datos cuando corresponda."
       ]
     },

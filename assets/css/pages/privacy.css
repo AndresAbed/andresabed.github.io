@@ -19,7 +19,7 @@
 }
 
 .privacy-hero h1 {
-  color: var(--color-text);
+  color: var(--color-ink);
   font-family: "Poppins", sans-serif;
   font-size: clamp(2.35rem, 4.15vw, 4rem);
   font-weight: 620;
@@ -144,7 +144,7 @@
 
 .privacy-article__section h2,
 .privacy-contact h2 {
-  color: var(--color-text);
+  color: var(--color-ink);
   font-size: clamp(1.25rem, 2vw, 1.8rem);
   font-weight: 650;
   line-height: 1.15;
@@ -259,5 +259,96 @@
     height: 5px;
     min-height: 0;
     width: 96px;
+  }
+}
+
+.unsubscribe-page {
+  background:
+    linear-gradient(180deg, rgb(41 41 41 / 0.035), transparent 38%),
+    var(--color-surface);
+  min-height: 100vh;
+}
+
+.unsubscribe-view {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding-block: clamp(3rem, 8vw, 6.5rem);
+}
+
+.unsubscribe-view__inner {
+  display: grid;
+  justify-items: center;
+}
+
+.unsubscribe-panel {
+  background: #ffffff;
+  border: 1px solid rgb(41 41 41 / 0.08);
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgb(41 41 41 / 0.12);
+  max-width: 760px;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  width: min(100%, 760px);
+}
+
+.unsubscribe-panel__logo {
+  display: block;
+  height: auto;
+  margin: 0 auto clamp(1.4rem, 3vw, 2rem);
+  max-width: min(230px, 70vw);
+}
+
+.unsubscribe-panel__mark {
+  background: linear-gradient(90deg, var(--color-brand-red), var(--color-brand-green));
+  border-radius: 999px;
+  height: 5px;
+  margin: 0 auto clamp(1.4rem, 3vw, 2rem);
+  width: 92px;
+}
+
+.unsubscribe-panel[data-unsubscribe-tone="error"] .unsubscribe-panel__mark {
+  background: var(--color-brand-red);
+}
+
+.unsubscribe-panel h1 {
+  color: var(--color-ink);
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 780;
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin: 0 auto;
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+.unsubscribe-panel p {
+  color: rgb(41 41 41 / 0.72);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 520;
+  line-height: 1.65;
+  margin: var(--space-4) auto 0;
+  max-width: 58rem;
+}
+
+.unsubscribe-panel__action {
+  margin-top: clamp(1.35rem, 3vw, 2rem);
+}
+
+@media (max-width: 560px) {
+  .unsubscribe-view {
+    min-height: 100vh;
+    place-items: start center;
+  }
+
+  .unsubscribe-panel {
+    text-align: left;
+  }
+
+  .unsubscribe-panel__logo,
+  .unsubscribe-panel__mark {
+    margin-left: 0;
+    margin-right: 0;
   }
 }

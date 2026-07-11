@@ -603,18 +603,24 @@ body.site-menu-open .site-menu-drawer {
 }
 
 .site-footer-newsletter__button {
+  align-items: center;
   background: var(--color-brand-red);
   border: 0;
   border-radius: 0px 12px 12px 0px;
   color: #ffffff;
   cursor: pointer;
+  display: inline-flex;
   flex: 0 0 clamp(136px, 12vw, 158px);
   font: inherit;
   font-size: clamp(0.92rem, 1.15vw, 1rem);
   font-weight: 800;
+  justify-content: center;
   min-height: 56px;
   padding: 0.72rem clamp(16px, 1.8vw, 22px);
-  transition: background-color 160ms ease, color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease;
   white-space: nowrap;
 }
 
@@ -628,8 +634,43 @@ body.site-menu-open .site-menu-drawer {
 }
 
 .site-footer-newsletter__button:disabled {
-  cursor: progress;
   opacity: 0.78;
+}
+
+.site-footer-newsletter__button[data-newsletter-button-state="submitting"] {
+  cursor: progress;
+}
+
+.site-footer-newsletter__button::before {
+  content: none;
+}
+
+.site-footer-newsletter__button[data-newsletter-button-state="submitting"]::before {
+  animation: newsletterSubmitSpin 0.7s linear infinite;
+  border: 2px solid rgb(255 255 255 / 0.44);
+  border-radius: 999px;
+  border-top-color: #ffffff;
+  content: "";
+  height: 17px;
+  margin-right: 8px;
+  width: 17px;
+}
+
+.site-footer-newsletter__button[data-newsletter-button-state="success"] {
+  background: var(--color-brand-green);
+  color: #ffffff;
+  cursor: default;
+  opacity: 1;
+}
+
+.site-footer-newsletter__button[data-newsletter-button-state="success"]::before {
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  content: "";
+  height: 12px;
+  margin: -2px 10px 0 0;
+  transform: rotate(45deg);
+  width: 6px;
 }
 
 .site-footer-newsletter__trap {
@@ -662,6 +703,12 @@ body.site-menu-open .site-menu-drawer {
 .site-footer-newsletter__status[data-newsletter-status="unavailable"] {
   color: #ffd3cc;
   font-weight: 700;
+}
+
+@keyframes newsletterSubmitSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .site-footer__inner {

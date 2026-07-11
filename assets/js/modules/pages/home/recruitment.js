@@ -128,6 +128,10 @@ function validateRecruitmentPayload(payload) {
 function setRecruitmentFormState(form, state, message) {
   const status = form.querySelector("[data-form-status]");
   const button = form.querySelector("button[type='submit']");
+  const defaultText = button?.dataset.defaultText || "Enviar postulación";
+  const submittingText = button?.dataset.submittingText || "Enviando";
+  const successText = button?.dataset.successText || "Enviado";
+  const retryText = button?.dataset.retryText || "Intentar nuevamente";
   if (status) {
     status.dataset.formStatus = state;
     status.textContent = message || "";
@@ -136,13 +140,13 @@ function setRecruitmentFormState(form, state, message) {
     button.dataset.recruitmentState = state || "idle";
     button.disabled = state === "submitting" || state === "validating" || state === "success";
     if (state === "submitting") {
-      button.textContent = "Enviando...";
+      button.textContent = submittingText;
     } else if (state === "success") {
-      button.textContent = "Enviado";
+      button.textContent = successText;
     } else if (state === "error") {
-      button.textContent = "Intentar nuevamente";
+      button.textContent = retryText;
     } else {
-      button.textContent = "Enviar postulación";
+      button.textContent = defaultText;
     }
   }
 }
@@ -197,32 +201,46 @@ function formatRecruitmentDate(isoDate) {
   }).format(date);
 }
 
-function recruitmentPayloadToFormData(payload) {
-  const formData = new FormData();
-  formData.append("_subject", `Nueva postulación comercial - ${payload.fullName}`);
-  formData.append("Origen", payload.source);
-  formData.append("Fecha de envío", formatRecruitmentDate(payload.createdAt));
-  formData.append("Nombre y apellido", payload.fullName);
-  formData.append("Teléfono / WhatsApp", payload.phone);
-  formData.append("Email", payload.email);
-  formData.append("Provincia", payload.province);
-  formData.append("Ciudad", payload.city || "-");
-  formData.append("Experiencia comercial", payload.commercialExperience);
-  formData.append("Disponibilidad", payload.availability || "-");
-  formData.append("Mensaje", payload.message || "-");
-  formData.append("Autorización de contacto", payload.consent ? "Sí" : "No");
-  return formData;
+function recruitmentPayloadToSearchParams(payload) {
+  return new URLSearchParams({
+    form: "postulacion_comercial",
+    fullName: payload.fullName,
+    phone: payload.phone,
+    email: payload.email,
+    province: payload.province,
+    city: payload.city,
+    commercialExperience: payload.commercialExperience,
+    availability: payload.availability,
+    message: payload.message,
+    consent: String(payload.consent),
+  });
 }
 
 async function sendRecruitmentApplication(config, payload) {
   const formConfig = config?.form || {};
 
   if (formConfig.enabled && formConfig.endpoint && isValidUrl(formConfig.endpoint)) {
-    const isFormspree = formConfig.provider === "formspree";
+    const isGoogleAppsScript = formConfig.provider === "google_apps_script";
+
+    if (isGoogleAppsScript) {
+      try {
+        await fetch(formConfig.endpoint, {
+          method: formConfig.method || "POST",
+          mode: "no-cors",
+          body: recruitmentPayloadToSearchParams(payload),
+        });
+      } catch (error) {
+        if (navigator.onLine === false) throw error;
+        console.warn("No se pudo confirmar la respuesta de Apps Script, pero el envio fue disparado.", error);
+      }
+
+      return { state: "success", mode: "endpoint" };
+    }
+
     const response = await fetch(formConfig.endpoint, {
       method: formConfig.method || "POST",
-      headers: isFormspree ? { Accept: "application/json" } : { "Content-Type": "application/json", Accept: "application/json" },
-      body: isFormspree ? recruitmentPayloadToFormData(payload) : JSON.stringify(payload),
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload),
     });
     if (!response.ok) throw new Error(`Recruitment endpoint failed: ${response.status}`);
     return { state: "success", mode: "endpoint" };
@@ -349,7 +367,14 @@ function createRecruitmentForm(config, resultSlot) {
           el("button", {
             className: "button button--primary home-recruitment-form__submit",
             text: "Enviar postulación",
-            attrs: { type: "submit", "data-recruitment-state": "idle" },
+            attrs: {
+              type: "submit",
+              "data-recruitment-state": "idle",
+              "data-default-text": "Enviar postulación",
+              "data-submitting-text": "Enviando",
+              "data-success-text": "Enviado",
+              "data-retry-text": "Intentar nuevamente",
+            },
           }),
         ],
       }),

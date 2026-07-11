@@ -82,7 +82,6 @@ El proyecto usa estados para distinguir informacion final de informacion pendien
 - `pending_validation`: dato plausible, pendiente de confirmar antes de publicar como definitivo.
 - `mock`: dato de estructura o ejemplo para vistas todavia no terminadas.
 - `partial_mock`: mezcla de estructura real con datos de ejemplo.
-- `temporary_shared_endpoint`: endpoint operativo pero provisorio.
 
 Estos estados no son errores por si mismos. Sirven para que el sitio pueda avanzar sin presentar datos provisorios como definitivos.
 
@@ -90,7 +89,7 @@ Estos estados no son errores por si mismos. Sirven para que el sitio pueda avanz
 
 `data/agency-contact.json` contiene la configuración operativa de formularios comerciales vinculados al catalogo:
 
-- `planInquiryForm`: formulario de consulta dentro del detalle de un plan. Hoy envia a Formspree con un endpoint provisorio.
+- `planInquiryForm`: formulario de consulta dentro del detalle de un plan. Envia a Google Apps Script para guardar la informacion en Google Sheets.
 - `planEnrollmentForm`: formulario de inscripcion final. Esta apagado porque el sitio no incluye inscripcion online en esta etapa.
 
 La preinscripcion o consulta asistida no implica contratacion ni inscripcion final. La vista general de contacto fue retirada; las rutas comerciales se concentran en el catalogo y en las gestiones oficiales configuradas en `resources.json`.

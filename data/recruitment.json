@@ -27,12 +27,12 @@
   "form": {
     "enabled": true,
     "mode": "endpoint",
-    "provider": "formspree",
-    "endpoint": "https://formspree.io/f/meebgdzo",
+    "provider": "google_apps_script",
+    "endpoint": "https://script.google.com/macros/s/AKfycbzemHbZOaEWY7n0XMx1eM4F-_Rr-wwE5HTnPLQxXeISbqi5VBJkcE92hwHJMMnd9_zq/exec",
     "method": "POST",
     "recipientEmail": "abedandres@gmail.com",
-    "recipientStatus": "configured_in_formspree",
-    "status": "pending_validation"
+    "recipientStatus": "stored_in_google_sheet",
+    "status": "active"
   },
   "messages": {
     "success": "Postulación enviada. Vamos a revisar tus datos y contactarte si el perfil coincide.",

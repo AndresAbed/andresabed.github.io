@@ -131,7 +131,9 @@ function newsletterCopy(config) {
     label: copy.label || "Correo electrónico",
     placeholder: copy.placeholder || "Ingresa tu correo electronico",
     button: copy.button || "Suscribite",
-    submitting: copy.submitting || "Enviando...",
+    submitting: copy.submitting || "Enviando",
+    sent: copy.sent || "Enviado",
+    retry: copy.retry || "Reintentar",
     success: copy.success || "Listo, ya estás en la lista de novedades.",
     error: copy.error || "No pudimos guardar el email. Revisalo e intentá de nuevo.",
     unavailable: copy.unavailable || "La suscripción por email todavía no está disponible.",
@@ -144,7 +146,9 @@ function setNewsletterState(form, state, message = "") {
   const status = form.querySelector("[data-newsletter-status]");
   const button = form.querySelector("button[type='submit']");
   const defaultText = button?.dataset.defaultText || "Recibir novedades";
-  const submittingText = button?.dataset.submittingText || "Enviando...";
+  const submittingText = button?.dataset.submittingText || "Enviando";
+  const sentText = button?.dataset.sentText || "Enviado";
+  const retryText = button?.dataset.retryText || "Reintentar";
 
   form.dataset.newsletterState = state;
   if (status) {
@@ -152,8 +156,17 @@ function setNewsletterState(form, state, message = "") {
     status.textContent = message;
   }
   if (button) {
-    button.disabled = state === "submitting";
-    button.textContent = state === "submitting" ? submittingText : defaultText;
+    button.dataset.newsletterButtonState = state || "idle";
+    button.disabled = state === "submitting" || state === "success" || state === "unavailable";
+    if (state === "submitting") {
+      button.textContent = submittingText;
+    } else if (state === "success") {
+      button.textContent = sentText;
+    } else if (state === "error") {
+      button.textContent = retryText;
+    } else {
+      button.textContent = defaultText;
+    }
   }
 }
 
@@ -180,8 +193,6 @@ function submitNewsletterForm(form, config, copy) {
 
   const body = new URLSearchParams({
     email,
-    source: config.source || "footer_newsletter",
-    page: window.location.href,
     consentText: copy.consent,
     website: String(form.elements.website?.value || ""),
   });
@@ -251,6 +262,9 @@ function createNewsletterBlock(newsletterConfig) {
               disabled: enabled ? null : true,
               "data-default-text": copy.button,
               "data-submitting-text": copy.submitting,
+              "data-sent-text": copy.sent,
+              "data-retry-text": copy.retry,
+              "data-newsletter-button-state": "idle",
             },
           }),
         ],

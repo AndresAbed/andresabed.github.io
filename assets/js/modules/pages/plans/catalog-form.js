@@ -46,6 +46,8 @@ const FORM_TYPES = Object.freeze({
 });
 
 const ENABLE_ENROLLMENT_FORM = false;
+const CONTACT_CONSENT_TEXT =
+  "Acepto que me contacten para recibir asesoramiento sobre este plan y que mis datos sean tratados según la política de privacidad.";
 
 const FORM_COPY = Object.freeze({
   [FORM_TYPES.PREINQUIRY]: {
@@ -55,7 +57,7 @@ const FORM_COPY = Object.freeze({
       "Completá tus datos y un asesor comercial te contactará para revisar la opción elegida, resolver tus dudas y orientarte con una propuesta acorde a lo que estás buscando.",
     source: "catalogo_planes_preinscripcion",
     submit: "Enviar",
-    submitting: "Enviando...",
+    submitting: "Enviando",
     success: "Consulta enviada",
     successMessage: "Consulta enviada. Vamos a contactarte para continuar.",
     unavailable: "El envío automático de preinscripción todavía no está configurado.",
@@ -67,7 +69,7 @@ const FORM_COPY = Object.freeze({
       "Usá este formulario cuando ya quieras avanzar con la inscripción del plan. Cargá los datos del titular para preparar la solicitud y revisar la información antes de continuar con la confirmación final.",
     source: "catalogo_planes_inscripcion",
     submit: "Enviar inscripción",
-    submitting: "Enviando...",
+    submitting: "Enviando",
     success: "Inscripción enviada",
     successMessage: "Solicitud de inscripción enviada. Vamos a revisar los datos para continuar.",
     unavailable: "La inscripción online todavía no está configurada.",
@@ -143,20 +145,23 @@ function setFormState(form, state, message = "") {
   const status = form.querySelector("[data-plan-form-status]");
   const button = form.querySelector("button[type='submit']");
   const defaultText = button?.dataset.defaultText || "Enviar";
-  const submittingText = button?.dataset.submittingText || "Enviando...";
+  const submittingText = button?.dataset.submittingText || "Enviando";
   const successText = button?.dataset.successText || defaultText;
+  const retryText = button?.dataset.retryText || defaultText;
   if (status) {
     status.dataset.planFormStatus = state;
     status.textContent = message;
   }
   if (button) {
     button.dataset.state = state;
-    button.disabled = state === FORM_STATES.SUBMITTING || state === FORM_STATES.VALIDATING;
+    button.disabled = state === FORM_STATES.SUBMITTING || state === FORM_STATES.VALIDATING || state === FORM_STATES.SUCCESS;
     button.textContent =
       state === FORM_STATES.SUBMITTING
         ? submittingText
         : state === FORM_STATES.SUCCESS
           ? successText
+          : state === FORM_STATES.ERROR
+            ? retryText
           : defaultText;
   }
 }
@@ -270,6 +275,21 @@ async function sendPlanInquiry(config, payload, formType) {
     return { state: FORM_STATES.UNAVAILABLE };
   }
 
+  if (formConfig.provider === "google_apps_script") {
+    try {
+      await fetch(formConfig.endpoint, {
+        method: formConfig.method || "POST",
+        mode: "no-cors",
+        body: planInquiryPayloadToSearchParams(payload),
+      });
+    } catch (error) {
+      if (navigator.onLine === false) throw error;
+      console.warn("No se pudo confirmar la respuesta de Apps Script, pero el envio fue disparado.", error);
+    }
+
+    return { state: FORM_STATES.SUCCESS };
+  }
+
   const response = await fetch(formConfig.endpoint, {
     method: formConfig.method || "POST",
     headers: {
@@ -281,6 +301,25 @@ async function sendPlanInquiry(config, payload, formType) {
 
   if (!response.ok) throw new Error(`Plan inquiry failed: ${response.status}`);
   return { state: FORM_STATES.SUCCESS };
+}
+
+function planInquiryPayloadToSearchParams(payload) {
+  const params = new URLSearchParams();
+  params.set("form", payload.formType || FORM_TYPES.PREINQUIRY);
+  params.set("firstName", payload.firstName || "");
+  params.set("lastName", payload.lastName || "");
+  params.set("dni", payload.dni || "");
+  params.set("address", payload.address || "");
+  params.set("phone", payload.phone || "");
+  params.set("email", payload.email || "");
+  params.set("province", payload.province || "");
+  params.set("city", payload.city || "");
+  params.set("planCode", payload.planCode || payload.planArticle || "");
+  params.set("planName", payload.planName || payload.interestedPlanName || "");
+  params.set("message", payload.message || "");
+  params.set("contactConsent", payload.contactConsent ? "true" : "");
+  params.set("contactConsentText", payload.contactConsentText || "");
+  return params;
 }
 
 function getSellers(contactConfig) {
@@ -409,6 +448,7 @@ function createPlanForm(plan, contactConfig, formType) {
           "data-default-text": copy.submit,
           "data-submitting-text": copy.submitting,
           "data-success-text": copy.success,
+          "data-retry-text": "Intentar nuevamente",
         },
       }),
     ],
@@ -426,30 +466,32 @@ function createPlanForm(plan, contactConfig, formType) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const payload = normalizePayload(form, plan, formType);
-    setFormState(form, FORM_STATES.VALIDATING, "Revisando datos...");
+    setFormState(form, FORM_STATES.VALIDATING);
     const errors = validatePayload(payload);
 
     if (Object.keys(errors).length) {
       showFieldErrors(form, plan, formType, errors);
-      setFormState(form, FORM_STATES.ERROR, "Revisá los campos marcados.");
+      setFormState(form, FORM_STATES.ERROR);
       return;
     }
 
     clearFieldErrors(form);
-    setFormState(form, FORM_STATES.SUBMITTING, "Enviando datos...");
+    setFormState(form, FORM_STATES.SUBMITTING);
     sendPlanInquiry(contactConfig, payload, formType)
       .then((result) => {
         if (result.state === FORM_STATES.UNAVAILABLE) {
-          setFormState(form, FORM_STATES.UNAVAILABLE, copy.unavailable);
+          setFormState(form, FORM_STATES.UNAVAILABLE);
           return;
         }
         form.reset();
-        sellerSelect?.setAttribute("disabled", "");
-        sellerSelect.required = false;
-        setFormState(form, FORM_STATES.SUCCESS, copy.successMessage);
+        if (sellerSelect) {
+          sellerSelect.disabled = true;
+          sellerSelect.required = false;
+        }
+        setFormState(form, FORM_STATES.SUCCESS);
       })
       .catch(() => {
-        setFormState(form, FORM_STATES.ERROR, "No pudimos enviar los datos. Intentá nuevamente.");
+        setFormState(form, FORM_STATES.ERROR);
       });
   });
 

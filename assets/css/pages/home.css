@@ -2060,10 +2060,19 @@ body.site-video-open {
   width: 17px;
 }
 
+.home-recruitment-form__submit[data-recruitment-state="submitting"] {
+  background: #151a17;
+  border-color: #151a17;
+  color: #ffffff;
+  cursor: progress;
+  opacity: 0.82;
+}
+
 .home-recruitment-form__submit[data-recruitment-state="success"] {
   background: var(--color-brand-green);
   border-color: var(--color-brand-green);
   color: #ffffff;
+  cursor: default;
   opacity: 1;
 }
 

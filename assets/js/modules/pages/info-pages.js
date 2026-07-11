@@ -15,6 +15,14 @@ import {
 } from "../components/info-components.js";
 import { clear, el, qs } from "../utils/dom.js";
 
+const GUIDE_ALERT_IMAGE = "/assets/img/how-it-works-alert.svg";
+const GUIDE_STEP_IMAGES = [
+  "/assets/img/how-it-works-step-plan.svg",
+  "/assets/img/how-it-works-step-valor-nominal.svg",
+  "/assets/img/how-it-works-step-cuotas.svg",
+  "/assets/img/how-it-works-step-sorteos.svg",
+];
+
 function latestMonth(months = []) {
   return months.length ? Math.max(...months.map(Number)) : null;
 }
@@ -27,6 +35,23 @@ function latestPublishedMonth(months = [], year) {
   return months.includes(defaultMonth) ? defaultMonth : latestMonth(months);
 }
 
+function createSummaryIntro(text = "") {
+  const highlight = "mientras el título esté vigente y al día";
+  const [before, after] = String(text).split(highlight);
+
+  if (after === undefined) {
+    return el("p", { text });
+  }
+
+  return el("p", {
+    children: [
+      before ? document.createTextNode(before) : null,
+      el("strong", { text: highlight }),
+      after ? document.createTextNode(after) : null,
+    ],
+  });
+}
+
 function createGuideOverview(summary = {}) {
   return el("section", {
     className: "system-guide-panel system-guide-overview",
@@ -36,7 +61,7 @@ function createGuideOverview(summary = {}) {
         className: "system-guide-overview__copy",
         children: [
           el("h2", { text: summary.title, attrs: { id: "system-guide-overview-title" } }),
-          el("p", { text: summary.intro }),
+          createSummaryIntro(summary.intro),
           el("dl", {
             className: "system-guide-reading-list",
             children: [
@@ -89,7 +114,7 @@ function createGuideJourney(steps = []) {
     children: [
       createSectionHeader({
         title: "El recorrido, paso a paso",
-        intro: "Una forma simple de leer qué sucede desde que elegís un plan hasta la participación mensual.",
+        intro: "Descubrí el recorrido desde que elegís un plan hasta tu participación mensual.",
         id: "system-guide-journey-title",
       }),
       el("ol", {
@@ -99,7 +124,19 @@ function createGuideJourney(steps = []) {
             className: "system-guide-step",
             children: [
               el("span", { className: "system-guide-step__number", text: String(index + 1).padStart(2, "0") }),
+              GUIDE_STEP_IMAGES[index]
+                ? el("img", {
+                    className: "system-guide-step__image",
+                    attrs: {
+                      src: GUIDE_STEP_IMAGES[index],
+                      alt: "",
+                      loading: "lazy",
+                      "aria-hidden": "true",
+                    },
+                  })
+                : null,
               el("div", {
+                className: "system-guide-step__copy",
                 children: [el("h3", { text: step.title }), el("p", { text: step.body })],
               }),
             ],
@@ -146,6 +183,15 @@ function createImportantNotes(notes = {}) {
       el("div", {
         className: "system-guide-notes__intro",
         children: [
+          el("img", {
+            className: "system-guide-notes__icon",
+            attrs: {
+              src: GUIDE_ALERT_IMAGE,
+              alt: "",
+              loading: "lazy",
+              "aria-hidden": "true",
+            },
+          }),
           el("span", { text: "Aclaraciones importantes" }),
           el("h2", { text: notes.title || "Aclaraciones importantes", attrs: { id: "system-guide-notes-title" } }),
           el("p", {

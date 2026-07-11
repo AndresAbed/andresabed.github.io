@@ -26,8 +26,8 @@
       ]
     },
     "keyConcepts": {
-      "title": "Conceptos que conviene tener claros",
-      "intro": "Para leer mejor cada opción, separá lo que ves en el catálogo de lo que define la documentación: valor nominal, cuotas, sorteos, endosos y rescate.",
+      "title": "Palabras clave para entender tu plan",
+      "intro": "Familiarizarte con estos términos te permitirá entender mejor el funcionamiento de cada plan.",
       "items": [
         {
           "label": "Título",
@@ -138,7 +138,7 @@
         {
           "id": "como-se-realizan-los-sorteos-mensuales",
           "question": "¿Cómo se realizan los sorteos mensuales?",
-          "answer": "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires, en la última jugada de cada mes, salvo excepciones previamente aprobadas por la autoridad correspondiente.",
+          "answer": "Los sorteos se realizan mediante la Lotería de la Ciudad de Buenos Aires (LOTBA), en la última jugada de cada mes, salvo excepciones previamente aprobadas por la autoridad correspondiente.",
           "status": "verified"
         },
         {

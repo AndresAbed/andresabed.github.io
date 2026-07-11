@@ -720,6 +720,19 @@
   line-height: 1;
 }
 
+.system-guide-step__image {
+  align-self: start;
+  display: block;
+  block-size: clamp(128px, 13vw, 176px);
+  inline-size: min(100%, 230px);
+  justify-self: center;
+  object-fit: contain;
+}
+
+.system-guide-step__copy {
+  align-self: start;
+}
+
 .system-guide-step h3,
 .system-concept h3 {
   color: var(--color-ink);
@@ -813,6 +826,13 @@
   letter-spacing: 0.08em;
   margin-block-end: 0.7rem;
   text-transform: uppercase;
+}
+
+.system-guide-notes__icon {
+  block-size: clamp(58px, 6vw, 86px);
+  display: block;
+  inline-size: auto;
+  margin-block-end: clamp(8px, 1vw, 12px);
 }
 
 .system-guide-notes__intro {

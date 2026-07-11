@@ -1,0 +1,51 @@
+{
+  "planCode": 882,
+  "displayName": "Yamaha FZ 25 + $200.000",
+  "officialName": "YAMAHA FZ25 + $200000",
+  "brand": {
+    "name": "Yamaha",
+    "logo": "/assets/img/brand-logos/yamaha.svg"
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    },
+    {
+      "id": "front",
+      "label": "Frente",
+      "position": "front",
+      "file": "front.webp"
+    },
+    {
+      "id": "side",
+      "label": "Lateral",
+      "position": "side",
+      "file": "side.webp"
+    },
+    {
+      "id": "rear_right",
+      "label": "Trasera derecha",
+      "position": "rear-right",
+      "file": "rear-right.webp"
+    },
+    {
+      "id": "rear",
+      "label": "Trasera",
+      "position": "rear",
+      "file": "rear.webp"
+    }
+  ],
+  "mediaScale": {
+    "card": "1.6",
+    "cardHover": "1.64",
+    "featured": "1.8",
+    "featuredHover": "1.84"
+  },
+  "mediaPosition": {
+    "cardY": "1.5%",
+    "featuredY": "2%"
+  }
+}

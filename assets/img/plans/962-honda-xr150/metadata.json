@@ -1,0 +1,51 @@
+{
+  "planCode": 962,
+  "displayName": "Honda XR 150 + $100.000",
+  "officialName": "HONDA XR150+$100000 5 CHANCES",
+  "brand": {
+    "name": "Honda",
+    "logo": "/assets/img/brand-logos/honda.svg"
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    },
+    {
+      "id": "front",
+      "label": "Frente",
+      "position": "front",
+      "file": "front.webp"
+    },
+    {
+      "id": "side",
+      "label": "Lateral",
+      "position": "side",
+      "file": "side.webp"
+    },
+    {
+      "id": "rear_right",
+      "label": "Trasera derecha",
+      "position": "rear-right",
+      "file": "rear-right.webp"
+    },
+    {
+      "id": "rear",
+      "label": "Trasera",
+      "position": "rear",
+      "file": "rear.webp"
+    }
+  ],
+  "mediaScale": {
+    "card": "1.8",
+    "cardHover": "1.84",
+    "featured": "1.8",
+    "featuredHover": "1.84"
+  },
+  "mediaPosition": {
+    "cardY": "2%",
+    "featuredY": "2%"
+  }
+}

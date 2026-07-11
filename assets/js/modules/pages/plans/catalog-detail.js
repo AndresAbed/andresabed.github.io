@@ -56,6 +56,7 @@ function angleTabLabel(image) {
     front_left: "Frente izq.",
     front: "Frente",
     front_right: "Frente der.",
+    side: "Lateral",
     rear_right: "Atrás der.",
     rear: "Atrás",
   };

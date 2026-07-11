@@ -568,7 +568,7 @@
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   min-height: var(--plan-card-media-height);
   overflow: hidden;
-  padding: clamp(44px, 3.5vw, 56px) clamp(15px, 2vw, 24px) clamp(24px, 2.2vw, 32px);
+  padding: clamp(24px, 2.4vw, 34px) clamp(15px, 2vw, 24px) clamp(42px, 3.4vw, 56px);
   position: relative;
   z-index: 1;
   transition: background-color 360ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -578,6 +578,10 @@
   height: var(--plan-card-media-height);
   min-height: 0;
   z-index: 2;
+}
+
+.plan-list-card--motos:not(.plan-list-card--featured) .plan-list-card__media {
+  padding-block-start: clamp(32px, 3vw, 45px);
 }
 
 .plan-list-card__media::before,
@@ -629,7 +633,8 @@
 }
 
 .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
-  transform: scale(var(--plan-media-card-hover-scale, var(--plan-media-card-scale, 1.9)));
+  transform: scale(var(--plan-media-card-hover-scale, var(--plan-media-card-scale, 1.9)))
+    translate(var(--plan-media-card-hover-x, var(--plan-media-card-x, 0)), var(--plan-media-card-hover-y, var(--plan-media-card-y, 0)));
 }
 
 .plan-list-card--dinero .plan-list-card__media img,
@@ -672,10 +677,15 @@
   pointer-events: none;
   position: relative;
   width: min(72%, 270px);
-  transform: scale(var(--plan-media-card-scale, 1.9));
+  transform: scale(var(--plan-media-card-scale, 1.9)) translate(var(--plan-media-card-x, 0), var(--plan-media-card-y, 0));
   transform-origin: center;
   transition: transform 220ms ease;
   z-index: 2;
+}
+
+.plan-list-card--motos .plan-list-card__media img {
+  max-height: clamp(176px, 16vw, 212px);
+  width: min(88%, 390px);
 }
 
 .plan-list-card__media-placeholder {
@@ -732,6 +742,11 @@
   position: relative;
 }
 
+.plan-list-card--featured.plan-list-card--motos .plan-list-card__media {
+  overflow: hidden;
+  padding: clamp(16px, 2vw, 26px) clamp(18px, 2.2vw, 28px) clamp(34px, 3vw, 48px);
+}
+
 .plan-list-card--featured .plan-list-card__media img {
   max-height: clamp(210px, 22vw, 326px);
   width: min(76%, 420px);
@@ -740,13 +755,29 @@
 .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
 .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
   max-height: clamp(225px, 23vw, 340px);
-  transform: scale(var(--plan-media-featured-scale, 2.4)) translate(3%, 3%);
+  transform: scale(var(--plan-media-featured-scale, 2.4)) translate(var(--plan-media-featured-x, 3%), var(--plan-media-featured-y, 3%));
   transform-origin: center;
+}
+
+.plan-list-card--featured.plan-list-card--autos .plan-list-card__media img {
+  width: min(76%, 420px);
+}
+
+.plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
+  max-height: clamp(285px, 29vw, 390px);
+  transform: scale(var(--plan-media-featured-scale, 1.8)) translate(var(--plan-media-featured-x, 0), var(--plan-media-featured-y, 2%));
+  width: min(92%, 640px);
 }
 
 .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
 .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-  transform: scale(var(--plan-media-featured-hover-scale, var(--plan-media-featured-scale, 2.46))) translate(3%, 3%);
+  transform: scale(var(--plan-media-featured-hover-scale, var(--plan-media-featured-scale, 2.46)))
+    translate(var(--plan-media-featured-hover-x, var(--plan-media-featured-x, 3%)), var(--plan-media-featured-hover-y, var(--plan-media-featured-y, 3%)));
+}
+
+.plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
+  transform: scale(var(--plan-media-featured-hover-scale, var(--plan-media-featured-scale, 1.84)))
+    translate(var(--plan-media-featured-hover-x, var(--plan-media-featured-x, 0)), var(--plan-media-featured-hover-y, var(--plan-media-featured-y, 2%)));
 }
 
 .plan-list-card__tag {
@@ -2264,6 +2295,17 @@ body.plan-drawer-open {
     width: min(70%, 280px);
   }
 
+  .plan-list-card--motos .plan-list-card__media img {
+    max-height: clamp(190px, 22vw, 240px);
+    transform: scale(1.42) translate(var(--plan-media-card-x, 0), var(--plan-media-card-y, 0));
+    width: min(88%, 410px);
+  }
+
+  .plan-list-card--motos:not(.plan-list-card--featured):hover .plan-list-card__media img {
+    transform: scale(1.46)
+      translate(var(--plan-media-card-hover-x, var(--plan-media-card-x, 0)), var(--plan-media-card-hover-y, var(--plan-media-card-y, 0)));
+  }
+
   .plan-list-card--dinero .plan-list-card__media img,
   .plan-list-card--dinero:not(.plan-list-card--featured):hover .plan-list-card__media img {
     max-height: clamp(138px, 14vw, 158px);
@@ -2274,20 +2316,24 @@ body.plan-drawer-open {
   .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
     max-height: clamp(220px, 29vw, 320px);
-    transform: scale(1.44) translate(1%, 3%);
+    transform: scale(var(--plan-media-featured-scale, 1.44)) translate(var(--plan-media-featured-x, 1%), var(--plan-media-featured-y, 3%));
   }
 
   .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.48) translate(1%, 3%);
+    transform: scale(var(--plan-media-featured-hover-scale, var(--plan-media-featured-scale, 1.48)))
+      translate(var(--plan-media-featured-hover-x, var(--plan-media-featured-x, 1%)), var(--plan-media-featured-hover-y, var(--plan-media-featured-y, 3%)));
   }
 
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.62) translate(2%, 3%);
+    max-height: clamp(275px, 31vw, 380px);
+    transform: scale(1.42) translate(var(--plan-media-featured-x, 2%), 9%);
+    width: min(92%, 620px);
   }
 
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.66) translate(2%, 3%);
+    transform: scale(1.46)
+      translate(var(--plan-media-featured-hover-x, var(--plan-media-featured-x, 2%)), 9%);
   }
 
 }
@@ -2295,11 +2341,25 @@ body.plan-drawer-open {
 @media (hover: none) and (max-width: 1120px) {
   .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.44) translateX(1%);
+    transform: scale(var(--plan-media-featured-scale, 1.44)) translate(var(--plan-media-featured-x, 1%), var(--plan-media-featured-y, 3%));
   }
 
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.62) translateX(2%);
+    transform: scale(1.42) translate(var(--plan-media-featured-x, 2%), 9%);
+  }
+}
+
+@media (min-width: 1121px) and (max-width: 1280px) {
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="956"] .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="967"] .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="968"] .plan-list-card__media img {
+    transform: scale(1.74) translate(var(--plan-media-card-x, 0), -3%);
+  }
+
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="956"]:hover .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="967"]:hover .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="968"]:hover .plan-list-card__media img {
+    transform: scale(1.78) translate(var(--plan-media-card-hover-x, var(--plan-media-card-x, 0)), -3%);
   }
 }
 
@@ -2484,31 +2544,35 @@ body.plan-drawer-open {
     border-left: 0;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     min-height: 300px;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .plan-list-card--featured .plan-list-card__media img {
     max-height: 170px;
-    transform: scale(1.68) translate(4%, 4%);
+    transform: scale(var(--plan-media-featured-scale, 1.68)) translate(var(--plan-media-featured-x, 4%), var(--plan-media-featured-y, 4%));
     width: min(78%, 320px);
   }
 
   .plan-list-card--featured.plan-list-card--autos .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.82) translate(4%, 4%);
+    transform: scale(var(--plan-media-featured-scale, 1.82)) translate(var(--plan-media-featured-x, 4%), var(--plan-media-featured-y, 4%));
   }
 
   .plan-list-card--featured.plan-list-card--autos:hover .plan-list-card__media img,
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.82) translate(4%, 4%);
+    transform: scale(var(--plan-media-featured-hover-scale, var(--plan-media-featured-scale, 1.82)))
+      translate(var(--plan-media-featured-hover-x, var(--plan-media-featured-x, 4%)), var(--plan-media-featured-hover-y, var(--plan-media-featured-y, 4%)));
   }
 
   .plan-list-card--featured.plan-list-card--motos .plan-list-card__media img {
-    transform: scale(1.92) translate(4%, 4%);
+    max-height: 210px;
+    transform: scale(1.28) translate(var(--plan-media-featured-x, 4%), 8%);
+    width: min(88%, 390px);
   }
 
   .plan-list-card--featured.plan-list-card--motos:hover .plan-list-card__media img {
-    transform: scale(1.92) translate(4%, 4%);
+    transform: scale(1.28)
+      translate(var(--plan-media-featured-hover-x, var(--plan-media-featured-x, 4%)), 8%);
   }
 
   .plan-list-card--featured h3 {
@@ -2552,7 +2616,7 @@ body.plan-drawer-open {
 
   .plan-list-card__media {
     min-height: 270px;
-    padding-block-start: 58px;
+    padding-block-start: 45px;
   }
 
   .plan-list-card__media img {
@@ -2563,6 +2627,24 @@ body.plan-drawer-open {
 
   .plan-list-card:not(.plan-list-card--featured):hover .plan-list-card__media img {
     transform: scale(1.72);
+  }
+
+  .plan-list-card--motos:not(.plan-list-card--featured) .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured):hover .plan-list-card__media img {
+    max-height: 178px;
+    transform: scale(1.24) translate(var(--plan-media-card-x, 0), var(--plan-media-card-y, 0));
+    width: min(82%, 330px);
+  }
+
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="956"] .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="967"] .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="968"] .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="956"]:hover .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="967"]:hover .plan-list-card__media img,
+  .plan-list-card--motos:not(.plan-list-card--featured)[data-article="968"]:hover .plan-list-card__media img {
+    max-height: 210px;
+    transform: scale(1.46) translate(var(--plan-media-card-x, 0), var(--plan-media-card-y, 0));
+    width: min(88%, 380px);
   }
 
   .plan-list-card[data-media-fit="large-vehicle"]:not(.plan-list-card--featured) .plan-list-card__media img,

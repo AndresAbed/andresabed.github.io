@@ -65,10 +65,12 @@ function createChanceRibbon(chanceCount) {
 }
 
 function createMediaContent(plan, media) {
-  if (media.hasImage && media.defaultImage) {
+  const cardImage = media.cardImage || media.defaultImage;
+
+  if (media.hasImage && cardImage) {
     return el("img", {
       attrs: {
-        src: media.defaultImage.src,
+        src: cardImage.src,
         alt: `Imagen ilustrativa de ${plan.displayName}`,
         loading: "lazy",
       },
@@ -87,11 +89,20 @@ function createMediaContent(plan, media) {
 
 function mediaStyle(media) {
   const scale = media?.scale || {};
+  const position = media?.position || {};
   const rules = [];
   if (scale.card) rules.push(`--plan-media-card-scale: ${scale.card}`);
   if (scale.cardHover) rules.push(`--plan-media-card-hover-scale: ${scale.cardHover}`);
   if (scale.featured) rules.push(`--plan-media-featured-scale: ${scale.featured}`);
   if (scale.featuredHover) rules.push(`--plan-media-featured-hover-scale: ${scale.featuredHover}`);
+  if (position.cardX) rules.push(`--plan-media-card-x: ${position.cardX}`);
+  if (position.cardY) rules.push(`--plan-media-card-y: ${position.cardY}`);
+  if (position.cardHoverX) rules.push(`--plan-media-card-hover-x: ${position.cardHoverX}`);
+  if (position.cardHoverY) rules.push(`--plan-media-card-hover-y: ${position.cardHoverY}`);
+  if (position.featuredX) rules.push(`--plan-media-featured-x: ${position.featuredX}`);
+  if (position.featuredY) rules.push(`--plan-media-featured-y: ${position.featuredY}`);
+  if (position.featuredHoverX) rules.push(`--plan-media-featured-hover-x: ${position.featuredHoverX}`);
+  if (position.featuredHoverY) rules.push(`--plan-media-featured-hover-y: ${position.featuredHoverY}`);
   return rules.join("; ");
 }
 

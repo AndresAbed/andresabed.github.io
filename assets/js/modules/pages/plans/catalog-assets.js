@@ -1,6 +1,11 @@
 import { withSiteBasePath } from "../../data/api.js";
 
 const PLAN_IMAGE_FOLDERS = Object.freeze({
+  870: "870-honda-new-wave-110",
+  880: "880-gilera-smash-110",
+  881: "881-honda-twister-300",
+  882: "882-yamaha-fz25",
+  883: "883-bajaj-dominar-d400",
   887: "887-renault-kwid",
   888: "888-fiat-mobi",
   891: "891-chevrolet-onix",
@@ -46,12 +51,17 @@ const PLAN_IMAGE_FOLDERS = Object.freeze({
   949: "949-fiat-pulse",
   950: "950-fiat-fastback-turbo",
   951: "951-volkswagen-taos",
+  956: "956-honda-xre300",
   957: "957-toyota-hiace",
+  960: "960-honda-new-wave-110",
+  961: "961-honda-xr150",
+  962: "962-honda-xr150",
   963: "963-fiat-cronos",
   964: "964-fiat-cronos",
   965: "965-fiat-cronos",
   966: "966-toyota-hilux",
-  968: "968-honda-xr300-tornado",
+  967: "967-honda-xre300",
+  968: "968-honda-xre300",
 });
 
 const ANGLES = Object.freeze([
@@ -61,6 +71,16 @@ const ANGLES = Object.freeze([
   { id: "rear_right", label: "Trasera derecha", file: "rear-right.webp", position: "rear-right" },
   { id: "rear", label: "Trasera", file: "rear.webp", position: "rear" },
 ]);
+
+const MOTO_ANGLES = Object.freeze([
+  { id: "front_left", label: "Frente izquierdo", file: "front-left.webp", position: "front-left" },
+  { id: "front", label: "Frente", file: "front.webp", position: "front" },
+  { id: "side", label: "Lateral", file: "side.webp", position: "side" },
+  { id: "rear_right", label: "Trasera derecha", file: "rear-right.webp", position: "rear-right" },
+  { id: "rear", label: "Trasera", file: "rear.webp", position: "rear" },
+]);
+
+const IMAGE_ANGLE_LOOKUP = Object.freeze([...ANGLES, ...MOTO_ANGLES]);
 
 const MONEY_IMAGE = Object.freeze({
   id: "money",
@@ -87,6 +107,10 @@ const BRAND_LOGOS = Object.freeze([
 
 function folderFor(article) {
   return PLAN_IMAGE_FOLDERS[article] || "";
+}
+
+function anglesForPlan(plan) {
+  return plan?.category === "motos" ? MOTO_ANGLES : ANGLES;
 }
 
 function normalizeBrandSource(plan) {
@@ -138,18 +162,28 @@ async function loadFolderMetadata(folder) {
   }
 }
 
-function normalizeMetadataImages(folder, metadata) {
-  const images = Array.isArray(metadata?.images) && metadata.images.length ? metadata.images : ANGLES;
+function normalizeMetadataImages(folder, metadata, plan) {
+  const images = Array.isArray(metadata?.images) && metadata.images.length ? metadata.images : anglesForPlan(plan);
   return images
     .filter((image) => image?.file)
     .map((image) => {
-      const angle = ANGLES.find((item) => item.id === image.id || item.file === image.file) || {};
+      const angle = IMAGE_ANGLE_LOOKUP.find((item) => item.id === image.id || item.file === image.file) || {};
       return {
         ...angle,
         ...image,
         src: withSiteBasePath(`/assets/img/plans/${folder}/${image.file}`),
       };
     });
+}
+
+function normalizeMetadataImage(folder, image) {
+  if (!image?.file) return null;
+  const angle = IMAGE_ANGLE_LOOKUP.find((item) => item.id === image.id || item.file === image.file) || {};
+  return {
+    ...angle,
+    ...image,
+    src: withSiteBasePath(`/assets/img/plans/${folder}/${image.file}`),
+  };
 }
 
 export async function withPlanMediaMetadata(items) {
@@ -168,8 +202,11 @@ export async function withPlanMediaMetadata(items) {
     const fit = metadata?.mediaFit || "";
     const scale = metadata?.mediaScale || null;
     const position = metadata?.mediaPosition || null;
-    const images = folder && metadata ? normalizeMetadataImages(folder, metadata) : [];
-    return folder || brand || fit || scale || position ? { ...item, mediaMetadata: { folder, brand, fit, scale, position, images } } : item;
+    const images = folder && metadata ? normalizeMetadataImages(folder, metadata, item) : [];
+    const cardImage = folder && metadata ? normalizeMetadataImage(folder, metadata.cardImage) : null;
+    return folder || brand || fit || scale || position || cardImage
+      ? { ...item, mediaMetadata: { folder, brand, fit, scale, position, images, cardImage } }
+      : item;
   });
 }
 
@@ -182,6 +219,7 @@ export function getPlanMedia(plan) {
       hasImage: true,
       defaultAngle: MONEY_IMAGE.id,
       defaultImage: MONEY_IMAGE,
+      cardImage: MONEY_IMAGE,
       images: [MONEY_IMAGE],
     };
   }
@@ -197,6 +235,7 @@ export function getPlanMedia(plan) {
       hasImage: false,
       defaultAngle: "",
       defaultImage: null,
+      cardImage: null,
       images: [],
     };
   }
@@ -204,7 +243,7 @@ export function getPlanMedia(plan) {
   const images =
     Array.isArray(plan?.mediaMetadata?.images) && plan.mediaMetadata.images.length
       ? plan.mediaMetadata.images
-      : ANGLES.map((angle) => ({
+      : anglesForPlan(plan).map((angle) => ({
           ...angle,
           src: withSiteBasePath(`/assets/img/plans/${folder}/${angle.file}`),
         }));
@@ -218,6 +257,7 @@ export function getPlanMedia(plan) {
     hasImage: images.length > 0,
     defaultAngle: images.find((image) => image.id === "front_left")?.id || images[0]?.id || "",
     defaultImage: images.find((image) => image.id === "front_left") || images[0] || null,
+    cardImage: plan?.mediaMetadata?.cardImage || images.find((image) => image.id === "front_left") || images[0] || null,
     images,
   };
 }

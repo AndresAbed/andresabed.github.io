@@ -1,0 +1,34 @@
+{
+  "planCode": 880,
+  "displayName": "Gilera Smash 110 + $100.000",
+  "officialName": "GILERA SMASH110+$100000 5CHANC",
+  "brand": {
+    "name": "Gilera",
+    "logo": "/assets/img/brand-logos/gilera.svg"
+  },
+  "cardImage": {
+    "id": "front_left",
+    "label": "Frente izquierdo",
+    "position": "front-left",
+    "file": "front-left.webp"
+  },
+  "images": [
+    {
+      "id": "side",
+      "label": "Lateral",
+      "position": "side",
+      "file": "side.webp"
+    }
+  ],
+  "mediaScale": {
+    "card": "1.6",
+    "cardHover": "1.64",
+    "featured": "1.8",
+    "featuredHover": "1.84"
+  },
+  "mediaPosition": {
+    "cardY": "2%",
+    "featuredY": "2%",
+    "featuredX": "1%"
+  }
+}

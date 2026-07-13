@@ -10,12 +10,6 @@
       "url": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
       "displayPhone": "+54 9 11 1234-5678",
       "status": "mock"
-    },
-    "email": {
-      "enabled": true,
-      "label": "Email comercial",
-      "address": "contacto@agenciasabed.com.ar",
-      "status": "active"
     }
   },
   "planInquiryForm": {

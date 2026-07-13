@@ -1,5 +1,5 @@
 import { clear, el, qs } from "../../utils/dom.js";
-import { createHomeSectionHeader } from "./shared.js";
+import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js";
 
 function scrollSocialReviews(track, direction) {
   if (!track) return;
@@ -151,4 +151,5 @@ export function renderSocialReviews(data) {
   window.addEventListener("resize", syncProgress);
   target.querySelector(".home-social-proof__control--prev")?.addEventListener("click", () => scrollSocialReviews(track, -1));
   target.querySelector(".home-social-proof__control--next")?.addEventListener("click", () => scrollSocialReviews(track, 1));
+  enableHorizontalSwipe(track);
 }

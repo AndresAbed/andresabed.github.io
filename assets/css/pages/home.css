@@ -868,11 +868,14 @@ body.site-video-open {
   background:
     linear-gradient(90deg, rgb(255 255 255 / 0.78) 0%, rgb(255 255 255 / 0.34) 62%, rgb(255 255 255 / 0) 100%);
   border-radius: 18px;
+  cursor: grab;
   display: grid;
   gap: 24px;
   grid-auto-columns: calc((100% - 48px) / 3);
   grid-auto-flow: column;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   padding: 18px 22px 28px;
   scroll-padding-inline: 22px;
   scroll-snap-type: x mandatory;
@@ -1201,12 +1204,15 @@ body.site-video-open {
   background:
     linear-gradient(90deg, rgb(255 255 255 / 0.78) 0%, rgb(255 255 255 / 0.34) 62%, rgb(255 255 255 / 0) 100%);
   border-radius: 18px;
+  cursor: grab;
   display: grid;
   gap: 28px;
   grid-auto-columns: minmax(330px, 390px);
   grid-auto-flow: column;
   min-width: 0;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   padding: 18px 22px 26px;
   scroll-padding-inline: 22px;
   scroll-snap-type: x mandatory;
@@ -1215,6 +1221,13 @@ body.site-video-open {
 
 .home-social-proof__track::-webkit-scrollbar {
   display: none;
+}
+
+.home-adjudications__track[data-dragging="true"],
+.home-social-proof__track[data-dragging="true"] {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
 }
 
 .home-social-proof__track:focus-visible {
@@ -2611,9 +2624,14 @@ body.site-video-open {
   }
 
   .home-adjudications__track {
-    grid-auto-columns: 100%;
+    grid-auto-columns: calc(100% - 18px);
     padding-inline: 14px;
     scroll-padding-inline: 14px;
+    touch-action: pan-y;
+  }
+
+  .home-social-proof__track {
+    touch-action: pan-y;
   }
 
   .home-adjudications__control {

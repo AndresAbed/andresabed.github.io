@@ -1,7 +1,7 @@
 import { withSiteBasePath } from "../../data/api.js";
 import { createButton } from "../../components/plan-components.js";
 import { clear, el, qs } from "../../utils/dom.js";
-import { createHomeSectionHeader } from "./shared.js";
+import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js";
 
 const ADJUDICATION_IMAGE_TIMEOUT_MS = 2200;
 
@@ -167,4 +167,5 @@ export function renderHomeAdjudications(data) {
 
   target.querySelector(".home-adjudications__control--prev")?.addEventListener("click", () => scrollAdjudications(track, -1));
   target.querySelector(".home-adjudications__control--next")?.addEventListener("click", () => scrollAdjudications(track, 1));
+  enableHorizontalSwipe(track);
 }

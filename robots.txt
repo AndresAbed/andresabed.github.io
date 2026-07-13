@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://andresabed.github.io/club_san_jorge/sitemap.xml
+Sitemap: https://agenciasabed.com.ar/sitemap.xml

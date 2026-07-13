@@ -23,13 +23,15 @@ function normalizeBasePath(path) {
   return `/${value.replace(/^\/+|\/+$/g, "")}`;
 }
 
+const GITHUB_PROJECT_PAGE_BASES = new Set(["club_san_jorge"]);
+
 export function getSiteBasePath() {
   const configuredBase = document.querySelector('meta[name="site-base-path"]')?.getAttribute("content");
   if (configuredBase !== null && configuredBase !== undefined) return normalizeBasePath(configuredBase);
 
   if (window.location.hostname.endsWith(".github.io")) {
     const firstSegment = window.location.pathname.split("/").filter(Boolean)[0];
-    return firstSegment ? `/${firstSegment}` : "";
+    return GITHUB_PROJECT_PAGE_BASES.has(firstSegment) ? `/${firstSegment}` : "";
   }
 
   return "";

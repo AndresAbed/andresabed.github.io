@@ -120,11 +120,12 @@ Las imagenes de detalle se resuelven por codigo de articulo y carpetas de `asset
 La URL publica configurada para metadatos, `robots.txt` y `sitemap.xml` es:
 
 ```text
-https://andresabed.github.io/club_san_jorge/
+https://agenciasabed.com.ar/
 ```
 
-Si el sitio pasa a un dominio propio, actualizar el mismo origen en:
+Si el sitio cambia de dominio, actualizar el mismo origen en:
 
+- `CNAME`
 - `data/site.json` (`seo.siteUrl`)
 - `robots.txt`
 - `sitemap.xml`

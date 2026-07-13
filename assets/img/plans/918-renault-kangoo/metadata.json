@@ -1,0 +1,18 @@
+{
+  "planCode": 918,
+  "displayName": "Renault Kangoo Break",
+  "officialName": "RENAULT KANGOO BREAK",
+  "brand": {
+    "name": "Renault",
+    "logo": "/assets/img/brand-logos/renault.svg"
+  },
+  "images": [
+    {
+      "id": "front_left",
+      "label": "Frente izquierdo",
+      "position": "front-left",
+      "file": "front-left.webp"
+    }
+  ],
+  "mediaFit": "large-vehicle"
+}

@@ -30,6 +30,7 @@ const PLAN_IMAGE_FOLDERS = Object.freeze({
   915: "915-renault-kangoo-express",
   916: "916-peugeot-2008",
   917: "917-renault-duster",
+  918: "918-renault-kangoo",
   919: "919-renault-oroch",
   921: "921-fiat-toro-freedom",
   922: "922-ford-ranger",

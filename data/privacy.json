@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "v1",
-    "updatedAt": "2026-07-11",
-    "status": "pending_contact_configuration"
+    "updatedAt": "2026-07-13",
+    "status": "active"
   },
   "hero": {
     "eyebrow": "Privacidad",
@@ -74,14 +74,13 @@
       "id": "derechos",
       "title": "Tus derechos",
       "body": [
-        "Podés solicitar acceso, corrección, actualización o eliminación de tus datos personales.",
-        "Cuando los canales definitivos del sitio estén configurados, esta página se actualizará con el email de contacto correspondiente para estas solicitudes."
+        "Podés solicitar acceso, corrección, actualización o eliminación de tus datos personales."
       ]
     }
   ],
   "contact": {
     "title": "Consultas sobre privacidad",
-    "body": "Si querés ejercer alguno de estos derechos o tenés una consulta sobre el tratamiento de tus datos, escribinos por los canales de contacto publicados en el sitio.",
-    "emailFallback": "Email en actualización"
+    "body": "Si querés ejercer alguno de estos derechos o tenés una consulta sobre el tratamiento de tus datos, escribinos a contacto@agenciasabed.com.ar.",
+    "emailFallback": "contacto@agenciasabed.com.ar"
   }
 }

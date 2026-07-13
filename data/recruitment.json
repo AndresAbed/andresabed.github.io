@@ -30,7 +30,7 @@
     "provider": "google_apps_script",
     "endpoint": "https://script.google.com/macros/s/AKfycbzvvDAHl9lsyLiV7DF9Kdtc6jTa8pmoebvV2ZNZCMGbwPkGlPf76fr_KK-wnfh0cAUi/exec",
     "method": "POST",
-    "recipientEmail": "abedandres@gmail.com",
+    "recipientEmail": "contacto@agenciasabed.com.ar",
     "recipientStatus": "stored_in_google_sheet",
     "status": "active"
   },

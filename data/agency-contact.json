@@ -12,10 +12,10 @@
       "status": "mock"
     },
     "email": {
-      "enabled": false,
+      "enabled": true,
       "label": "Email comercial",
-      "address": "",
-      "status": "pending_validation"
+      "address": "contacto@agenciasabed.com.ar",
+      "status": "active"
     }
   },
   "planInquiryForm": {

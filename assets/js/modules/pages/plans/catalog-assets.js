@@ -52,6 +52,7 @@ const PLAN_IMAGE_FOLDERS = Object.freeze({
   949: "949-fiat-pulse",
   950: "950-fiat-fastback-turbo",
   951: "951-volkswagen-taos",
+  952: "952-chevrolet-equinox-at",
   956: "956-honda-xre300",
   957: "957-toyota-hiace",
   960: "960-honda-new-wave-110",

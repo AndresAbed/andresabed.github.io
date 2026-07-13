@@ -1,10 +1,10 @@
 {
-  "planCode": 918,
-  "displayName": "Renault Kangoo Break",
-  "officialName": "RENAULT KANGOO BREAK",
+  "planCode": 952,
+  "displayName": "Chevrolet Equinox AT",
+  "officialName": "CHEV. EQUINOX AT",
   "brand": {
-    "name": "Renault",
-    "logo": "/assets/img/brand-logos/renault.svg"
+    "name": "Chevrolet",
+    "logo": "/assets/img/brand-logos/chevrolet.svg"
   },
   "images": [
     {
@@ -12,6 +12,12 @@
       "label": "Frente izquierdo",
       "position": "front-left",
       "file": "front-left.webp"
+    },
+    {
+      "id": "front",
+      "label": "Frente",
+      "position": "front",
+      "file": "front.webp"
     },
     {
       "id": "front_right",
@@ -24,7 +30,12 @@
       "label": "Trasera derecha",
       "position": "rear-right",
       "file": "rear-right.webp"
+    },
+    {
+      "id": "rear",
+      "label": "Trasera",
+      "position": "rear",
+      "file": "rear.webp"
     }
-  ],
-  "mediaFit": "large-vehicle"
+  ]
 }

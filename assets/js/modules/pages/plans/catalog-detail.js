@@ -74,7 +74,11 @@ function createAngleSelector(plan, media) {
 
   return el("div", {
     className: "plan-angle-tabs",
-    attrs: { role: "group", "aria-label": `Vistas disponibles de ${plan.displayName}` },
+    attrs: {
+      role: "group",
+      "aria-label": `Vistas disponibles de ${plan.displayName}`,
+      style: `--plan-angle-count: ${media.images.length}`,
+    },
     children: [
       ...media.images.map((image) =>
         el("button", {

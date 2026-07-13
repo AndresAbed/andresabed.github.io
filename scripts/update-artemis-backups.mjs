@@ -9,6 +9,8 @@ const REQUEST_TIMEOUT_MS = 12000;
 const ADJUDICATION_LOOKBACK_YEARS = 3;
 
 const backupPath = "data/artemis-backup.json";
+const adjudicationImageDir = "assets/img/adjudicados";
+const adjudicationImagePublicPath = "/assets/img/adjudicados";
 
 const adjudicationColumns = Object.freeze([
   { key: "name", label: "Nombre" },
@@ -98,6 +100,28 @@ async function fetchJson(url) {
   }
 }
 
+async function fetchBuffer(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        Accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+
+    return Buffer.from(await response.arrayBuffer());
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 function normalizeArtemisText(value) {
   const text = String(value || "").trim();
   if (!/[ÃÂ]/.test(text)) return text;
@@ -132,7 +156,7 @@ function parseDrawsFromArtemis(payload, fallback) {
   const lastDate = dateFromArtemisSegment(issueDescr[1]);
   const nextDate = dateFromArtemisSegment(issueDescr[2]);
 
-  if (!numbers.length && !lastDate && !nextDate) return fallback;
+  if (numbers.length < 3 || !lastDate || !nextDate) return fallback;
 
   return {
     ...fallback,
@@ -211,19 +235,20 @@ function parseHomeAdjudicationsFromArtemis(payload, fallback) {
 
       return {
         id: slugify(`${name}-${imageNumber}`) || `adjudicado-${index + 1}`,
+        imageNumber,
         name,
         installment,
         drawDate,
         prize,
         residence,
         imageUrl: `${ARTEMIS_WINNER_IMAGE_BASE}/${imageNumber}.webp`,
-        imageAlt: `${name} en una entrega de adjudicación de Club San Jorge`,
+        remoteImageUrl: `${ARTEMIS_WINNER_IMAGE_BASE}/${imageNumber}.webp`,
         source: "artemis_api",
       };
     })
     .filter(Boolean);
 
-  if (!items.length) return fallback;
+  if (items.length < 3) return fallback;
 
   return {
     ...fallback,
@@ -300,6 +325,111 @@ async function fetchHomeAdjudications(previousBackup, errors) {
   }
 }
 
+function localAdjudicationImagePath(imageNumber) {
+  return path.join(adjudicationImageDir, `${imageNumber}.webp`);
+}
+
+function localAdjudicationImageUrl(imageNumber) {
+  return `${adjudicationImagePublicPath}/${imageNumber}.webp`;
+}
+
+function imageNumberFromItem(item) {
+  return String(item?.imageNumber || item?.id?.match?.(/-(\d+)$/)?.[1] || "").trim();
+}
+
+function collectReferencedImageNumbers(homeAdjudications) {
+  return new Set(
+    (homeAdjudications?.items || [])
+      .map(imageNumberFromItem)
+      .filter(Boolean),
+  );
+}
+
+async function downloadAdjudicationImage(item, previousItem, errors) {
+  const imageNumber = String(item?.imageNumber || "").trim();
+  if (!imageNumber) return item;
+
+  const localPath = localAdjudicationImagePath(imageNumber);
+  const localUrl = localAdjudicationImageUrl(imageNumber);
+  const remoteUrl = item.remoteImageUrl || item.imageUrl || `${ARTEMIS_WINNER_IMAGE_BASE}/${imageNumber}.webp`;
+
+  fs.mkdirSync(adjudicationImageDir, { recursive: true });
+
+  if (!fs.existsSync(localPath)) {
+    try {
+      const buffer = await fetchBuffer(remoteUrl);
+      fs.writeFileSync(localPath, buffer);
+      console.log(`Saved adjudication image ${localPath}`);
+    } catch (error) {
+      const hadPreviousLocalImage =
+        previousItem?.imageUrl === localUrl ||
+        previousItem?.localImageUrl === localUrl ||
+        fs.existsSync(localPath);
+
+      if (!hadPreviousLocalImage) {
+        const message = `No se pudo respaldar imagen adjudicado ${imageNumber}: ${error.message}`;
+        errors.push(message);
+        console.warn(message);
+        return {
+          ...item,
+          imageUrl: "",
+          localImageUrl: "",
+          remoteImageUrl: remoteUrl,
+        };
+      }
+
+      console.warn(`Se mantiene imagen local previa para adjudicado ${imageNumber}: ${error.message}`);
+    }
+  }
+
+  return {
+    ...item,
+    imageUrl: localUrl,
+    localImageUrl: localUrl,
+    remoteImageUrl: remoteUrl,
+  };
+}
+
+async function backupHomeAdjudicationImages(homeAdjudications, previousBackup, errors) {
+  const previousItemsByImageNumber = new Map(
+    (previousBackup?.homeAdjudications?.items || [])
+      .map((item) => {
+        const imageNumber = imageNumberFromItem(item);
+        return imageNumber ? [imageNumber, item] : null;
+      })
+      .filter(Boolean),
+  );
+
+  return {
+    ...homeAdjudications,
+    items: await Promise.all(
+      (homeAdjudications?.items || []).map((item) =>
+        downloadAdjudicationImage(item, previousItemsByImageNumber.get(String(item.imageNumber)), errors),
+      ),
+    ),
+  };
+}
+
+function pruneUnusedAdjudicationImages(homeAdjudications) {
+  if (!fs.existsSync(adjudicationImageDir)) return [];
+
+  const referenced = collectReferencedImageNumbers(homeAdjudications);
+  const removed = [];
+
+  fs.readdirSync(adjudicationImageDir, { withFileTypes: true }).forEach((entry) => {
+    if (!entry.isFile() || !entry.name.endsWith(".webp")) return;
+
+    const imageNumber = entry.name.replace(/\.webp$/i, "");
+    if (referenced.has(imageNumber)) return;
+
+    const filePath = path.join(adjudicationImageDir, entry.name);
+    fs.unlinkSync(filePath);
+    removed.push(filePath);
+  });
+
+  return removed;
+}
+
 async function fetchAdjudicationsForPeriod(period, previousBackup, errors) {
   try {
     const payload = await fetchJson(
@@ -341,7 +471,10 @@ async function main() {
   const generatedAt = new Date().toISOString();
 
   const draws = await fetchDraws(previousBackup, errors);
-  const homeAdjudications = await fetchHomeAdjudications(previousBackup, errors);
+  const fetchedHomeAdjudications = await fetchHomeAdjudications(previousBackup, errors);
+  const homeAdjudications = await backupHomeAdjudicationImages(fetchedHomeAdjudications, previousBackup, errors);
+  const removedImages = pruneUnusedAdjudicationImages(homeAdjudications);
+  removedImages.forEach((filePath) => console.log(`Removed unused adjudication image ${filePath}`));
   const periods = {};
 
   for (const period of adjudicationPeriodKeys()) {

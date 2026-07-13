@@ -117,38 +117,48 @@ function mediaStyle(media) {
   return rules.join("; ");
 }
 
-function createDetailImage(plan, media) {
-  if (media.hasImage && media.defaultImage) {
-    return el("div", {
-      className: "plan-detail-card__image",
-      attrs: { "data-image-position": media.defaultImage.position, "data-image-folder": media.folder },
-      children: [
-        el("img", {
-          attrs: {
-            src: media.defaultImage.src,
-            alt: `Imagen ilustrativa de ${plan.displayName}`,
-            "data-angle-position": media.defaultImage.position,
-            "data-plan-angle-image": "",
-          },
-        }),
-      ],
-    });
-  }
-
+function createDetailImagePlaceholder(plan) {
   return el("div", {
     className: "plan-detail-card__image plan-detail-card__image--placeholder",
     attrs: { "data-image-position": "placeholder", "data-image-folder": "" },
     children: [
       el("div", {
         className: "plan-detail-card__image-placeholder",
-        attrs: { role: "img", "aria-label": `Imagen pendiente para ${plan.displayName}` },
         children: [
-          el("span", { text: "Imagen pendiente" }),
+          el("span", { text: "Imagen no disponible" }),
           el("small", { text: `Código ${plan.article || "-"}` }),
         ],
       }),
     ],
   });
+}
+
+function createDetailImage(plan, media) {
+  if (media.hasImage && media.defaultImage) {
+    const image = el("img", {
+      attrs: {
+        src: media.defaultImage.src,
+        alt: "",
+        "data-angle-position": media.defaultImage.position,
+        "data-plan-angle-image": "",
+      },
+    });
+
+    image.addEventListener("error", () => {
+      const detail = image.closest(".plan-detail-card");
+      image.closest(".plan-detail-card__image")?.replaceWith(createDetailImagePlaceholder(plan));
+      const note = detail?.querySelector(".plan-detail-card__image-note");
+      if (note) note.textContent = "Imagen no disponible";
+    });
+
+    return el("div", {
+      className: "plan-detail-card__image",
+      attrs: { "data-image-position": media.defaultImage.position, "data-image-folder": media.folder },
+      children: [image],
+    });
+  }
+
+  return createDetailImagePlaceholder(plan);
 }
 
 function createDetail(plan, contactConfig) {
@@ -214,7 +224,7 @@ function createDetail(plan, contactConfig) {
             children: [
               createDetailImage(plan, media),
               createAngleSelector(plan, media),
-              el("span", { className: "plan-detail-card__image-note", text: media.hasImage ? "* Imagen ilustrativa" : "Imagen pendiente de carga" }),
+              el("span", { className: "plan-detail-card__image-note", text: media.hasImage ? "* Imagen ilustrativa" : "Imagen no disponible" }),
             ],
           }),
           el("div", {
@@ -275,7 +285,7 @@ function initAngleSelector(detail) {
   const setActiveAngle = (button, index, { syncRange = true } = {}) => {
     if (index !== currentIndex) {
       image.src = button.dataset.angleSrc;
-      image.alt = button.dataset.angleLabel || image.alt;
+      image.alt = "";
       image.dataset.anglePosition = button.dataset.anglePosition || "";
       buttons.forEach((item) => {
         item.classList.toggle("is-active", item === button);

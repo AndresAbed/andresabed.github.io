@@ -12,6 +12,30 @@ function finishAppLoading() {
   });
 }
 
+function startPageController(site) {
+  if (document.body.dataset.page === "home") {
+    return initHomePage(site);
+  }
+
+  if (document.body.dataset.page === "planes") {
+    return initPlansHub(site);
+  }
+
+  if (document.body.dataset.page === "adjudicados") {
+    return initAdjudicationsPage(site);
+  }
+
+  if (document.body.dataset.page === "como-funciona") {
+    return initSystemGuidePage(site);
+  }
+
+  if (document.body.dataset.page === "privacidad") {
+    return initPrivacyPage(site);
+  }
+
+  return null;
+}
+
 async function boot() {
   try {
     const [site, agencyContact] = await Promise.all([
@@ -22,18 +46,9 @@ async function boot() {
       }),
     ]);
     renderShell(site, agencyContact);
+    finishAppLoading();
 
-    if (document.body.dataset.page === "home") {
-      await initHomePage(site);
-    } else if (document.body.dataset.page === "planes") {
-      await initPlansHub(site);
-    } else if (document.body.dataset.page === "adjudicados") {
-      await initAdjudicationsPage(site);
-    } else if (document.body.dataset.page === "como-funciona") {
-      await initSystemGuidePage(site);
-    } else if (document.body.dataset.page === "privacidad") {
-      await initPrivacyPage(site);
-    }
+    await startPageController(site);
   } catch (error) {
     console.error(error);
     document.documentElement.classList.add("has-data-error");

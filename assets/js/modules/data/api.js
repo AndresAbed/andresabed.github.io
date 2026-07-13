@@ -49,7 +49,7 @@ export function withSiteBasePath(target) {
 const ARTEMIS_BASE_URL = "https://artemis.clubsanjorge.com.ar";
 const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_BASE_URL}/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/issue`;
 const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
-const ARTEMIS_TIMEOUT_MS = 4500;
+const ARTEMIS_TIMEOUT_MS = 1400;
 const ARTEMIS_BACKUP_SOURCE = "local_artemis_backup";
 const ADJUDICATION_LOOKBACK_YEARS = 3;
 const ADJUDICATION_COLUMNS = Object.freeze([
@@ -185,6 +185,22 @@ function withBackupMeta(value, backup, kind) {
   };
 }
 
+function backupDrawsOrEmpty(backup) {
+  if (backup?.draws?.stimuli?.length || backup?.draws?.lastDraw?.date || backup?.draws?.nextDraw?.date) {
+    return withBackupMeta(backup.draws, backup, "draws");
+  }
+
+  return EMPTY_DRAWS;
+}
+
+function backupHomeAdjudicationsOrEmpty(backup) {
+  if (backup?.homeAdjudications?.items?.length) {
+    return withBackupMeta(backup.homeAdjudications, backup, "home_adjudications");
+  }
+
+  return EMPTY_HOME_ADJUDICATIONS;
+}
+
 function normalizeArtemisText(value) {
   const text = String(value || "").trim();
   if (!/[ÃÂ]/.test(text)) return text;
@@ -219,7 +235,7 @@ function parseDrawsFromArtemis(payload, fallback) {
   const lastDate = dateFromArtemisSegment(issueDescr[1]);
   const nextDate = dateFromArtemisSegment(issueDescr[2]);
 
-  if (!numbers.length && !lastDate && !nextDate) return fallback;
+  if (numbers.length < 3 || !lastDate || !nextDate) return fallback;
 
   return {
     ...fallback,
@@ -291,6 +307,15 @@ function parseAdjudicationsFromArtemis(payload) {
 }
 
 function parseHomeAdjudicationsFromArtemis(payload, fallback) {
+  const fallbackItemsByImageNumber = new Map(
+    (fallback?.items || [])
+      .map((item) => {
+        const imageNumber = item?.imageNumber || String(item?.id || "").match(/-(\d+)$/)?.[1] || "";
+        return imageNumber ? [String(imageNumber), item] : null;
+      })
+      .filter(Boolean),
+  );
+
   const items = (Array.isArray(payload) ? payload : [])
     .map((entry, index) => {
       const issueDescr = entry?.issue_descr || [];
@@ -304,21 +329,27 @@ function parseHomeAdjudicationsFromArtemis(payload, fallback) {
 
       if (!name || !installment || !drawDate || !prize || !imageNumber) return null;
 
+      const fallbackItem = fallbackItemsByImageNumber.get(imageNumber);
+      const localImageUrl = fallbackItem?.localImageUrl || "";
+      const remoteImageUrl = `${ARTEMIS_WINNER_IMAGE_BASE}/${imageNumber}.webp`;
+
       return {
         id: slugify(`${name}-${imageNumber}`) || `adjudicado-${index + 1}`,
+        imageNumber,
         name,
         installment,
         drawDate,
         prize,
         residence,
-        imageUrl: `${ARTEMIS_WINNER_IMAGE_BASE}/${imageNumber}.webp`,
-        imageAlt: `${name} en una entrega de adjudicación de Club San Jorge`,
+        imageUrl: localImageUrl || remoteImageUrl,
+        localImageUrl,
+        remoteImageUrl,
         source: "artemis_api",
       };
     })
     .filter(Boolean);
 
-  if (!items.length) return fallback;
+  if (items.length < 3) return fallback;
 
   return {
     ...fallback,
@@ -332,45 +363,64 @@ function parseHomeAdjudicationsFromArtemis(payload, fallback) {
 }
 
 async function loadOfficialDraws() {
+  const backup = await loadSafeArtemisBackup();
+  const fallback = backupDrawsOrEmpty(backup);
+  if (fallback !== EMPTY_DRAWS) return fallback;
+
   try {
     const payload = await fetchArtemisIssues(
       { related_project: "SORTEO", issue_summary: "ULTIMO" },
       { columns: ["issue_descr"] },
     );
-    return parseDrawsFromArtemis(payload, EMPTY_DRAWS);
+    return parseDrawsFromArtemis(payload, fallback);
   } catch (error) {
     console.warn("No se pudo cargar el sorteo desde Artemis.", error);
-    const backup = await loadSafeArtemisBackup();
-    if (backup?.draws?.stimuli?.length || backup?.draws?.lastDraw?.date) {
-      return withBackupMeta(backup.draws, backup, "draws");
-    }
-    return EMPTY_DRAWS;
+    return fallback;
   }
 }
 
 async function loadOfficialHomeAdjudications() {
+  const backup = await loadSafeArtemisBackup();
+  const fallback = backupHomeAdjudicationsOrEmpty(backup);
+  if (fallback !== EMPTY_HOME_ADJUDICATIONS) return fallback;
+
   try {
     const payload = await fetchArtemisIssues(
       { assigned_to: 6, status: "CLOSED", related_project: "ADJUDI" },
       { columns: ["issue_descr"], offset: 0, limit: 8 },
     );
-    return parseHomeAdjudicationsFromArtemis(payload, EMPTY_HOME_ADJUDICATIONS);
+    return parseHomeAdjudicationsFromArtemis(payload, fallback);
   } catch (error) {
     console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
-    const backup = await loadSafeArtemisBackup();
-    if (backup?.homeAdjudications?.items?.length) {
-      return withBackupMeta(backup.homeAdjudications, backup, "home_adjudications");
-    }
-    return EMPTY_HOME_ADJUDICATIONS;
+    return fallback;
   }
 }
 
 async function loadOfficialAdjudicationsForPeriod(year, month) {
+  const backup = await loadSafeArtemisBackup();
+  const periodKey = `${year}-${padTwoDigits(month)}`;
+  const period = backup?.adjudications?.periods?.[periodKey];
+  const fallback = period
+    ? {
+        meta: {
+          ...backupMeta(backup, "adjudications"),
+          periodKey,
+        },
+        columns: backup?.adjudications?.columns || ADJUDICATION_COLUMNS,
+        rows: period.rows || [],
+      }
+    : null;
+
+  if (fallback) return fallback;
+
   try {
     const payload = await fetchArtemisIssues(
       { related_project: "ADJUDI", issue_summary: issueSummaryFromPeriod(year, month) },
       { columns: ["issue_descr"] },
     );
+    const rows = parseAdjudicationsFromArtemis(payload);
+
+    if (!rows.length && fallback) return fallback;
 
     return {
       meta: {
@@ -378,23 +428,11 @@ async function loadOfficialAdjudicationsForPeriod(year, month) {
         status: "verified",
       },
       columns: ADJUDICATION_COLUMNS,
-      rows: parseAdjudicationsFromArtemis(payload),
+      rows,
     };
   } catch (error) {
     console.warn("No se pudieron cargar adjudicados desde Artemis.", error);
-    const backup = await loadSafeArtemisBackup();
-    const periodKey = `${year}-${padTwoDigits(month)}`;
-    const period = backup?.adjudications?.periods?.[periodKey];
-    if (period) {
-      return {
-        meta: {
-          ...backupMeta(backup, "adjudications"),
-          periodKey,
-        },
-        columns: backup?.adjudications?.columns || ADJUDICATION_COLUMNS,
-        rows: period.rows || [],
-      };
-    }
+    if (fallback) return fallback;
 
     return {
       meta: {

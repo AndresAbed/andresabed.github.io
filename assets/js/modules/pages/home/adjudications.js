@@ -1,6 +1,9 @@
+import { withSiteBasePath } from "../../data/api.js";
 import { createButton } from "../../components/plan-components.js";
 import { clear, el, qs } from "../../utils/dom.js";
 import { createHomeSectionHeader } from "./shared.js";
+
+const ADJUDICATION_IMAGE_TIMEOUT_MS = 2200;
 
 function scrollAdjudications(track, direction) {
   if (!track) return;
@@ -22,22 +25,50 @@ function scrollAdjudications(track, direction) {
 
   track.scrollBy({ left: direction * step, behavior: "smooth" });
 }
+
+function createAdjudicationMedia(item) {
+  const imageUrl = withSiteBasePath(item.imageUrl);
+  const media = el("div", {
+    className: "home-adjudication-card__media",
+    attrs: { "data-image-state": imageUrl ? "loading" : "unavailable" },
+    children: [el("span", { className: "home-adjudication-card__image-fallback", text: "Imagen no disponible" })],
+  });
+
+  if (!imageUrl) return media;
+
+  const image = el("img", {
+    attrs: {
+      src: imageUrl,
+      alt: "",
+      loading: "lazy",
+    },
+  });
+
+  const imageTimeout = window.setTimeout(() => {
+    if (media.dataset.imageState !== "loading") return;
+    media.dataset.imageState = "unavailable";
+    image.remove();
+  }, ADJUDICATION_IMAGE_TIMEOUT_MS);
+
+  image.addEventListener("load", () => {
+    window.clearTimeout(imageTimeout);
+    media.dataset.imageState = "ready";
+  });
+  image.addEventListener("error", () => {
+    window.clearTimeout(imageTimeout);
+    media.dataset.imageState = "unavailable";
+    image.remove();
+  });
+
+  media.append(image);
+  return media;
+}
+
 function createAdjudicationCard(item) {
   return el("article", {
     className: "home-adjudication-card",
     children: [
-      el("div", {
-        className: "home-adjudication-card__media",
-        children: [
-          el("img", {
-            attrs: {
-              src: item.imageUrl,
-              alt: item.imageAlt || `Entrega de adjudicación de ${item.name}`,
-              loading: "lazy",
-            },
-          }),
-        ],
-      }),
+      createAdjudicationMedia(item),
       el("div", {
         className: "home-adjudication-card__body",
         children: [

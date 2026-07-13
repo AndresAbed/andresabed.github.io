@@ -15,15 +15,12 @@ function getCategoryStats(planCatalog, category) {
 const CATEGORY_CARD_IMAGES = Object.freeze({
   autos: {
     imageUrl: "/assets/img/plans/plan-auto-hilux-cronos.webp",
-    imageAlt: "Auto y camioneta disponibles en planes Club San Jorge",
   },
   motos: {
     imageUrl: "/assets/img/plans/plan-moto-honda-xr-cb.webp",
-    imageAlt: "Motos disponibles en planes Club San Jorge",
   },
   dinero: {
     imageUrl: "/assets/img/plans/plan-dinero-billetes.webp",
-    imageAlt: "Billetes representando una orden de compra",
   },
 });
 export function renderPlanRoutes(data) {

@@ -205,6 +205,10 @@ function createHeroLead(site) {
 
 function createHeroDraws(draws) {
   const stimuli = (draws?.stimuli || []).sort((a, b) => (a.position || 0) - (b.position || 0)).slice(0, 3);
+  const hasDrawData = Boolean(draws?.lastDraw?.date || draws?.nextDraw?.date || stimuli.some((item) => item.winningNumber));
+
+  if (!hasDrawData) return null;
+
   const lastState = resolveValueState(draws?.lastDraw?.date, draws?.lastDraw?.status);
   const nextState = resolveValueState(draws?.nextDraw?.date, draws?.nextDraw?.status);
   const lastDrawDate = formatDrawDate(draws?.lastDraw?.date);

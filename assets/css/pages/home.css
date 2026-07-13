@@ -899,6 +899,8 @@ body.site-video-open {
   aspect-ratio: 16 / 11;
   background:
     linear-gradient(135deg, rgb(190 0 47 / 0.08), rgb(97 175 84 / 0.08));
+  display: grid;
+  place-items: center;
   overflow: hidden;
   position: relative;
 }
@@ -907,16 +909,37 @@ body.site-video-open {
   background:
     linear-gradient(180deg, transparent 42%, rgb(0 0 0 / 0.3) 100%);
   content: "";
+  display: none;
   inset: 0;
   pointer-events: none;
   position: absolute;
+  z-index: 2;
+}
+
+.home-adjudication-card__media[data-image-state="ready"]::after {
+  display: block;
 }
 
 .home-adjudication-card__media img {
   display: block;
+  grid-area: 1 / 1;
   height: 100%;
   object-fit: cover;
   width: 100%;
+  z-index: 1;
+}
+
+.home-adjudication-card__image-fallback {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  grid-area: 1 / 1;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.home-adjudication-card__media[data-image-state="ready"] .home-adjudication-card__image-fallback {
+  display: none;
 }
 
 .home-adjudication-card__installment {

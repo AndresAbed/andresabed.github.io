@@ -1,24 +1,18 @@
-import { loadHomeData } from "../data/api.js";
+import {
+  loadArtemisBackup,
+  loadHomeData,
+  loadPlanCatalog,
+  loadRecruitment,
+  loadResources,
+  loadSocialReviews,
+  loadVideos,
+} from "../data/api.js";
 import { renderHero } from "./home/hero.js";
 import { renderPlanRoutes } from "./home/plan-routes.js";
 import { renderHomeAdjudications } from "./home/adjudications.js";
 import { renderSocialReviews } from "./home/social-reviews.js";
 import { renderSubscriberResources } from "./home/subscriber-resources.js";
 import { renderRecruitment } from "./home/recruitment.js";
-
-function createInitialHomeData(site) {
-  return {
-    site,
-    draws: {
-      lastDraw: {},
-      nextDraw: {},
-      stimuli: [],
-    },
-    videos: {
-      items: [],
-    },
-  };
-}
 
 function renderHomeSections(data) {
   renderHero(data);
@@ -29,8 +23,34 @@ function renderHomeSections(data) {
   renderRecruitment(data);
 }
 
+async function loadHomeFallbackData(site) {
+  const [planCatalog, resources, artemisBackup, socialReviews, recruitment, videos] = await Promise.all([
+    loadPlanCatalog(),
+    loadResources(),
+    loadArtemisBackup(),
+    loadSocialReviews(),
+    loadRecruitment(),
+    loadVideos(),
+  ]);
+
+  return {
+    site,
+    planCatalog,
+    resources,
+    draws: artemisBackup?.draws || {},
+    homeAdjudications: artemisBackup?.homeAdjudications || {},
+    socialReviews,
+    recruitment,
+    videos,
+  };
+}
+
 export function initHomePage(site) {
-  renderHero(createInitialHomeData(site));
+  loadHomeFallbackData(site)
+    .then(renderHomeSections)
+    .catch((error) => {
+      console.warn("No se pudo cargar el respaldo inicial de Home.", error);
+    });
 
   loadHomeData()
     .then(renderHomeSections)

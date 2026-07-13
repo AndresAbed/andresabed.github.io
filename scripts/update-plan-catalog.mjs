@@ -121,7 +121,6 @@ function itemFromRow(row, index) {
     planLabel: `Articulo ${articulo || "-"} / Plan ${row.plan || "-"}`,
     officialArticle: articulo || null,
     imageUrl: articulo ? `${officialImageBase}${articulo}.webp` : "",
-    imageAlt: row.cate === "Dinero" ? "Orden de compra Club San Jorge" : `${displayName} Club San Jorge`,
     officialPlan: Number(row.plan) || null,
     officialOrder: Number(row.orden) || index + 1,
     months: {

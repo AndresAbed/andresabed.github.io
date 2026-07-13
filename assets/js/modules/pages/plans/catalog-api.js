@@ -4,7 +4,8 @@ import { normalizeLivePlan, normalizeSnapshotPlan, sortPlans } from "./catalog-n
 
 const ARTEMIS_PLAN_CATALOG_URL =
   "https://artemis.clubsanjorge.com.ar/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/listapre";
-const ARTEMIS_PLAN_TIMEOUT_MS = 4500;
+const ARTEMIS_PLAN_TIMEOUT_MS = 1400;
+const MIN_LIVE_PLAN_ROWS = 10;
 
 const PLAN_COLUMNS = Object.freeze([
   "activo",
@@ -57,29 +58,65 @@ function normalizeFallbackSnapshot(snapshot) {
   return sortPlans((snapshot?.items || []).map(normalizeSnapshotPlan).filter((item) => item.article && item.displayName));
 }
 
+export async function loadSnapshotCatalogPlans() {
+  const fallback = await loadPlanCatalog();
+  const items = await withPlanMediaMetadata(normalizeFallbackSnapshot(fallback));
+
+  return {
+    meta: {
+      source: "local_snapshot_fallback",
+      status: "partial",
+      loadedAt: new Date().toISOString(),
+    },
+    items,
+  };
+}
+
+function hasUsableCatalog(catalog) {
+  return (catalog?.items || []).length >= MIN_LIVE_PLAN_ROWS;
+}
+
+export async function loadLiveCatalogPlans() {
+  const rows = await fetchLiveRows();
+  if (rows.length < MIN_LIVE_PLAN_ROWS) {
+    throw new Error("El catalogo Artemis devolvio una lista incompleta.");
+  }
+
+  const items = await withPlanMediaMetadata(normalizeLiveRows(rows));
+  if (items.length < MIN_LIVE_PLAN_ROWS) {
+    throw new Error("El catalogo Artemis no tiene suficientes planes validos.");
+  }
+
+  return {
+    meta: {
+      source: "artemis_api",
+      status: "verified",
+      loadedAt: new Date().toISOString(),
+    },
+    items,
+  };
+}
+
 export async function loadCatalogPlans() {
+  let snapshot = null;
+
   try {
-    const rows = await fetchLiveRows();
-    const items = await withPlanMediaMetadata(normalizeLiveRows(rows));
-    return {
-      meta: {
-        source: "artemis_api",
-        status: "verified",
-        loadedAt: new Date().toISOString(),
-      },
-      items,
-    };
+    snapshot = await loadSnapshotCatalogPlans();
+    if (hasUsableCatalog(snapshot)) return snapshot;
+
+    console.warn("El catalogo local no tiene suficientes planes. Se intenta Artemis como segunda opcion.");
   } catch (error) {
-    console.warn("No se pudo cargar el catalogo vivo desde Artemis.", error);
-    const fallback = await loadPlanCatalog();
-    const items = await withPlanMediaMetadata(normalizeFallbackSnapshot(fallback));
-    return {
-      meta: {
-        source: "local_snapshot_fallback",
-        status: "partial",
-        loadedAt: new Date().toISOString(),
-      },
-      items,
-    };
+    console.warn("No se pudo cargar el catalogo local de planes. Se intenta Artemis como segunda opcion.", error);
+  }
+
+  try {
+    return await loadLiveCatalogPlans();
+  } catch (error) {
+    if (snapshot?.items?.length) {
+      console.warn("Artemis no devolvio un catalogo usable. Se mantiene el catalogo local disponible.", error);
+      return snapshot;
+    }
+
+    throw error;
   }
 }

@@ -27,7 +27,7 @@ export function createPlanVisual(item, className = "home-plan-visual") {
     className,
     attrs: {
       src: withSiteBasePath(item.imageUrl),
-      alt: item.imageAlt || item.displayName,
+      alt: "",
       loading: "lazy",
     },
   });

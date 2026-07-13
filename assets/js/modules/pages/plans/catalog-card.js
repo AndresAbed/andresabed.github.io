@@ -64,27 +64,36 @@ function createChanceRibbon(chanceCount) {
   });
 }
 
+function createMediaPlaceholder(plan) {
+  return el("div", {
+    className: "plan-list-card__media-placeholder",
+    children: [
+      el("span", { className: "plan-list-card__media-placeholder-label", text: "Imagen no disponible" }),
+      el("small", { text: `Código ${plan.article || "-"}` }),
+    ],
+  });
+}
+
 function createMediaContent(plan, media) {
   const cardImage = media.cardImage || media.defaultImage;
 
   if (media.hasImage && cardImage) {
-    return el("img", {
+    const image = el("img", {
       attrs: {
         src: cardImage.src,
-        alt: `Imagen ilustrativa de ${plan.displayName}`,
+        alt: "",
         loading: "lazy",
       },
     });
+
+    image.addEventListener("error", () => {
+      image.replaceWith(createMediaPlaceholder(plan));
+    });
+
+    return image;
   }
 
-  return el("div", {
-    className: "plan-list-card__media-placeholder",
-    attrs: { role: "img", "aria-label": `Imagen pendiente para ${plan.displayName}` },
-    children: [
-      el("span", { className: "plan-list-card__media-placeholder-label", text: "Imagen pendiente" }),
-      el("small", { text: `Código ${plan.article || "-"}` }),
-    ],
-  });
+  return createMediaPlaceholder(plan);
 }
 
 function mediaStyle(media) {

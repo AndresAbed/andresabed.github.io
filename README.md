@@ -55,8 +55,8 @@ Archivos principales:
 - `social-reviews.json`: pruebas sociales y testimonios.
 - `recruitment.json`: bloque y formulario de productores.
 
-Los resultados de sorteos, adjudicados destacados de la Home y la tabla de adjudicados se cargan desde Artemis para evitar mantener copias locales de datos oficiales que cambian con frecuencia.
-Si Artemis no responde, el sitio usa `data/artemis-backup.json` para sorteos/adjudicados y `data/plan_catalog.json` como catalogo curado de planes.
+El sitio publico funciona local-first: sorteos, adjudicados destacados, tabla de adjudicados y catalogo de planes se leen primero desde archivos versionados en `data/`.
+Artemis queda como fuente externa para actualizar respaldos y como segunda opcion si faltara un respaldo local usable.
 
 ## Backups de Artemis
 
@@ -69,8 +69,9 @@ node scripts/update-artemis-backups.mjs
 Ese comando actualiza:
 
 - `data/artemis-backup.json`
+- `assets/img/adjudicados/` con imagenes destacadas disponibles
 
-`data/plan_catalog.json` queda como snapshot curado del catalogo y tambien como fallback cuando Artemis no responde.
+`data/plan_catalog.json` queda como snapshot curado del catalogo principal. El frontend solo intenta Artemis para planes si ese snapshot local falta o no es usable.
 
 Tambien existe un workflow mensual en `.github/workflows/update-artemis-backups.yml` para correr el mismo proceso el primer dia de cada mes y commitear cambios si Artemis devuelve informacion nueva.
 

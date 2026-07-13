@@ -27,8 +27,9 @@ Catalogo V2:
 - No completar `valorNominal`, `cuota`, `brand` o `model` sin fuente validada.
 - Usar `pending_validation` o `sourceStatus` prudente cuando falten datos especificos.
 
-Datos via API:
-- Sorteos, adjudicados destacados de la Home y la tabla de adjudicados se consumen desde Artemis.
-- Si Artemis falla, `artemis-backup.json` funciona como respaldo local de esos datos.
-- `plan_catalog.json` queda como snapshot curado del catalogo y fallback de planes cuando Artemis no responde.
-- No mantener copias locales de `draws.json`, `adjudications.json`, `home-adjudications.json` ni fotos locales de adjudicados salvo que vuelvan a ser necesarias como fallback editorial.
+Datos operativos:
+- El sitio publico consume primero los respaldos locales versionados.
+- `artemis-backup.json` respalda sorteos, adjudicados destacados y la tabla de adjudicados.
+- `plan_catalog.json` queda como snapshot curado del catalogo principal.
+- Artemis se usa para actualizar respaldos por script/cron y como segunda opcion si falta un respaldo local usable.
+- Las fotos locales de adjudicados destacados viven en `assets/img/adjudicados/` y se actualizan/limpian desde el script de backup.

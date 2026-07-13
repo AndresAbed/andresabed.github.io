@@ -3,8 +3,6 @@ import { createButton } from "../../components/plan-components.js";
 import { clear, el, qs } from "../../utils/dom.js";
 import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js";
 
-const ADJUDICATION_IMAGE_TIMEOUT_MS = 2200;
-
 function scrollAdjudications(track, direction) {
   if (!track) return;
   const card = track.querySelector(".home-adjudication-card");
@@ -44,23 +42,19 @@ function createAdjudicationMedia(item) {
     },
   });
 
-  const imageTimeout = window.setTimeout(() => {
-    if (media.dataset.imageState !== "loading") return;
-    media.dataset.imageState = "unavailable";
-    image.remove();
-  }, ADJUDICATION_IMAGE_TIMEOUT_MS);
-
   image.addEventListener("load", () => {
-    window.clearTimeout(imageTimeout);
     media.dataset.imageState = "ready";
   });
   image.addEventListener("error", () => {
-    window.clearTimeout(imageTimeout);
     media.dataset.imageState = "unavailable";
     image.remove();
   });
 
   media.append(image);
+  if (image.complete && image.naturalWidth > 0) {
+    media.dataset.imageState = "ready";
+  }
+
   return media;
 }
 

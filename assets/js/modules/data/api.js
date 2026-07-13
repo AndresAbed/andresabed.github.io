@@ -54,6 +54,8 @@ const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
 const ARTEMIS_TIMEOUT_MS = 1400;
 const ARTEMIS_BACKUP_SOURCE = "local_artemis_backup";
 const ADJUDICATION_LOOKBACK_YEARS = 3;
+const HOME_ADJUDICATION_TARGET_COUNT = 8;
+const HOME_ADJUDICATION_FETCH_LIMIT = 16;
 const ADJUDICATION_COLUMNS = Object.freeze([
   { key: "name", label: "Nombre" },
   { key: "address", label: "Domicilio" },
@@ -196,11 +198,15 @@ function backupDrawsOrEmpty(backup) {
 }
 
 function backupHomeAdjudicationsOrEmpty(backup) {
-  if (backup?.homeAdjudications?.items?.length) {
+  if (hasCompleteHomeAdjudications(backup?.homeAdjudications)) {
     return withBackupMeta(backup.homeAdjudications, backup, "home_adjudications");
   }
 
   return EMPTY_HOME_ADJUDICATIONS;
+}
+
+export function hasCompleteHomeAdjudications(homeAdjudications) {
+  return (homeAdjudications?.items || []).length >= HOME_ADJUDICATION_TARGET_COUNT;
 }
 
 function normalizeArtemisText(value) {
@@ -349,9 +355,10 @@ function parseHomeAdjudicationsFromArtemis(payload, fallback) {
         source: "artemis_api",
       };
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .slice(0, HOME_ADJUDICATION_TARGET_COUNT);
 
-  if (items.length < 3) return fallback;
+  if (items.length < HOME_ADJUDICATION_TARGET_COUNT) return fallback;
 
   return {
     ...fallback,
@@ -389,7 +396,7 @@ async function loadOfficialHomeAdjudications() {
   try {
     const payload = await fetchArtemisIssues(
       { assigned_to: 6, status: "CLOSED", related_project: "ADJUDI" },
-      { columns: ["issue_descr"], offset: 0, limit: 8 },
+      { columns: ["issue_descr"], offset: 0, limit: HOME_ADJUDICATION_FETCH_LIMIT },
     );
     return parseHomeAdjudicationsFromArtemis(payload, fallback);
   } catch (error) {

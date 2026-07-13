@@ -71,6 +71,8 @@ Ese comando actualiza:
 - `data/artemis-backup.json`
 - `assets/img/adjudicados/` con imagenes destacadas disponibles
 
+La Home espera 8 adjudicados destacados. Si Artemis devuelve menos de 8 registros válidos o no se logran respaldar 8 imágenes locales, el script mantiene el bloque anterior para no achicar la landing ni borrar imágenes todavía necesarias.
+
 `data/plan_catalog.json` queda como snapshot curado del catalogo principal. El frontend solo intenta Artemis para planes si ese snapshot local falta o no es usable.
 
 Tambien existe un workflow mensual en `.github/workflows/update-artemis-backups.yml` para correr el mismo proceso el primer dia de cada mes y commitear cambios si Artemis devuelve informacion nueva.

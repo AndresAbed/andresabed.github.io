@@ -1,4 +1,5 @@
 import {
+  hasCompleteHomeAdjudications,
   loadArtemisBackup,
   loadHomeData,
   loadPlanCatalog,
@@ -38,7 +39,7 @@ async function loadHomeFallbackData(site) {
     planCatalog,
     resources,
     draws: artemisBackup?.draws || {},
-    homeAdjudications: artemisBackup?.homeAdjudications || {},
+    homeAdjudications: hasCompleteHomeAdjudications(artemisBackup?.homeAdjudications) ? artemisBackup.homeAdjudications : {},
     socialReviews,
     recruitment,
     videos,
@@ -46,16 +47,11 @@ async function loadHomeFallbackData(site) {
 }
 
 export function initHomePage(site) {
-  loadHomeFallbackData(site)
+  return loadHomeData()
     .then(renderHomeSections)
-    .catch((error) => {
-      console.warn("No se pudo cargar el respaldo inicial de Home.", error);
-    });
-
-  loadHomeData()
-    .then(renderHomeSections)
-    .catch((error) => {
-      console.error(error);
-      document.documentElement.classList.add("has-data-error");
+    .catch(async (error) => {
+      console.warn("No se pudo cargar Home completa. Se intenta renderizar el respaldo inicial.", error);
+      const fallbackData = await loadHomeFallbackData(site);
+      renderHomeSections(fallbackData);
     });
 }

@@ -7,6 +7,8 @@ const ARTEMIS_MEDIA_ISSUE_URL = `${ARTEMIS_MEDIA_ROOT}/issue`;
 const ARTEMIS_WINNER_IMAGE_BASE = `${ARTEMIS_BASE_URL}/images/winners`;
 const REQUEST_TIMEOUT_MS = 12000;
 const ADJUDICATION_LOOKBACK_YEARS = 3;
+const HOME_ADJUDICATION_TARGET_COUNT = 8;
+const HOME_ADJUDICATION_FETCH_LIMIT = 16;
 
 const backupPath = "data/artemis-backup.json";
 const adjudicationImageDir = "assets/img/adjudicados";
@@ -219,8 +221,8 @@ function parseAdjudicationsFromArtemis(payload) {
     .filter(Boolean);
 }
 
-function parseHomeAdjudicationsFromArtemis(payload, fallback) {
-  const items = (Array.isArray(payload) ? payload : [])
+function parseHomeAdjudicationItemsFromArtemis(payload) {
+  return (Array.isArray(payload) ? payload : [])
     .map((entry, index) => {
       const issueDescr = entry?.issue_descr || [];
       const name = normalizeArtemisText(issueDescr[0]);
@@ -246,9 +248,12 @@ function parseHomeAdjudicationsFromArtemis(payload, fallback) {
         source: "artemis_api",
       };
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .slice(0, HOME_ADJUDICATION_TARGET_COUNT);
+}
 
-  if (items.length < 3) return fallback;
+function createHomeAdjudicationsFromItems(items, fallback) {
+  if (items.length < HOME_ADJUDICATION_TARGET_COUNT) return fallback;
 
   return {
     ...fallback,
@@ -313,10 +318,20 @@ async function fetchHomeAdjudications(previousBackup, errors) {
       artemisUrl(
         ARTEMIS_MEDIA_ISSUE_URL,
         { assigned_to: 6, status: "CLOSED", related_project: "ADJUDI" },
-        { columns: ["issue_descr"], offset: 0, limit: 8 },
+        { columns: ["issue_descr"], offset: 0, limit: HOME_ADJUDICATION_FETCH_LIMIT },
       ),
     );
-    return parseHomeAdjudicationsFromArtemis(payload, emptyHomeAdjudications);
+    const previousHomeAdjudications = previousBackup?.homeAdjudications || emptyHomeAdjudications;
+    const items = parseHomeAdjudicationItemsFromArtemis(payload);
+
+    if (items.length < HOME_ADJUDICATION_TARGET_COUNT) {
+      const message = `Artemis devolvió ${items.length}/${HOME_ADJUDICATION_TARGET_COUNT} adjudicados destacados válidos; se mantiene el backup anterior.`;
+      errors.push(message);
+      console.warn(message);
+      return previousHomeAdjudications;
+    }
+
+    return createHomeAdjudicationsFromItems(items, previousHomeAdjudications);
   } catch (error) {
     const message = `No se pudieron actualizar adjudicados destacados: ${error.message}`;
     errors.push(message);
@@ -343,6 +358,14 @@ function collectReferencedImageNumbers(homeAdjudications) {
       .map(imageNumberFromItem)
       .filter(Boolean),
   );
+}
+
+function hasLocalAdjudicationImage(item) {
+  const imageNumber = imageNumberFromItem(item);
+  if (!imageNumber) return false;
+
+  const localUrl = localAdjudicationImageUrl(imageNumber);
+  return (item?.imageUrl === localUrl || item?.localImageUrl === localUrl) && fs.existsSync(localAdjudicationImagePath(imageNumber));
 }
 
 async function downloadAdjudicationImage(item, previousItem, errors) {
@@ -391,8 +414,9 @@ async function downloadAdjudicationImage(item, previousItem, errors) {
 }
 
 async function backupHomeAdjudicationImages(homeAdjudications, previousBackup, errors) {
+  const previousHomeAdjudications = previousBackup?.homeAdjudications || emptyHomeAdjudications;
   const previousItemsByImageNumber = new Map(
-    (previousBackup?.homeAdjudications?.items || [])
+    (previousHomeAdjudications?.items || [])
       .map((item) => {
         const imageNumber = imageNumberFromItem(item);
         return imageNumber ? [imageNumber, item] : null;
@@ -400,14 +424,27 @@ async function backupHomeAdjudicationImages(homeAdjudications, previousBackup, e
       .filter(Boolean),
   );
 
-  return {
-    ...homeAdjudications,
-    items: await Promise.all(
-      (homeAdjudications?.items || []).map((item) =>
-        downloadAdjudicationImage(item, previousItemsByImageNumber.get(String(item.imageNumber)), errors),
-      ),
+  const items = await Promise.all(
+    (homeAdjudications?.items || []).map((item) =>
+      downloadAdjudicationImage(item, previousItemsByImageNumber.get(String(item.imageNumber)), errors),
     ),
+  );
+  const nextHomeAdjudications = {
+    ...homeAdjudications,
+    items,
   };
+
+  const readyImageCount = items.filter(hasLocalAdjudicationImage).length;
+  const previousReadyImageCount = (previousHomeAdjudications?.items || []).filter(hasLocalAdjudicationImage).length;
+
+  if (readyImageCount < HOME_ADJUDICATION_TARGET_COUNT && previousReadyImageCount >= HOME_ADJUDICATION_TARGET_COUNT) {
+    const message = `El backup nuevo dejó ${readyImageCount}/${HOME_ADJUDICATION_TARGET_COUNT} imágenes locales listas; se mantiene el backup anterior.`;
+    errors.push(message);
+    console.warn(message);
+    return previousHomeAdjudications;
+  }
+
+  return nextHomeAdjudications;
 }
 
 function pruneUnusedAdjudicationImages(homeAdjudications) {

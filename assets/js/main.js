@@ -5,10 +5,66 @@ import { initAdjudicationsPage, initSystemGuidePage } from "./modules/pages/info
 import { initPlansHub } from "./modules/pages/plans/index.js";
 import { initPrivacyPage } from "./modules/pages/privacy.js";
 
+const LOADER_EXIT_MS = 420;
+const CRITICAL_ASSET_TIMEOUT_MS = 2800;
+
+function delay(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+function imageReady(image) {
+  return image.complete && image.naturalWidth > 0;
+}
+
+function waitForImage(image) {
+  if (imageReady(image) || (!image.currentSrc && !image.src)) return Promise.resolve();
+
+  return new Promise((resolve) => {
+    image.addEventListener("load", resolve, { once: true });
+    image.addEventListener("error", resolve, { once: true });
+  });
+}
+
+function isCriticalImage(image) {
+  if (image.loading !== "lazy") return true;
+
+  const bounds = image.getBoundingClientRect();
+  return bounds.top < window.innerHeight * 1.25 && bounds.bottom > -window.innerHeight * 0.25;
+}
+
+async function waitForCriticalAssets() {
+  const images = [...document.images].filter(isCriticalImage);
+  const fontReady = document.fonts?.ready?.catch?.(() => null) || Promise.resolve();
+
+  await Promise.race([
+    Promise.all([...images.map(waitForImage), fontReady]),
+    delay(CRITICAL_ASSET_TIMEOUT_MS),
+  ]);
+}
+
 function finishAppLoading() {
-  window.requestAnimationFrame(() => {
-    document.documentElement.classList.remove("app-loading");
-    document.documentElement.classList.add("app-ready");
+  const root = document.documentElement;
+  if (window.__appLoadingFallback) window.clearTimeout(window.__appLoadingFallback);
+
+  if (!root.classList.contains("app-loading")) {
+    root.classList.remove("app-loading-exit");
+    root.classList.add("app-ready");
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    window.requestAnimationFrame(() => {
+      root.classList.add("app-loading-exit");
+      root.classList.remove("app-loading");
+
+      window.setTimeout(() => {
+        root.classList.remove("app-loading-exit");
+        root.classList.add("app-ready");
+        resolve();
+      }, LOADER_EXIT_MS);
+    });
   });
 }
 
@@ -46,14 +102,14 @@ async function boot() {
       }),
     ]);
     renderShell(site, agencyContact);
-    finishAppLoading();
 
     await startPageController(site);
+    await waitForCriticalAssets();
   } catch (error) {
     console.error(error);
     document.documentElement.classList.add("has-data-error");
   } finally {
-    finishAppLoading();
+    await finishAppLoading();
   }
 }
 

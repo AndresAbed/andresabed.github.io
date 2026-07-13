@@ -2,7 +2,7 @@
   "meta": {
     "source": "artemis_api",
     "status": "verified",
-    "generatedAt": "2026-07-08T03:30:32.615Z",
+    "generatedAt": "2026-07-13T18:15:28.341Z",
     "lookbackYears": 3,
     "errors": []
   },
@@ -66,83 +66,107 @@
     "items": [
       {
         "id": "sosa-camila-anabel-795253",
+        "imageNumber": "795253",
         "name": "Sosa Camila Anabel",
         "installment": "10",
         "drawDate": "28-03-2026",
         "prize": "Honda Tornado CB300 + $200.000",
         "residence": "Termas Río Hondo/Santiago del Estero",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/795253.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/795253.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/795253.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/795253.webp"
       },
       {
         "id": "alderete-marcela-fabiana-796275",
+        "imageNumber": "796275",
         "name": "Alderete Marcela Fabiana",
         "installment": "10",
         "drawDate": "25-04-2026",
         "prize": "Fiat Cronos drive pack + orden de compra",
         "residence": "Termas Río Hondo/Santiago del Estero",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/796275.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/796275.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/796275.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/796275.webp"
       },
       {
         "id": "fontela-viviana-784341",
+        "imageNumber": "784341",
         "name": "Fontela Viviana",
         "installment": "16",
         "drawDate": "25-04-2026",
         "prize": "Honda Twister CB300 + $200.000",
         "residence": "Santo Tomé/Corrientes",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/784341.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/784341.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/784341.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/784341.webp"
       },
       {
         "id": "gallardo-adamo-angel-humberto-811881",
+        "imageNumber": "811881",
         "name": "Gallardo Adamo Ángel Humberto",
         "installment": "3",
         "drawDate": "25-04-2026",
         "prize": "Honda Wave 110 + $100.000",
         "residence": "La Banda/Santiago del Estero",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/811881.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/811881.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/811881.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/811881.webp"
       },
       {
         "id": "gallardo-maria-lujan-787533",
+        "imageNumber": "787533",
         "name": "Gallardo María Luján",
         "installment": "14",
         "drawDate": "25-04-2026",
         "prize": "honda Twister CB300 + $200.000",
         "residence": "Termas Río Hondo/Santiago del Estero",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/787533.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/787533.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/787533.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/787533.webp"
       },
       {
         "id": "galvan-viterba-mirella-807254",
+        "imageNumber": "807254",
         "name": "Galván Viterba Mirella",
         "installment": "5",
         "drawDate": "25-04-2026",
         "prize": "Gilera Smash 110 + $100.000",
         "residence": "Santiago Del Estero/Santiago del Estero",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/807254.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/807254.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/807254.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/807254.webp"
       },
       {
         "id": "heredia-matias-ezequiel-752067",
+        "imageNumber": "752067",
         "name": "Heredia Matías Ezequiel",
         "installment": "32",
         "drawDate": "25-04-2026",
         "prize": "Chevolet Tracker + valor nominal",
         "residence": "Posadas/Misiones",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/752067.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/752067.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/752067.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/752067.webp"
       },
       {
         "id": "hernandez-lorena-noemi-815404",
+        "imageNumber": "815404",
         "name": "Hernández Lorena Noemi",
         "installment": "1",
         "drawDate": "25-04-2026",
         "prize": "Toyota Yaris XS",
         "residence": "Cervantes/Río Negro",
-        "imageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/815404.webp",
-        "source": "artemis_api"
+        "imageUrl": "/assets/img/adjudicados/815404.webp",
+        "remoteImageUrl": "https://artemis.clubsanjorge.com.ar/images/winners/815404.webp",
+        "source": "artemis_api",
+        "localImageUrl": "/assets/img/adjudicados/815404.webp"
       }
     ]
   },

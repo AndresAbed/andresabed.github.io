@@ -114,6 +114,8 @@ function createBrandLogo({ logo, scrolledLogo }) {
             attrs: {
               src: defaultLogo,
               alt: "Club San Jorge Capitalización y Ahorro",
+              width: "374",
+              height: "39",
               "data-logo-default": defaultLogo,
               "data-logo-scrolled": nextScrolledLogo,
             },
@@ -350,6 +352,8 @@ function createNewsletterBlock(newsletterConfig) {
             attrs: {
               src: withSiteBasePath("/assets/img/mail-icon.svg"),
               alt: "",
+              width: "40",
+              height: "40",
               "aria-hidden": "true",
             },
           }),
@@ -483,14 +487,18 @@ function setupHeaderScrollState(header) {
     }
   };
 
+  let scrollFrame = null;
+  const syncScrolled = () => {
+    if (scrollFrame !== null) return;
+    scrollFrame = window.requestAnimationFrame(() => {
+      scrollFrame = null;
+      setScrolled();
+    });
+  };
+
   setScrolled();
-  const syncScrolled = () => window.requestAnimationFrame(setScrolled);
   window.addEventListener("scroll", syncScrolled, { passive: true });
-  document.addEventListener("scroll", syncScrolled, { passive: true });
-  window.addEventListener("wheel", syncScrolled, { passive: true });
-  window.addEventListener("touchmove", syncScrolled, { passive: true });
   window.addEventListener("resize", syncScrolled, { passive: true });
-  window.setInterval(setScrolled, 120);
 }
 
 function setupHeaderMenu({ header, overlay, drawer }) {
@@ -585,6 +593,8 @@ function createFooter(site, agencyContact = {}) {
                     attrs: {
                       src: withSiteBasePath(footerLogo),
                       alt: agency.displayLockup || "Club San Jorge | Agencias Abed",
+                      width: "161",
+                      height: "119",
                     },
                   })
                 : el("strong", { text: agency.displayLockup || "Club San Jorge | Agencias Abed" }),

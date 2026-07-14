@@ -465,9 +465,8 @@ export function renderRecruitment(data) {
           ],
         }),
         el("div", {
-          id: panelId,
           className: "home-recruitment__panel",
-          attrs: { "data-open": "false", "data-recruitment-panel": true, "aria-hidden": "true", inert: true },
+          attrs: { id: panelId, "data-open": "false", "data-recruitment-panel": true, "aria-hidden": "true", inert: true },
           children: [
             el("div", {
               className: "home-recruitment__panel-inner",

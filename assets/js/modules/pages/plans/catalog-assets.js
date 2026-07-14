@@ -90,6 +90,8 @@ const MONEY_IMAGE = Object.freeze({
   file: "plan-dinero-billetes.webp",
   position: "money",
   src: withSiteBasePath("/assets/img/plans/plan-dinero-billetes.webp"),
+  width: 1536,
+  height: 1024,
 });
 
 const BRAND_LOGOS = Object.freeze([
@@ -174,6 +176,8 @@ function normalizeMetadataImages(folder, metadata, plan) {
         ...angle,
         ...image,
         src: withSiteBasePath(`/assets/img/plans/${folder}/${image.file}`),
+        width: 1200,
+        height: 750,
       };
     });
 }
@@ -185,6 +189,8 @@ function normalizeMetadataImage(folder, image) {
     ...angle,
     ...image,
     src: withSiteBasePath(`/assets/img/plans/${folder}/${image.file}`),
+    width: 1200,
+    height: 750,
   };
 }
 
@@ -248,6 +254,8 @@ export function getPlanMedia(plan) {
       : anglesForPlan(plan).map((angle) => ({
           ...angle,
           src: withSiteBasePath(`/assets/img/plans/${folder}/${angle.file}`),
+          width: 1200,
+          height: 750,
         }));
 
   return {

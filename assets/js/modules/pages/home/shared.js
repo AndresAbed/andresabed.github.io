@@ -95,8 +95,13 @@ export function createPlanVisual(item, className = "home-plan-visual") {
     className,
     attrs: {
       src: withSiteBasePath(item.imageUrl),
+      srcset: item.imageSrcset || undefined,
+      sizes: item.imageSizes || undefined,
       alt: "",
+      width: item.imageWidth || undefined,
+      height: item.imageHeight || undefined,
       loading: "lazy",
+      decoding: "async",
     },
   });
 }

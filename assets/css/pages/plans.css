@@ -855,7 +855,7 @@
 .plan-list-card__ribbon strong {
   align-items: center;
   align-self: stretch;
-  background: var(--color-brand-green);
+  background: var(--color-brand-green-dark);
   border-radius: 999px;
   color: #ffffff;
   display: inline-flex;
@@ -1248,7 +1248,7 @@
 
 .plan-list-card--featured .plan-list-card__nominal {
   align-items: center;
-  background: var(--color-brand-green);
+  background: var(--color-brand-green-dark);
   border: 0;
   border-radius: 0;
   display: flex;
@@ -1537,7 +1537,7 @@ body.plan-drawer-open {
   grid-template-rows: minmax(340px, 1fr) auto;
   min-height: clamp(455px, 50vw, 620px);
   overflow: hidden;
-  padding: clamp(70px, 6vw, 86px) clamp(20px, 3vw, 36px) clamp(18px, 2.2vw, 26px);
+  padding: clamp(154px, 12vw, 180px) clamp(20px, 3vw, 36px) clamp(18px, 2.2vw, 26px);
   position: relative;
 }
 
@@ -1549,7 +1549,7 @@ body.plan-drawer-open {
 .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__visual {
   grid-template-rows: minmax(380px, 1fr) auto;
   min-height: clamp(530px, 55vw, 690px);
-  padding-block-start: clamp(118px, 9vw, 150px);
+  padding-block-start: clamp(185px, 15vw, 215px);
 }
 
 .plan-detail-card__brand-panel {
@@ -1602,6 +1602,7 @@ body.plan-drawer-open {
 
 .plan-detail-card__image img {
   filter: drop-shadow(0 22px 18px rgb(41 41 41 / 0.12));
+  height: auto;
   max-height: var(--plan-media-detail-max-height, clamp(360px, 43vw, 560px));
   object-fit: contain;
   transform: translateY(var(--plan-media-detail-offset-y, 0)) scale(var(--plan-media-detail-scale, 1));
@@ -2216,8 +2217,8 @@ body.plan-drawer-open {
 }
 
 .plan-inquiry-form button[data-state="success"] {
-  background: var(--color-brand-green);
-  border-color: var(--color-brand-green);
+  background: var(--color-brand-green-dark);
+  border-color: var(--color-brand-green-dark);
   color: #ffffff;
   cursor: default;
   opacity: 1;
@@ -2815,13 +2816,13 @@ body.plan-drawer-open {
     min-height: auto;
     min-width: 0;
     overflow-x: hidden;
-    padding: clamp(142px, 23vw, 184px) 0 var(--space-4);
+    padding: clamp(148px, 32vw, 244px) 0 var(--space-4);
     width: 100%;
   }
 
   .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__visual {
     min-height: auto;
-    padding-block-start: clamp(184px, 30vw, 230px);
+    padding-block-start: clamp(184px, 34vw, 244px);
   }
 
   .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__image {

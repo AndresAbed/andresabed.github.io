@@ -9,7 +9,7 @@ colors:
   brand-green-dark: "#26763a"
   ink: "#292929"
   ink-soft: "#4e5350"
-  muted: "#73786f"
+  muted: "#656a63"
   neutral-mid: "#939389"
   line: "#deded6"
   surface: "#ffffff"
@@ -134,7 +134,7 @@ La paleta es institucional y comercial: rojo para accion y jerarquia, verde para
 
 - **Tinta principal** (`#292929`): texto principal, navbar oscura, footer, tablas oscuras y botones de cierre.
 - **Tinta suave** (`#4e5350`): texto secundario cuando el fondo es claro.
-- **Texto atenuado** (`#73786f`): apoyo, descripciones y notas. Verificar contraste si se usa sobre fondos tintados.
+- **Texto atenuado** (`#656a63`): apoyo, descripciones y notas con contraste AA sobre superficies blancas y suaves.
 - **Linea neutra** (`#deded6`): bordes, separadores y divisores.
 - **Superficie blanca** (`#ffffff`): tarjetas, paneles y formularios.
 - **Superficie suave** (`#f6f6f2`): fondo general y bloques neutros.

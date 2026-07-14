@@ -82,7 +82,10 @@ function createMediaContent(plan, media) {
       attrs: {
         src: cardImage.src,
         alt: "",
+        width: String(cardImage.width || 1200),
+        height: String(cardImage.height || 750),
         loading: "lazy",
+        decoding: "async",
       },
     });
 

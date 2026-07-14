@@ -23,6 +23,12 @@ const GUIDE_STEP_IMAGES = [
   withSiteBasePath("/assets/img/how-it-works-step-cuotas.svg"),
   withSiteBasePath("/assets/img/how-it-works-step-sorteos.svg"),
 ];
+const GUIDE_STEP_DIMENSIONS = [
+  { width: 1168, height: 896 },
+  { width: 1136, height: 928 },
+  { width: 1168, height: 896 },
+  { width: 1152, height: 912 },
+];
 
 function latestMonth(months = []) {
   return months.length ? Math.max(...months.map(Number)) : null;
@@ -180,7 +186,10 @@ function createGuideJourney(steps = []) {
                     attrs: {
                       src: GUIDE_STEP_IMAGES[index],
                       alt: "",
+                      width: String(GUIDE_STEP_DIMENSIONS[index].width),
+                      height: String(GUIDE_STEP_DIMENSIONS[index].height),
                       loading: "lazy",
+                      decoding: "async",
                       "aria-hidden": "true",
                     },
                   })
@@ -238,7 +247,10 @@ function createImportantNotes(notes = {}) {
             attrs: {
               src: GUIDE_ALERT_IMAGE,
               alt: "",
+              width: "501",
+              height: "601",
               loading: "lazy",
+              decoding: "async",
               "aria-hidden": "true",
             },
           }),

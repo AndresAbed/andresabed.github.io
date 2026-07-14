@@ -773,7 +773,7 @@
 }
 
 .referral-success__mark {
-  background: var(--color-brand-green);
+  background: var(--color-brand-green-dark);
   border: 8px solid #e5f4e2;
   border-radius: 50%;
   display: grid;

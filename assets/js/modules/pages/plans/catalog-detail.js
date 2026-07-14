@@ -143,6 +143,9 @@ function createDetailImage(plan, media) {
       attrs: {
         src: media.defaultImage.src,
         alt: "",
+        width: String(media.defaultImage.width || 1200),
+        height: String(media.defaultImage.height || 750),
+        decoding: "async",
         "data-angle-position": media.defaultImage.position,
         "data-plan-angle-image": "",
       },

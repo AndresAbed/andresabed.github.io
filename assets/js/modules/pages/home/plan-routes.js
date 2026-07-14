@@ -14,13 +14,25 @@ function getCategoryStats(planCatalog, category) {
 }
 const CATEGORY_CARD_IMAGES = Object.freeze({
   autos: {
-    imageUrl: "/assets/img/plans/plan-auto-hilux-cronos.webp",
+    imageUrl: "/assets/img/plans/plan-auto-hilux-cronos-900.webp",
+    imageSrcset: "/assets/img/plans/plan-auto-hilux-cronos-480.webp 480w, /assets/img/plans/plan-auto-hilux-cronos-900.webp 900w",
+    imageSizes: "(max-width: 720px) calc(100vw - 72px), (max-width: 1040px) 46vw, 360px",
+    imageWidth: 900,
+    imageHeight: 442,
   },
   motos: {
-    imageUrl: "/assets/img/plans/plan-moto-honda-xr-cb.webp",
+    imageUrl: "/assets/img/plans/plan-moto-honda-xr-cb-900.webp",
+    imageSrcset: "/assets/img/plans/plan-moto-honda-xr-cb-480.webp 480w, /assets/img/plans/plan-moto-honda-xr-cb-900.webp 900w",
+    imageSizes: "(max-width: 720px) calc(100vw - 72px), (max-width: 1040px) 46vw, 360px",
+    imageWidth: 900,
+    imageHeight: 569,
   },
   dinero: {
-    imageUrl: "/assets/img/plans/plan-dinero-billetes.webp",
+    imageUrl: "/assets/img/plans/plan-dinero-billetes-900.webp",
+    imageSrcset: "/assets/img/plans/plan-dinero-billetes-480.webp 480w, /assets/img/plans/plan-dinero-billetes-900.webp 900w",
+    imageSizes: "(max-width: 720px) calc(100vw - 72px), (max-width: 1040px) 46vw, 360px",
+    imageWidth: 900,
+    imageHeight: 600,
   },
 });
 export function renderPlanRoutes(data) {

@@ -42,6 +42,8 @@ function createUnsubscribeView(state) {
                 attrs: {
                   src: withSiteBasePath("/assets/img/brand/logo-agencias-abed-vertical-black.svg"),
                   alt: "Club San Jorge | Agencias Abed",
+                  width: "161",
+                  height: "119",
                 },
               }),
               el("div", { className: "unsubscribe-panel__mark", attrs: { "aria-hidden": "true" } }),

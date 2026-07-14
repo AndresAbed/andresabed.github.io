@@ -38,7 +38,10 @@ function createAdjudicationMedia(item) {
     attrs: {
       src: imageUrl,
       alt: "",
+      width: "800",
+      height: "550",
       loading: "lazy",
+      decoding: "async",
     },
   });
 

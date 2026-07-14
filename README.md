@@ -146,6 +146,12 @@ Si el sitio cambia de dominio, actualizar el mismo origen en:
 
 ## Checks utiles
 
+Regenerar el CSS de producción después de modificar parciales en `assets/css/`:
+
+```bash
+node scripts/build-css.mjs
+```
+
 Verificar whitespace del diff:
 
 ```bash

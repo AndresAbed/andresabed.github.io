@@ -79,9 +79,8 @@ export function renderSocialReviews(data) {
   if (!items.length) return;
   const trackId = "home-social-reviews-track";
   const track = el("div", {
-    id: trackId,
     className: "home-social-proof__track",
-    attrs: { tabindex: "0", "aria-label": "Opiniones de clientes" },
+    attrs: { id: trackId, tabindex: "0", "aria-label": "Opiniones de clientes" },
     children: items.map(createSocialReviewCard),
   });
 

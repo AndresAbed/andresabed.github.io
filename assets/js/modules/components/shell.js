@@ -9,6 +9,14 @@ const NAV_ITEMS = [
   { label: "Cómo funciona", href: "/como-funciona/" },
 ];
 
+const SYSTEM_GUIDE_NAV_ITEMS = [
+  { label: "El recorrido, paso a paso", href: "/como-funciona/#recorrido-paso-a-paso" },
+  { label: "Qué es", href: "/como-funciona/#que-es-y-que-no" },
+  { label: "Palabras clave", href: "/como-funciona/#puntos-clave" },
+  { label: "Contrato y condiciones", href: "/como-funciona/#contrato-plan-330" },
+  { label: "Preguntas frecuentes", href: "/como-funciona/#preguntas-frecuentes" },
+];
+
 function isCurrentPath(href) {
   const basePath = getSiteBasePath();
   const rawPath = window.location.pathname.replace(/index\.html$/, "");
@@ -16,19 +24,55 @@ function isCurrentPath(href) {
   return current === href || (href !== "/" && current.startsWith(href));
 }
 
-function createNav({ className = "site-nav", label = "Navegacion principal" } = {}) {
+function createSystemGuideNavItem({ drawer = false } = {}) {
+  const guideLink = el("a", {
+    className: drawer ? "" : "site-nav__guide-link",
+    text: "Cómo funciona",
+    attrs: {
+      href: normalizeInternalTarget("/como-funciona/"),
+      "aria-current": isCurrentPath("/como-funciona/") ? "page" : null,
+    },
+  });
+
+  if (drawer) return guideLink;
+
+  return el("div", {
+    className: "site-nav__guide-item",
+    children: [
+      guideLink,
+      el("ul", {
+        className: "site-nav__guide-links",
+        attrs: { "aria-label": "Secciones de Cómo funciona" },
+        children: SYSTEM_GUIDE_NAV_ITEMS.map((item) =>
+          el("li", {
+            children: [
+              el("a", {
+                text: item.label,
+                attrs: { href: normalizeInternalTarget(item.href) },
+              }),
+            ],
+          }),
+        ),
+      }),
+    ],
+  });
+}
+
+function createNav({ className = "site-nav", label = "Navegacion principal", drawer = false } = {}) {
   return el("nav", {
     className,
     attrs: { "aria-label": label },
-    children: NAV_ITEMS.map((item) =>
-      el("a", {
+    children: NAV_ITEMS.map((item) => {
+      if (item.href === "/como-funciona/") return createSystemGuideNavItem({ drawer });
+
+      return el("a", {
         text: item.label,
         attrs: {
           href: normalizeInternalTarget(item.href),
           "aria-current": isCurrentPath(item.href) ? "page" : null,
         },
-      }),
-    ),
+      });
+    }),
   });
 }
 
@@ -402,7 +446,7 @@ function createHeader(site) {
           el("button", { className: "site-header__drawer-close", text: "Cerrar", attrs: { type: "button", "aria-label": "Cerrar menú" } }),
         ],
       }),
-      createNav({ className: "site-drawer-nav", label: "Navegacion mobile" }),
+      createNav({ className: "site-drawer-nav", label: "Navegacion mobile", drawer: true }),
       el("div", {
         className: "site-header__drawer-cta",
         children: [

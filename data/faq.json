@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "v6-system-guide-330"
+    "version": "v7-system-clarifications"
   },
   "guide": {
     "summary": {
@@ -21,9 +21,37 @@
         },
         {
           "title": "Participás de sorteos",
-          "body": "El pago de la cuota correspondiente habilita la participación en el sorteo mensual, siempre que el título cumpla las condiciones de vigencia establecidas."
+          "body": "El pago de la cuota correspondiente habilita la participación en el sorteo mensual, siempre que el título cumpla las condiciones de vigencia establecidas. Si resultás adjudicado, podés optar por retirarte y no seguir pagando, o mantener el título vigente para continuar participando."
         }
       ]
+    },
+    "misconceptions": {
+      "title": "Qué es —y con qué no hay que confundirlo",
+      "intro": "Algunas palabras conocidas pueden llevar a interpretar el sistema como algo que no es. Estas diferencias ayudan a entender qué estás contratando antes de elegir un plan.",
+      "items": [
+        {
+          "title": "No es un préstamo",
+          "text": "Al suscribirte no recibís dinero que después debés devolver: abonás cuotas para formar un capital dentro de un título de capitalización y ahorro."
+        },
+        {
+          "title": "No es una rifa",
+          "text": "El sorteo es un beneficio mensual del título, pero el sistema no se reduce a pagar por una posibilidad de ganar. Las cuotas forman un capital dentro de un título de capitalización y ahorro."
+        },
+        {
+          "title": "No es una compra en cuotas",
+          "text": "Que un plan esté asociado a un auto o una moto no significa que estés financiando ese vehículo ni que se entregue automáticamente después de cierta cantidad de pagos. La relación se organiza mediante un título y su valor nominal."
+        },
+        {
+          "title": "No funciona por licitación",
+          "text": "No se ofrece dinero ni se adelantan cuotas para competir por una adjudicación. La participación se da mediante los sorteos mensuales previstos por el sistema, con el título vigente y la cuota correspondiente abonada."
+        }
+      ],
+      "adjudication": {
+        "eyebrow": "Si resultás adjudicado",
+        "title": "Podés elegir no seguir pagando",
+        "body": "No estás obligado a continuar con las cuotas futuras si decidís recibir el beneficio y retirarte del plan. También podés mantener el título vigente, seguir abonando y continuar participando en los sorteos mensuales.",
+        "note": "La elección se gestiona de acuerdo con las condiciones y los plazos indicados en la documentación del título."
+      }
     },
     "keyConcepts": {
       "title": "Palabras clave para entender tu plan",
@@ -58,7 +86,7 @@
     "importantNotes": {
       "title": "A tener en cuenta",
       "items": [
-        "Este sistema no debe leerse como una compra directa ni como una entrega automática de vehículo por pagar cierta cantidad de cuotas.",
+        "Si resultás adjudicado, podés optar por recibir el beneficio y retirarte del plan sin seguir abonando cuotas futuras, o continuar con el título vigente y seguir participando.",
         "Si una opción está asociada a un auto o una moto, esa asociación ayuda a visualizar el plan; el derecho concreto depende del valor nominal, los endosos aceptados y las condiciones vigentes.",
         "Para participar de sorteos y acceder a un beneficio por adjudicación, el título debe estar vigente y con la cuota del período abonada en tiempo y forma.",
         "Si se acepta el endoso de ampliación automática, el bien asociado puede actualizarse cuando cambia su valor o modelo. Si no se acepta, se toma el valor nominal indicado al suscribir.",
@@ -90,6 +118,24 @@
           "id": "que-es-club-san-jorge",
           "question": "¿Qué es Club San Jorge en capitalización y ahorro?",
           "answer": "Es un sistema de capitalización y ahorro. El suscriptor abona cuotas para formar un capital y participa de sorteos mensuales cuando el título está vigente y cumple las condiciones de pago correspondientes.",
+          "status": "verified"
+        },
+        {
+          "id": "es-un-prestamo",
+          "question": "¿Es un préstamo?",
+          "answer": "No. Al suscribirte no recibís dinero que luego debas devolver: abonás cuotas para formar un capital dentro de un título de capitalización y ahorro.",
+          "status": "verified"
+        },
+        {
+          "id": "es-una-rifa",
+          "question": "¿Es una rifa?",
+          "answer": "No. Aunque el título participa de sorteos mensuales, el sistema no se reduce a pagar por una posibilidad de ganar. Las cuotas forman un capital dentro de un título de capitalización y ahorro.",
+          "status": "verified"
+        },
+        {
+          "id": "es-una-compra-de-vehiculo-en-cuotas",
+          "question": "¿Estoy comprando un vehículo en cuotas?",
+          "answer": "No. El auto o la moto asociados ayudan a identificar y comparar una opción, pero la suscripción no es una compraventa financiada ni asegura la entrega automática de ese vehículo por haber pagado cierta cantidad de cuotas. Lo contratado es un título de capitalización y ahorro con un valor nominal.",
           "status": "verified"
         },
         {
@@ -150,7 +196,13 @@
         {
           "id": "si-salgo-adjudicado-debo-seguir-pagando",
           "question": "¿Si salgo adjudicado debo seguir pagando?",
-          "answer": "Ante una adjudicación, existen alternativas previstas por el sistema: retirar el beneficio y continuar abonando para seguir participando, o retirarse del plan según las condiciones aplicables. La decisión debe revisarse con la documentación del título.",
+          "answer": "No. Si resultás adjudicado, podés recibir el beneficio y optar por retirarte del plan; en ese caso no seguís pagando las cuotas futuras. También podés mantener el título vigente, continuar abonando y seguir participando en los sorteos mensuales, porque el título es no amortizante. La opción se gestiona según las condiciones y los plazos de la documentación del título.",
+          "status": "verified"
+        },
+        {
+          "id": "se-puede-licitar",
+          "question": "¿Se puede licitar para salir adjudicado?",
+          "answer": "No. Este sistema no tiene un mecanismo de licitación: no se ofrece dinero ni se adelantan cuotas para competir por una adjudicación. El beneficio se obtiene mediante los sorteos mensuales previstos, siempre que el título esté vigente y la cuota correspondiente se encuentre abonada.",
           "status": "verified"
         },
         {

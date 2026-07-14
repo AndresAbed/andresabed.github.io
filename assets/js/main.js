@@ -1,7 +1,7 @@
 import { loadAgencyContact, loadSite } from "./modules/data/api.js";
-import { renderShell } from "./modules/components/shell.js?v=20260714-20";
+import { renderShell } from "./modules/components/shell.js?v=20260714-21";
 import { initHomePage } from "./modules/pages/home.js?v=20260714-22";
-import { initAdjudicationsPage, initSystemGuidePage } from "./modules/pages/info-pages.js";
+import { initAdjudicationsPage, initSystemGuidePage } from "./modules/pages/info-pages.js?v=20260714-25";
 import { initPlansHub } from "./modules/pages/plans/index.js";
 import { initPrivacyPage } from "./modules/pages/privacy.js";
 import { initReferralProgramPage } from "./modules/pages/referral-program.js?v=20260714-23";

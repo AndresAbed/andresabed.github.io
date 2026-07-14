@@ -75,7 +75,7 @@ function createGuideOverview(summary = {}) {
               el("div", {
                 children: [
                   el("dt", { text: "Qué no es" }),
-                  el("dd", { text: "No es una compra directa ni una entrega automática por pagar cierta cantidad de cuotas." }),
+                  el("dd", { text: "No es un préstamo, una rifa, una compra en cuotas ni un sistema de licitación." }),
                 ],
               }),
               el("div", {
@@ -108,10 +108,59 @@ function createGuideOverview(summary = {}) {
   });
 }
 
+function createMisconceptions(misconceptions = {}) {
+  const adjudication = misconceptions.adjudication || {};
+
+  return el("section", {
+    className: "system-guide-section-block system-guide-misconceptions",
+    attrs: { id: "que-es-y-que-no", "aria-labelledby": "system-guide-misconceptions-title" },
+    children: [
+      createSectionHeader({
+        title: misconceptions.title || "Qué es y con qué no hay que confundirlo",
+        intro: misconceptions.intro,
+        id: "system-guide-misconceptions-title",
+      }),
+      el("div", {
+        className: "system-guide-misconceptions__layout",
+        children: [
+          el("div", {
+            className: "system-guide-misconceptions__list",
+            children: (misconceptions.items || []).map((item, index) =>
+              el("article", {
+                className: "system-guide-misconception",
+                children: [
+                  el("span", {
+                    className: "system-guide-misconception__index",
+                    text: String(index + 1).padStart(2, "0"),
+                    attrs: { "aria-hidden": "true" },
+                  }),
+                  el("div", {
+                    children: [el("h3", { text: item.title }), el("p", { text: item.text })],
+                  }),
+                ],
+              }),
+            ),
+          }),
+          el("aside", {
+            className: "system-guide-adjudication-callout",
+            attrs: { "aria-labelledby": "system-guide-adjudication-title" },
+            children: [
+              el("span", { className: "system-guide-adjudication-callout__eyebrow", text: adjudication.eyebrow || "Si resultás adjudicado" }),
+              el("h3", { text: adjudication.title || "Podés elegir cómo seguir", attrs: { id: "system-guide-adjudication-title" } }),
+              el("p", { text: adjudication.body }),
+              adjudication.note ? el("small", { text: adjudication.note }) : null,
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
 function createGuideJourney(steps = []) {
   return el("section", {
     className: "system-guide-section-block system-guide-journey",
-    attrs: { "aria-labelledby": "system-guide-journey-title" },
+    attrs: { id: "recorrido-paso-a-paso", "aria-labelledby": "system-guide-journey-title" },
     children: [
       createSectionHeader({
         title: "El recorrido, paso a paso",
@@ -452,6 +501,18 @@ export async function initAdjudicationsPage() {
   await renderAdjudicationSelection(target);
 }
 
+function scrollToCurrentGuideSection() {
+  const sectionId = window.location.hash.slice(1);
+  if (!sectionId) return;
+
+  const section = document.getElementById(decodeURIComponent(sectionId));
+  if (!section) return;
+
+  window.requestAnimationFrame(() => {
+    section.scrollIntoView({ block: "start" });
+  });
+}
+
 export async function initSystemGuidePage() {
   const target = qs("[data-system-guide-page]");
   if (!target) return;
@@ -464,9 +525,13 @@ export async function initSystemGuidePage() {
   target.append(
     createGuideOverview(guide.summary),
     createGuideJourney(guide.summary?.steps || []),
+    createMisconceptions(guide.misconceptions),
     createKeyConcepts(guide.keyConcepts),
     createImportantNotes(guide.importantNotes),
     createContractResource(guide.contract),
     createFaqZone(categories, faq.featuredFaqIds || []),
   );
+
+  scrollToCurrentGuideSection();
+  window.addEventListener("hashchange", scrollToCurrentGuideSection);
 }

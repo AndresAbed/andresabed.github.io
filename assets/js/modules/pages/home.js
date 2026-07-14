@@ -4,6 +4,7 @@ import {
   loadHomeData,
   loadPlanCatalog,
   loadRecruitment,
+  loadReferralProgram,
   loadResources,
   loadSocialReviews,
   loadVideos,
@@ -14,6 +15,7 @@ import { renderHomeAdjudications } from "./home/adjudications.js";
 import { renderSocialReviews } from "./home/social-reviews.js";
 import { renderSubscriberResources } from "./home/subscriber-resources.js";
 import { renderRecruitment } from "./home/recruitment.js";
+import { renderReferralProgram } from "./home/referral-program.js?v=20260714-22";
 
 function renderHomeSections(data) {
   renderHero(data);
@@ -21,16 +23,18 @@ function renderHomeSections(data) {
   renderHomeAdjudications(data);
   renderSocialReviews(data);
   renderSubscriberResources(data);
+  renderReferralProgram(data);
   renderRecruitment(data);
 }
 
 async function loadHomeFallbackData(site) {
-  const [planCatalog, resources, artemisBackup, socialReviews, recruitment, videos] = await Promise.all([
+  const [planCatalog, resources, artemisBackup, socialReviews, recruitment, referralProgram, videos] = await Promise.all([
     loadPlanCatalog(),
     loadResources(),
     loadArtemisBackup(),
     loadSocialReviews(),
     loadRecruitment(),
+    loadReferralProgram(),
     loadVideos(),
   ]);
 
@@ -42,6 +46,7 @@ async function loadHomeFallbackData(site) {
     homeAdjudications: hasCompleteHomeAdjudications(artemisBackup?.homeAdjudications) ? artemisBackup.homeAdjudications : {},
     socialReviews,
     recruitment,
+    referralProgram,
     videos,
   };
 }

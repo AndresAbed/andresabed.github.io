@@ -509,6 +509,7 @@ function createFooter(site, agencyContact = {}) {
     { label: "Planes", href: "/planes/" },
     { label: "Adjudicados", href: "/adjudicados/" },
     { label: "Cómo funciona", href: "/como-funciona/" },
+    { label: "Recomendá y Ganá", href: "/recomenda-y-gana/" },
     { label: "Privacidad", href: "/privacidad/" },
   ];
 

@@ -1,0 +1,1158 @@
+.referral-program {
+  background: var(--color-surface-soft);
+  overflow: hidden;
+}
+
+.referral-hero {
+  background:
+    radial-gradient(circle at 78% 18%, rgb(255 255 255 / 0.16), transparent 19rem),
+    linear-gradient(122deg, #be002f 0%, #a00029 56%, #68001b 100%);
+  color: #ffffff;
+  isolation: isolate;
+  min-height: min(760px, calc(100svh - 77px));
+  overflow: hidden;
+  padding-block: clamp(64px, 9vw, 118px);
+  position: relative;
+}
+
+.referral-hero::before {
+  background: repeating-linear-gradient(135deg, rgb(255 255 255 / 0.075) 0 1px, transparent 1px 32px);
+  content: "";
+  inset: 0;
+  opacity: 0.48;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.referral-hero::after {
+  background: var(--color-brand-green);
+  bottom: 0;
+  content: "";
+  height: 5px;
+  left: 62%;
+  position: absolute;
+  right: 0;
+}
+
+.referral-hero__grid {
+  align-items: center;
+  display: grid;
+  gap: clamp(46px, 8vw, 112px);
+}
+
+.referral-hero__copy {
+  max-width: 680px;
+}
+
+.referral-entry__label,
+.referral-success__label,
+.home-referral-program__label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+}
+
+.referral-hero h1 {
+  color: #ffffff;
+  font-size: clamp(3rem, 8vw, 5.8rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  margin-block-end: 26px;
+  max-width: 8.5ch;
+  text-wrap: balance;
+}
+
+.referral-hero__intro {
+  color: rgb(255 255 255 / 0.9);
+  font-size: clamp(1.04rem, 1.8vw, 1.3rem);
+  line-height: 1.6;
+  margin-block-end: 30px;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.referral-hero__cta {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--color-brand-red-dark);
+  min-height: 50px;
+  padding-inline: 1.35rem;
+}
+
+.referral-hero__cta:hover {
+  background: #f4f4f1;
+  border-color: #f4f4f1;
+  color: var(--color-brand-red-dark);
+}
+
+.referral-hero__note {
+  color: rgb(255 255 255 / 0.78);
+  font-size: 0.9rem;
+  margin: 20px 0 0;
+  max-width: 57ch;
+}
+
+.referral-hero__visual {
+  margin-inline: auto;
+  max-width: 560px;
+  width: 100%;
+}
+
+.referral-network {
+  aspect-ratio: 1 / 0.92;
+  position: relative;
+}
+
+.referral-network::before,
+.referral-network::after {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 50%;
+  content: "";
+  inset: 9% 5%;
+  position: absolute;
+}
+
+.referral-network::after {
+  inset: 22% 18%;
+}
+
+.referral-network__line {
+  background: rgb(255 255 255 / 0.46);
+  height: 2px;
+  left: 40%;
+  position: absolute;
+  top: 45%;
+  transform-origin: left center;
+  width: 31%;
+}
+
+.referral-network__line--one {
+  transform: rotate(-24deg);
+}
+
+.referral-network__line--two {
+  transform: rotate(29deg);
+}
+
+.referral-network__person {
+  align-items: center;
+  color: #ffffff;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.referral-network__person span {
+  background:
+    radial-gradient(circle at 50% 33%, currentColor 0 16%, transparent 17%),
+    radial-gradient(ellipse at 50% 86%, currentColor 0 29%, transparent 30%),
+    rgb(255 255 255 / 0.13);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  border-radius: 50%;
+  box-shadow: 0 20px 50px rgb(52 0 13 / 0.25);
+  color: #ffffff;
+  display: block;
+  height: clamp(78px, 14vw, 118px);
+  width: clamp(78px, 14vw, 118px);
+}
+
+.referral-network__person strong {
+  font-size: 0.82rem;
+}
+
+.referral-network__person--main {
+  left: 19%;
+  top: 34%;
+}
+
+.referral-network__person--main span {
+  background-color: #292929;
+  border-color: #292929;
+}
+
+.referral-network__person--one {
+  right: 4%;
+  top: 10%;
+}
+
+.referral-network__person--two {
+  bottom: 10%;
+  right: 2%;
+}
+
+.referral-network__person--one span,
+.referral-network__person--two span {
+  background-color: var(--color-brand-green);
+  border-color: rgb(255 255 255 / 0.72);
+}
+
+.referral-network__ticket {
+  background: #ffffff;
+  border-radius: 0 15px 0 15px;
+  bottom: 4%;
+  box-shadow: 0 24px 70px rgb(52 0 13 / 0.28);
+  color: var(--color-ink);
+  display: grid;
+  gap: 2px;
+  left: 3%;
+  padding: 18px 22px;
+  position: absolute;
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+
+.referral-network__ticket::after {
+  border: 2px solid var(--color-brand-green);
+  border-radius: 50%;
+  content: "";
+  height: 14px;
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  width: 14px;
+}
+
+.referral-network__ticket small {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.referral-network__ticket strong {
+  color: var(--color-brand-red);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  letter-spacing: 0.04em;
+}
+
+.referral-steps {
+  background: #ffffff;
+  padding-block: clamp(64px, 9vw, 112px);
+}
+
+.referral-steps__layout {
+  display: grid;
+  gap: clamp(38px, 7vw, 92px);
+}
+
+.referral-steps__header h2,
+.referral-context h2,
+.referral-entry__intro h2 {
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.referral-steps__header p {
+  font-size: 1.05rem;
+  max-width: 52ch;
+}
+
+.referral-steps__list {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.referral-steps__list li {
+  align-items: start;
+  border-top: 1px solid var(--color-line);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: auto 1fr;
+  padding-block: 24px;
+}
+
+.referral-steps__list li:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.referral-steps__number {
+  align-items: center;
+  background: var(--color-brand-red);
+  border-radius: 0 10px 0 10px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  height: 40px;
+  justify-content: center;
+  width: 44px;
+}
+
+.referral-steps__list h3 {
+  font-size: clamp(1.12rem, 2vw, 1.35rem);
+  margin-block: 0 7px;
+}
+
+.referral-steps__list p {
+  margin: 0;
+  max-width: 58ch;
+}
+
+.referral-context {
+  background: #292929;
+  color: #ffffff;
+  padding-block: clamp(64px, 9vw, 112px);
+  position: relative;
+}
+
+.referral-context::before {
+  background: linear-gradient(90deg, var(--color-brand-red) 0 62%, var(--color-brand-green) 62% 100%);
+  content: "";
+  height: 5px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.referral-context__grid {
+  display: grid;
+  gap: clamp(32px, 7vw, 86px);
+}
+
+.referral-context h2,
+.referral-context p {
+  color: #ffffff;
+}
+
+.referral-audience > p {
+  color: rgb(255 255 255 / 0.72);
+  max-width: 55ch;
+}
+
+.referral-audience ul {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+}
+
+.referral-audience li {
+  align-items: center;
+  border-bottom: 1px solid rgb(255 255 255 / 0.14);
+  display: flex;
+  gap: 12px;
+  padding-block: 0 14px;
+}
+
+.referral-audience li::before {
+  background: var(--color-brand-green);
+  border-radius: 50%;
+  content: "";
+  flex: 0 0 10px;
+  height: 10px;
+  width: 10px;
+}
+
+.referral-benefit {
+  background: #ffffff;
+  border-radius: 0 18px 0 18px;
+  color: var(--color-ink);
+  padding: clamp(28px, 5vw, 52px);
+  position: relative;
+}
+
+.referral-benefit h2,
+.referral-benefit p {
+  color: var(--color-ink);
+}
+
+.referral-benefit h2 {
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  margin-block-end: 18px;
+}
+
+.referral-benefit__mark {
+  background: var(--color-brand-red);
+  border: 7px solid #ffe5ec;
+  border-radius: 50%;
+  height: 32px;
+  margin-block-end: 30px;
+  position: relative;
+  width: 32px;
+}
+
+.referral-benefit__mark::after {
+  border-bottom: 3px solid #ffffff;
+  border-right: 3px solid #ffffff;
+  content: "";
+  height: 8px;
+  left: 7px;
+  position: absolute;
+  top: 4px;
+  transform: rotate(45deg);
+  width: 4px;
+}
+
+.referral-benefit__note {
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin: 24px 0 0;
+  padding: 16px;
+}
+
+.referral-entry {
+  background:
+    linear-gradient(180deg, #f6f6f2 0%, #ffffff 100%);
+  padding-block: clamp(68px, 9vw, 118px);
+}
+
+.referral-entry__grid {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+}
+
+.referral-entry__intro {
+  align-self: start;
+}
+
+.referral-entry__label {
+  color: var(--color-brand-red);
+  margin-block-end: 14px;
+}
+
+.referral-entry__intro > p:not(.referral-entry__label) {
+  font-size: 1.04rem;
+  max-width: 52ch;
+}
+
+.referral-entry__assurance {
+  border-top: 1px solid var(--color-line);
+  margin-block-start: 30px;
+  padding-block-start: 22px;
+}
+
+.referral-entry__assurance strong {
+  color: var(--color-brand-red-dark);
+  display: block;
+  margin-block-end: 6px;
+}
+
+.referral-entry__assurance p {
+  font-size: 0.92rem !important;
+  margin: 0;
+}
+
+.referral-form-shell {
+  min-width: 0;
+}
+
+.referral-form {
+  background: #ffffff;
+  border: 1px solid rgb(41 41 41 / 0.12);
+  border-radius: 16px;
+  box-shadow: none;
+  display: grid;
+  gap: clamp(22px, 2.6vw, 30px);
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 32px);
+  position: relative;
+}
+
+.referral-form::before {
+  background: linear-gradient(90deg, var(--color-brand-red), var(--color-brand-green));
+  content: "";
+  height: 3px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.referral-form__status {
+  background: #fff8e8;
+  border: 1px solid #e7c879;
+  border-radius: var(--radius-md);
+  color: #704600;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 14px 16px;
+}
+
+.referral-form__status:empty {
+  display: none;
+}
+
+.referral-form__status[data-referral-form-status="error"] {
+  background: #fff1f0;
+  border-color: #f2b8b5;
+  color: var(--color-error);
+}
+
+.referral-form__status[data-referral-form-status="submitting"] {
+  background: #eef4ff;
+  border-color: #b5ccef;
+  color: #174b8c;
+}
+
+.referral-form fieldset {
+  border: 0;
+  border-radius: 0;
+  gap: clamp(16px, 2vw, 22px);
+  padding: 0;
+}
+
+.referral-form legend,
+.referral-form__referrals-head h3 {
+  color: var(--color-ink);
+  float: none;
+  font-size: clamp(1.3rem, 2.2vw, 1.55rem);
+  font-weight: 650;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  text-wrap: balance;
+  width: 100%;
+}
+
+.referral-form__section-intro,
+.referral-form__referrals-head p {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.referral-form__section-intro {
+  margin: 10px 0 0;
+}
+
+.referral-form__referrals-head p {
+  margin: 6px 0 0;
+}
+
+.referral-form__participant-grid,
+.referral-person__grid {
+  display: grid;
+  gap: clamp(1rem, 1.7vw, 1.35rem);
+}
+
+.referral-field {
+  align-content: start;
+  color: rgb(41 41 41 / 0.82);
+  display: grid;
+  font-size: 0.78rem;
+  font-weight: 700;
+  gap: 7px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.referral-field__label {
+  align-items: end;
+  display: flex;
+  min-height: 1.2rem;
+}
+
+.referral-field input,
+.referral-field select {
+  background: #ffffff;
+  border-color: rgb(41 41 41 / 0.18);
+  border-radius: var(--radius-sm);
+  min-height: 44px;
+  text-transform: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.referral-field input:hover,
+.referral-field select:hover {
+  border-color: rgb(41 41 41 / 0.34);
+}
+
+.referral-field input:focus,
+.referral-field select:focus {
+  box-shadow: 0 0 0 3px rgb(97 175 84 / 0.16);
+}
+
+.referral-field select {
+  cursor: pointer;
+}
+
+.referral-field input::placeholder {
+  color: #5f645e;
+}
+
+.referral-field__help {
+  color: #5c615b;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.referral-field .field-error {
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.referral-form__referrals {
+  border-top: 1px solid var(--color-line);
+  display: grid;
+  gap: 20px;
+  padding-block-start: 30px;
+}
+
+.referral-form__referrals-head {
+  display: block;
+}
+
+.referral-form__referrals-head > div {
+  max-width: 62ch;
+}
+
+.referral-list {
+  display: grid;
+  gap: 18px;
+}
+
+.referral-person {
+  background: #fbfbf8;
+  border: 1px solid rgb(41 41 41 / 0.1) !important;
+  border-radius: 12px !important;
+  padding: clamp(18px, 2.4vw, 24px) !important;
+  position: relative;
+}
+
+.referral-person legend {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-block-end: 16px;
+  padding-inline: 72px;
+  text-align: center;
+}
+
+.referral-person__remove {
+  background: #ffffff;
+  border: 1px solid rgb(143 0 36 / 0.2);
+  border-radius: 0 8px 0 8px;
+  color: var(--color-brand-red-dark);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  min-height: 36px;
+  padding: 6px 10px;
+  position: absolute;
+  right: 14px;
+  top: 13px;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.referral-person__remove:hover {
+  border-color: var(--color-brand-red);
+  color: var(--color-brand-red);
+}
+
+.referral-form__add {
+  justify-self: start;
+  min-height: 44px;
+}
+
+.referral-form__add > span {
+  color: var(--color-brand-red);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.referral-form__consent {
+  align-items: start;
+  background: #fbfbf8;
+  border: 1px solid rgb(41 41 41 / 0.12);
+  border-radius: 0 14px 0 14px;
+  column-gap: 12px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  letter-spacing: 0;
+  overflow: hidden;
+  padding: clamp(17px, 2.2vw, 22px) clamp(18px, 2.6vw, 26px) clamp(17px, 2.2vw, 22px) clamp(22px, 3vw, 32px);
+  position: relative;
+  text-transform: none;
+}
+
+.referral-form__consent::before {
+  background: var(--color-brand-red);
+  content: "";
+  inset: 0 auto 0 0;
+  position: absolute;
+  width: 5px;
+}
+
+.referral-form__consent input {
+  accent-color: var(--color-brand-green);
+  appearance: auto;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  height: 18px;
+  margin: 0.15rem 0 0;
+  min-height: 18px;
+  padding: 0;
+  width: 18px;
+}
+
+.referral-form__consent > span {
+  color: rgb(41 41 41 / 0.76);
+  font-size: 0.84rem;
+  font-weight: 650;
+  line-height: 1.48;
+}
+
+.referral-form__consent a {
+  color: var(--color-brand-red-dark);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.referral-form__consent .field-error {
+  grid-column: 2;
+}
+
+.referral-form__trap {
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.referral-form__footer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.referral-form__submit {
+  background: #151a17;
+  border-color: #151a17;
+  font-weight: 520;
+  min-height: 50px;
+  min-width: min(100%, 240px);
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.referral-form__submit:hover {
+  background: var(--color-brand-red);
+  border-color: var(--color-brand-red);
+  color: #ffffff;
+}
+
+.referral-form__submit[data-state="submitting"]::before {
+  animation: referralSubmitSpin 700ms linear infinite;
+  border: 2px solid rgb(255 255 255 / 0.42);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  content: "";
+  height: 17px;
+  width: 17px;
+}
+
+.referral-form__submit[data-state="submitting"]:disabled {
+  background: #151a17;
+  border-color: #151a17;
+  color: #ffffff;
+  cursor: wait;
+}
+
+.referral-success {
+  background: #ffffff;
+  border: 1px solid #c5dfc1;
+  border-radius: 0 18px 0 18px;
+  box-shadow: var(--shadow-soft);
+  padding: clamp(30px, 6vw, 62px);
+  text-align: center;
+}
+
+.referral-success__mark {
+  background: var(--color-brand-green);
+  border: 8px solid #e5f4e2;
+  border-radius: 50%;
+  display: grid;
+  height: 62px;
+  margin: 0 auto 26px;
+  place-items: center;
+  position: relative;
+  width: 62px;
+}
+
+.referral-success__mark::after {
+  border-bottom: 4px solid #ffffff;
+  border-right: 4px solid #ffffff;
+  content: "";
+  height: 17px;
+  transform: rotate(45deg);
+  width: 9px;
+}
+
+.referral-success__label {
+  color: var(--color-success);
+  margin-block-end: 10px;
+}
+
+.referral-success h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-wrap: balance;
+}
+
+.referral-success__body {
+  font-size: 1.05rem;
+}
+
+.referral-success__number {
+  background: #292929;
+  border-radius: 0 14px 0 14px;
+  color: #ffffff;
+  display: grid;
+  gap: 7px;
+  margin: 30px auto 18px;
+  max-width: 430px;
+  padding: 24px;
+}
+
+.referral-success__number span {
+  color: rgb(255 255 255 / 0.68);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.referral-success__number strong {
+  color: #ffffff;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  letter-spacing: 0.04em;
+}
+
+.referral-success__date {
+  color: rgb(255 255 255 / 0.78);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-block-start: 8px;
+}
+
+.referral-success__proof {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.referral-success__next {
+  font-size: 0.9rem;
+  margin: 24px auto;
+  max-width: 56ch;
+}
+
+.referral-success__download {
+  min-height: 48px;
+}
+
+.home-section--referral-program {
+  background: #ffffff;
+  padding-block: 0;
+  scroll-margin-top: 86px;
+}
+
+.home-referral-program {
+  align-items: center;
+  background:
+    linear-gradient(108deg, rgb(190 0 47 / 0.055) 0 30%, transparent 30.15%),
+    linear-gradient(90deg, #f6f6f2 0%, #ffffff 66%);
+  border-bottom: 1px solid rgb(41 41 41 / 0.1);
+  border-top: 1px solid rgb(41 41 41 / 0.1);
+  display: grid;
+  gap: clamp(22px, 4vw, 56px);
+  grid-template-areas:
+    "visual"
+    "copy"
+    "action";
+  overflow: hidden;
+  padding: clamp(40px, 5vw, 68px) max(24px, calc((100vw - var(--container)) / 2));
+  position: relative;
+}
+
+.home-referral-program::after {
+  background: linear-gradient(90deg, var(--color-brand-red), var(--color-brand-green));
+  content: "";
+  height: 4px;
+  left: max(24px, calc((100vw - var(--container)) / 2));
+  position: absolute;
+  top: -1px;
+  width: min(240px, 24vw);
+}
+
+.home-referral-program__visual {
+  grid-area: visual;
+  height: 124px;
+  justify-self: center;
+  position: relative;
+  width: 190px;
+}
+
+.home-referral-program__person {
+  background:
+    radial-gradient(circle at 50% 32%, #ffffff 0 14%, transparent 15%),
+    radial-gradient(ellipse at 50% 82%, #ffffff 0 27%, transparent 28%);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 12px 28px rgb(41 41 41 / 0.12), 0 0 0 1px rgb(41 41 41 / 0.1);
+  height: 72px;
+  position: absolute;
+  top: 4px;
+  width: 72px;
+}
+
+.home-referral-program__person--primary {
+  background-color: var(--color-brand-red);
+  left: 6px;
+}
+
+.home-referral-program__person--secondary {
+  background-color: var(--color-brand-green);
+  right: 6px;
+}
+
+.home-referral-program__path {
+  border-top: 2px dashed rgb(41 41 41 / 0.3);
+  left: 73px;
+  position: absolute;
+  right: 73px;
+  top: 40px;
+}
+
+.home-referral-program__ticket {
+  background: #ffffff;
+  border: 1px solid rgb(190 0 47 / 0.2);
+  border-radius: 0 9px 0 9px;
+  bottom: 0;
+  box-shadow: 0 10px 24px rgb(41 41 41 / 0.1);
+  color: var(--color-brand-red);
+  font-size: 0.82rem;
+  font-weight: 900;
+  left: 62px;
+  letter-spacing: 0.08em;
+  padding: 9px 19px;
+  position: absolute;
+  transform: rotate(-2deg);
+}
+
+.home-referral-program__copy {
+  grid-area: copy;
+  max-width: 760px;
+}
+
+.home-referral-program__copy h2,
+.home-referral-program__copy p {
+  color: var(--color-ink);
+}
+
+.home-referral-program__copy h2 {
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin-block-end: 16px;
+  max-width: 21ch;
+  text-wrap: balance;
+}
+
+.home-referral-program__copy > p:not(.home-referral-program__label, .home-referral-program__note) {
+  color: var(--color-ink-soft);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 58ch;
+}
+
+.home-referral-program__label {
+  color: var(--color-brand-red-dark) !important;
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  font-weight: 800;
+  margin-block-end: 12px;
+}
+
+.home-referral-program__note {
+  align-items: center;
+  color: var(--color-brand-green-dark) !important;
+  display: flex;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  font-weight: 700;
+  gap: 12px;
+  line-height: 1.45;
+  margin: 20px 0 0;
+  max-width: 62ch;
+}
+
+.home-referral-program__note::before {
+  background: var(--color-brand-green);
+  border: 5px solid #e8f4e5;
+  border-radius: 50%;
+  content: "";
+  flex: 0 0 22px;
+  height: 22px;
+  width: 22px;
+}
+
+.home-referral-program__action {
+  grid-area: action;
+  justify-self: start;
+}
+
+.home-referral-program__action .button {
+  background: var(--color-brand-red);
+  border-color: var(--color-brand-red);
+  color: #ffffff;
+  min-height: 50px;
+  min-width: 220px;
+  white-space: nowrap;
+}
+
+.home-referral-program__action .button:hover {
+  background: var(--color-brand-red-dark);
+  border-color: var(--color-brand-red-dark);
+  color: #ffffff;
+}
+
+@keyframes referralSubmitSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (min-width: 700px) {
+  .referral-form__participant-grid,
+  .referral-person__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .referral-form__submit {
+    min-width: 250px;
+  }
+
+  .home-referral-program {
+    column-gap: clamp(36px, 6vw, 72px);
+    grid-template-areas:
+      "visual copy"
+      "visual action";
+    grid-template-columns: minmax(210px, 0.5fr) minmax(0, 1.5fr);
+    row-gap: 24px;
+  }
+
+  .home-referral-program__action {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .referral-hero__grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(390px, 0.92fr);
+  }
+
+  .referral-steps__layout {
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+  }
+
+  .referral-steps__header {
+    position: sticky;
+    top: 112px;
+  }
+
+  .referral-context__grid {
+    align-items: center;
+    grid-template-columns: minmax(0, 0.9fr) minmax(400px, 1.1fr);
+  }
+
+  .referral-entry__grid {
+    align-items: start;
+    column-gap: clamp(72px, 8vw, 112px);
+    grid-template-columns: minmax(250px, 0.55fr) minmax(0, 1.45fr);
+  }
+
+  .referral-entry__intro {
+    position: sticky;
+    top: 112px;
+  }
+
+  .home-referral-program {
+    grid-template-columns: minmax(260px, 0.58fr) minmax(0, 1.42fr);
+  }
+
+  .home-referral-program__visual {
+    transform: scale(1.18);
+  }
+
+  .home-referral-program__action {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 520px) {
+  .referral-hero {
+    min-height: auto;
+    padding-block: 52px 64px;
+  }
+
+  .referral-hero h1 {
+    font-size: clamp(2.85rem, 15vw, 4.1rem);
+  }
+
+  .referral-network__ticket {
+    bottom: 0;
+    left: 0;
+  }
+
+  .referral-form {
+    margin-inline: -4px;
+    padding: 20px 16px;
+  }
+
+  .referral-person {
+    padding: 18px 14px !important;
+  }
+
+  .referral-person legend {
+    padding-inline: 58px;
+  }
+
+  .referral-form__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .referral-form__submit {
+    width: 100%;
+  }
+
+  .referral-form__consent {
+    padding: 15px;
+  }
+
+  .home-referral-program {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-referral-program__visual {
+    justify-self: start;
+    margin-block: -8px;
+    transform: scale(0.84);
+    transform-origin: left center;
+  }
+
+  .home-referral-program__action {
+    grid-column: 1;
+  }
+
+  .home-referral-program__action .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referral-form__submit[data-state="submitting"]::before {
+    animation: none;
+  }
+}

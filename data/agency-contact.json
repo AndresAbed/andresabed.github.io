@@ -16,7 +16,7 @@
     "enabled": true,
     "mode": "endpoint",
     "provider": "google_apps_script",
-    "endpoint": "https://script.google.com/macros/s/AKfycbzvvDAHl9lsyLiV7DF9Kdtc6jTa8pmoebvV2ZNZCMGbwPkGlPf76fr_KK-wnfh0cAUi/exec",
+    "endpoint": "https://script.google.com/macros/s/AKfycbzvzi3RkjK2Qc5iGnQR6wCgzV8taGvcRRqjk4tUA7Q_MCZNsTt6gafF7YDfm5VHEBij/exec",
     "method": "POST",
     "status": "active"
   },
@@ -24,7 +24,7 @@
     "enabled": true,
     "mode": "endpoint",
     "provider": "google_apps_script",
-    "endpoint": "https://script.google.com/macros/s/AKfycbzvvDAHl9lsyLiV7DF9Kdtc6jTa8pmoebvV2ZNZCMGbwPkGlPf76fr_KK-wnfh0cAUi/exec",
+    "endpoint": "https://script.google.com/macros/s/AKfycbzvzi3RkjK2Qc5iGnQR6wCgzV8taGvcRRqjk4tUA7Q_MCZNsTt6gafF7YDfm5VHEBij/exec",
     "method": "POST",
     "status": "active",
     "copy": {
@@ -40,6 +40,16 @@
       "consent": "Acepto recibir novedades por email. No implica una solicitud ni inscripción a un plan.",
       "privacyNote": "Podés darte de baja cuando quieras."
     }
+  },
+  "referralProgram": {
+    "enabled": true,
+    "mode": "endpoint",
+    "provider": "google_apps_script",
+    "endpoint": "https://script.google.com/macros/s/AKfycbzvzi3RkjK2Qc5iGnQR6wCgzV8taGvcRRqjk4tUA7Q_MCZNsTt6gafF7YDfm5VHEBij/exec",
+    "method": "POST",
+    "formType": "referral_program",
+    "status": "active",
+    "responseType": "json"
   },
   "planEnrollmentForm": {
     "enabled": false,

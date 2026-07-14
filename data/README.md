@@ -9,11 +9,13 @@ Incluye JSON editables para construir la web estática:
 - videos.json
 - social-reviews.json
 - recruitment.json
+- referral-program.json
 - agency-contact.json
 
 Uso principal:
 - `site.json`: marca, SEO, navegacion, CTAs globales y textos legales.
 - `agency-contact.json`: canales comerciales y formularios vinculados a planes. No existe una vista general de contacto.
+- `referral-program.json`: contenido editable de la página y del CTA de Home para Recomendá y Ganá.
 - `plan_catalog.json`: catalogo curado de planes usado por `/planes/`, Home y modales de detalle.
 - `artemis-backup.json`: fallback local para sorteos y adjudicados cuando Artemis no responde.
 

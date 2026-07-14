@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "version": "v1",
+    "updatedAt": "2026-07-14",
+    "status": "active",
+    "owner": "Agencias Abed"
+  },
+  "home": {
+    "label": "Recomendá y Ganá",
+    "title": "¿Conocés a alguien que pueda estar interesado?",
+    "body": "Compartí sus datos para que podamos brindarle información.",
+    "note": "Cada referido válido suma oportunidades para participar por importantes premios.",
+    "cta": {
+      "label": "Ver cómo participar",
+      "href": "/recomenda-y-gana/"
+    }
+  },
+  "hero": {
+    "title": "Recomendá y Ganá",
+    "intro": "¿Conocés a alguien que pueda estar interesado en adquirir un vehículo o en conocer cómo funciona el sistema de Capitalización y Ahorro? Recomendalo y sumá oportunidades para participar por los premios de esta campaña.",
+    "ctaLabel": "Participar ahora",
+    "transparencyNote": "Las personas recomendadas serán contactadas por nosotros para brindarles información comercial."
+  },
+  "steps": {
+    "title": "Participar es simple",
+    "intro": "Dejá tus datos, sumá tus referidos y registrá tu participación en pocos minutos.",
+    "items": [
+      {
+        "title": "Completás tus datos",
+        "body": "Necesitamos identificarte y tener un canal de contacto para registrar tu participación."
+      },
+      {
+        "title": "Agregás personas interesadas",
+        "body": "Podés sumar tantos referidos como quieras, siempre que sus datos sean reales y tengas autorización para compartirlos."
+      },
+      {
+        "title": "Participás por los premios de esta campaña",
+        "body": "Luego de validar los datos, cada referido válido suma oportunidades a tu participación. Cuantos más referidos válidos agregues, más oportunidades tenés en el sorteo."
+      }
+    ]
+  },
+  "audience": {
+    "title": "¿A quién podés recomendar?",
+    "intro": "A familiares, amigos, compañeros o conocidos que estén evaluando alguna de estas alternativas:",
+    "interests": [
+      "Adquirir un vehículo",
+      "Conocer el sistema de Capitalización y Ahorro",
+      "Conocer los planes y productos disponibles"
+    ]
+  },
+  "benefit": {
+    "title": "Cada referido válido suma nuevas participaciones",
+    "body": "Una referencia se considera válida cuando los datos son reales y nos permiten establecer contacto con la persona recomendada.",
+    "note": "Completar una fila no genera automáticamente una participación: las referencias se validan luego del envío."
+  },
+  "form": {
+    "title": "Registrá tu participación",
+    "intro": "Primero dejá tus datos. Después agregá al menos una persona que pueda estar interesada.",
+    "participantTitle": "Tus datos",
+    "participantIntro": "Estos datos identifican a la persona que participa.",
+    "sellerHelp": "Si un asesor de Agencias Abed te invitó a participar, seleccionalo en la lista.",
+    "sellerOptions": [],
+    "referralsTitle": "Tus referidos",
+    "referralsIntro": "Sumá a cada referido con sus datos de contacto completos. Antes de enviar, verificá que la información sea correcta.",
+    "relationshipOptions": [
+      "Familiar",
+      "Amigo/a",
+      "Compañero/a de trabajo o estudio",
+      "Vecino/a",
+      "Conocido/a",
+      "Cliente/a",
+      "Otro vínculo"
+    ],
+    "addReferralLabel": "Agregar otro referido",
+    "removeReferralLabel": "Quitar",
+    "consentText": "Declaro que tengo autorización para compartir estos datos y acepto que Agencias Abed contacte a mis referidos para brindarles información comercial. Entiendo que los ganadores serán contactados directamente y que los resultados no necesariamente serán publicados.",
+    "privacyLinkLabel": "Política de privacidad",
+    "submitLabel": "Registrar mi participación",
+    "submittingLabel": "Registrando participación…",
+    "retryLabel": "Intentar nuevamente",
+    "unavailableMessage": "El registro online quedará disponible cuando finalicemos la conexión con el sistema de participaciones.",
+    "errorMessage": "No pudimos registrar la participación. Tus datos siguen cargados: revisalos e intentá nuevamente."
+  },
+  "success": {
+    "label": "Participación registrada",
+    "title": "¡Gracias por participar!",
+    "body": "Tu participación fue registrada correctamente.",
+    "numberLabel": "Número de participación",
+    "dateLabel": "Fecha de registro",
+    "proofNote": "Conservá este número como comprobante de participación.",
+    "nextStep": "Si uno de tus referidos necesita información, podremos contactarlo a través de los datos que compartiste.",
+    "downloadLabel": "Descargar comprobante en PDF"
+  }
+}

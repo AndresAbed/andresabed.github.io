@@ -9,6 +9,7 @@ El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizacio
 - `index.html`: Home comercial/informativa.
 - `planes/`: catalogo principal por categorias.
 - `adjudicados/`, `como-funciona/`: paginas internas informativas.
+- `recomenda-y-gana/`: herramienta de referidos y registro de participaciones de Agencias Abed.
 - `assets/css/`: entrada CSS y parciales agrupados por `core`, `components` y `pages`.
 - `assets/js/`: entrada JS y modulos internos agrupados por `components`, `data`, `pages` y `utils`.
 - `assets/js/modules/pages/plans/`: logica del catalogo, separada en assets, filtros, tarjetas, detalle, formularios y normalizacion.
@@ -94,6 +95,7 @@ Estos estados no son errores por si mismos. Sirven para que el sitio pueda avanz
 
 - `planInquiryForm`: formulario de consulta dentro del detalle de un plan. Envia a Google Apps Script para guardar la informacion en Google Sheets.
 - `planEnrollmentForm`: formulario de inscripcion final. Esta apagado porque el sitio no incluye inscripcion online en esta etapa.
+- `referralProgram`: formulario activo del módulo Recomendá y Ganá, conectado al despliegue público de Google Apps Script.
 
 La preinscripcion o consulta asistida no implica contratacion ni inscripcion final. La vista general de contacto fue retirada; las rutas comerciales se concentran en el catalogo y en las gestiones oficiales configuradas en `resources.json`.
 

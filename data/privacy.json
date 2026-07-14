@@ -7,7 +7,7 @@
   "hero": {
     "eyebrow": "Privacidad",
     "title": "Privacidad y tratamiento de datos",
-    "intro": "En este sitio usamos los datos que nos dejás para responder consultas comerciales, preinscripciones y postulaciones vinculadas a planes de Capitalización y Ahorro Club San Jorge."
+    "intro": "En este sitio usamos los datos que nos dejás para responder consultas comerciales, preinscripciones, postulaciones y participaciones vinculadas a Agencias Abed y a los planes de Capitalización y Ahorro Club San Jorge."
   },
   "notice": "Esta política explica de forma simple qué información podemos solicitar, para qué la usamos y cómo podés pedir cambios o eliminación de tus datos.",
   "sections": [
@@ -16,6 +16,7 @@
       "title": "Qué datos podemos solicitar",
       "body": [
         "Según el formulario que completes, podemos pedir datos de identificación y contacto como nombre, apellido, DNI, provincia, localidad, dirección, teléfono, WhatsApp y email.",
+        "En Recomendá y Ganá también recibimos los datos de contacto de las personas que recomendás. Antes de compartirlos, debés contar con su autorización.",
         "En consultas por planes también podemos registrar el plan que te interesó, su código y la información necesaria para que un asesor pueda responderte con contexto.",
         "Si te suscribís a novedades, registramos tu email, la fecha de alta, el texto de consentimiento asociado y el estado de la suscripción."
       ]
@@ -25,6 +26,7 @@
       "title": "Para qué usamos la información",
       "body": [
         "Usamos los datos para contactarte, responder tu consulta, orientar una preinscripción, preparar una solicitud o evaluar una postulación comercial.",
+        "En Recomendá y Ganá usamos los datos para validar la participación y para brindar información comercial a tus referidos.",
         "Cuando completás una preinscripción, también podemos registrar tu email en la lista de novedades para enviarte información relacionada con planes, recursos y comunicaciones comerciales de Agencias Abed.",
         "No usamos la información para finalidades ajenas a la relación comercial solicitada por vos en el formulario correspondiente."
       ]
@@ -49,7 +51,7 @@
       "id": "terceros",
       "title": "Servicios y tratamiento por terceros",
       "body": [
-        "Los formularios del sitio pueden enviarse y organizarse mediante Google Apps Script y Google Sheets. Esos servicios procesan la información para permitirnos recibir, ordenar y revisar las consultas, preinscripciones, postulaciones y suscripciones.",
+        "Los formularios del sitio pueden enviarse y organizarse mediante Google Apps Script y Google Sheets. Esos servicios procesan la información para permitirnos recibir, ordenar y revisar las consultas, preinscripciones, postulaciones, suscripciones y participaciones de Recomendá y Ganá.",
         "También podemos usar servicios externos de email o mensajería para responder consultas y enviar comunicaciones relacionadas con la solicitud que realizaste.",
         "Cuando sea necesario para responder una solicitud, la información puede ser revisada por el equipo comercial correspondiente y, si aplica, contrastada con información oficial de Club San Jorge."
       ]

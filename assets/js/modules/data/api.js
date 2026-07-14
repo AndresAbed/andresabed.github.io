@@ -11,6 +11,7 @@ export const DATASETS = Object.freeze({
   privacy: "privacy.json",
   socialReviews: "social-reviews.json",
   recruitment: "recruitment.json",
+  referralProgram: "referral-program.json",
   videos: "videos.json",
   agencyContact: "agency-contact.json",
 });
@@ -147,6 +148,7 @@ export const loadAdjudicationsForPeriod = (year, month) => loadOfficialAdjudicat
 export const loadHomeAdjudications = () => loadOfficialHomeAdjudications();
 export const loadSocialReviews = () => loadDataset("socialReviews");
 export const loadRecruitment = () => loadDataset("recruitment");
+export const loadReferralProgram = () => loadDataset("referralProgram");
 export const loadVideos = () => loadDataset("videos");
 export const loadAgencyContact = () => loadDataset("agencyContact");
 
@@ -455,7 +457,7 @@ async function loadOfficialAdjudicationsForPeriod(year, month) {
 }
 
 export async function loadHomeData() {
-  const [site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, videos] = await Promise.all([
+  const [site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, referralProgram, videos] = await Promise.all([
     loadSite(),
     loadPlanCatalog(),
     loadResources(),
@@ -463,10 +465,11 @@ export async function loadHomeData() {
     loadHomeAdjudications(),
     loadSocialReviews(),
     loadRecruitment(),
+    loadReferralProgram(),
     loadVideos(),
   ]);
 
-  return { site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, videos };
+  return { site, planCatalog, resources, draws, homeAdjudications, socialReviews, recruitment, referralProgram, videos };
 }
 
 export function getCatalogCategories(catalogData) {

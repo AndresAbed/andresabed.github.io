@@ -1,9 +1,10 @@
 import { loadAgencyContact, loadSite } from "./modules/data/api.js";
-import { renderShell } from "./modules/components/shell.js";
-import { initHomePage } from "./modules/pages/home.js";
+import { renderShell } from "./modules/components/shell.js?v=20260714-20";
+import { initHomePage } from "./modules/pages/home.js?v=20260714-22";
 import { initAdjudicationsPage, initSystemGuidePage } from "./modules/pages/info-pages.js";
 import { initPlansHub } from "./modules/pages/plans/index.js";
 import { initPrivacyPage } from "./modules/pages/privacy.js";
+import { initReferralProgramPage } from "./modules/pages/referral-program.js?v=20260714-23";
 
 const LOADER_EXIT_MS = 420;
 const CRITICAL_ASSET_TIMEOUT_MS = 2800;
@@ -68,7 +69,7 @@ function finishAppLoading() {
   });
 }
 
-function startPageController(site) {
+function startPageController(site, agencyContact) {
   if (document.body.dataset.page === "home") {
     return initHomePage(site);
   }
@@ -89,6 +90,10 @@ function startPageController(site) {
     return initPrivacyPage(site);
   }
 
+  if (document.body.dataset.page === "recomenda-y-gana") {
+    return initReferralProgramPage(site, agencyContact);
+  }
+
   return null;
 }
 
@@ -103,7 +108,7 @@ async function boot() {
     ]);
     renderShell(site, agencyContact);
 
-    await startPageController(site);
+    await startPageController(site, agencyContact);
     await waitForCriticalAssets();
   } catch (error) {
     console.error(error);

@@ -13,22 +13,11 @@ export function renderReferralProgram(data) {
       attrs: { "aria-labelledby": "home-referral-program-title" },
       children: [
         el("div", {
-          className: "home-referral-program__visual",
-          attrs: { "aria-hidden": "true" },
-          children: [
-            el("span", { className: "home-referral-program__person home-referral-program__person--primary" }),
-            el("span", { className: "home-referral-program__path" }),
-            el("span", { className: "home-referral-program__person home-referral-program__person--secondary" }),
-            el("span", { className: "home-referral-program__ticket", text: "RYG" }),
-          ],
-        }),
-        el("div", {
           className: "home-referral-program__copy",
           children: [
             el("p", { className: "home-referral-program__label", text: content.label }),
             el("h2", { attrs: { id: "home-referral-program-title" }, text: content.title }),
             el("p", { text: content.body }),
-            content.note ? el("p", { className: "home-referral-program__note", text: content.note }) : null,
           ],
         }),
         el("div", {

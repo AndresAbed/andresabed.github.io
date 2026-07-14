@@ -1,4 +1,4 @@
-import { loadAgencyContact, loadSite } from "./modules/data/api.js";
+import { loadAgencyContact, loadSite } from "./modules/data/api.js?v=20260714-33";
 import { renderShell } from "./modules/components/shell.js?v=20260714-21";
 
 const LOADER_EXIT_MS = 220;
@@ -29,7 +29,7 @@ function finishAppLoading() {
 
 async function startPageController(site, agencyContact) {
   if (document.body.dataset.page === "home") {
-    const { initHomePage } = await import("./modules/pages/home.js?v=20260714-30");
+    const { initHomePage } = await import("./modules/pages/home.js?v=20260714-33");
     return initHomePage(site);
   }
 
@@ -54,7 +54,7 @@ async function startPageController(site, agencyContact) {
   }
 
   if (document.body.dataset.page === "recomenda-y-gana") {
-    const { initReferralProgramPage } = await import("./modules/pages/referral-program.js?v=20260714-29");
+    const { initReferralProgramPage } = await import("./modules/pages/referral-program.js?v=20260714-30");
     return initReferralProgramPage(site, agencyContact);
   }
 

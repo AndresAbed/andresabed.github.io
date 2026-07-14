@@ -1,17 +1,16 @@
 {
   "meta": {
-    "version": "v1",
+    "version": "v2",
     "updatedAt": "2026-07-14",
     "status": "active",
     "owner": "Agencias Abed"
   },
   "home": {
     "label": "Recomendá y Ganá",
-    "title": "¿Conocés a alguien que pueda estar interesado?",
-    "body": "Compartí sus datos para que podamos brindarle información.",
-    "note": "Cada referido válido suma oportunidades para participar por importantes premios.",
+    "title": "Participá por importantes premios",
+    "body": "¿Conocés a alguien que pueda estar interesado en nuestro planes? Compartí sus datos: cada referido válido suma nuevas oportunidades.",
     "cta": {
-      "label": "Ver cómo participar",
+      "label": "Quiero participar",
       "href": "/recomenda-y-gana/"
     }
   },

@@ -1,4 +1,4 @@
-import { loadReferralProgram, normalizeInternalTarget } from "../data/api.js";
+import { loadReferralProgram, normalizeInternalTarget } from "../data/api.js?v=20260714-33";
 import { ARGENTINA_PROVINCES } from "../utils/argentina.js";
 import { clear, el, qs } from "../utils/dom.js";
 import { downloadReferralReceiptPdf } from "../utils/referral-receipt-pdf.js?v=20260714-23";

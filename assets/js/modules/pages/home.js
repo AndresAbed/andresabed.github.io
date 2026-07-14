@@ -8,14 +8,14 @@ import {
   loadResources,
   loadSocialReviews,
   loadVideos,
-} from "../data/api.js";
+} from "../data/api.js?v=20260714-33";
 import { renderHero } from "./home/hero.js";
 import { renderPlanRoutes } from "./home/plan-routes.js";
 import { renderHomeAdjudications } from "./home/adjudications.js";
 import { renderSocialReviews } from "./home/social-reviews.js";
 import { renderSubscriberResources } from "./home/subscriber-resources.js";
 import { renderRecruitment } from "./home/recruitment.js?v=20260714-29";
-import { renderReferralProgram } from "./home/referral-program.js?v=20260714-22";
+import { renderReferralProgram } from "./home/referral-program.js?v=20260714-25";
 
 function renderHomeSections(data) {
   renderHero(data);

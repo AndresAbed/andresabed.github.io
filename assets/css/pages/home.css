@@ -133,8 +133,8 @@
 }
 
 .home-hero-v5 .button--green {
-  background: var(--color-brand-green-dark);
-  border-color: var(--color-brand-green-dark);
+  background: var(--color-brand-green);
+  border-color: var(--color-brand-green);
   color: #ffffff;
 }
 

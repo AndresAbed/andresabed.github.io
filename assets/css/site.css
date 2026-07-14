@@ -486,8 +486,8 @@ body.site-menu-open {
 }
 
 .site-header__whatsapp {
-  background: var(--color-brand-green-dark);
-  border-color: #1f6230;
+  background: #25d366;
+  border-color: #1fbd5d;
   border-radius: var(--button-shape);
   box-shadow: 0 8px 18px rgb(37 211 102 / 0.14);
   color: #ffffff !important;
@@ -504,8 +504,8 @@ body.site-menu-open {
 }
 
 .site-header__whatsapp:hover {
-  background: #1f6230;
-  border-color: #185128;
+  background: #1ebe5d;
+  border-color: #17a951;
   color: #ffffff !important;
 }
 
@@ -2602,7 +2602,7 @@ legend {
 
 .system-guide-adjudication-callout__eyebrow {
   color: #a9d6a2;
-  font-size: 0.74rem;
+  font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -3705,8 +3705,8 @@ legend {
 }
 
 .home-hero-v5 .button--green {
-  background: var(--color-brand-green-dark);
-  border-color: var(--color-brand-green-dark);
+  background: var(--color-brand-green);
+  border-color: var(--color-brand-green);
   color: #ffffff;
 }
 

@@ -1,7 +1,7 @@
 import { withSiteBasePath } from "../../data/api.js";
 import { createButton } from "../../components/plan-components.js";
 import { clear, el, qs } from "../../utils/dom.js";
-import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js";
+import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js?v=20260714-41";
 
 function scrollAdjudications(track, direction) {
   if (!track) return;

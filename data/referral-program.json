@@ -58,7 +58,12 @@
     "participantTitle": "Tus datos",
     "participantIntro": "Estos datos identifican a la persona que participa.",
     "sellerHelp": "Si un asesor de Agencias Abed te invitó a participar, seleccionalo en la lista.",
-    "sellerOptions": [],
+    "sellerOptions": [
+      {
+        "value": "COD001",
+        "label": "Nombre del vendedor — COD001"
+      }
+    ],
     "referralsTitle": "Tus referidos",
     "referralsIntro": "Sumá a cada referido con sus datos de contacto completos. Antes de enviar, verificá que la información sea correcta.",
     "relationshipOptions": [

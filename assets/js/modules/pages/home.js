@@ -10,10 +10,10 @@ import {
   loadVideos,
 } from "../data/api.js?v=20260714-33";
 import { renderHero } from "./home/hero.js?v=20260714-40";
-import { renderPlanRoutes } from "./home/plan-routes.js?v=20260714-40";
-import { renderHomeAdjudications } from "./home/adjudications.js?v=20260714-40";
-import { renderSocialReviews } from "./home/social-reviews.js?v=20260714-40";
-import { renderSubscriberResources } from "./home/subscriber-resources.js?v=20260714-40";
+import { renderPlanRoutes } from "./home/plan-routes.js?v=20260714-41";
+import { renderHomeAdjudications } from "./home/adjudications.js?v=20260714-41";
+import { renderSocialReviews } from "./home/social-reviews.js?v=20260714-41";
+import { renderSubscriberResources } from "./home/subscriber-resources.js?v=20260714-41";
 import { renderRecruitment } from "./home/recruitment.js?v=20260714-29";
 import { renderReferralProgram } from "./home/referral-program.js?v=20260714-25";
 

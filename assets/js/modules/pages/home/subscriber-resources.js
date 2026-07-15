@@ -2,7 +2,7 @@ import { getResourcesByGroup } from "../../data/api.js";
 import { classifyLinkItem } from "../../data/validators.js";
 import { clear, el, qs } from "../../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES } from "../../utils/status.js";
-import { createHomeSectionHeader } from "./shared.js";
+import { createHomeSectionHeader } from "./shared.js?v=20260714-41";
 
 export function renderSubscriberResources(data) {
   const target = qs("[data-subscriber-resources]");

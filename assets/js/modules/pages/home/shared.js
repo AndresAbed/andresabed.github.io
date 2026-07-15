@@ -46,7 +46,9 @@ export function enableHorizontalSwipe(track) {
   };
 
   track.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
+    // Touch and pen gestures use the browser's native inertial scrolling.
+    // Pointer capture is kept only as a desktop mouse-drag enhancement.
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
 
     gesture = {
       pointerId: event.pointerId,

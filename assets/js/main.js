@@ -47,7 +47,7 @@ function finishAppLoading() {
 
 async function startPageController(site, agencyContact) {
   if (document.body.dataset.page === "home") {
-    const { initHomePage } = await import("./modules/pages/home.js?v=20260714-40");
+    const { initHomePage } = await import("./modules/pages/home.js?v=20260714-41");
     return initHomePage(site);
   }
 

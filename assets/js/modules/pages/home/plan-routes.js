@@ -1,7 +1,7 @@
 import { getCatalogCategories, getCatalogItemsByCategory } from "../../data/api.js";
 import { categoryHref, createButton } from "../../components/plan-components.js";
 import { clear, el, qs } from "../../utils/dom.js";
-import { createHomeSectionHeader, createPlanVisual } from "./shared.js";
+import { createHomeSectionHeader, createPlanVisual } from "./shared.js?v=20260714-41";
 
 function getCategoryStats(planCatalog, category) {
   const items = getCatalogItemsByCategory(planCatalog, category.slug);

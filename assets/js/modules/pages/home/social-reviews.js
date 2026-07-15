@@ -1,5 +1,5 @@
 import { clear, el, qs } from "../../utils/dom.js";
-import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js";
+import { createHomeSectionHeader, enableHorizontalSwipe } from "./shared.js?v=20260714-41";
 
 function scrollSocialReviews(track, direction) {
   if (!track) return;

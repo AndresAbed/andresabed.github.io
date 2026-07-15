@@ -18,6 +18,10 @@ export const DATASETS = Object.freeze({
 
 const cache = new Map();
 
+function isLocalDevelopment() {
+  return ["localhost", "127.0.0.1", "::1", "[::1]"].includes(window.location.hostname);
+}
+
 function normalizeBasePath(path) {
   const value = String(path || "").trim();
   if (!value || value === "/") return "";
@@ -105,14 +109,20 @@ const EMPTY_HOME_ADJUDICATIONS = Object.freeze({
 
 export async function fetchJson(path, options = {}) {
   const requestPath = withSiteBasePath(path);
-  if (cache.has(requestPath)) return cache.get(requestPath);
+  const bypassCache = isLocalDevelopment();
+  if (!bypassCache && cache.has(requestPath)) return cache.get(requestPath);
 
   const controller = options.timeoutMs ? new AbortController() : null;
   const timeout = controller
     ? window.setTimeout(() => controller.abort(), options.timeoutMs)
     : null;
 
-  const request = fetch(requestPath, controller ? { signal: controller.signal } : undefined)
+  const requestOptions = {
+    ...(controller ? { signal: controller.signal } : {}),
+    ...(bypassCache ? { cache: "no-store" } : {}),
+  };
+
+  const request = fetch(requestPath, Object.keys(requestOptions).length ? requestOptions : undefined)
     .then(async (response) => {
       if (!response.ok) {
         throw new Error(`No se pudo cargar ${requestPath} (${response.status})`);
@@ -127,7 +137,7 @@ export async function fetchJson(path, options = {}) {
       if (timeout) window.clearTimeout(timeout);
     });
 
-  cache.set(requestPath, request);
+  if (!bypassCache) cache.set(requestPath, request);
   return request;
 }
 

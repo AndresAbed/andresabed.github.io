@@ -241,7 +241,7 @@ function createDetail(plan, contactConfig) {
                 className: "plan-detail-card__metrics",
                 children: [
                   createMetric("Cuota mensual", moneyOrConfirm(plan.monthlyFee), "primary"),
-                  createMetric("Valor nominal", moneyOrConfirm(plan.nominalValue)),
+                  createMetric("Valor nominal total", moneyOrConfirm(plan.nominalValue)),
                   createMetric("Chances de premio", chanceLabel(plan.prizeChances), "", chanceTooltipText(plan.prizeChances)),
                   createMetric("Código", String(plan.article || "-")),
                 ],

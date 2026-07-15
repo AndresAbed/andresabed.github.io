@@ -31,7 +31,7 @@ Catalogo V2:
 
 Datos operativos:
 - El sitio publico consume primero los respaldos locales versionados.
-- `artemis-backup.json` respalda sorteos, adjudicados destacados y la tabla de adjudicados.
+- `artemis-backup.json` respalda sorteos, adjudicados destacados y, para cada período, la tabla de adjudicados junto con las fechas y los tres números estímulo publicados por Artemis.
 - `plan_catalog.json` queda como snapshot curado del catalogo principal.
 - Artemis se usa para actualizar respaldos por script/cron y como segunda opcion si falta un respaldo local usable.
 - Las fotos locales de adjudicados destacados viven en `assets/img/adjudicados/` y se actualizan/limpian desde el script de backup.

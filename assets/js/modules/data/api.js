@@ -296,6 +296,40 @@ function drawDateFromArtemisDetail(value) {
   return normalizeArtemisText(value).split(";")[1]?.trim() || "";
 }
 
+function adjudicationDrawFromArtemisDetail(value) {
+  const segments = normalizeArtemisText(value)
+    .split(";")
+    .map((segment) => segment.trim());
+  const date = segments[1] || "";
+  const nextDate = segments[2] || "";
+  const winningNumbers = segments.slice(3, 6).filter(Boolean);
+
+  if (!date && !nextDate && !winningNumbers.length) return null;
+
+  const complete = Boolean(date && nextDate && winningNumbers.length === 3);
+  const labels = ["1.er estímulo", "2.º estímulo", "3.er estímulo"];
+
+  return {
+    date,
+    nextDate,
+    stimuli: winningNumbers.map((winningNumber, index) => ({
+      position: index + 1,
+      label: labels[index],
+      winningNumber,
+      status: "verified",
+      source: "artemis_api",
+    })),
+    status: complete ? "verified" : "partial",
+    source: "artemis_api",
+  };
+}
+
+function parseAdjudicationDrawFromArtemis(payload) {
+  return (Array.isArray(payload) ? payload : [])
+    .map((entry) => adjudicationDrawFromArtemisDetail(entry?.issue_descr?.[3]))
+    .find((draw) => draw?.stimuli?.length || draw?.date || draw?.nextDate) || null;
+}
+
 function padTwoDigits(value) {
   return String(value).padStart(2, "0");
 }
@@ -428,6 +462,7 @@ async function loadOfficialAdjudicationsForPeriod(year, month) {
           periodKey,
         },
         columns: backup?.adjudications?.columns || ADJUDICATION_COLUMNS,
+        draw: period.draw || null,
         rows: period.rows || [],
       }
     : null;
@@ -449,6 +484,7 @@ async function loadOfficialAdjudicationsForPeriod(year, month) {
         status: "verified",
       },
       columns: ADJUDICATION_COLUMNS,
+      draw: parseAdjudicationDrawFromArtemis(payload),
       rows,
     };
   } catch (error) {
@@ -461,6 +497,7 @@ async function loadOfficialAdjudicationsForPeriod(year, month) {
         status: "pending_validation",
       },
       columns: ADJUDICATION_COLUMNS,
+      draw: null,
       rows: [],
     };
   }

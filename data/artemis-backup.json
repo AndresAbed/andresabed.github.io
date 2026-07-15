@@ -2,7 +2,7 @@
   "meta": {
     "source": "artemis_api",
     "status": "verified",
-    "generatedAt": "2026-07-13T19:51:47.218Z",
+    "generatedAt": "2026-07-15T04:02:34.315Z",
     "lookbackYears": 3,
     "errors": []
   },
@@ -196,6 +196,35 @@
           "status": "verified",
           "year": 2024,
           "month": 1
+        },
+        "draw": {
+          "date": "27-01-2024",
+          "nextDate": "24-02-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "512",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "318",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "052",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -753,6 +782,35 @@
           "year": 2024,
           "month": 2
         },
+        "draw": {
+          "date": "24-02-2024",
+          "nextDate": "30-03-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "122",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "563",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "143",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Sergio Omar  Ruiz",
@@ -1217,6 +1275,35 @@
           "status": "verified",
           "year": 2024,
           "month": 3
+        },
+        "draw": {
+          "date": "30-03-2024",
+          "nextDate": "27-04-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "4",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "870",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "346",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -1710,6 +1797,35 @@
           "status": "verified",
           "year": 2024,
           "month": 4
+        },
+        "draw": {
+          "date": "27-04-2024",
+          "nextDate": "27-05-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "935",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "667",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "862",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -2260,6 +2376,35 @@
           "year": 2024,
           "month": 5
         },
+        "draw": {
+          "date": "27-05-2024",
+          "nextDate": "29-06-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "560",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "853",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "815",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Nunez Teresa",
@@ -2710,6 +2855,35 @@
           "status": "verified",
           "year": 2024,
           "month": 6
+        },
+        "draw": {
+          "date": "29-06-2024",
+          "nextDate": "27-07-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "555",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "396",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "284",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -3281,6 +3455,35 @@
           "year": 2024,
           "month": 7
         },
+        "draw": {
+          "date": "27-07-2024",
+          "nextDate": "31-08-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "616",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "585",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "40",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Muzzillo Daiana Giselle",
@@ -3759,6 +3962,35 @@
           "status": "verified",
           "year": 2024,
           "month": 8
+        },
+        "draw": {
+          "date": "31-08-2024",
+          "nextDate": "28-09-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "40",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "332",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "550",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -4308,6 +4540,35 @@
           "status": "verified",
           "year": 2024,
           "month": 9
+        },
+        "draw": {
+          "date": "28-09-2024",
+          "nextDate": "26-10-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "78",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "579",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "938",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -4956,6 +5217,35 @@
           "year": 2024,
           "month": 10
         },
+        "draw": {
+          "date": "26-10-2024",
+          "nextDate": "30-11-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "476",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "157",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "540",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Desvaux Ana Maria",
@@ -5511,6 +5801,35 @@
           "status": "verified",
           "year": 2024,
           "month": 11
+        },
+        "draw": {
+          "date": "30-11-2024",
+          "nextDate": "28-12-2024",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "812",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "840",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "981",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -6095,6 +6414,35 @@
           "status": "verified",
           "year": 2024,
           "month": 12
+        },
+        "draw": {
+          "date": "28-12-2024",
+          "nextDate": "25-01-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "966",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "68",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "206",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -6693,6 +7041,35 @@
           "status": "verified",
           "year": 2025,
           "month": 1
+        },
+        "draw": {
+          "date": "25-01-2025",
+          "nextDate": "22-02-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "832",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "585",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "70",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -7299,6 +7676,35 @@
           "year": 2025,
           "month": 2
         },
+        "draw": {
+          "date": "22-02-2025",
+          "nextDate": "29-03-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "443",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "692",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "407",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Albornoz Cejas Martina Mariel",
@@ -7868,6 +8274,35 @@
           "status": "verified",
           "year": 2025,
           "month": 3
+        },
+        "draw": {
+          "date": "29-03-2025",
+          "nextDate": "26-04-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "618",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "976",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "791",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -8516,6 +8951,35 @@
           "year": 2025,
           "month": 4
         },
+        "draw": {
+          "date": "26-04-2025",
+          "nextDate": "31-05-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "176",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "259",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "599",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Jaramillo Nadia Melisa",
@@ -9085,6 +9549,35 @@
           "status": "verified",
           "year": 2025,
           "month": 5
+        },
+        "draw": {
+          "date": "31-05-2025",
+          "nextDate": "28-06-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "777",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "449",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "454",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -9733,6 +10226,35 @@
           "year": 2025,
           "month": 6
         },
+        "draw": {
+          "date": "28-06-2025",
+          "nextDate": "26-07-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "659",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "767",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "792",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Chaves Mariana Mercedes",
@@ -10351,6 +10873,35 @@
           "status": "verified",
           "year": 2025,
           "month": 7
+        },
+        "draw": {
+          "date": "26-07-2025",
+          "nextDate": "30-08-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "405",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "526",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "918",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -11125,6 +11676,35 @@
           "year": 2025,
           "month": 8
         },
+        "draw": {
+          "date": "30-08-2025",
+          "nextDate": "27-09-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "752",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "962",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "328",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Arce Anibal Humberto",
@@ -11856,6 +12436,35 @@
           "year": 2025,
           "month": 9
         },
+        "draw": {
+          "date": "27-09-2025",
+          "nextDate": "25-10-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "662",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "474",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "64",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Casas Marcos Jose",
@@ -12439,6 +13048,35 @@
           "status": "verified",
           "year": 2025,
           "month": 10
+        },
+        "draw": {
+          "date": "25-10-2025",
+          "nextDate": "29-11-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "502",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "377",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "293",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -13171,6 +13809,35 @@
           "year": 2025,
           "month": 11
         },
+        "draw": {
+          "date": "29-11-2025",
+          "nextDate": "27-12-2025",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "598",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "68",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "325",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Bravo Olga Alicia",
@@ -13845,6 +14512,35 @@
           "status": "verified",
           "year": 2025,
           "month": 12
+        },
+        "draw": {
+          "date": "27-12-2025",
+          "nextDate": "31-01-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "86",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "307",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "222",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -14597,6 +15293,35 @@
           "status": "verified",
           "year": 2026,
           "month": 1
+        },
+        "draw": {
+          "date": "31-01-2026",
+          "nextDate": "28-02-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "810",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "886",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "94",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -15377,6 +16102,35 @@
           "status": "verified",
           "year": 2026,
           "month": 2
+        },
+        "draw": {
+          "date": "28-02-2026",
+          "nextDate": "28-03-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "799",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "540",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "265",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -16235,6 +16989,35 @@
           "year": 2026,
           "month": 3
         },
+        "draw": {
+          "date": "28-03-2026",
+          "nextDate": "25-04-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "180",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "938",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "678",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Albornoz Andrea Virginia",
@@ -16965,6 +17748,35 @@
           "status": "verified",
           "year": 2026,
           "month": 4
+        },
+        "draw": {
+          "date": "25-04-2026",
+          "nextDate": "30-05-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "463",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "161",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "415",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {
@@ -17760,6 +18572,35 @@
           "year": 2026,
           "month": 5
         },
+        "draw": {
+          "date": "30-05-2026",
+          "nextDate": "27-06-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "931",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "555",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "716",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
+        },
         "rows": [
           {
             "name": "Zambrano Rios Julio Agustin",
@@ -18511,6 +19352,35 @@
           "status": "verified",
           "year": 2026,
           "month": 6
+        },
+        "draw": {
+          "date": "27-06-2026",
+          "nextDate": "25-07-2026",
+          "stimuli": [
+            {
+              "position": 1,
+              "label": "1.er estímulo",
+              "winningNumber": "798",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 2,
+              "label": "2.º estímulo",
+              "winningNumber": "750",
+              "status": "verified",
+              "source": "artemis_api"
+            },
+            {
+              "position": 3,
+              "label": "3.er estímulo",
+              "winningNumber": "357",
+              "status": "verified",
+              "source": "artemis_api"
+            }
+          ],
+          "status": "verified",
+          "source": "artemis_api"
         },
         "rows": [
           {

@@ -1,4 +1,4 @@
-import { loadAgencyContact, loadSite } from "./modules/data/api.js?v=20260714-33";
+import { loadAgencyContact, loadSite } from "./modules/data/api.js?v=20260715-2";
 import { renderShell } from "./modules/components/shell.js?v=20260714-21";
 
 const LOADER_EXIT_MS = 220;
@@ -57,7 +57,7 @@ async function startPageController(site, agencyContact) {
   }
 
   if (document.body.dataset.page === "adjudicados") {
-    const { initAdjudicationsPage } = await import("./modules/pages/info-pages.js?v=20260714-29");
+    const { initAdjudicationsPage } = await import("./modules/pages/info-pages.js?v=20260715-2");
     return initAdjudicationsPage(site);
   }
 

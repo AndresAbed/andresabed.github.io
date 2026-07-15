@@ -199,6 +199,40 @@ function drawDateFromArtemisDetail(value) {
   return normalizeArtemisText(value).split(";")[1]?.trim() || "";
 }
 
+function adjudicationDrawFromArtemisDetail(value) {
+  const segments = normalizeArtemisText(value)
+    .split(";")
+    .map((segment) => segment.trim());
+  const date = segments[1] || "";
+  const nextDate = segments[2] || "";
+  const winningNumbers = segments.slice(3, 6).filter(Boolean);
+
+  if (!date && !nextDate && !winningNumbers.length) return null;
+
+  const complete = Boolean(date && nextDate && winningNumbers.length === 3);
+  const labels = ["1.er estímulo", "2.º estímulo", "3.er estímulo"];
+
+  return {
+    date,
+    nextDate,
+    stimuli: winningNumbers.map((winningNumber, index) => ({
+      position: index + 1,
+      label: labels[index],
+      winningNumber,
+      status: "verified",
+      source: "artemis_api",
+    })),
+    status: complete ? "verified" : "partial",
+    source: "artemis_api",
+  };
+}
+
+function parseAdjudicationDrawFromArtemis(payload) {
+  return (Array.isArray(payload) ? payload : [])
+    .map((entry) => adjudicationDrawFromArtemisDetail(entry?.issue_descr?.[3]))
+    .find((draw) => draw?.stimuli?.length || draw?.date || draw?.nextDate) || null;
+}
+
 function parseAdjudicationsFromArtemis(payload) {
   return (Array.isArray(payload) ? payload : [])
     .map((entry) => {
@@ -456,7 +490,7 @@ function pruneUnusedAdjudicationImages(homeAdjudications) {
   fs.readdirSync(adjudicationImageDir, { withFileTypes: true }).forEach((entry) => {
     if (!entry.isFile() || !entry.name.endsWith(".webp")) return;
 
-    const imageNumber = entry.name.replace(/\.webp$/i, "");
+    const imageNumber = entry.name.replace(/(?:-\d+)?\.webp$/i, "");
     if (referenced.has(imageNumber)) return;
 
     const filePath = path.join(adjudicationImageDir, entry.name);
@@ -484,6 +518,7 @@ async function fetchAdjudicationsForPeriod(period, previousBackup, errors) {
         year: period.year,
         month: period.month,
       },
+      draw: parseAdjudicationDrawFromArtemis(payload),
       rows: parseAdjudicationsFromArtemis(payload),
     };
   } catch (error) {
@@ -497,6 +532,7 @@ async function fetchAdjudicationsForPeriod(period, previousBackup, errors) {
         year: period.year,
         month: period.month,
       },
+      draw: null,
       rows: [],
     };
   }

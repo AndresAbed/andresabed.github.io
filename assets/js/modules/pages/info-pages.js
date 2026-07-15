@@ -7,13 +7,14 @@ import {
   loadFaq,
   normalizeInternalTarget,
   withSiteBasePath,
-} from "../data/api.js";
+} from "../data/api.js?v=20260715-2";
 import {
+  createAdjudicationDrawSummary,
   createAdjudicationsTable,
   createFinalHelpCta,
   createMonthYearSelector,
   createSectionHeader,
-} from "../components/info-components.js";
+} from "../components/info-components.js?v=20260715-2";
 import { clear, el, qs } from "../utils/dom.js";
 
 const GUIDE_ALERT_IMAGE = withSiteBasePath("/assets/img/how-it-works-alert.svg");
@@ -457,7 +458,7 @@ async function renderAdjudicationSelection(target, selectedYear, selectedMonth) 
   const month = selectedMonth || latestPublishedMonth(months, year);
   const adjudications = await loadAdjudicationsForPeriod(year, month);
   const rows = adjudications.rows || [];
-  const columns = getAdjudicationColumns();
+  const columns = adjudications.columns || getAdjudicationColumns();
 
   const selector = createMonthYearSelector({
     years,
@@ -488,6 +489,7 @@ async function renderAdjudicationSelection(target, selectedYear, selectedMonth) 
             selector,
           ],
         }),
+        createAdjudicationDrawSummary({ draw: adjudications.draw }),
         el("section", {
           className: "adjudications-results",
           attrs: { "aria-label": "Listado de adjudicados" },

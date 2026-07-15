@@ -1972,7 +1972,7 @@ legend {
 
 .adjudications-shell {
   display: grid;
-  gap: clamp(28px, 3.2vw, 46px);
+  gap: clamp(20px, 2.2vw, 30px);
 }
 
 .adjudications-control-panel {
@@ -2078,6 +2078,114 @@ legend {
   width: 100%;
 }
 
+.adjudications-draw-summary {
+  align-items: stretch;
+  background: #fbfbf8;
+  border: 1px solid rgb(41 41 41 / 0.1);
+  border-radius: 12px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(142px, 0.82fr) minmax(0, 3fr);
+  justify-self: center;
+  max-width: 900px;
+  overflow: hidden;
+  padding: 10px;
+  width: min(100%, 900px);
+}
+
+.adjudications-draw-summary__date {
+  align-content: center;
+  border-inline-end: 1px solid rgb(41 41 41 / 0.1);
+  display: grid;
+  margin: 0;
+  padding: 12px clamp(12px, 2vw, 20px);
+}
+
+.adjudications-draw-summary dt {
+  color: var(--color-muted);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.adjudications-draw-summary dd {
+  margin: 0.2rem 0 0;
+}
+
+.adjudications-draw-summary__date-value time,
+.adjudications-draw-summary__date-value dd > span {
+  color: var(--color-ink);
+  font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.adjudications-draw-summary__stimuli {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.adjudications-draw-stimulus {
+  background: #efefea;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  display: grid;
+  gap: 5px;
+  min-height: 96px;
+  padding: 14px 8px;
+  place-items: center;
+  text-align: center;
+}
+
+.adjudications-draw-stimulus strong {
+  color: var(--color-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.adjudications-draw-stimulus span {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.adjudications-draw-stimulus--featured {
+  background: var(--color-brand-red);
+  border-color: var(--color-brand-red);
+}
+
+.adjudications-draw-stimulus--featured strong,
+.adjudications-draw-stimulus--featured span {
+  color: #ffffff;
+}
+
+.adjudications-draw-summary--partial {
+  border-inline-start: 3px solid var(--color-brand-red);
+  display: block;
+  padding: 14px 16px;
+}
+
+.adjudications-draw-summary--partial p {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 68ch;
+}
+
 .adjudications-note {
   color: var(--color-muted);
   font-size: 0.84rem;
@@ -2179,6 +2287,7 @@ legend {
   .adjudications-filter__submit {
     grid-column: 1 / -1;
   }
+
 }
 
 @media (min-width: 980px) {
@@ -2194,6 +2303,7 @@ legend {
   .adjudications-filter__submit {
     grid-column: auto;
   }
+
 }
 
 .resource-grid--wide {
@@ -3561,6 +3671,46 @@ legend {
 
   .adjudications-note {
     text-align: left;
+  }
+
+  .adjudications-draw-summary {
+    border-radius: 10px;
+    gap: 6px;
+    grid-template-columns: minmax(84px, 1.08fr) minmax(0, 3fr);
+    padding: 6px;
+  }
+
+  .adjudications-draw-summary__date {
+    padding: 8px 5px;
+  }
+
+  .adjudications-draw-summary__stimuli {
+    gap: 6px;
+  }
+
+  .adjudications-draw-stimulus {
+    gap: 4px;
+    min-height: 72px;
+    padding: 9px 2px;
+  }
+
+  .adjudications-draw-stimulus strong {
+    font-size: clamp(1.35rem, 7.2vw, 1.9rem);
+  }
+
+  .adjudications-draw-stimulus span {
+    font-size: clamp(0.5rem, 2.35vw, 0.62rem);
+    letter-spacing: -0.01em;
+  }
+
+  .adjudications-draw-summary dt {
+    font-size: 0.54rem;
+    letter-spacing: 0;
+  }
+
+  .adjudications-draw-summary__date-value time,
+  .adjudications-draw-summary__date-value dd > span {
+    font-size: clamp(0.68rem, 3.3vw, 0.82rem);
   }
 
   .adjudications-table {

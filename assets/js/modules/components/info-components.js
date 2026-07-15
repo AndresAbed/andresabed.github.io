@@ -1,4 +1,4 @@
-import { normalizeInternalTarget } from "../data/api.js";
+import { normalizeInternalTarget } from "../data/api.js?v=20260715-2";
 import { classifyLinkItem } from "../data/validators.js";
 import { el } from "../utils/dom.js";
 import { FALLBACK_TEXT, UI_STATES, resolveValueState } from "../utils/status.js";
@@ -139,6 +139,66 @@ export function createMonthYearSelector({ years, selectedYear, months, selectedM
   });
 
   return form;
+}
+
+function dateTimeValue(value = "") {
+  const [day, month, year] = String(value).split("-");
+  return day && month && year ? `${year}-${month}-${day}` : "";
+}
+
+function createDrawDate(label, value, className) {
+  return el("div", {
+    className,
+    children: [
+      el("dt", { text: label }),
+      el("dd", {
+        children: value
+          ? [el("time", { text: value, attrs: { datetime: dateTimeValue(value) || undefined } })]
+          : [el("span", { text: FALLBACK_TEXT.updating })],
+      }),
+    ],
+  });
+}
+
+export function createAdjudicationDrawSummary({ draw }) {
+  const stimuli = [...(draw?.stimuli || [])]
+    .filter((item) => hasValue(item?.winningNumber))
+    .sort((a, b) => (a.position || 0) - (b.position || 0));
+  const hasDrawData = Boolean(draw?.date || stimuli.length);
+
+  if (!hasDrawData) {
+    return el("section", {
+      className: "adjudications-draw-summary adjudications-draw-summary--partial",
+      attrs: { "aria-label": "Información del sorteo", "data-state": UI_STATES.PARTIAL, role: "status" },
+      children: [
+        el("p", { text: "Los números de este sorteo están en actualización." }),
+      ],
+    });
+  }
+
+  return el("section", {
+    className: "adjudications-draw-summary",
+    attrs: { "aria-label": draw?.date ? `Resultados del sorteo del ${draw.date}` : "Resultados del sorteo" },
+    children: [
+      el("dl", {
+        className: "adjudications-draw-summary__date",
+        children: [createDrawDate("Fecha del sorteo", draw?.date, "adjudications-draw-summary__date-value")],
+      }),
+      el("ol", {
+        className: "adjudications-draw-summary__stimuli",
+        attrs: { "aria-label": "Estímulos del sorteo" },
+        children: stimuli.map((item, index) =>
+          el("li", {
+            className: index === 0 ? "adjudications-draw-stimulus adjudications-draw-stimulus--featured" : "adjudications-draw-stimulus",
+            children: [
+              el("strong", { text: item.winningNumber }),
+              el("span", { text: `${index + 1}° Estímulo` }),
+            ],
+          }),
+        ),
+      }),
+    ],
+  });
 }
 
 export function createAdjudicationsTable({ columns, rows }) {

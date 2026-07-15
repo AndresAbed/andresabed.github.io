@@ -28,10 +28,10 @@ El objetivo del proyecto es ayudar a usuarios a entender planes de Capitalizaci�
 
 ## Cómo correr localmente
 
-Usar un servidor estático desde la raíz del proyecto:
+Para editar el sitio, usar el servidor de desarrollo:
 
 ```bash
-python3 -m http.server 8000
+node scripts/dev-server.mjs
 ```
 
 Abrir:
@@ -40,15 +40,34 @@ Abrir:
 http://localhost:8000/
 ```
 
+Este comando reconstruye automáticamente los bundles al guardar cambios en los CSS fuente y envía todos los archivos locales sin caché. Para ver un cambio de CSS, JSON o JavaScript alcanza con recargar normalmente la página.
+
 No abrir con `file://`, porque los módulos JS consumen JSON con `fetch()`.
 
-En `localhost` y `127.0.0.1`, los JSON se cargan con `cache: "no-store"` y sin caché interna de la aplicación. Así, al recargar la página se reflejan los cambios de `data/*.json` sin tener que vaciar el caché del navegador.
-
-Si el puerto `8000` está ocupado, usar otro puerto:
+Como alternativa puntual, se puede usar un servidor estático simple. En ese caso, después de editar un CSS hay que reconstruirlo manualmente con `node scripts/build-css.mjs`:
 
 ```bash
 python3 -m http.server 8010
 ```
+
+Para usar otro puerto con el servidor de desarrollo:
+
+```bash
+node scripts/dev-server.mjs 8010
+```
+
+### Qué CSS editar
+
+Los archivos editables son los parciales fuente:
+
+- `assets/css/core/*.css`: tokens, estilos base, layout y utilidades compartidas.
+- `assets/css/components/index.css`: componentes reutilizables.
+- `assets/css/pages/base.css`: estilos de páginas informativas compartidas.
+- `assets/css/pages/home.css`, `plans.css`, `privacy.css` y `referral-program.css`: estilos exclusivos de cada ruta.
+
+No editar `assets/css/site.css` ni `assets/css/site-*.min.css`. Son archivos generados por `scripts/build-css.mjs`: `site.css` contiene todos los parciales sin minificar y cada `site-*.min.css` combina solo lo necesario para su ruta. Producción y las vistas locales actuales cargan los bundles `site-*.min.css`.
+
+Por ejemplo, `.referral-form__consent` se define una sola vez en `assets/css/pages/referral-program.css`; sus apariciones en `site.css` y `site-referral.min.css` son copias generadas. Al guardar el parcial fuente con el servidor de desarrollo, esas copias se reconstruyen solas.
 
 ## Data
 

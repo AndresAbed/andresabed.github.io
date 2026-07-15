@@ -665,8 +665,6 @@
 .referral-form__consent {
   align-items: start;
   background: #fbfbf8;
-  border: 1px solid rgb(41 41 41 / 0.12);
-  border-radius: 0 14px 0 14px;
   column-gap: 12px;
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr);
@@ -675,14 +673,6 @@
   padding: clamp(17px, 2.2vw, 22px) clamp(18px, 2.6vw, 26px) clamp(17px, 2.2vw, 22px) clamp(22px, 3vw, 32px);
   position: relative;
   text-transform: none;
-}
-
-.referral-form__consent::before {
-  background: var(--color-brand-red);
-  content: "";
-  inset: 0 auto 0 0;
-  position: absolute;
-  width: 5px;
 }
 
 .referral-form__consent input {
@@ -700,7 +690,7 @@
 
 .referral-form__consent > span {
   color: rgb(41 41 41 / 0.76);
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 650;
   line-height: 1.48;
 }

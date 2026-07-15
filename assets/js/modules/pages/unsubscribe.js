@@ -1,4 +1,4 @@
-import { withSiteBasePath } from "../data/api.js";
+import { loadAgencyContact, withSiteBasePath } from "../data/api.js";
 import { clear, el, qs } from "../utils/dom.js";
 
 const STATES = Object.freeze({
@@ -14,15 +14,74 @@ const STATES = Object.freeze({
   },
 });
 
-function resolveState() {
-  const params = new URLSearchParams(window.location.search);
-  const rawStatus = String(params.get("estado") || params.get("status") || "success").toLowerCase();
+function stateFromStatus(status) {
+  const rawStatus = String(status || "").toLowerCase();
 
   if (["error", "invalid", "no-encontrado", "not-found"].includes(rawStatus)) {
     return STATES.error;
   }
 
   return STATES.success;
+}
+
+function replaceUrlStatus(status) {
+  const url = new URL(window.location.href);
+  url.searchParams.delete("token");
+  url.searchParams.delete("status");
+  url.searchParams.set("estado", status);
+  window.history.replaceState({}, "", url);
+}
+
+async function resolveState() {
+  const params = new URLSearchParams(window.location.search);
+  const existingStatus = params.get("estado") || params.get("status");
+
+  if (existingStatus) {
+    return stateFromStatus(existingStatus);
+  }
+
+  const token = String(params.get("token") || "").trim();
+
+  if (!token) {
+    replaceUrlStatus("error");
+    return STATES.error;
+  }
+
+  try {
+    const contactConfig = await loadAgencyContact();
+    const formConfig = contactConfig?.newsletterForm || {};
+    const endpoint = String(formConfig.endpoint || "").trim();
+
+    if (!formConfig.enabled || !endpoint) {
+      throw new Error("Unsubscribe endpoint unavailable");
+    }
+
+    const response = await fetch(endpoint, {
+      method: formConfig.method || "POST",
+      body: new URLSearchParams({
+        formType: "unsubscribe",
+        token,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Unsubscribe request failed: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.ok !== true) {
+      replaceUrlStatus("error");
+      return STATES.error;
+    }
+
+    replaceUrlStatus("success");
+    return STATES.success;
+  } catch (error) {
+    console.warn("No se pudo procesar la baja de novedades.", error);
+    replaceUrlStatus("error");
+    return STATES.error;
+  }
 }
 
 function createUnsubscribeView(state) {
@@ -62,12 +121,13 @@ function createUnsubscribeView(state) {
   });
 }
 
-export function initUnsubscribePage() {
+export async function initUnsubscribePage() {
   const mount = qs("[data-unsubscribe-page]");
   if (!mount) return;
 
+  const state = await resolveState();
   clear(mount);
-  mount.append(createUnsubscribeView(resolveState()));
+  mount.append(createUnsubscribeView(state));
 }
 
 function finishUnsubscribeLoading() {
@@ -77,8 +137,8 @@ function finishUnsubscribeLoading() {
   });
 }
 
-try {
-  initUnsubscribePage();
-} finally {
-  finishUnsubscribeLoading();
-}
+initUnsubscribePage()
+  .catch((error) => {
+    console.error("No se pudo inicializar la vista de baja.", error);
+  })
+  .finally(finishUnsubscribeLoading);

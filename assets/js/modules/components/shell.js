@@ -240,6 +240,10 @@ function submitNewsletterForm(form, config, copy) {
   const body = new URLSearchParams({
     email,
     consentText: copy.consent,
+    unsubscribePageUrl: new URL(
+      withSiteBasePath("/baja/"),
+      window.location.origin,
+    ).toString(),
     website: String(form.elements.website?.value || ""),
   });
 

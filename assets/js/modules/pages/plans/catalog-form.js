@@ -1,5 +1,5 @@
 import { el } from "../../utils/dom.js";
-import { normalizeInternalTarget } from "../../data/api.js";
+import { normalizeInternalTarget, withSiteBasePath } from "../../data/api.js";
 import { ARGENTINA_PROVINCES } from "../../utils/argentina.js";
 import { hasValue, isValidUrl } from "../../utils/validators.js";
 import { formatMoneyARS } from "../../components/plan-components.js";
@@ -292,6 +292,10 @@ function planInquiryPayloadToSearchParams(payload) {
   params.set("message", payload.message || "");
   params.set("contactConsent", payload.contactConsent ? "true" : "");
   params.set("contactConsentText", payload.contactConsentText || "");
+  params.set(
+    "unsubscribePageUrl",
+    new URL(withSiteBasePath("/baja/"), window.location.origin).toString(),
+  );
   return params;
 }
 

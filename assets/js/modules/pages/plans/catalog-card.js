@@ -1,5 +1,5 @@
 import { el } from "../../utils/dom.js";
-import { getPlanMedia } from "./catalog-assets.js";
+import { getPlanMedia } from "./catalog-assets.js?v=20260714-40";
 import { brandKey, categoryClass, moneyOrConfirm } from "./catalog-format.js";
 
 function cardClass(plan) {
@@ -47,10 +47,10 @@ function createCardMeta(plan) {
   });
 }
 
-function createCardHeading(plan) {
+function createCardHeading(plan, headingId) {
   return el("div", {
     className: "plan-list-card__heading",
-    children: [el("h3", { text: plan.displayName || "Plan a confirmar" })],
+    children: [el("h3", { text: plan.displayName || "Plan a confirmar", attrs: { id: headingId } })],
   });
 }
 
@@ -74,7 +74,20 @@ function createMediaPlaceholder(plan) {
   });
 }
 
-function createMediaContent(plan, media) {
+function responsiveCardImageAttrs(cardImage, featured) {
+  const supportsVariants = /(?:\/front-left|\/plan-dinero-billetes)\.webp$/i.test(cardImage.src);
+  if (!supportsVariants) return {};
+
+  const base = cardImage.src.replace(/\.webp$/i, "");
+  return {
+    srcset: `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`,
+    sizes: featured
+      ? "(max-width: 720px) min(84vw, 390px), (max-width: 1120px) min(55vw, 420px), min(36vw, 420px)"
+      : "(max-width: 720px) min(84vw, 360px), (max-width: 1120px) min(40vw, 360px), min(24vw, 270px)",
+  };
+}
+
+function createMediaContent(plan, media, { featured = false, priority = false } = {}) {
   const cardImage = media.cardImage || media.defaultImage;
 
   if (media.hasImage && cardImage) {
@@ -84,8 +97,10 @@ function createMediaContent(plan, media) {
         alt: "",
         width: String(cardImage.width || 1200),
         height: String(cardImage.height || 750),
-        loading: "lazy",
+        loading: priority ? "eager" : "lazy",
+        fetchpriority: priority ? "high" : "low",
         decoding: "async",
+        ...responsiveCardImageAttrs(cardImage, featured),
       },
     });
 
@@ -118,11 +133,12 @@ function mediaStyle(media) {
   return rules.join("; ");
 }
 
-function createPlanCard(plan) {
+function createPlanCard(plan, index) {
   const media = getPlanMedia(plan);
   const chanceCount = Number(plan.prizeChances);
   const hasFeaturedChances = chanceCount === 5;
   const brand = brandKey(media.brand);
+  const headingId = `plan-card-title-${plan.article}`;
 
   return el("article", {
     className: cardClass(plan),
@@ -136,16 +152,13 @@ function createPlanCard(plan) {
       "data-has-media": media.hasImage ? "true" : "false",
       "data-subcategory": plan.subcategory || "",
       "data-search": plan.searchText,
-      tabindex: "0",
-      role: "button",
-      "aria-haspopup": "dialog",
-      "aria-label": `Abrir preinscripción para ${plan.displayName || "este plan"}`,
+      "aria-labelledby": headingId,
       style: mediaStyle(media),
     },
     children: [
       el("div", {
         className: "plan-list-card__media",
-        children: [createMediaContent(plan, media)],
+        children: [createMediaContent(plan, media, { featured: hasFeaturedChances, priority: index === 0 })],
       }),
       !hasFeaturedChances ? createCardPrice(plan) : null,
       hasFeaturedChances ? createChanceRibbon(chanceCount) : null,
@@ -155,16 +168,21 @@ function createPlanCard(plan) {
           el("div", {
             className: "plan-list-card__info",
             children: [
-              createCardHeading(plan),
+              createCardHeading(plan, headingId),
               hasFeaturedChances ? createCardPrice(plan) : null,
               el("div", {
                 className: "plan-list-card__identity",
                 children: [createCategoryTag(plan), createCardMeta(plan)],
               }),
-              el("span", {
+              el("button", {
                 className: "button plan-list-card__action",
                 text: "Preinscripción",
-                attrs: { "aria-hidden": "true" },
+                attrs: {
+                  type: "button",
+                  "data-open-plan": plan.article,
+                  "aria-haspopup": "dialog",
+                  "aria-label": `Abrir preinscripción para ${plan.displayName || "este plan"}`,
+                },
               }),
             ],
           }),
@@ -208,7 +226,7 @@ export function createCatalogGrid(items) {
       el("div", {
         className: "plans-catalog-grid",
         attrs: { "data-plan-grid": "" },
-        children: items.map(createPlanCard),
+        children: items.map((item, index) => createPlanCard(item, index)),
       }),
       createEmptyState(),
     ],

@@ -3,6 +3,24 @@ import { renderShell } from "./modules/components/shell.js?v=20260714-21";
 
 const LOADER_EXIT_MS = 220;
 
+function waitForSiteStyles() {
+  const stylesheet = document.querySelector("[data-site-styles]");
+  if (!stylesheet || stylesheet.dataset.loaded === "true" || stylesheet.sheet) return Promise.resolve();
+
+  return Promise.race([
+    new Promise((resolve) => {
+      stylesheet.addEventListener("load", resolve, { once: true });
+      stylesheet.addEventListener("error", resolve, { once: true });
+    }),
+    new Promise((resolve) => window.setTimeout(resolve, 4000)),
+  ]).then(
+    () =>
+      new Promise((resolve) => {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(resolve));
+      }),
+  );
+}
+
 function finishAppLoading() {
   const root = document.documentElement;
   if (window.__appLoadingFallback) window.clearTimeout(window.__appLoadingFallback);
@@ -29,12 +47,12 @@ function finishAppLoading() {
 
 async function startPageController(site, agencyContact) {
   if (document.body.dataset.page === "home") {
-    const { initHomePage } = await import("./modules/pages/home.js?v=20260714-33");
+    const { initHomePage } = await import("./modules/pages/home.js?v=20260714-40");
     return initHomePage(site);
   }
 
   if (document.body.dataset.page === "planes") {
-    const { initPlansHub } = await import("./modules/pages/plans/index.js?v=20260714-29");
+    const { initPlansHub } = await import("./modules/pages/plans/index.js?v=20260714-40");
     return initPlansHub(site);
   }
 
@@ -77,6 +95,7 @@ async function boot() {
     console.error(error);
     document.documentElement.classList.add("has-data-error");
   } finally {
+    await waitForSiteStyles();
     await finishAppLoading();
   }
 }

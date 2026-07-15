@@ -94,6 +94,8 @@ const MONEY_IMAGE = Object.freeze({
   height: 1024,
 });
 
+let planMediaIndexPromise = null;
+
 const BRAND_LOGOS = Object.freeze([
   { name: "Volkswagen", aliases: ["VOLKSWAGEN", "VW.", "VW "], logo: "/assets/img/brand-logos/volkswagen.svg", logoRatio: 5.94 },
   { name: "Chevrolet", aliases: ["CHEVROLET", "CHEV."], logo: "/assets/img/brand-logos/chevrolet.svg", logoRatio: 11.01 },
@@ -152,18 +154,17 @@ function brandFromMetadata(metadata) {
   };
 }
 
-async function loadFolderMetadata(folder) {
-  if (!folder) return null;
-
-  try {
-    const response = await fetch(withSiteBasePath(`/assets/img/plans/${folder}/metadata.json`), {
+async function loadPlanMediaIndex() {
+  if (!planMediaIndexPromise) {
+    planMediaIndexPromise = fetch(withSiteBasePath("/data/plan-media-index.json"), {
       headers: { Accept: "application/json" },
-    });
-    if (!response.ok) return null;
-    return response.json();
-  } catch {
-    return null;
+    })
+      .then((response) => (response.ok ? response.json() : { folders: {} }))
+      .then((payload) => payload?.folders || {})
+      .catch(() => ({}));
   }
+
+  return planMediaIndexPromise;
 }
 
 function normalizeMetadataImages(folder, metadata, plan) {
@@ -195,17 +196,11 @@ function normalizeMetadataImage(folder, image) {
 }
 
 export async function withPlanMediaMetadata(items) {
-  const metadataByFolder = new Map();
-
-  await Promise.all(
-    [...new Set(items.map((item) => folderFor(item?.article)).filter(Boolean))].map(async (folder) => {
-      metadataByFolder.set(folder, await loadFolderMetadata(folder));
-    }),
-  );
+  const metadataByFolder = await loadPlanMediaIndex();
 
   return items.map((item) => {
     const folder = folderFor(item?.article);
-    const metadata = folder ? metadataByFolder.get(folder) : null;
+    const metadata = folder ? metadataByFolder[folder] : null;
     const brand = brandFromMetadata(metadata) || brandFromPlan(item);
     const fit = metadata?.mediaFit || "";
     const scale = metadata?.mediaScale || null;

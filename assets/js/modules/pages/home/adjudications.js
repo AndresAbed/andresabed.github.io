@@ -26,6 +26,9 @@ function scrollAdjudications(track, direction) {
 
 function createAdjudicationMedia(item) {
   const imageUrl = withSiteBasePath(item.imageUrl);
+  const responsiveSource = /\/assets\/img\/adjudicados\/[^/]+\.webp$/i.test(imageUrl)
+    ? imageUrl.replace(/\.webp$/i, "-480.webp")
+    : "";
   const media = el("div", {
     className: "home-adjudication-card__media",
     attrs: { "data-image-state": imageUrl ? "loading" : "unavailable" },
@@ -37,6 +40,8 @@ function createAdjudicationMedia(item) {
   const image = el("img", {
     attrs: {
       src: imageUrl,
+      srcset: responsiveSource ? `${responsiveSource} 480w, ${imageUrl} 800w` : undefined,
+      sizes: responsiveSource ? "(max-width: 720px) calc(100vw - 72px), 340px" : undefined,
       alt: "",
       width: "800",
       height: "550",

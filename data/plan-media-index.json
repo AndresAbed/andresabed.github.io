@@ -1,0 +1,2671 @@
+{
+  "folders": {
+    "870-honda-new-wave-110": {
+      "planCode": 870,
+      "displayName": "Honda New Wave 110 + $100.000",
+      "officialName": "HONDA NEW WAVE 110+100000",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.8",
+        "cardHover": "1.84",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    },
+    "880-gilera-smash-110": {
+      "planCode": 880,
+      "displayName": "Gilera Smash 110 + $100.000",
+      "officialName": "GILERA SMASH110+$100000 5CHANC",
+      "brand": {
+        "name": "Gilera",
+        "logo": "/assets/img/brand-logos/gilera.svg"
+      },
+      "cardImage": {
+        "id": "front_left",
+        "label": "Frente izquierdo",
+        "position": "front-left",
+        "file": "front-left.webp"
+      },
+      "images": [
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.6",
+        "cardHover": "1.64",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%",
+        "featuredX": "1%"
+      }
+    },
+    "881-honda-twister-300": {
+      "planCode": 881,
+      "displayName": "Honda Twister 300 + $200.000",
+      "officialName": "HONDA TWISTER 300 + $200.000",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.6",
+        "cardHover": "1.64",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "1.5%",
+        "featuredY": "2%"
+      }
+    },
+    "882-yamaha-fz25": {
+      "planCode": 882,
+      "displayName": "Yamaha FZ 25 + $200.000",
+      "officialName": "YAMAHA FZ25 + $200000",
+      "brand": {
+        "name": "Yamaha",
+        "logo": "/assets/img/brand-logos/yamaha.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.6",
+        "cardHover": "1.64",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "1.5%",
+        "featuredY": "2%"
+      }
+    },
+    "883-bajaj-dominar-d400": {
+      "planCode": 883,
+      "displayName": "Bajaj Dominar D400 + $200.000",
+      "officialName": "BAJAJ DOMINAR D400 + $200.000",
+      "brand": {
+        "name": "Bajaj",
+        "logo": "/assets/img/brand-logos/bajaj.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.6",
+        "cardHover": "1.64",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "1.5%",
+        "featuredY": "2%"
+      }
+    },
+    "887-renault-kwid": {
+      "planCode": 887,
+      "displayName": "Renault Kwid",
+      "officialName": "RENAULT KWID 5P",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "888-fiat-mobi": {
+      "planCode": 888,
+      "displayName": "Fiat Mobi",
+      "officialName": "FIAT MOBI 5P",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "891-chevrolet-onix": {
+      "planCode": 891,
+      "displayName": "Chevrolet Onix Joy LS",
+      "officialName": "CHEVROLET ONIX JOY LS 5P",
+      "brand": {
+        "name": "Chevrolet",
+        "logo": "/assets/img/brand-logos/chevrolet.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "892-chevrolet-onix-plus": {
+      "planCode": 892,
+      "displayName": "Chevrolet Onix Plus",
+      "officialName": "CHEVROLET ONIX PLUS 4P",
+      "brand": {
+        "name": "Chevrolet",
+        "logo": "/assets/img/brand-logos/chevrolet.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "893-renault-sandero": {
+      "planCode": 893,
+      "displayName": "Renault Sandero",
+      "officialName": "RENAULT SANDERO 5P",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "894-toyota-yaris": {
+      "planCode": 894,
+      "displayName": "Toyota Yaris",
+      "officialName": "TOYOTA YARIS 5P",
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "894-toyota-yaris-hatchback": {
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      }
+    },
+    "895-fiat-cronos": {
+      "planCode": 895,
+      "displayName": "Fiat Cronos",
+      "officialName": "FIAT CRONOS 4P",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "897-citroen-c3": {
+      "planCode": 897,
+      "displayName": "Citroën C3",
+      "officialName": "CITROEN C3",
+      "brand": {
+        "name": "Citroën",
+        "logo": "/assets/img/brand-logos/citroen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "898-renault-stepway": {
+      "planCode": 898,
+      "displayName": "Renault Sandero Stepway",
+      "officialName": "RENAULT SANDERO STEPWAY",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "900-volkswagen-polo": {
+      "planCode": 900,
+      "displayName": "Volkswagen Polo",
+      "officialName": "VW. POLO 5P",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "901-volkswagen-virtus": {
+      "planCode": 901,
+      "displayName": "Volkswagen Virtus",
+      "officialName": "VW. VIRTUS 4P",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "902-citroen-c3-aircross": {
+      "planCode": 902,
+      "displayName": "Citroën C3 Aircross",
+      "officialName": "CITROEN C3 AIRCROSS 5P",
+      "brand": {
+        "name": "Citroën",
+        "logo": "/assets/img/brand-logos/citroen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "903-fiat-fiorino": {
+      "planCode": 903,
+      "displayName": "Fiat Fiorino",
+      "officialName": "FIAT FIORINO",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "904-fiat-strada": {
+      "planCode": 904,
+      "displayName": "Fiat Strada",
+      "officialName": "FIAT STRADA C/S",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "905-peugeot-208": {
+      "planCode": 905,
+      "displayName": "Peugeot 208",
+      "officialName": "PEUGEOT 208 N",
+      "brand": {
+        "name": "Peugeot",
+        "logo": "/assets/img/brand-logos/peugeot.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "907-citroen-berlingo": {
+      "planCode": 907,
+      "displayName": "Citroën Berlingo Multispace",
+      "officialName": "CITROEN BERLINGO MULTISPACE D",
+      "brand": {
+        "name": "Citroën",
+        "logo": "/assets/img/brand-logos/citroen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "910-toyota-corolla": {
+      "planCode": 910,
+      "displayName": "Toyota Corolla",
+      "officialName": "TOYOTA COROLLA 4P",
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "911-volkswagen-nivus": {
+      "planCode": 911,
+      "displayName": "Volkswagen Nivus",
+      "officialName": "VW. NIVUS 5P",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "912-chevrolet-tracker": {
+      "planCode": 912,
+      "displayName": "Chevrolet Tracker",
+      "officialName": "CHEVROLET TRACKER",
+      "brand": {
+        "name": "Chevrolet",
+        "logo": "/assets/img/brand-logos/chevrolet.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "913-volkswagen-t-cross": {
+      "planCode": 913,
+      "displayName": "Volkswagen T-Cross",
+      "officialName": "VW. T-CROSS",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "914-volkswagen-saveiro": {
+      "planCode": 914,
+      "displayName": "Volkswagen Saveiro",
+      "officialName": "VW. SAVEIRO C/S",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "915-renault-kangoo-express": {
+      "planCode": 915,
+      "displayName": "Renault Kangoo Express",
+      "officialName": "RENAULT KANGOO EXPRESS N",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "916-peugeot-2008": {
+      "planCode": 916,
+      "displayName": "Peugeot 2008",
+      "officialName": "PEUGEOT 2008",
+      "brand": {
+        "name": "Peugeot",
+        "logo": "/assets/img/brand-logos/peugeot.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "917-renault-duster": {
+      "planCode": 917,
+      "displayName": "Renault Duster",
+      "officialName": "RENAULT DUSTER",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "918-renault-kangoo": {
+      "planCode": 918,
+      "displayName": "Renault Kangoo Break",
+      "officialName": "RENAULT KANGOO BREAK",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "919-renault-oroch": {
+      "planCode": 919,
+      "displayName": "Renault Duster Oroch",
+      "officialName": "RENAULT DUSTER OROCH",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "921-fiat-toro-freedom": {
+      "planCode": 921,
+      "displayName": "Fiat Toro Freedom",
+      "officialName": "FIAT TORO FREEDOM",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "922-ford-ranger": {
+      "planCode": 922,
+      "displayName": "Ford Ranger 4x2",
+      "officialName": "FORD RANGER 4x2 CD",
+      "brand": {
+        "name": "Ford",
+        "logo": "/assets/img/brand-logos/ford.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "923-toyota-hilux": {
+      "planCode": 923,
+      "displayName": "Toyota Hilux DX 4x2",
+      "officialName": "TOYOTA HILUX DX 4x2 CD",
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "924-volkswagen-amarok": {
+      "planCode": 924,
+      "displayName": "Volkswagen Amarok TDI 4x2",
+      "officialName": "VW. AMAROK TDI 4x2 CD",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "925-chevrolet-s-10": {
+      "planCode": 925,
+      "displayName": "Chevrolet S10 4x2",
+      "officialName": "CHEVROLET S10 TD 4X2 CD",
+      "brand": {
+        "name": "Chevrolet",
+        "logo": "/assets/img/brand-logos/chevrolet.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "926-renault-alaskan": {
+      "planCode": 926,
+      "displayName": "Renault Alaskan 4x2",
+      "officialName": "RENAULT ALASKAN 4x2 CD",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "927-chevrolet-montana": {
+      "planCode": 927,
+      "displayName": "Chevrolet Montana 1.8",
+      "officialName": "CHEVROLET MONTANA 1.8",
+      "brand": {
+        "name": "Chevrolet",
+        "logo": "/assets/img/brand-logos/chevrolet.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "928-ford-ranger": {
+      "planCode": 928,
+      "displayName": "Ford Ranger 4x4",
+      "officialName": "FORD RANGER D 4x4 CD",
+      "brand": {
+        "name": "Ford",
+        "logo": "/assets/img/brand-logos/ford.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "929-fiat-ducato-furgon-corto": {
+      "planCode": 929,
+      "displayName": "Fiat Ducato Furgón Corto",
+      "officialName": "FIAT DUCATO FURGON CORTO TN TD",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "mediaScale": {
+        "detailWidth": "100%",
+        "detailMaxHeight": "clamp(380px, 43vw, 560px)"
+      },
+      "mediaPosition": {
+        "detailOffsetY": "clamp(16px, 1.8vw, 30px)"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "930-ford-e-transit": {
+      "planCode": 930,
+      "displayName": "Ford Transit Furgón Mediano",
+      "officialName": "FORD TRANSIT FURGON MEDIANO D",
+      "brand": {
+        "name": "Ford",
+        "logo": "/assets/img/brand-logos/ford.svg"
+      },
+      "mediaScale": {
+        "detailWidth": "100%",
+        "detailMaxHeight": "clamp(430px, 49vw, 640px)"
+      },
+      "mediaPosition": {
+        "detailOffsetY": "clamp(22px, 3vw, 48px)"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "931-peugeot-boxer": {
+      "planCode": 931,
+      "displayName": "Peugeot Boxer HDI",
+      "officialName": "PEUGEOT BOXER HDI",
+      "brand": {
+        "name": "Peugeot",
+        "logo": "/assets/img/brand-logos/peugeot.svg"
+      },
+      "mediaScale": {
+        "detailWidth": "100%",
+        "detailMaxHeight": "clamp(390px, 44vw, 580px)"
+      },
+      "mediaPosition": {
+        "detailOffsetY": "clamp(18px, 2vw, 34px)"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "932-renault-master": {
+      "planCode": 932,
+      "displayName": "Renault Master Furgón Corto",
+      "officialName": "RENAULT MASTER D FURG.CORTO TB",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "mediaScale": {
+        "detailWidth": "100%",
+        "detailMaxHeight": "clamp(380px, 43vw, 560px)"
+      },
+      "mediaPosition": {
+        "detailOffsetY": "clamp(58px, 5vw, 86px)"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "944-renault-logan": {
+      "planCode": 944,
+      "displayName": "Renault Logan",
+      "officialName": "RENAULT LOGAN 4P",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "945-citroen-c4": {
+      "planCode": 945,
+      "displayName": "Citroën C4 Cactus AT",
+      "officialName": "CITROEN C4 CACTUS AT",
+      "brand": {
+        "name": "Citroën",
+        "logo": "/assets/img/brand-logos/citroen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "946-peugeot-partner": {
+      "planCode": 946,
+      "displayName": "Peugeot Partner Furgón HDI",
+      "officialName": "PEUGEOT PARTNER FURGON HDI",
+      "brand": {
+        "name": "Peugeot",
+        "logo": "/assets/img/brand-logos/peugeot.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "947-renault-kardian": {
+      "planCode": 947,
+      "displayName": "Renault Kardian",
+      "officialName": "RENAULT KARDIAN",
+      "brand": {
+        "name": "Renault",
+        "logo": "/assets/img/brand-logos/renault.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "948-toyota-corolla-cross": {
+      "planCode": 948,
+      "displayName": "Toyota Corolla Cross 2.0 CVT",
+      "officialName": "TOYOTA COROLLA CROSS 2.0 CVT",
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "949-fiat-pulse": {
+      "planCode": 949,
+      "displayName": "Fiat Pulse Drive 1.3 MT",
+      "officialName": "FIAT PULSE DRIVE 1.3 MT",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "950-fiat-fastback-turbo": {
+      "planCode": 950,
+      "displayName": "Fiat Fastback Turbo 270 AT",
+      "officialName": "FIAT FASTBACK TURBO 270 AT",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        }
+      ]
+    },
+    "951-volkswagen-taos": {
+      "planCode": 951,
+      "displayName": "Volkswagen Taos AT",
+      "officialName": "VW. TAOS AT",
+      "brand": {
+        "name": "Volkswagen",
+        "logo": "/assets/img/brand-logos/volkswagen.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "952-chevrolet-equinox-at": {
+      "planCode": 952,
+      "displayName": "Chevrolet Equinox AT",
+      "officialName": "CHEV. EQUINOX AT",
+      "brand": {
+        "name": "Chevrolet",
+        "logo": "/assets/img/brand-logos/chevrolet.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "956-honda-xre300": {
+      "planCode": 956,
+      "displayName": "Honda XR 300 Tornado + $200.000",
+      "officialName": "HONDA XR300TORNADO + $200000",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "2",
+        "cardHover": "2.04",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    },
+    "957-toyota-hiace": {
+      "planCode": 957,
+      "displayName": "Toyota Hiace L-2",
+      "officialName": "TOYOTA HIACE L-2",
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "960-honda-new-wave-110": {
+      "planCode": 960,
+      "displayName": "Honda New Wave 110 + $100.000",
+      "officialName": "HONDA NEW WAVE110+100000",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.8",
+        "cardHover": "1.84",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    },
+    "961-honda-xr150": {
+      "planCode": 961,
+      "displayName": "Honda XR 150 + $100.000",
+      "officialName": "HONDA XR150+$100000 3 CHANCES",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.8",
+        "cardHover": "1.84",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    },
+    "962-honda-xr150": {
+      "planCode": 962,
+      "displayName": "Honda XR 150 + $100.000",
+      "officialName": "HONDA XR150+$100000 5 CHANCES",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "1.8",
+        "cardHover": "1.84",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    },
+    "963-fiat-cronos": {
+      "planCode": 963,
+      "displayName": "Fiat Cronos 1.3",
+      "officialName": "F. CRONOS 1.3 5 CHANCES",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "964-fiat-cronos": {
+      "planCode": 964,
+      "displayName": "Fiat Cronos",
+      "officialName": "FIAT CRONOS 4P 3 CHANCES",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "965-fiat-cronos": {
+      "planCode": 965,
+      "displayName": "Fiat Cronos",
+      "officialName": "FIAT CRONOS 4P 3CHANCES",
+      "brand": {
+        "name": "Fiat",
+        "logo": "/assets/img/brand-logos/fiat.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ]
+    },
+    "966-toyota-hilux": {
+      "planCode": 966,
+      "displayName": "Toyota Hilux 4x4",
+      "officialName": "TOYOTA HILUX 4x4 CD",
+      "brand": {
+        "name": "Toyota",
+        "logo": "/assets/img/brand-logos/toyota.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "front_right",
+          "label": "Frente derecho",
+          "position": "front-right",
+          "file": "front-right.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaFit": "large-vehicle"
+    },
+    "967-honda-xre300": {
+      "planCode": 967,
+      "displayName": "Honda XR 300 Tornado + $500.000",
+      "officialName": "HONDA XR300TORNADO+$500000 3CHA",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "2",
+        "cardHover": "2.04",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    },
+    "968-honda-xre300": {
+      "planCode": 968,
+      "displayName": "Honda XR 300 Tornado + $500.000",
+      "officialName": "HONDA XR300TORNADO+$500000 5CHA",
+      "brand": {
+        "name": "Honda",
+        "logo": "/assets/img/brand-logos/honda.svg"
+      },
+      "images": [
+        {
+          "id": "front_left",
+          "label": "Frente izquierdo",
+          "position": "front-left",
+          "file": "front-left.webp"
+        },
+        {
+          "id": "front",
+          "label": "Frente",
+          "position": "front",
+          "file": "front.webp"
+        },
+        {
+          "id": "side",
+          "label": "Lateral",
+          "position": "side",
+          "file": "side.webp"
+        },
+        {
+          "id": "rear_right",
+          "label": "Trasera derecha",
+          "position": "rear-right",
+          "file": "rear-right.webp"
+        },
+        {
+          "id": "rear",
+          "label": "Trasera",
+          "position": "rear",
+          "file": "rear.webp"
+        }
+      ],
+      "mediaScale": {
+        "card": "2",
+        "cardHover": "2.04",
+        "featured": "1.8",
+        "featuredHover": "1.84"
+      },
+      "mediaPosition": {
+        "cardY": "2%",
+        "featuredY": "2%"
+      }
+    }
+  }
+}

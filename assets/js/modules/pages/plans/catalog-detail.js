@@ -1,5 +1,5 @@
 import { clear, el, qs, qsa } from "../../utils/dom.js";
-import { getPlanMedia } from "./catalog-assets.js";
+import { getPlanMedia } from "./catalog-assets.js?v=20260714-40";
 import { createPlanInquiryForm } from "./catalog-form.js";
 import { brandKey, categoryClass, chanceLabel, detailProductName, moneyOrConfirm } from "./catalog-format.js";
 
@@ -339,6 +339,7 @@ function hasInteractiveTarget(target, card) {
 export function initDetail(root, items, contactConfig) {
   const drawer = qs("[data-plan-detail-drawer]", root);
   if (!drawer) return;
+  let lastTrigger = null;
 
   if (drawer.parentElement !== document.body) {
     document.body.appendChild(drawer);
@@ -373,11 +374,16 @@ export function initDetail(root, items, contactConfig) {
     clear(drawer);
     document.body.classList.remove("plan-drawer-open");
     if (pushUrl) clearPlanFromUrl();
+    window.requestAnimationFrame(() => {
+      if (lastTrigger?.isConnected) lastTrigger.focus({ preventScroll: true });
+      lastTrigger = null;
+    });
   }
 
   qsa("[data-open-plan]", root).forEach((button) => {
     button.addEventListener("click", (event) => {
       event.stopPropagation();
+      lastTrigger = button;
       openPlan(button.dataset.openPlan);
     });
   });
@@ -385,13 +391,7 @@ export function initDetail(root, items, contactConfig) {
   qsa("[data-open-plan-card]", root).forEach((card) => {
     card.addEventListener("click", (event) => {
       if (hasInteractiveTarget(event.target, card)) return;
-      openPlan(card.dataset.openPlanCard);
-    });
-
-    card.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      if (hasInteractiveTarget(event.target, card)) return;
-      event.preventDefault();
+      lastTrigger = qs("[data-open-plan]", card);
       openPlan(card.dataset.openPlanCard);
     });
   });

@@ -145,7 +145,7 @@ export function renderSocialReviews(data) {
     progressFrame = requestAnimationFrame(() => updateSocialReviewProgress(track, progress));
   };
 
-  updateSocialReviewProgress(track, progress);
+  syncProgress();
   track.addEventListener("scroll", syncProgress, { passive: true });
   window.addEventListener("resize", syncProgress);
   target.querySelector(".home-social-proof__control--prev")?.addEventListener("click", () => scrollSocialReviews(track, -1));

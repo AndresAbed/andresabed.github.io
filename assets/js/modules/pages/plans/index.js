@@ -1,7 +1,7 @@
 import { loadAgencyContact, normalizeInternalTarget } from "../../data/api.js";
 import { clear, el, qs } from "../../utils/dom.js";
-import { loadCatalogPlans } from "./catalog-api.js";
-import { createPlansCatalog } from "./catalog-view.js";
+import { loadCatalogPlans } from "./catalog-api.js?v=20260714-40";
+import { createPlansCatalog } from "./catalog-view.js?v=20260714-40";
 
 function createCatalogError() {
   return el("section", {

@@ -109,7 +109,7 @@ El catalogo agrupa opciones por:
 - `motos`
 - `dinero`
 
-Las imagenes de detalle se resuelven por codigo de articulo y carpetas de `assets/img/plans/`. Cuando una carpeta tiene `metadata.json`, se usa para asociar logo/marca y configuracion visual del producto.
+Las imagenes de detalle se resuelven por codigo de articulo y carpetas de `assets/img/plans/`. Cuando una carpeta tiene `metadata.json`, se usa para asociar logo/marca y configuracion visual del producto. El navegador consume el indice agregado `data/plan-media-index.json` para evitar una solicitud por carpeta.
 
 ## Reglas de renderizado
 
@@ -151,6 +151,16 @@ Regenerar el CSS de producción después de modificar parciales en `assets/css/`
 ```bash
 node scripts/build-css.mjs
 ```
+
+El comando conserva `assets/css/site.css` para desarrollo y genera bundles minificados por ruta (`site-base`, `site-home`, `site-plans`, `site-privacy` y `site-referral`).
+
+Regenerar el indice de metadata del catalogo después de modificar `assets/img/plans/*/metadata.json`:
+
+```bash
+node scripts/build-plan-media-index.mjs
+```
+
+Las variantes responsive del catalogo y de los adjudicados se generan con `scripts/build-plan-card-images.mjs`, que requiere `sharp` disponible en el entorno.
 
 Verificar whitespace del diff:
 

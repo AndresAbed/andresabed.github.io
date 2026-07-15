@@ -1,5 +1,5 @@
 import { loadPlanCatalog } from "../../data/api.js";
-import { withPlanMediaMetadata } from "./catalog-assets.js";
+import { withPlanMediaMetadata } from "./catalog-assets.js?v=20260714-40";
 import { normalizeLivePlan, normalizeSnapshotPlan, sortPlans } from "./catalog-normalize.js";
 
 const ARTEMIS_PLAN_CATALOG_URL =

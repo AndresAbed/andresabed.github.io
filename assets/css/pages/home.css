@@ -1770,8 +1770,8 @@ body.site-video-open {
 }
 
 .home-recruitment__toggle {
-  background: var(--color-brand-green-dark);
-  border-color: var(--color-brand-green-dark);
+  background: var(--color-brand-green);
+  border-color: var(--color-brand-green);
   box-shadow: 0 18px 40px rgb(0 0 0 / 0.2);
   color: #ffffff;
   min-width: 230px;

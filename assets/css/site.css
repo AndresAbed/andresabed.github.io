@@ -3181,13 +3181,22 @@ legend {
   gap: 0.2rem;
   padding: 0.92rem 1rem;
   text-decoration: none;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition: background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
 }
 
 .system-guide-faq-topics a:hover,
 .system-guide-faq-topics a:focus-visible {
   background: #f8f8f4;
   color: var(--color-brand-red);
+}
+
+.system-guide-faq-topics a.is-active {
+  box-shadow: inset 4px 0 0 var(--color-brand-red);
+  color: var(--color-brand-red);
+}
+
+.system-guide-faq-topics a.is-active small {
+  color: rgb(41 41 41 / 0.74);
 }
 
 .system-guide-faq-topics a:focus-visible {
@@ -9677,16 +9686,31 @@ body.plan-drawer-open {
 }
 
 .privacy-toc a {
+  border-radius: 7px;
   color: rgb(41 41 41 / 0.76);
-  display: inline-flex;
+  display: flex;
   font-size: 0.92rem;
   font-weight: 560;
   line-height: 1.35;
+  padding: 0.42rem 0.6rem;
   text-decoration: none;
+  transition: background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
 }
 
-.privacy-toc a:hover {
+.privacy-toc a:hover,
+.privacy-toc a:focus-visible {
   color: var(--color-brand-red);
+}
+
+.privacy-toc a.is-active {
+  box-shadow: inset 3px 0 0 var(--color-brand-red);
+  color: var(--color-brand-red);
+  font-weight: 680;
+}
+
+.privacy-toc a:focus-visible {
+  outline: 3px solid rgb(190 0 47 / 0.18);
+  outline-offset: 2px;
 }
 
 .privacy-article {

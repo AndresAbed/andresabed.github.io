@@ -1,5 +1,6 @@
 import { loadPrivacy } from "../data/api.js";
 import { clear, el, qs } from "../utils/dom.js";
+import { initScrollSpy } from "../utils/scroll-spy.js?v=20260715-1";
 import { isBlank } from "../utils/validators.js";
 
 function formatUpdatedAt(value) {
@@ -132,4 +133,12 @@ export async function initPrivacyPage(site) {
   const privacy = await loadPrivacy();
   clear(mount);
   mount.append(createPrivacyPage(privacy, site));
+
+  const navigation = mount.querySelector(".privacy-toc");
+  const article = mount.querySelector(".privacy-article");
+  initScrollSpy({
+    navigation,
+    sections: mount.querySelectorAll(".privacy-article__section"),
+    region: article,
+  });
 }

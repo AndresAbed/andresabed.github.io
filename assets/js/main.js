@@ -62,12 +62,12 @@ async function startPageController(site, agencyContact) {
   }
 
   if (document.body.dataset.page === "como-funciona") {
-    const { initSystemGuidePage } = await import("./modules/pages/info-pages.js?v=20260714-29");
+    const { initSystemGuidePage } = await import("./modules/pages/info-pages.js?v=20260715-3");
     return initSystemGuidePage(site);
   }
 
   if (document.body.dataset.page === "privacidad") {
-    const { initPrivacyPage } = await import("./modules/pages/privacy.js?v=20260714-29");
+    const { initPrivacyPage } = await import("./modules/pages/privacy.js?v=20260715-3");
     return initPrivacyPage(site);
   }
 

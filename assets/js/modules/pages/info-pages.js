@@ -16,6 +16,7 @@ import {
   createSectionHeader,
 } from "../components/info-components.js?v=20260715-2";
 import { clear, el, qs } from "../utils/dom.js";
+import { initScrollSpy } from "../utils/scroll-spy.js?v=20260715-1";
 
 const GUIDE_ALERT_IMAGE = withSiteBasePath("/assets/img/how-it-works-alert.svg");
 const GUIDE_STEP_IMAGES = [
@@ -545,6 +546,14 @@ export async function initSystemGuidePage() {
     createContractResource(guide.contract),
     createFaqZone(categories, faq.featuredFaqIds || []),
   );
+
+  const faqNavigation = target.querySelector(".system-guide-faq-topics");
+  const faqTopics = target.querySelector(".system-guide-faq__topics");
+  initScrollSpy({
+    navigation: faqNavigation,
+    sections: target.querySelectorAll(".system-guide-faq-category"),
+    region: faqTopics,
+  });
 
   scrollToCurrentGuideSection();
   window.addEventListener("hashchange", scrollToCurrentGuideSection);

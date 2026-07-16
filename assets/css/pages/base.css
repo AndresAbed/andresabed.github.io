@@ -1412,13 +1412,22 @@
   gap: 0.2rem;
   padding: 0.92rem 1rem;
   text-decoration: none;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition: background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
 }
 
 .system-guide-faq-topics a:hover,
 .system-guide-faq-topics a:focus-visible {
   background: #f8f8f4;
   color: var(--color-brand-red);
+}
+
+.system-guide-faq-topics a.is-active {
+  box-shadow: inset 4px 0 0 var(--color-brand-red);
+  color: var(--color-brand-red);
+}
+
+.system-guide-faq-topics a.is-active small {
+  color: rgb(41 41 41 / 0.74);
 }
 
 .system-guide-faq-topics a:focus-visible {

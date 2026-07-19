@@ -7,7 +7,7 @@ import {
   loadFaq,
   normalizeInternalTarget,
   withSiteBasePath,
-} from "../data/api.js?v=20260715-2";
+} from "../data/api.js?v=20260719-1";
 import {
   createAdjudicationDrawSummary,
   createAdjudicationsTable,

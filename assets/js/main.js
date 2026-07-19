@@ -62,7 +62,7 @@ async function startPageController(site, agencyContact) {
   }
 
   if (document.body.dataset.page === "como-funciona") {
-    const { initSystemGuidePage } = await import("./modules/pages/info-pages.js?v=20260719-1");
+    const { initSystemGuidePage } = await import("./modules/pages/info-pages.js?v=20260719-2");
     return initSystemGuidePage(site);
   }
 

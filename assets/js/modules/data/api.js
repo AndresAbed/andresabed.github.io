@@ -7,7 +7,7 @@ export const DATASETS = Object.freeze({
   artemisBackup: "artemis-backup.json",
   planCatalog: "plan_catalog.json",
   planPrizes: "plan_prizes.json",
-  faq: "faq.json",
+  faq: "faq.json?v=20260719-1",
   resources: "resources.json",
   privacy: "privacy.json",
   socialReviews: "social-reviews.json",

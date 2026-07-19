@@ -91,7 +91,12 @@ function createWhatsappLink({ hasCtaTarget, target, cta, compact = false }) {
   return el("a", {
     className: `button ${hasCtaTarget ? "site-header__whatsapp" : "button--disabled"} ${compact ? "site-header__whatsapp--compact" : ""}`,
     attrs: hasCtaTarget
-      ? { href: target, "aria-label": cta.label || "Hablar por WhatsApp" }
+      ? {
+          href: target,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          "aria-label": cta.label || "Hablar por WhatsApp",
+        }
       : { href: "#", "aria-disabled": "true", title: "Canal en configuracion" },
     children: [
       hasCtaTarget ? el("span", { className: "site-header__whatsapp-icon", attrs: { "aria-hidden": "true" } }) : null,
@@ -432,10 +437,7 @@ function createHeader(site) {
           }),
           el("div", {
             className: "site-header__mobile-actions",
-            children: [
-              createWhatsappLink({ hasCtaTarget, target, cta, compact: true }),
-              createMenuButton(),
-            ],
+            children: [createMenuButton()],
           }),
         ],
       }),

@@ -153,7 +153,7 @@ function createSellerField({ options, help = "" }) {
     className: "referral-field",
     attrs: { for: "referral-seller-code" },
     children: [
-      el("span", { className: "referral-field__label", text: "Código de vendedor" }),
+      el("span", { className: "referral-field__label", text: "Productor (opcional)" }),
       el("select", {
         attrs: {
           id: "referral-seller-code",

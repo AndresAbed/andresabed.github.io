@@ -7,9 +7,9 @@
     "whatsapp": {
       "enabled": true,
       "label": "WhatsApp comercial",
-      "url": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
-      "displayPhone": "+54 9 11 1234-5678",
-      "status": "mock"
+      "url": "https://wa.me/5493512356545?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
+      "displayPhone": "+54 9 3512 35-6545",
+      "status": "verified"
     }
   },
   "planInquiryForm": {
@@ -68,6 +68,6 @@
     "unavailable": "La consulta quedo preparada, pero el envio automatico todavia esta en configuracion.",
     "error": "No pudimos procesar la consulta. Revisá los datos e intentá nuevamente.",
     "nextSteps": "Completar este formulario no implica contratar ni quedar inscripto. Un asesor comercial revisa tu consulta, te contacta y te explica documentacion, condiciones y pasos reales.",
-    "whatsappNote": "Canal principal de contacto. El numero actual es placeholder tecnico hasta cargar el WhatsApp comercial definitivo."
+    "whatsappNote": "Canal principal de contacto comercial de Agencias Abed."
   }
 }

@@ -219,7 +219,6 @@ Los HTML y algunos imports de JavaScript usan parámetros `?v=` para evitar que 
 
 ## Pendientes antes de publicar
 
-- Definir WhatsApp comercial real.
 - Confirmar y monitorear los endpoints activos de Google Apps Script y su política de recepción de leads.
 - Revisar textos legales con responsable comercial o asesor correspondiente.
 - Validar datos marcados como `mock`, `partial_mock` o `pending_validation` que correspondan a vistas publicables.

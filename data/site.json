@@ -14,11 +14,11 @@
     "tagline": "Planes de Capitalización y Ahorro Club San Jorge con atención comercial de Agencias Abed.",
     "legalDescriptor": "Agencia mercantil Club San Jorge",
     "coverageLabel": "Atención online a todo el país",
-    "primaryWhatsapp": "+54 9 11 1234-5678",
+    "primaryWhatsapp": "+54 9 3512 35-6545",
     "secondaryWhatsapp": "",
     "contactEmail": "contacto@agenciasabed.com.ar",
-    "instagramUrl": "https://www.instagram.com/clubsanjorge/",
-    "facebookUrl": "https://www.facebook.com/clubsanjorge",
+    "instagramUrl": "https://instagram.com/agenciasabed",
+    "facebookUrl": "https://facebook.com/agenciasabed",
     "youtubeUrl": "https://www.youtube.com/channel/UCfo9TZoLQh_WMwdgs7_u3ww/featured",
     "status": "pending_validation",
     "commercialPromise": "Compará opciones de autos, motos y órdenes de compra, con atención personalizada durante la elección del plan.",
@@ -107,12 +107,12 @@
   "cta": {
     "primary": {
       "label": "Hablar por WhatsApp",
-      "target": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge."
+      "target": "https://wa.me/5493512356545?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge."
     },
     "whatsapp": {
       "label": "Hablar por WhatsApp",
-      "target": "https://wa.me/5491112345678?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
-      "status": "mock"
+      "target": "https://wa.me/5493512356545?text=Hola%2C%20quiero%20consultar%20por%20planes%20de%20Club%20San%20Jorge.",
+      "status": "verified"
     }
   },
   "seo": {

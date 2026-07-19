@@ -415,7 +415,7 @@ function createPlanForm(plan, contactConfig, formType) {
         text:
           isEnrollment
             ? "Este formulario prepara la solicitud de inscripción del plan elegido. La lógica de pago y validación final se configurará en una etapa posterior."
-            : "Esta preinscripción no finaliza la operación: nos permite preparar una consulta personalizada sobre el plan. Si el título está vigente y la cuota se encuentra al día, podés participar de los sorteos mensuales desde la primera cuota.",
+            : "Esta preinscripción no finaliza la operación: nos permite preparar una consulta personalizada sobre el plan. Si el título está vigente y la cuota se encuentra al día, podes participar del sorteo desde el primer mes.",
       }),
       el("button", {
         className: "button button--primary",

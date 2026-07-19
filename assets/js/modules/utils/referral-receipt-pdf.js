@@ -201,12 +201,15 @@ function renderElementToCanvas(element) {
     ".referral-success__label",
     "h2",
     ".referral-success__body",
-    ".referral-success__number span",
-    ".referral-success__number strong",
+    ".referral-success__number-label",
+    ".referral-success__participation span",
+    ".referral-success__participation strong",
     ".referral-success__date",
     ".referral-success__proof",
     ".referral-success__next",
-  ].forEach((selector) => drawTextElement(context, element.querySelector(selector), panelBounds));
+  ].forEach((selector) => {
+    element.querySelectorAll(selector).forEach((textElement) => drawTextElement(context, textElement, panelBounds));
+  });
 
   return { canvas, cssWidth, cssHeight };
 }
@@ -297,12 +300,14 @@ export async function createReferralReceiptPdfBlob({ element } = {}) {
   return new Blob([pdfBytes], { type: "application/pdf" });
 }
 
-export async function downloadReferralReceiptPdf({ element, participationNumber } = {}) {
+export async function downloadReferralReceiptPdf({ element, participationNumbers = [] } = {}) {
   const blob = await createReferralReceiptPdfBlob({ element });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
+  const numbers = participationNumbers.map((number) => String(number || "").trim()).filter(Boolean);
+  const fileReference = numbers.length === 1 ? numbers[0] : `${numbers[0] || "participaciones"}-${numbers.length}-numeros`;
   link.href = url;
-  link.download = `comprobante-${safeFilePart(participationNumber)}.pdf`;
+  link.download = `comprobante-${safeFilePart(fileReference)}.pdf`;
   link.hidden = true;
   document.body.append(link);
   link.click();

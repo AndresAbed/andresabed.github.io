@@ -1,7 +1,7 @@
 import { loadReferralProgram, normalizeInternalTarget } from "../data/api.js?v=20260714-33";
 import { ARGENTINA_PROVINCES } from "../utils/argentina.js";
 import { clear, el, qs } from "../utils/dom.js";
-import { downloadReferralReceiptPdf } from "../utils/referral-receipt-pdf.js?v=20260714-23";
+import { downloadReferralReceiptPdf } from "../utils/referral-receipt-pdf.js?v=20260718-41";
 import { hasValue, isValidUrl } from "../utils/validators.js";
 
 const FORM_STATES = Object.freeze({
@@ -13,7 +13,7 @@ const FORM_STATES = Object.freeze({
   UNAVAILABLE: "unavailable",
 });
 
-const PARTICIPATION_NUMBER_PATTERN = /^RYG-\d{6,}$/;
+const PARTICIPATION_NUMBER_PATTERN = /^RYG-\d{4}$/;
 const DEFAULT_RELATIONSHIP_OPTIONS = [
   "Familiar",
   "Amigo/a",
@@ -394,13 +394,78 @@ async function sendReferralProgram(config, payload) {
 
   if (!response.ok) throw new Error(`Referral endpoint failed: ${response.status}`);
   const result = await response.json();
-  const participationNumber = String(result.numeroParticipacion || result.numero || result.participationNumber || "").trim();
+  const rawParticipations = Array.isArray(result.participaciones)
+    ? result.participaciones
+    : Array.isArray(result.numerosParticipacion)
+      ? result.numerosParticipacion
+      : [];
+  const fallbackNumber = String(result.numeroParticipacion || result.numero || result.participationNumber || "").trim();
+  const entries = rawParticipations.length ? rawParticipations : fallbackNumber ? [fallbackNumber] : [];
+  const participationsByReferral = Array(payload.referidos.length).fill(null);
 
-  if (result.ok !== true || !PARTICIPATION_NUMBER_PATTERN.test(participationNumber)) {
+  entries.forEach((entry, position) => {
+    const number = String(
+      typeof entry === "string"
+        ? entry
+        : entry?.numero || entry?.numeroParticipacion || entry?.participationNumber || "",
+    ).trim();
+    const rawIndex = typeof entry === "object" && entry !== null ? Number(entry.referidoIndex) : position;
+    const referralIndex = Number.isInteger(rawIndex) ? rawIndex : position;
+
+    if (referralIndex >= 0 && referralIndex < participationsByReferral.length && !participationsByReferral[referralIndex]) {
+      participationsByReferral[referralIndex] = number;
+    }
+  });
+
+  const participationNumbers = participationsByReferral.filter(Boolean);
+  const uniqueNumbers = new Set(participationNumbers);
+
+  if (
+    result.ok !== true ||
+    participationNumbers.length !== payload.referidos.length ||
+    uniqueNumbers.size !== participationNumbers.length ||
+    participationNumbers.some((number) => !PARTICIPATION_NUMBER_PATTERN.test(number))
+  ) {
     throw new Error("Referral endpoint returned an invalid response");
   }
 
-  return participationNumber;
+  return participationNumbers.map((number, index) => ({
+    number,
+    referralIndex: index,
+    referralName: [payload.referidos[index]?.nombre, payload.referidos[index]?.apellido].filter(Boolean).join(" "),
+  }));
+}
+
+function renderSuccessParticipations(panel, participations, successContent) {
+  const list = panel.querySelector("[data-participation-list]");
+  const heading = panel.querySelector("[data-participation-heading]");
+  const proof = panel.querySelector("[data-participation-proof]");
+  if (!list) return;
+
+  clear(list);
+  participations.forEach((participation, index) => {
+    list.append(
+      el("div", {
+        className: "referral-success__participation",
+        children: [
+          el("span", { text: `Referido ${index + 1}${participation.referralName ? ` · ${participation.referralName}` : ""}` }),
+          el("strong", { attrs: { "data-participation-number": "" }, text: participation.number }),
+        ],
+      }),
+    );
+  });
+
+  if (heading) {
+    heading.textContent = participations.length === 1
+      ? successContent.numberLabel || "Número de participación"
+      : successContent.numberLabelPlural || "Números de participación";
+  }
+
+  if (proof) {
+    proof.textContent = participations.length === 1
+      ? successContent.proofNote || "Conservá este número como comprobante de participación."
+      : successContent.proofNotePlural || "Conservá estos números como comprobante de participación.";
+  }
 }
 
 function createSuccessPanel(successContent) {
@@ -415,8 +480,12 @@ function createSuccessPanel(successContent) {
       el("div", {
         className: "referral-success__number",
         children: [
-          el("span", { text: successContent.numberLabel || "Número de participación" }),
-          el("strong", { attrs: { "data-participation-number": "" }, text: "RYG-000000" }),
+          el("span", {
+            className: "referral-success__number-label",
+            text: successContent.numberLabel || "Número de participación",
+            attrs: { "data-participation-heading": "" },
+          }),
+          el("div", { className: "referral-success__numbers", attrs: { "data-participation-list": "" } }),
           el("time", {
             className: "referral-success__date",
             text: `${successContent.dateLabel || "Fecha de registro"}: --/--/----`,
@@ -427,7 +496,11 @@ function createSuccessPanel(successContent) {
           }),
         ],
       }),
-      el("p", { className: "referral-success__proof", text: successContent.proofNote || "Conservá este número como comprobante de participación." }),
+      el("p", {
+        className: "referral-success__proof",
+        text: successContent.proofNote || "Conservá este número como comprobante de participación.",
+        attrs: { "data-participation-proof": "" },
+      }),
       el("p", { className: "referral-success__next", text: successContent.nextStep || "Podremos contactar a tus referidos por los datos que compartiste." }),
       el("button", {
         className: "button button--secondary referral-success__download",
@@ -446,7 +519,7 @@ function createSuccessPanel(successContent) {
     try {
       await downloadReferralReceiptPdf({
         element: panel,
-        participationNumber: panel.querySelector("[data-participation-number]")?.textContent,
+        participationNumbers: [...panel.querySelectorAll("[data-participation-number]")].map((element) => element.textContent),
       });
     } catch (error) {
       console.error("No se pudo generar el comprobante en PDF.", error);
@@ -632,8 +705,8 @@ function createReferralForm(program, config) {
 
     setState(FORM_STATES.SUBMITTING, "Estamos registrando tu participación.");
     try {
-      const participationNumber = await sendReferralProgram(config, payload);
-      successPanel.querySelector("[data-participation-number]").textContent = participationNumber;
+      const participations = await sendReferralProgram(config, payload);
+      renderSuccessParticipations(successPanel, participations, program.success || {});
       setRegistrationDate(successPanel, new Date());
       setState(FORM_STATES.SUCCESS);
       form.hidden = true;
@@ -665,7 +738,7 @@ function createHeroVisual() {
           el("div", { className: "referral-network__person referral-network__person--two", children: [el("span"), el("strong", { text: "Referido" })] }),
           el("div", {
             className: "referral-network__ticket",
-            children: [el("small", { text: "Tu comprobante" }), el("strong", { text: "RYG-••••••" })],
+            children: [el("small", { text: "Tu comprobante" }), el("strong", { text: "RYG-••••" })],
           }),
         ],
       }),

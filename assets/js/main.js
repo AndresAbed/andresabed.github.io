@@ -72,7 +72,7 @@ async function startPageController(site, agencyContact) {
   }
 
   if (document.body.dataset.page === "recomenda-y-gana") {
-    const { initReferralProgramPage } = await import("./modules/pages/referral-program.js?v=20260714-30");
+    const { initReferralProgramPage } = await import("./modules/pages/referral-program.js?v=20260718-41");
     return initReferralProgramPage(site, agencyContact);
   }
 

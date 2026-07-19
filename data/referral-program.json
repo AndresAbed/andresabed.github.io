@@ -90,8 +90,10 @@
     "title": "¡Gracias por participar!",
     "body": "Tu participación fue registrada correctamente.",
     "numberLabel": "Número de participación",
+    "numberLabelPlural": "Números de participación",
     "dateLabel": "Fecha de registro",
     "proofNote": "Conservá este número como comprobante de participación.",
+    "proofNotePlural": "Conservá estos números como comprobante de participación.",
     "nextStep": "Si uno de tus referidos necesita información, podremos contactarlo a través de los datos que compartiste.",
     "downloadLabel": "Descargar comprobante en PDF"
   }

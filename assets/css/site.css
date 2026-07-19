@@ -10622,6 +10622,10 @@ body.plan-drawer-open {
   text-align: center;
 }
 
+.referral-person__grid {
+  margin-block-start: 10px;
+}
+
 .referral-person__remove {
   background: #ffffff;
   border: 1px solid rgb(143 0 36 / 0.2);
@@ -10793,21 +10797,36 @@ body.plan-drawer-open {
   border-radius: 0 14px 0 14px;
   color: #ffffff;
   display: grid;
-  gap: 7px;
+  gap: 14px;
   margin: 30px auto 18px;
-  max-width: 430px;
+  max-width: 480px;
   padding: 24px;
 }
 
-.referral-success__number span {
+.referral-success__number-label,
+.referral-success__participation span {
   color: rgb(255 255 255 / 0.68);
   font-size: 0.75rem;
   font-weight: 700;
 }
 
-.referral-success__number strong {
+.referral-success__numbers {
+  display: grid;
+}
+
+.referral-success__participation {
+  display: grid;
+  gap: 5px;
+  padding-block: 10px;
+}
+
+.referral-success__participation + .referral-success__participation {
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.referral-success__participation strong {
   color: #ffffff;
-  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  font-size: clamp(1.55rem, 5vw, 2.35rem);
   letter-spacing: 0.04em;
 }
 

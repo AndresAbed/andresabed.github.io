@@ -237,6 +237,7 @@ function createDetail(plan, contactConfig) {
       "data-plan-article": plan.article,
       "data-image-folder": media.folder,
       "data-media-fit": media.fit || "",
+      "data-has-angle-selector": media.images.length > 1 ? "true" : "false",
       style: mediaStyle(media),
       tabindex: "-1",
       "aria-labelledby": `plan-detail-title-${plan.article}`,

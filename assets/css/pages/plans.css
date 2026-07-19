@@ -1534,10 +1534,10 @@ body.plan-drawer-open {
   border: 1px solid rgb(41 41 41 / 0.12);
   border-radius: 16px 16px 0 0;
   display: grid;
-  grid-template-rows: minmax(340px, 1fr) auto;
-  min-height: clamp(455px, 50vw, 620px);
+  grid-template-rows: minmax(300px, 1fr) auto;
+  min-height: clamp(420px, 45vw, 540px);
   overflow: hidden;
-  padding: clamp(154px, 12vw, 180px) clamp(20px, 3vw, 36px) clamp(18px, 2.2vw, 26px);
+  padding: clamp(132px, 9vw, 148px) clamp(20px, 3vw, 36px) clamp(12px, 1.5vw, 18px);
   position: relative;
 }
 
@@ -1547,9 +1547,9 @@ body.plan-drawer-open {
 }
 
 .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__visual {
-  grid-template-rows: minmax(380px, 1fr) auto;
-  min-height: clamp(530px, 55vw, 690px);
-  padding-block-start: clamp(185px, 15vw, 215px);
+  grid-template-rows: minmax(340px, 1fr) auto;
+  min-height: clamp(480px, 50vw, 620px);
+  padding-block-start: clamp(160px, 12vw, 180px);
 }
 
 .plan-detail-card__brand-panel {
@@ -1584,9 +1584,11 @@ body.plan-drawer-open {
   background: transparent;
   display: flex;
   justify-content: center;
-  min-height: clamp(340px, 40vw, 500px);
-  padding: clamp(8px, 1.5vw, 18px);
-  --plan-media-detail-scale: 1.06;
+  min-height: clamp(300px, 35vw, 440px);
+  --plan-media-detail-clearance: 0px;
+  --plan-media-detail-padding: clamp(8px, 1.5vw, 18px);
+  padding: var(--plan-media-detail-padding);
+  --plan-media-detail-scale: 1;
 }
 
 .plan-detail-card__image[data-image-position="money"] {
@@ -1597,13 +1599,25 @@ body.plan-drawer-open {
 }
 
 .plan-detail-card[data-media-fit="large-vehicle"] .plan-detail-card__image {
-  --plan-media-detail-scale: 1.1;
+  --plan-media-detail-scale: 1.04;
+}
+
+.plan-detail-card[data-has-angle-selector="true"] .plan-detail-card__image {
+  --plan-media-detail-clearance: clamp(28px, 2.8vw, 44px);
+  padding-block-end: calc(var(--plan-media-detail-padding) + var(--plan-media-detail-clearance));
+}
+
+.plan-detail-card[data-has-angle-selector="true"][data-media-fit="large-vehicle"] .plan-detail-card__image {
+  --plan-media-detail-clearance: clamp(44px, 3.5vw, 60px);
 }
 
 .plan-detail-card__image img {
   filter: drop-shadow(0 22px 18px rgb(41 41 41 / 0.12));
   height: auto;
-  max-height: var(--plan-media-detail-max-height, clamp(360px, 43vw, 560px));
+  max-height: min(
+    var(--plan-media-detail-max-height, clamp(320px, 36vw, 460px)),
+    clamp(320px, 36vw, 460px)
+  );
   object-fit: contain;
   transform: translateY(var(--plan-media-detail-offset-y, 0)) scale(var(--plan-media-detail-scale, 1));
   width: var(--plan-media-detail-width, 100%);
@@ -2418,17 +2432,20 @@ body.plan-drawer-open {
   }
 
   .plan-detail-card__visual {
-    grid-template-rows: minmax(410px, 1fr) auto;
-    min-height: clamp(560px, 70vw, 720px);
+    grid-template-rows: minmax(360px, 1fr) auto;
+    min-height: clamp(500px, 60vw, 640px);
   }
 
   .plan-detail-card__image {
-    min-height: clamp(410px, 50vw, 560px);
-    --plan-media-detail-scale: 1.14;
+    min-height: clamp(350px, 43vw, 480px);
+    --plan-media-detail-scale: 1.08;
   }
 
   .plan-detail-card__image img {
-    max-height: var(--plan-media-detail-max-height, clamp(430px, 54vw, 620px));
+    max-height: min(
+      var(--plan-media-detail-max-height, clamp(370px, 45vw, 500px)),
+      clamp(370px, 45vw, 500px)
+    );
     max-width: 106%;
     width: var(--plan-media-detail-width, min(106%, 820px));
   }
@@ -2439,7 +2456,7 @@ body.plan-drawer-open {
   }
 
   .plan-detail-card[data-media-fit="large-vehicle"] .plan-detail-card__image {
-    --plan-media-detail-scale: 1.18;
+    --plan-media-detail-scale: 1.11;
   }
 
   .plan-angle-range {
@@ -2913,17 +2930,17 @@ body.plan-drawer-open {
     min-height: auto;
     min-width: 0;
     overflow-x: hidden;
-    padding: clamp(148px, 32vw, 244px) 0 var(--space-4);
+    padding: clamp(132px, 30vw, 208px) 0 var(--space-3);
     width: 100%;
   }
 
   .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__visual {
     min-height: auto;
-    padding-block-start: clamp(184px, 34vw, 244px);
+    padding-block-start: clamp(160px, 32vw, 208px);
   }
 
   .plan-detail-card[data-image-folder$="ford-ranger"] .plan-detail-card__image {
-    min-height: clamp(370px, 54vh, 470px);
+    min-height: clamp(340px, 50vh, 440px);
   }
 
   .plan-detail-card__brand-panel {
@@ -2951,11 +2968,11 @@ body.plan-drawer-open {
   .plan-detail-card__image {
     box-sizing: border-box;
     max-width: 100%;
-    min-height: clamp(360px, 52vh, 470px);
+    min-height: clamp(320px, 48vh, 430px);
     min-width: 0;
     overflow: hidden;
     width: 100%;
-    --plan-media-detail-scale: 1.2;
+    --plan-media-detail-scale: 1.15;
   }
 
   .plan-detail-card__image[data-image-position="money"] {
@@ -2965,7 +2982,10 @@ body.plan-drawer-open {
   }
 
   .plan-detail-card__image img {
-    max-height: var(--plan-media-detail-max-height, clamp(390px, 58vh, 560px));
+    max-height: min(
+      var(--plan-media-detail-max-height, clamp(350px, 52vh, 480px)),
+      clamp(350px, 52vh, 480px)
+    );
     max-width: 112%;
     width: var(--plan-media-detail-width, min(112%, 760px));
   }
@@ -2976,7 +2996,15 @@ body.plan-drawer-open {
   }
 
   .plan-detail-card[data-media-fit="large-vehicle"] .plan-detail-card__image {
-    --plan-media-detail-scale: 1.24;
+    --plan-media-detail-scale: 1.18;
+  }
+
+  .plan-detail-card[data-has-angle-selector="true"] .plan-detail-card__image {
+    --plan-media-detail-clearance: clamp(32px, 8vw, 52px);
+  }
+
+  .plan-detail-card[data-has-angle-selector="true"][data-media-fit="large-vehicle"] .plan-detail-card__image {
+    --plan-media-detail-clearance: clamp(48px, 11vw, 72px);
   }
 
   .plan-detail-card__image-note {

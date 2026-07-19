@@ -1,6 +1,6 @@
 import { el } from "../../utils/dom.js";
 import { createCatalogGrid } from "./catalog-card.js?v=20260714-40";
-import { initDetail } from "./catalog-detail.js?v=20260719-1";
+import { initDetail } from "./catalog-detail.js?v=20260719-2";
 import { createFilters, initFiltering } from "./catalog-filters.js";
 
 export function createPlansCatalog(catalog, contactConfig) {

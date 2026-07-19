@@ -183,17 +183,22 @@ function createGuideJourney(steps = []) {
             children: [
               el("span", { className: "system-guide-step__number", text: String(index + 1).padStart(2, "0") }),
               GUIDE_STEP_IMAGES[index]
-                ? el("img", {
-                    className: "system-guide-step__image",
-                    attrs: {
-                      src: GUIDE_STEP_IMAGES[index],
-                      alt: "",
-                      width: String(GUIDE_STEP_DIMENSIONS[index].width),
-                      height: String(GUIDE_STEP_DIMENSIONS[index].height),
-                      loading: "lazy",
-                      decoding: "async",
-                      "aria-hidden": "true",
-                    },
+                ? el("div", {
+                    className: "system-guide-step__media",
+                    children: [
+                      el("img", {
+                        className: "system-guide-step__image",
+                        attrs: {
+                          src: GUIDE_STEP_IMAGES[index],
+                          alt: "",
+                          width: String(GUIDE_STEP_DIMENSIONS[index].width),
+                          height: String(GUIDE_STEP_DIMENSIONS[index].height),
+                          loading: "lazy",
+                          decoding: "async",
+                          "aria-hidden": "true",
+                        },
+                      }),
+                    ],
                   })
                 : null,
               el("div", {

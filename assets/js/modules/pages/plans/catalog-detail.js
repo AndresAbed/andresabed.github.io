@@ -51,6 +51,64 @@ function createMetric(label, value, tone = "", tooltipText = "") {
   });
 }
 
+function prizeLabel(position) {
+  return `${position}º premio`;
+}
+
+function prizeValue(prize, plan) {
+  if (prize.kind === "plan") return plan.displayName;
+  if (prize.text) return prize.text;
+  return moneyOrConfirm(prize.amount);
+}
+
+function createPrizesTable(plan) {
+  if (!plan.prizes?.length) return null;
+
+  const titleId = `plan-prizes-title-${plan.article}`;
+  return el("section", {
+    className: "plan-prizes",
+    attrs: { "aria-labelledby": titleId },
+    children: [
+      el("div", {
+        className: "plan-prizes__heading",
+        children: [
+          el("h3", { text: "Premios del plan", attrs: { id: titleId } }),
+          el("p", { text: "El valor nominal total contempla la suma de los premios detallados." }),
+        ],
+      }),
+      el("div", {
+        className: "plan-prizes__table-wrap",
+        children: [
+          el("table", {
+            children: [
+              el("thead", {
+                children: [
+                  el("tr", {
+                    children: [
+                      el("th", { text: "Premio", attrs: { scope: "col" } }),
+                      el("th", { text: "Detalle", attrs: { scope: "col" } }),
+                    ],
+                  }),
+                ],
+              }),
+              el("tbody", {
+                children: plan.prizes.map((prize) =>
+                  el("tr", {
+                    children: [
+                      el("th", { text: prizeLabel(prize.position), attrs: { scope: "row" } }),
+                      el("td", { text: prizeValue(prize, plan) }),
+                    ],
+                  }),
+                ),
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
 function angleTabLabel(image) {
   const labels = {
     front_left: "Frente izq.",
@@ -246,6 +304,7 @@ function createDetail(plan, contactConfig) {
                   createMetric("Código", String(plan.article || "-")),
                 ],
               }),
+              createPrizesTable(plan),
               el("section", {
                 className: "plan-detail-card__form",
                 attrs: { "aria-labelledby": `plan-form-title-${plan.article}` },

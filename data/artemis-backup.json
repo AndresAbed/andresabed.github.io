@@ -28,21 +28,21 @@
     "stimuli": [
       {
         "position": 1,
-        "label": "1° Estímulo",
+        "label": "1° Premio",
         "winningNumber": "798",
         "status": "verified",
         "source": "artemis_api"
       },
       {
         "position": 2,
-        "label": "2° Estímulo",
+        "label": "2° Premio",
         "winningNumber": "750",
         "status": "verified",
         "source": "artemis_api"
       },
       {
         "position": 3,
-        "label": "3° Estímulo",
+        "label": "3° Premio",
         "winningNumber": "357",
         "status": "verified",
         "source": "artemis_api"
@@ -203,21 +203,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "512",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "318",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "052",
               "status": "verified",
               "source": "artemis_api"
@@ -788,21 +788,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "122",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "563",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "143",
               "status": "verified",
               "source": "artemis_api"
@@ -1282,21 +1282,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "4",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "870",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "346",
               "status": "verified",
               "source": "artemis_api"
@@ -1804,21 +1804,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "935",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "667",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "862",
               "status": "verified",
               "source": "artemis_api"
@@ -2382,21 +2382,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "560",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "853",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "815",
               "status": "verified",
               "source": "artemis_api"
@@ -2862,21 +2862,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "555",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "396",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "284",
               "status": "verified",
               "source": "artemis_api"
@@ -3461,21 +3461,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "616",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "585",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "40",
               "status": "verified",
               "source": "artemis_api"
@@ -3969,21 +3969,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "40",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "332",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "550",
               "status": "verified",
               "source": "artemis_api"
@@ -4547,21 +4547,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "78",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "579",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "938",
               "status": "verified",
               "source": "artemis_api"
@@ -5223,21 +5223,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "476",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "157",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "540",
               "status": "verified",
               "source": "artemis_api"
@@ -5808,21 +5808,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "812",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "840",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "981",
               "status": "verified",
               "source": "artemis_api"
@@ -6421,21 +6421,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "966",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "68",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "206",
               "status": "verified",
               "source": "artemis_api"
@@ -7048,21 +7048,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "832",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "585",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "70",
               "status": "verified",
               "source": "artemis_api"
@@ -7682,21 +7682,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "443",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "692",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "407",
               "status": "verified",
               "source": "artemis_api"
@@ -8281,21 +8281,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "618",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "976",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "791",
               "status": "verified",
               "source": "artemis_api"
@@ -8957,21 +8957,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "176",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "259",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "599",
               "status": "verified",
               "source": "artemis_api"
@@ -9556,21 +9556,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "777",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "449",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "454",
               "status": "verified",
               "source": "artemis_api"
@@ -10232,21 +10232,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "659",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "767",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "792",
               "status": "verified",
               "source": "artemis_api"
@@ -10880,21 +10880,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "405",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "526",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "918",
               "status": "verified",
               "source": "artemis_api"
@@ -11682,21 +11682,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "752",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "962",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "328",
               "status": "verified",
               "source": "artemis_api"
@@ -12442,21 +12442,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "662",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "474",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "64",
               "status": "verified",
               "source": "artemis_api"
@@ -13055,21 +13055,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "502",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "377",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "293",
               "status": "verified",
               "source": "artemis_api"
@@ -13815,21 +13815,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "598",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "68",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "325",
               "status": "verified",
               "source": "artemis_api"
@@ -14519,21 +14519,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "86",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "307",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "222",
               "status": "verified",
               "source": "artemis_api"
@@ -15300,21 +15300,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "810",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "886",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "94",
               "status": "verified",
               "source": "artemis_api"
@@ -16109,21 +16109,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "799",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "540",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "265",
               "status": "verified",
               "source": "artemis_api"
@@ -16995,21 +16995,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "180",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "938",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "678",
               "status": "verified",
               "source": "artemis_api"
@@ -17755,21 +17755,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "463",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "161",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "415",
               "status": "verified",
               "source": "artemis_api"
@@ -18578,21 +18578,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "931",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "555",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "716",
               "status": "verified",
               "source": "artemis_api"
@@ -19359,21 +19359,21 @@
           "stimuli": [
             {
               "position": 1,
-              "label": "1.er estímulo",
+              "label": "1.er premio",
               "winningNumber": "798",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 2,
-              "label": "2.º estímulo",
+              "label": "2.º premio",
               "winningNumber": "750",
               "status": "verified",
               "source": "artemis_api"
             },
             {
               "position": 3,
-              "label": "3.er estímulo",
+              "label": "3.er premio",
               "winningNumber": "357",
               "status": "verified",
               "source": "artemis_api"

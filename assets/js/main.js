@@ -52,7 +52,7 @@ async function startPageController(site, agencyContact) {
   }
 
   if (document.body.dataset.page === "planes") {
-    const { initPlansHub } = await import("./modules/pages/plans/index.js?v=20260714-40");
+    const { initPlansHub } = await import("./modules/pages/plans/index.js?v=20260719-1");
     return initPlansHub(site);
   }
 

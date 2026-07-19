@@ -6,6 +6,7 @@ export const DATASETS = Object.freeze({
   site: "site.json",
   artemisBackup: "artemis-backup.json",
   planCatalog: "plan_catalog.json",
+  planPrizes: "plan_prizes.json",
   faq: "faq.json",
   resources: "resources.json",
   privacy: "privacy.json",
@@ -150,6 +151,7 @@ export async function loadDataset(name) {
 export const loadSite = () => loadDataset("site");
 export const loadArtemisBackup = () => loadDataset("artemisBackup");
 export const loadPlanCatalog = () => loadDataset("planCatalog");
+export const loadPlanPrizes = () => loadDataset("planPrizes");
 export const loadFaq = () => loadDataset("faq");
 export const loadResources = () => loadDataset("resources");
 export const loadPrivacy = () => loadDataset("privacy");
@@ -278,7 +280,7 @@ function parseDrawsFromArtemis(payload, fallback) {
     },
     stimuli: numbers.map((winningNumber, index) => ({
       position: index + 1,
-      label: `${index + 1}° Estímulo`,
+      label: `${index + 1}° Premio`,
       winningNumber,
       status: "verified",
       source: "artemis_api",
@@ -307,7 +309,7 @@ function adjudicationDrawFromArtemisDetail(value) {
   if (!date && !nextDate && !winningNumbers.length) return null;
 
   const complete = Boolean(date && nextDate && winningNumbers.length === 3);
-  const labels = ["1.er estímulo", "2.º estímulo", "3.er estímulo"];
+  const labels = ["1.er premio", "2.º premio", "3.er premio"];
 
   return {
     date,

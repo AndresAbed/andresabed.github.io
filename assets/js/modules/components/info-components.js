@@ -72,7 +72,7 @@ export function createDrawSummary(draws) {
         className: "home-panel stack",
         children: [
           createSectionHeader({
-            eyebrow: "Estimulos",
+            eyebrow: "Premios",
             title: "Numeros destacados",
             intro: renderableStimuli.length ? "Numeros cargados en el data pack." : "Los numeros se publicaran cuando esten validados.",
           }),
@@ -186,13 +186,13 @@ export function createAdjudicationDrawSummary({ draw }) {
       }),
       el("ol", {
         className: "adjudications-draw-summary__stimuli",
-        attrs: { "aria-label": "Estímulos del sorteo" },
+        attrs: { "aria-label": "Premios del sorteo" },
         children: stimuli.map((item, index) =>
           el("li", {
             className: index === 0 ? "adjudications-draw-stimulus adjudications-draw-stimulus--featured" : "adjudications-draw-stimulus",
             children: [
               el("strong", { text: item.winningNumber }),
-              el("span", { text: `${index + 1}° Estímulo` }),
+              el("span", { text: `${index + 1}° Premio` }),
             ],
           }),
         ),

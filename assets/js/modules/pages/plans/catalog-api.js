@@ -1,6 +1,7 @@
-import { loadPlanCatalog } from "../../data/api.js";
+import { loadPlanCatalog, loadPlanPrizes } from "../../data/api.js";
 import { withPlanMediaMetadata } from "./catalog-assets.js?v=20260714-40";
 import { normalizeLivePlan, normalizeSnapshotPlan, sortPlans } from "./catalog-normalize.js";
+import { withPlanPrizes } from "./catalog-prizes.js";
 
 const ARTEMIS_PLAN_CATALOG_URL =
   "https://artemis.clubsanjorge.com.ar/api/stream/whJeJzzt07DTV9RS7HIkGPND1uptZxvl/media/listapre";
@@ -59,8 +60,8 @@ function normalizeFallbackSnapshot(snapshot) {
 }
 
 export async function loadSnapshotCatalogPlans() {
-  const fallback = await loadPlanCatalog();
-  const items = await withPlanMediaMetadata(normalizeFallbackSnapshot(fallback));
+  const [fallback, prizes] = await Promise.all([loadPlanCatalog(), loadPlanPrizes()]);
+  const items = await withPlanMediaMetadata(withPlanPrizes(normalizeFallbackSnapshot(fallback), prizes));
 
   return {
     meta: {
@@ -77,12 +78,12 @@ function hasUsableCatalog(catalog) {
 }
 
 export async function loadLiveCatalogPlans() {
-  const rows = await fetchLiveRows();
+  const [rows, prizes] = await Promise.all([fetchLiveRows(), loadPlanPrizes()]);
   if (rows.length < MIN_LIVE_PLAN_ROWS) {
     throw new Error("El catalogo Artemis devolvio una lista incompleta.");
   }
 
-  const items = await withPlanMediaMetadata(normalizeLiveRows(rows));
+  const items = await withPlanMediaMetadata(withPlanPrizes(normalizeLiveRows(rows), prizes));
   if (items.length < MIN_LIVE_PLAN_ROWS) {
     throw new Error("El catalogo Artemis no tiene suficientes planes validos.");
   }

@@ -5,7 +5,7 @@
   "guide": {
     "summary": {
       "title": "Cómo leer este sistema",
-      "intro": "Se trata de un título de capitalización y ahorro. Durante el plazo previsto formás un capital y, mientras el título esté vigente y al día, participás de los sorteos estímulo del sistema.",
+      "intro": "Se trata de un título de capitalización y ahorro. Durante el plazo previsto formás un capital y, mientras el título esté vigente y al día, participás de los sorteos de premios del sistema.",
       "steps": [
         {
           "title": "Elegís un plan",
@@ -70,7 +70,7 @@
           "text": "Es el pago mensual del título. Se calcula por cada 1.000 de valor nominal y está compuesto por cuota de ahorro y carga administrativa."
         },
         {
-          "label": "Sorteo estímulo",
+          "label": "Sorteo de premios",
           "text": "Es la participación mensual vinculada al número de sorteo del título. Para acceder al beneficio, la cuota del mes debe estar abonada según las condiciones vigentes."
         },
         {

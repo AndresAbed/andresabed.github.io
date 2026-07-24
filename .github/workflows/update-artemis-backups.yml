@@ -2,7 +2,8 @@ name: Update Artemis backups
 
 on:
   schedule:
-    - cron: "0 23 1 * *"
+    # Todos los domingos a las 23:00 UTC.
+    - cron: "0 23 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -13,29 +14,64 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check last Sunday of month
+        id: schedule_check
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          # Las ejecuciones manuales deben continuar siempre.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Manual execution requested."
+            exit 0
+          fi
+
+          CURRENT_MONTH=$(date -u +%m)
+          NEXT_SUNDAY_MONTH=$(date -u -d "+7 days" +%m)
+
+          if [ "$CURRENT_MONTH" != "$NEXT_SUNDAY_MONTH" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Today is the last Sunday of the month."
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "Today is not the last Sunday of the month."
+          fi
+
       - name: Checkout
+        if: steps.schedule_check.outputs.should_run == 'true'
         uses: actions/checkout@v6
 
       - name: Setup Node
+        if: steps.schedule_check.outputs.should_run == 'true'
         uses: actions/setup-node@v6
         with:
           node-version: "24"
 
       - name: Update backups
+        if: steps.schedule_check.outputs.should_run == 'true'
         run: node scripts/update-artemis-backups.mjs
 
       - name: Commit changes
+        if: steps.schedule_check.outputs.should_run == 'true'
         run: |
-          if git diff --quiet; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo "No backup changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
           git add data/artemis-backup.json
+
           if [ -d assets/img/adjudicados ]; then
             git add assets/img/adjudicados
           fi
+
+          if git diff --cached --quiet; then
+            echo "No staged backup changes to commit."
+            exit 0
+          fi
+
           git commit -m "Update Artemis backups"
           git push

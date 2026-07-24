@@ -29,7 +29,7 @@ function normalizeBasePath(path) {
   return `/${value.replace(/^\/+|\/+$/g, "")}`;
 }
 
-const GITHUB_PROJECT_PAGE_BASES = new Set(["club_san_jorge"]);
+const GITHUB_PROJECT_PAGE_BASES = new Set(["agencias_abed_web"]);
 
 export function getSiteBasePath() {
   const configuredBase = document.querySelector('meta[name="site-base-path"]')?.getAttribute("content");

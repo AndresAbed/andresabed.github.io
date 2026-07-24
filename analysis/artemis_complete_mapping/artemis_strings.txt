@@ -1,0 +1,90 @@
+# Formato: ESTADO | origen | offset/línea | función/clase | string sanitizada | interpretación
+# Deducción estática; no se contactó ningún host. El segmento opaco de la base Artemis está redactado.
+
+CONFIRMED_USED | libapp.so | +0x0c0618 | ApiClient | https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media | base API Artemis hardcodeada
+CONFIRMED_USED | libapp.so | +0x070ba1 | AuthBloc | /vended | recurso de vendedor usado para login
+CONFIRMED_USED | auth_bloc.dart AOT | 0x80a010-0x80a464 | AuthBloc Login | q={"numvende":...,"activo":...} | filtro de productor y password
+CONFIRMED_USED | auth_bloc.dart AOT | 0x80a010-0x80a464 | AuthBloc Login | h={"columns":["numvende","nomvende","ncuit","domvende","codpost","password","ctacob","activo"]} | proyección de vendedor
+CONFIRMED_USED | libapp.so | +0x03eeb7 | ContratoService/ContratoBloc | /regsubscriber | alta de suscriptor
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | numdoc | int.parse(dni+"1")
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | nomsoc | nombre y apellido concatenados
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | domicsoc | domicilio del socio
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | codpost | código postal actual
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | fecnac | fecha ddMMyyyy
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | telefono | dato de contacto
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | email | dato de contacto
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | estcivil | EstadoCivil.id
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | naciona / ARG | nacionalidad constante enviada
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | pep | valor entero directo del radio
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | sujeobli | valor entero del campo UI uif
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | lugnacim | codpost de nacimiento o 0
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | acid / 0 | constante; corrige informe anterior
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | ncuit | CUIT del suscriptor
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x577904-0x577f44 | RegisterSuscriber | sexosoc | Genero.id
+CONFIRMED_USED | contrato_service.dart AOT | 0x578278 | verifier | error | bandera de error de negocio
+CONFIRMED_USED | contrato_service.dart AOT | 0x578278 | verifier | detail | detalle de error de negocio
+CONFIRMED_USED | contrato_service.dart AOT | 0x578278 | verifier | Respuesta vacía del servidor. | error local ante lista vacía
+CONFIRMED_USED | libapp.so | +0x081e98 | LocalidadActualSelect/LocalidadNacimientoSelect | /locmae?q={"codprov":" | maestro de localidades por provincia
+CONFIRMED_USED | localidad selectors AOT | 0x5c3fc0 / 0x5c4884 | GET locmae | h={"limit":10000,"columns":["codpost","desloc","desprov","despais","cartel","desdepto"]} | límite/proyección exactos
+CONFIRMED_USED | libapp.so | +0x094c7d | HomeBloc/ContratoBloc | /issue?q={"related_project":"SORTEO","issue_summary":"ULTIMO"}&h={"columns":["issue_descr"]} | último sorteo
+CONFIRMED_USED | libapp.so | +0x042208 | HomeBloc | /issue?q={"assigned_to":6,"status":"CLOSED","related_project":"ADJUDI"}&h={"columns":["issue_descr"],"offset":0,"limit":8} | últimos adjudicados
+CONFIRMED_USED | home/contrato AOT | 0x5c8f3c / 0x574fd8 | issue parser | issue_descr | contenedor posicional de datos
+CONFIRMED_USED | ultimo_sorteo.dart AOT | 0x5c9648 | UltimoSorteo.toJson | date | fecha de sorteo
+CONFIRMED_USED | ultimo_sorteo.dart AOT | 0x5c9660 | UltimoSorteo.toJson | next_draw_date | fecha de próximo sorteo
+CONFIRMED_USED | ultimo_sorteo.dart AOT | 0x5c9678 | UltimoSorteo.toJson | first_winner | primer ganador
+CONFIRMED_USED | ultimo_sorteo.dart AOT | 0x5c9690 | UltimoSorteo.toJson | second_winner | segundo ganador
+CONFIRMED_USED | ultimo_sorteo.dart AOT | 0x5c96a8 | UltimoSorteo.toJson | third_winner | tercer ganador
+CONFIRMED_USED | home_bloc.dart AOT | 0x5c9200 / 0x5c923c | draw date handling | dd-MM-yyyy / yyyy-MM-dd | formatos de fecha
+CONFIRMED_USED | libapp.so | +0x054fad | ListadoPlanesBloc | https://artemis.../<REDACTED>/media/listapre?q={"activo":1}&h={"columns":["activo","plan","descart","articulo","orden","impocuo","impovn","cantprem","cate","subcate"]} | URL completa de catálogo APK
+CONFIRMED_USED | Plan AOT | modelo Plan | Plan.fromJson | Autos / Dinero / Motos | valores de cate
+CONFIRMED_USED | Plan AOT | modelo Plan | Plan.fromJson | Alta Gama / Baja Gama / - / Utilitarios | valores de subcate
+CONFIRMED_USED | libapp.so | +0x0a6721 | pantallas de planes/contrato | https://artemis.clubsanjorge.com.ar/images/ | base de imágenes de artículo
+CONFIRMED_USED | pantallas AOT | 0x60895c/0x609384/0x5ee80c/0x5ef448 | image builder | .webp | extensión concatenada a articulo
+CONFIRMED_USED | libapp.so | +0x057a70 | HomeScreen.item | https://artemis.clubsanjorge.com.ar/images/winners/ | base de imágenes de adjudicados
+CONFIRMED_USED | libapp.so | +0x07ea69 | ContratoBloc CreateContract | https://clubsanjorge.com.ar/api/rest/v2/uploadFile | upload de ZIP
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x549b48-0x549cc4 | FormData | doc_number | DNI crudo multipart
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x549b48-0x549cc4 | FormData | images | nombre de parte del ZIP
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x549b48-0x549cc4 | MultipartFile | test1.zip | filename enviado
+CONFIRMED_USED | dio/form_data.dart AOT | 0x571094 | FormData | application/octet-stream | MIME del ZIP
+CONFIRMED_USED | dio/form_data.dart AOT | 0x57126c | FormData boundary | --dio-boundary- | prefijo de boundary interno
+CONFIRMED_USED | contrato_bloc.dart AOT | ZIP construction | CreateContract | dni_dorso.jpg | primera entrada ZIP
+CONFIRMED_USED | contrato_bloc.dart AOT | ZIP construction | CreateContract | dni_frente.jpg | segunda entrada ZIP
+CONFIRMED_USED | contrato_bloc.dart AOT | ZIP construction | CreateContract | selfie.jpg | tercera entrada ZIP
+CONFIRMED_USED | contrato_bloc.dart AOT | ZIP construction | CreateContract | Firma.jpg | cuarta entrada ZIP; bytes PNG
+CONFIRMED_USED | libapp.so | +0x03c861 | ContratoBloc | /mkcontract | creación de contrato
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x549d0c-0x54a098 | mkcontract body | articulo / numdoc / tipo / cbu / numvende / cuota1 | claves exactas
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x549d0c-0x54a098 | mkcontract body | NONE | cbu constante
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x549d0c-0x54a098 | mkcontract response | result | id encadenado a contrato.numtit
+CONFIRMED_USED | libapp.so | +0x041ef3 | ContratoBloc | /contrato?q={"numtit":" | consulta posterior a creación
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x54a0cc-0x54a298 | contrato h | columns=[numdoc,numtit,nomsoc,domicsoc,codpost,telefono,email,articulo,numsort] | proyección exacta
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x54a0cc-0x54a298 | contrato response | numsorteo / numsort | número consumido desde numsort
+CONFIRMED_USED | libapp.so | +0x032c6d | ContratoBloc | https://clubsanjorge.com.ar/api/rest/v3/generatePaymentLink | link de pago
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x574a1c-0x574ddc | payment body | article_id / amount / first_name / last_name / identification_type / identification_number / email | claves exactas
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x574a1c-0x574ddc | payment body | DNI | tipo de identificación constante
+CONFIRMED_USED | contrato_bloc.dart AOT | 0x574a1c-0x574ddc | payment response | redirect | URL dinámica cargada en WebView
+CONFIRMED_USED | payment WebView AOT | 0x604cd8 | URL path matcher | /capitalizacion-y-ahorro/productores/pago/exito | éxito por path
+CONFIRMED_USED | payment WebView AOT | 0x604d78 | URL path matcher | /capitalizacion-y-ahorro/productores/pago/fallo | fallo por path
+INDIRECT_REFERENCE | libapp.so | +0x072dc6 | DebugScreen | test-san-jorge.pantheonsite.io | host dentro de URI custom de prueba, no HTTP
+INDIRECT_REFERENCE | DebugScreen AOT | 0x606474-0x6064a8 | debug payment | csjcapapp://test-san-jorge.pantheonsite.io/capitalizacion-y-ahorro/productores/pago/exito | URI artificial para probar navegación local
+CONFIRMED_USED | ApiClient AOT | 0x54a400 | ApiClient.get | get | concatenación base+path y Dio.get
+CONFIRMED_USED | ApiClient AOT | 0x570e80 | ApiClient.post | post | concatenación base+path y Dio.post
+CONFIRMED_USED | ApiClient AOT | 0x54a53c | handleResponse | 200 / 201 | únicos status devueltos por ApiClient
+CONFIRMED_USED | ApiClient AOT | 0x54a53c | handleResponse | 302 / 400 / 401 / 405 / 422 | ramas; no-2xx normalmente preemptados por Dio
+CONFIRMED_USED | SessionService AOT | 0x57ae90 | _initRemoteConfig | session_timeout_minutes | única clave Remote Config de negocio hallada
+CONFIRMED_USED | SessionService AOT | 0x57ae9c | _initRemoteConfig | 120 | default local en minutos
+CONFIRMED_USED | Firebase SDK Java | ConfigFetchHttpClient.java:92 | Remote Config | https://firebaseremoteconfig.googleapis.com/v1/projects/{project}/namespaces/{namespace}:fetch | endpoint SDK
+INDIRECT_REFERENCE | Firebase SDK Java | B3/n.java:118 | Remote Config realtime | https://firebaseremoteconfigrealtime.googleapis.com/v1/projects/{project}/namespaces/{namespace}:streamFetchInvalidations | plantilla SDK, suscripción no confirmada
+CONFIRMED_USED | Firebase SDK Java | W2/c.java:22 | Installations | https://firebaseinstallations.googleapis.com/v1/ | servicio técnico Firebase
+INDIRECT_REFERENCE | Firebase resources | configuración | Firebase | club-cya.firebasestorage.app | bucket configurado sin plugin/call site Storage
+CONFIRMED_USED | AndroidManifest | aapt line 11 | permission | android.permission.INTERNET | permiso de red
+CONFIRMED_USED | AndroidManifest | aapt line 37 | permission | android.permission.CAMERA | DNI/selfie local
+CONFIRMED_USED | AndroidManifest | resources | in_app_update | https://play.google.com/store | integración Play Store
+CONFIRMED_USED | gender_select.dart AOT | 0x5bfdac-0x5bfdfc | Genero options | Femenino=1 / Masculino=2 / nodefinido=3 | enum enviado a sexosoc
+CONFIRMED_USED | estado_civil_select.dart AOT | 0x5b268c-0x5b275c | EstadoCivil options | Soltero/a=1 ... Otro=7 | enum enviado a estcivil
+CONFIRMED_USED | pep_select.dart AOT | 0x5c5cd4 / 0x5c5d2c | PepSelect | Sí=1 / No=0 | radio entero
+CONFIRMED_USED | uif_selecrt.dart AOT | 0x5c722c / 0x5c7284 | UifSelect | Sí=1 / No=0 | radio entero
+CONFIRMED_USED | website api.js | lines 476-477 | loadOfficialAdjudicationsForPeriod | q={"related_project":"ADJUDI","issue_summary":"01/MM/YYYY"} | consulta web por período, ausente del APK
+CONFIRMED_USED | website catalog-api.js | lines 11-22 | PLAN_COLUMNS | descsart | contradice descart del APK
+INDIRECT_REFERENCE | data/resources.json | line 104 | resource link | https://artemis.clubsanjorge.com.ar/6/assets/Terminos_y_Condiciones.pdf | PDF estático; no descargado
+DISCARDED | libflutter.so/runtime/dependencies | varios | generic code | authorization / token / graphql / select / insert / update / delete / websocket | strings genéricas sin call site Artemis
+DISCARDED | UTF-16/Base64 searches | no hit de negocio adicional | static scan | cadenas codificadas/ofuscadas | no produjeron hosts o rutas Artemis adicionales

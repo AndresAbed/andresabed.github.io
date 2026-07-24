@@ -1,0 +1,397 @@
+[
+  {
+    "name": "vended_login",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/vended",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/vended?q=<percent-encoded-json>&h=<percent-encoded-json>",
+    "construction": "ApiClient concatenates the hardcoded base and /vended. AuthBloc passes q=jsonEncode(map) and h=jsonEncode(map) through Dio queryParameters; Dio percent-encodes each value.",
+    "query_parameters": {
+      "q": {"numvende": "<producer_number_string>", "activo": "<password_string>"},
+      "h": {"columns": ["numvende", "nomvende", "ncuit", "domvende", "codpost", "password", "ctacob", "activo"]}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "List<Map>; the first item is parsed as User",
+    "response_fields": ["numvende", "nomvende", "ncuit", "domvende", "codpost", "password", "ctacob", "activo"],
+    "called_from": ["LoginScreen", "AuthBloc Login handler", "ApiClient.get"],
+    "evidence": [
+      "libapp.so string +0x070ba1 (/vended)",
+      "Flutter AOT auth_bloc.dart 0x80a010-0x80a464",
+      "Flutter AOT User.fromJson 0x80a4ac",
+      "Flutter AOT ApiClient.get 0x54a400"
+    ],
+    "notes": "An empty list is treated as authentication failure. No bearer token or session token is produced. The static base contains an opaque path component and is intentionally redacted."
+  },
+  {
+    "name": "register_subscriber",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "POST",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/regsubscriber",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/regsubscriber",
+    "construction": "ApiClient concatenates its hardcoded base with /regsubscriber and calls Dio.post(data: Map). ImplyContentTypeInterceptor selects JSON and the default transformer emits compact UTF-8 JSON.",
+    "query_parameters": {},
+    "body_fields": [
+      {"name": "numdoc", "type": "int", "source": "int.parse(dni + '1')"},
+      {"name": "nomsoc", "type": "String", "source": "nombre + ' ' + apellido"},
+      {"name": "domicsoc", "type": "String", "source": "direccion"},
+      {"name": "codpost", "type": "int", "source": "localidad_actual.codpost"},
+      {"name": "fecnac", "type": "String", "source": "fecha de nacimiento formatted ddMMyyyy"},
+      {"name": "telefono", "type": "String", "source": "telefono"},
+      {"name": "email", "type": "String", "source": "email"},
+      {"name": "estcivil", "type": "int", "source": "EstadoCivil.id (1..7)"},
+      {"name": "naciona", "type": "String", "constant": "ARG"},
+      {"name": "pep", "type": "int", "source": "UI radio value: 1 for Sí, 0 for No"},
+      {"name": "sujeobli", "type": "int", "source": "UI field uif: 1 for Sí, 0 for No"},
+      {"name": "lugnacim", "type": "int", "source": "localidad_nacimiento.codpost ?? 0"},
+      {"name": "acid", "type": "int", "constant": 0},
+      {"name": "ncuit", "type": "String", "source": "cuit"},
+      {"name": "sexosoc", "type": "int", "source": "Genero.id: Femenino=1, Masculino=2, nodefinido=3"}
+    ],
+    "headers": {"content-type": "application/json"},
+    "content_type": "application/json (body bytes encoded as UTF-8 by the JSON transformer)",
+    "response_shape": "dynamic list/map; business-error helper inspects error and detail",
+    "response_fields": ["error", "detail"],
+    "called_from": ["ContratoResumenDatosPersonales", "ContratoBloc RegisterSuscriber", "ContratoService.registrarSuscriptor", "ApiClient.post"],
+    "evidence": [
+      "libapp.so string +0x03eeb7 (/regsubscriber)",
+      "Flutter AOT contrato_bloc.dart 0x577904-0x577f44",
+      "Flutter AOT contrato_service.dart 0x578030 and verifier 0x578278",
+      "Flutter AOT gender_select.dart 0x5bfd98-0x5bfe54",
+      "Flutter AOT estado_civil_select.dart 0x5b2674-0x5b27f8",
+      "Flutter AOT pep_select.dart 0x5c5c50-0x5c5e38",
+      "Flutter AOT uif_selecrt.dart 0x5c71a8-0x5c7390"
+    ],
+    "notes": "A prior report inferred acid from codigo_actividad; deeper AOT reconstruction proves acid is the constant 0. Empty list throws 'Respuesta vacía del servidor.'."
+  },
+  {
+    "name": "locations_by_province",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/locmae",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/locmae?q={\"codprov\":\"<province_code>\"}&h={\"limit\":10000,\"columns\":[\"codpost\",\"desloc\",\"desprov\",\"despais\",\"cartel\",\"desdepto\"]}",
+    "construction": "The JSON fragments are interpolated directly into the path string; ApiClient.get receives no queryParameters. Dio/Uri normalizes prohibited URL characters when RequestOptions.uri is built.",
+    "query_parameters": {
+      "q": {"codprov": "<province_code_string>"},
+      "h": {"limit": 10000, "columns": ["codpost", "desloc", "desprov", "despais", "cartel", "desdepto"]}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "List<Localidad>",
+    "response_fields": ["codpost", "desloc", "desprov", "despais", "cartel", "desdepto"],
+    "called_from": ["LocalidadActualSelect", "LocalidadNacimientoSelect", "ApiClient.get"],
+    "evidence": [
+      "libapp.so string +0x081e98 (locmae query prefix)",
+      "Flutter AOT localidad_actual_select.dart 0x5c3fc0 and GET 0x5c4114",
+      "Flutter AOT localidad_nacimiento_select.dart 0x5c4884 and GET 0x5c49d8"
+    ],
+    "notes": "Both current and birth locality selectors use the same request. Exceptions are caught and converted to an empty list."
+  },
+  {
+    "name": "latest_draw_issue",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/issue",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/issue?q={\"related_project\":\"SORTEO\",\"issue_summary\":\"ULTIMO\"}&h={\"columns\":[\"issue_descr\"]}",
+    "construction": "The complete path plus raw q/h JSON is a compiled literal passed to ApiClient.get; Uri normalization performs wire escaping.",
+    "query_parameters": {
+      "q": {"related_project": "SORTEO", "issue_summary": "ULTIMO"},
+      "h": {"columns": ["issue_descr"]}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "List<Map> containing issue_descr; HomeBloc parses semicolon-delimited positional data",
+    "response_fields": ["issue_descr"],
+    "called_from": ["HomeScreen", "HomeBloc GetInitialData", "InicioDelPlanScreen", "ContratoBloc GetSorteo", "ApiClient.get"],
+    "evidence": [
+      "libapp.so string +0x094c7d",
+      "Flutter AOT home_bloc.dart 0x5c8eac-0x5c93ac",
+      "Flutter AOT contrato_bloc.dart literal/call 0x574f5c-0x574f68; issue_descr access 0x574fd8",
+      "Flutter AOT ultimo_sorteo.dart 0x5c961c-0x5c96dc"
+    ],
+    "notes": "HomeBloc constructs UltimoSorteo(date, next_draw_date, first_winner, second_winner, third_winner). ContratoBloc reads a positional element to calculate plan-start options. Exact backend tuple documentation is absent."
+  },
+  {
+    "name": "latest_adjudications_issue",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/issue",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/issue?q={\"assigned_to\":6,\"status\":\"CLOSED\",\"related_project\":\"ADJUDI\"}&h={\"columns\":[\"issue_descr\"],\"offset\":0,\"limit\":8}",
+    "construction": "The complete path plus raw q/h JSON is a compiled literal passed to ApiClient.get.",
+    "query_parameters": {
+      "q": {"assigned_to": 6, "status": "CLOSED", "related_project": "ADJUDI"},
+      "h": {"columns": ["issue_descr"], "offset": 0, "limit": 8}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "List<UltAdjudicados>; fromJson requires at least four issue_descr entries and parses issue_descr[3] as a semicolon-delimited tuple",
+    "response_fields": ["issue_descr", "issue_descr[0]", "issue_descr[2]", "split(issue_descr[3], ';')[4]", "split(issue_descr[3], ';')[5]"],
+    "called_from": ["HomeScreen", "HomeBloc GetInitialData", "UltAdjudicados.fromJson", "ApiClient.get"],
+    "evidence": [
+      "libapp.so string +0x042208",
+      "Flutter AOT home_bloc.dart 0x5c93a0-0x5c9a1c",
+      "Flutter AOT ult_adjudicados.dart 0x5c9a34-0x5c9cc0",
+      "Flutter AOT home_screen.dart 0x5ca4c8-0x5ca818"
+    ],
+    "notes": "The compiled model exposes three display values: the first top-level issue_descr value, a second positional value, and winner-image id from tuple position 5. Functional labels are only partly recoverable from APK UI; site parsing supplies corroborating, not APK-authoritative, semantics."
+  },
+  {
+    "name": "active_plan_catalog",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/listapre",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/listapre?q={\"activo\":1}&h={\"columns\":[\"activo\",\"plan\",\"descart\",\"articulo\",\"orden\",\"impocuo\",\"impovn\",\"cantprem\",\"cate\",\"subcate\"]}",
+    "construction": "Full raw URL literal passed to a fresh Dio().request with Options(method: GET), bypassing ApiClient.",
+    "query_parameters": {
+      "q": {"activo": 1},
+      "h": {"columns": ["activo", "plan", "descart", "articulo", "orden", "impocuo", "impovn", "cantprem", "cate", "subcate"]}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "List<Plan>; response.data is jsonEncode'd and immediately json.decode'd before mapping",
+    "response_fields": ["activo", "plan", "descart", "articulo", "orden", "impocuo", "impovn", "cantprem", "cate", "subcate"],
+    "called_from": ["ListadoPlanesScreen", "ListadoPlanesBloc", "Dio.request"],
+    "evidence": [
+      "libapp.so full URL string +0x054fad",
+      "Flutter AOT listado_planes_bloc.dart 0x607b7c-0x607ccc, request 0x607bfc",
+      "Flutter AOT Plan.fromJson model"
+    ],
+    "notes": "The APK field is descart. The repository website uses descsart; this is a documented cross-artifact contradiction, not silently normalized here."
+  },
+  {
+    "name": "upload_contract_documents",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "POST",
+    "host": "clubsanjorge.com.ar",
+    "path": "/api/rest/v2/uploadFile",
+    "full_url_template": "https://clubsanjorge.com.ar/api/rest/v2/uploadFile",
+    "construction": "Direct Dio.post to a hardcoded full URL with FormData. Boundary is '--dio-boundary-' plus a random 32-bit decimal padded to ten digits; multipart delimiters prepend two more hyphens.",
+    "query_parameters": {},
+    "body_fields": [
+      {"name": "doc_number", "type": "multipart text field", "source": "raw DNI string, without the regsubscriber suffix"},
+      {"name": "images", "type": "multipart file", "filename": "test1.zip", "content_type": "application/octet-stream", "zip_entries": ["dni_dorso.jpg", "dni_frente.jpg", "selfie.jpg", "Firma.jpg"]}
+    ],
+    "headers": {"content-type": "multipart/form-data; boundary=<runtime-boundary>"},
+    "content_type": "multipart/form-data",
+    "response_shape": "ignored; successful completion under Dio default validateStatus is sufficient",
+    "response_fields": [],
+    "called_from": ["ResumenContratoScreen", "ContratoBloc CreateContract", "flutter_archive", "Dio.post"],
+    "evidence": [
+      "libapp.so full URL +0x07ea69",
+      "Flutter AOT contrato_bloc.dart 0x549b48-0x549cc4",
+      "Flutter AOT form_data.dart 0x571094, finalize 0x56f488, boundary 0x57126c",
+      "JADX w3/C1400g.java (ZipOutputStream implementation)"
+    ],
+    "notes": "The signature entry is named Firma.jpg but carries PNG bytes. No explicit image compression, size limit, retry, idempotency key, or response-body validation was found."
+  },
+  {
+    "name": "make_contract",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "POST",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/mkcontract",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/mkcontract",
+    "construction": "ApiClient.post with a Dart Map; compact UTF-8 JSON via Dio.",
+    "query_parameters": {},
+    "body_fields": [
+      {"name": "articulo", "type": "int", "source": "Plan.articulo"},
+      {"name": "numdoc", "type": "int", "source": "int.parse(dni + '1')"},
+      {"name": "tipo", "type": "int", "constant": 0},
+      {"name": "cbu", "type": "String", "constant": "NONE"},
+      {"name": "numvende", "type": "int", "source": "authenticated User.numvende"},
+      {"name": "cuota1", "type": "int", "source": "selected OpcionInicioPlan.numero"}
+    ],
+    "headers": {"content-type": "application/json"},
+    "content_type": "application/json",
+    "response_shape": "List<Map> with first item result:int",
+    "response_fields": ["[0].result"],
+    "called_from": ["ResumenContratoScreen", "ContratoBloc CreateContract", "ApiClient.post"],
+    "evidence": [
+      "libapp.so string +0x03c861 (/mkcontract)",
+      "Flutter AOT contrato_bloc.dart 0x549d0c-0x54a098"
+    ],
+    "notes": "The client does not guard against an empty list before [0]. result is reused as q.numtit in the next call."
+  },
+  {
+    "name": "contract_lookup_after_creation",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/contrato",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/contrato?q={\"numtit\":\"<mkcontract.result>\"}&h={\"columns\":[\"numdoc\",\"numtit\",\"nomsoc\",\"domicsoc\",\"codpost\",\"telefono\",\"email\",\"articulo\",\"numsort\"]}",
+    "construction": "Raw interpolated path passed to ApiClient.get; mkcontract.result is converted to text and placed inside JSON quotes.",
+    "query_parameters": {
+      "q": {"numtit": "<mkcontract.result rendered as string>"},
+      "h": {"columns": ["numdoc", "numtit", "nomsoc", "domicsoc", "codpost", "telefono", "email", "articulo", "numsort"]}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "List<Map>; first item required by caller",
+    "response_fields": ["[0].numsort"],
+    "response_fields_requested_but_not_consumed": ["numdoc", "numtit", "nomsoc", "domicsoc", "codpost", "telefono", "email", "articulo"],
+    "called_from": ["ContratoBloc CreateContract", "ApiClient.get"],
+    "evidence": [
+      "libapp.so query prefix +0x041ef3",
+      "Flutter AOT contrato_bloc.dart 0x54a0cc-0x54a298"
+    ],
+    "notes": "The client stores numsorteo from [0].numsort. The business meaning of numtit/result is strongly suggested by chaining but not server-validated."
+  },
+  {
+    "name": "generate_payment_link",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "POST",
+    "host": "clubsanjorge.com.ar",
+    "path": "/api/rest/v3/generatePaymentLink",
+    "full_url_template": "https://clubsanjorge.com.ar/api/rest/v3/generatePaymentLink",
+    "construction": "Direct fresh Dio().request to a hardcoded full URL with Options(method: POST) and Map data; JSON content type is inferred.",
+    "query_parameters": {},
+    "body_fields": [
+      {"name": "article_id", "type": "int", "source": "Plan.articulo"},
+      {"name": "amount", "type": "double", "source": "selected amount/plan value"},
+      {"name": "first_name", "type": "String", "source": "nombre"},
+      {"name": "last_name", "type": "String", "source": "apellido"},
+      {"name": "identification_type", "type": "String", "constant": "DNI"},
+      {"name": "identification_number", "type": "String", "source": "raw DNI"},
+      {"name": "email", "type": "String", "source": "email"}
+    ],
+    "headers": {"content-type": "application/json"},
+    "content_type": "application/json",
+    "response_shape": "Map with redirect:String",
+    "response_fields": ["redirect"],
+    "called_from": ["ModalidadPagoDerechoSuscripcion / MercadoPagoScreen", "ContratoBloc GeneratePaymentLink", "Dio.request", "InAppWebView"],
+    "evidence": [
+      "libapp.so full URL +0x032c6d",
+      "Flutter AOT contrato_bloc.dart 0x574a1c-0x574ddc, request 0x574cc4",
+      "Flutter AOT payment WebView success path 0x604cd8 and failure path 0x604d78"
+    ],
+    "notes": "The redirect is loaded into an embedded WebView. Completion is decided by matching only the URL path, not the origin host."
+  },
+  {
+    "name": "plan_article_image",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/images/<articulo>.webp",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/images/<Plan.articulo>.webp",
+    "construction": "Hardcoded image-base string + Plan.articulo.toString() + '.webp'.",
+    "query_parameters": {},
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "WebP image bytes handled by Flutter image providers/cache",
+    "response_fields": [],
+    "called_from": ["ListadoPlanesScreen", "ContratoDatosPersonalesDni", "ContratoInitScreen", "CachedNetworkImage/Image"],
+    "evidence": [
+      "libapp.so string +0x0a6721",
+      "Flutter AOT listado_planes_screen.dart 0x60895c and 0x609384",
+      "Flutter AOT contrato_datos_personales_dni.dart 0x5ee80c",
+      "Flutter AOT contrato_init_screen.dart 0x5ef448"
+    ],
+    "notes": "This is a static media template, not proof of an API endpoint for arbitrary article identifiers."
+  },
+  {
+    "name": "winner_image",
+    "scope": "APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/images/winners/<image_id>.webp",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/images/winners/<issue-derived-image-id>.webp",
+    "construction": "Hardcoded winner-image base + UltAdjudicados image-id field + '.webp'.",
+    "query_parameters": {},
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "WebP image bytes handled by CachedNetworkImage",
+    "response_fields": [],
+    "called_from": ["HomeScreen.item", "UltAdjudicados", "CachedNetworkImage"],
+    "evidence": [
+      "libapp.so string +0x057a70",
+      "Flutter AOT home_screen.dart 0x5ca558-0x5ca5dc",
+      "Flutter AOT ult_adjudicados.dart 0x5c9c54-0x5c9c78"
+    ],
+    "notes": "The image id is obtained from semicolon tuple position 5."
+  },
+  {
+    "name": "adjudications_by_period",
+    "scope": "repository website, not APK 3.3.6",
+    "status": "CONFIRMED_USED",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/api/stream/<STREAM_KEY_REDACTED>/media/issue",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/api/stream/<STREAM_KEY_REDACTED>/media/issue?q=<encoded {related_project:'ADJUDI',issue_summary:'01/MM/YYYY'}>&h=<encoded {columns:['issue_descr']}>",
+    "construction": "Website artemisIssuesUrl uses URL.searchParams.set with JSON.stringify for q and h.",
+    "query_parameters": {
+      "q": {"related_project": "ADJUDI", "issue_summary": "01/<two-digit-month>/<four-digit-year>"},
+      "h": {"columns": ["issue_descr"]}
+    },
+    "body_fields": [],
+    "headers": {},
+    "content_type": null,
+    "response_shape": "issue rows parsed into adjudication table and draw metadata",
+    "response_fields": ["issue_descr"],
+    "called_from": ["website loadAdjudicationsForPeriod", "loadOfficialAdjudicationsForPeriod", "fetchArtemisIssues"],
+    "evidence": [
+      "assets/js/modules/data/api.js:57-60",
+      "assets/js/modules/data/api.js:167-176",
+      "assets/js/modules/data/api.js:456-491"
+    ],
+    "notes": "No corresponding APK call site was found. CONFIRMED_USED applies only to the static website code in this repository. Audit did not execute fetch."
+  },
+  {
+    "name": "terms_and_conditions_pdf",
+    "scope": "repository website, not APK 3.3.6",
+    "status": "INDIRECT_REFERENCE",
+    "confidence": "high",
+    "method": "GET",
+    "host": "artemis.clubsanjorge.com.ar",
+    "path": "/6/assets/Terminos_y_Condiciones.pdf",
+    "full_url_template": "https://artemis.clubsanjorge.com.ar/6/assets/Terminos_y_Condiciones.pdf",
+    "construction": "Static external resource URL in website data.",
+    "query_parameters": {},
+    "body_fields": [],
+    "headers": {},
+    "content_type": "application/pdf expected from extension only",
+    "response_shape": "PDF resource; not downloaded in this audit",
+    "response_fields": [],
+    "called_from": ["website resources data"],
+    "evidence": ["data/resources.json:99-106"],
+    "notes": "The URL is present and linked by repository content; no APK reference or server validation exists."
+  }
+]

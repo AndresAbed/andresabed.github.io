@@ -1,0 +1,242 @@
+[
+  {
+    "entity": "User",
+    "functional_name": "Productor/vendedor autenticado",
+    "fields": [
+      {"name": "numvende", "type": "int", "required": true, "constant_value": null, "evidence": "User.fromJson AOT 0x80a4ac; /vended h.columns"},
+      {"name": "nomvende", "type": "String", "required": true, "constant_value": null, "evidence": "User.fromJson; /vended"},
+      {"name": "ncuit", "type": "String", "required": true, "constant_value": null, "evidence": "User.fromJson; /vended"},
+      {"name": "domvende", "type": "String", "required": true, "constant_value": null, "evidence": "User.fromJson; /vended"},
+      {"name": "codpost", "type": "int", "required": true, "constant_value": null, "evidence": "User.fromJson; /vended"},
+      {"name": "password", "type": "String", "required": true, "constant_value": null, "evidence": "User.fromJson; requested by /vended"},
+      {"name": "ctacob", "type": "int?", "required": false, "constant_value": null, "evidence": "User.fromJson; /vended"},
+      {"name": "activo", "type": "int", "required": true, "constant_value": null, "evidence": "User.fromJson; /vended"}
+    ],
+    "relations": ["numvende is copied into MkContractRequest.numvende", "stored/recovered locally under secure-storage key user"],
+    "related_endpoints": ["vended_login", "make_contract"],
+    "related_models": ["User", "AuthState"],
+    "confidence": "high"
+  },
+  {
+    "entity": "UserFormData",
+    "functional_name": "Formulario local de alta del suscriptor",
+    "fields": [
+      {"name": "nombre", "type": "String", "required": true, "constant_value": null, "evidence": "form screens and regsubscriber body construction"},
+      {"name": "apellido", "type": "String", "required": true, "constant_value": null, "evidence": "form screens and regsubscriber body construction"},
+      {"name": "dni", "type": "String", "required": true, "constant_value": null, "evidence": "DNI scanner/manual entry; three request transformations"},
+      {"name": "gender", "type": "Genero", "required": true, "constant_value": null, "evidence": "gender_select.dart AOT"},
+      {"name": "date", "type": "DateTime/String", "required": true, "constant_value": null, "evidence": "formatted to ddMMyyyy for fecnac"},
+      {"name": "estado_civil", "type": "EstadoCivil", "required": true, "constant_value": null, "evidence": "estado_civil_select.dart AOT"},
+      {"name": "pais_nacimiento", "type": "selection", "required": true, "constant_value": null, "evidence": "form flow; backend receives constant ARG"},
+      {"name": "provincia_nacimiento", "type": "selection", "required": true, "constant_value": null, "evidence": "birth locality selector"},
+      {"name": "localidad_nacimiento", "type": "Localidad?", "required": false, "constant_value": null, "evidence": "lugnacim = codpost ?? 0"},
+      {"name": "provincia_actual", "type": "selection", "required": true, "constant_value": null, "evidence": "current locality selector"},
+      {"name": "localidad_actual", "type": "Localidad", "required": true, "constant_value": null, "evidence": "codpost request source"},
+      {"name": "direccion", "type": "String", "required": true, "constant_value": null, "evidence": "domicsoc source"},
+      {"name": "telefono", "type": "String", "required": true, "constant_value": null, "evidence": "regsubscriber body"},
+      {"name": "email", "type": "String", "required": true, "constant_value": null, "evidence": "regsubscriber and payment body"},
+      {"name": "cuit", "type": "String", "required": true, "constant_value": null, "evidence": "regsubscriber ncuit"},
+      {"name": "codigo_actividad", "type": "dynamic", "required": null, "constant_value": null, "evidence": "local model/UI only; not serialized into acid in this build"},
+      {"name": "pep", "type": "int", "required": true, "constant_value": null, "evidence": "pep_select.dart: Sí=1, No=0"},
+      {"name": "uif", "type": "int", "required": true, "constant_value": null, "evidence": "uif_selecrt.dart: Sí=1, No=0; serialized as sujeobli"}
+    ],
+    "relations": ["transformed into RegSubscriberRequest", "identity subset transformed into PaymentLinkRequest", "dni is also multipart doc_number"],
+    "related_endpoints": ["register_subscriber", "upload_contract_documents", "generate_payment_link"],
+    "related_models": ["UserFormData", "Genero", "EstadoCivil", "Localidad"],
+    "confidence": "high"
+  },
+  {
+    "entity": "Genero",
+    "functional_name": "Enumeración de sexo enviada a sexosoc",
+    "fields": [
+      {"name": "label", "type": "String", "required": true, "constant_value": "Femenino | Masculino | nodefinido", "evidence": "gender_select.dart 0x5bfdac/0x5bfdcc/0x5bfdec"},
+      {"name": "id", "type": "int", "required": true, "constant_value": "1 | 2 | 3 respectively", "evidence": "gender_select.dart 0x5bfdbc/0x5bfddc/0x5bfdfc"}
+    ],
+    "relations": ["UserFormData.gender.id -> RegSubscriberRequest.sexosoc"],
+    "related_endpoints": ["register_subscriber"],
+    "related_models": ["Genero"],
+    "confidence": "high"
+  },
+  {
+    "entity": "EstadoCivil",
+    "functional_name": "Enumeración de estado civil",
+    "fields": [
+      {"name": "label", "type": "String", "required": true, "constant_value": "Soltero/a | Casado/a | Viudo/a | Separado/a | Divorciado/a | Concubinato | Otro", "evidence": "estado_civil_select.dart 0x5b268c-0x5b274c"},
+      {"name": "id", "type": "int", "required": true, "constant_value": "1..7 in the same order", "evidence": "estado_civil_select.dart 0x5b269c-0x5b275c"}
+    ],
+    "relations": ["UserFormData.estado_civil.id -> RegSubscriberRequest.estcivil"],
+    "related_endpoints": ["register_subscriber"],
+    "related_models": ["EstadoCivil"],
+    "confidence": "high"
+  },
+  {
+    "entity": "Localidad",
+    "functional_name": "Localidad/maestro geográfico",
+    "fields": [
+      {"name": "codpost", "type": "int?", "required": false, "constant_value": null, "evidence": "Localidad.fromJson and /locmae columns"},
+      {"name": "desloc", "type": "String?", "required": false, "constant_value": null, "evidence": "Localidad.fromJson and /locmae columns"},
+      {"name": "desprov", "type": "String?", "required": false, "constant_value": null, "evidence": "Localidad.fromJson and /locmae columns"},
+      {"name": "despais", "type": "String?", "required": false, "constant_value": null, "evidence": "Localidad.fromJson and /locmae columns"},
+      {"name": "cartel", "type": "String?", "required": false, "constant_value": null, "evidence": "Localidad.fromJson and /locmae columns"},
+      {"name": "desdepto", "type": "String?", "required": false, "constant_value": null, "evidence": "Localidad.fromJson and /locmae columns"}
+    ],
+    "relations": ["filtered by codprov", "codpost maps to regsubscriber.codpost and regsubscriber.lugnacim"],
+    "related_endpoints": ["locations_by_province", "register_subscriber"],
+    "related_models": ["Localidad"],
+    "confidence": "high"
+  },
+  {
+    "entity": "Plan",
+    "functional_name": "Plan/artículo de capitalización",
+    "fields": [
+      {"name": "activo", "type": "int", "required": true, "constant_value": null, "evidence": "Plan.fromJson and listapre columns"},
+      {"name": "plan", "type": "int", "required": true, "constant_value": null, "evidence": "Plan.fromJson"},
+      {"name": "descart", "type": "String", "required": true, "constant_value": null, "evidence": "APK listapre literal and Plan.fromJson"},
+      {"name": "articulo", "type": "int", "required": true, "constant_value": null, "evidence": "Plan.fromJson; image and contract/payment key"},
+      {"name": "orden", "type": "int", "required": true, "constant_value": null, "evidence": "Plan.fromJson"},
+      {"name": "impocuo", "type": "double", "required": true, "constant_value": null, "evidence": "Plan.fromJson numeric conversion"},
+      {"name": "impovn", "type": "double", "required": true, "constant_value": null, "evidence": "Plan.fromJson numeric conversion"},
+      {"name": "cantprem", "type": "int", "required": true, "constant_value": null, "evidence": "Plan.fromJson"},
+      {"name": "cate", "type": "String enum", "required": true, "constant_value": "Autos | Dinero | Motos", "evidence": "Plan enum mapping AOT"},
+      {"name": "subcate", "type": "String enum", "required": true, "constant_value": "Alta Gama | Baja Gama | - | Utilitarios", "evidence": "Plan enum mapping AOT"}
+    ],
+    "relations": ["articulo -> image filename", "articulo -> mkcontract.articulo", "articulo -> payment article_id", "impocuo/impovn contribute to displayed/payment amounts"],
+    "related_endpoints": ["active_plan_catalog", "plan_article_image", "make_contract", "generate_payment_link"],
+    "related_models": ["Plan", "Categoria", "Subcategoria"],
+    "confidence": "high"
+  },
+  {
+    "entity": "Issue",
+    "functional_name": "Registro genérico Artemis usado para sorteos y adjudicaciones",
+    "fields": [
+      {"name": "related_project", "type": "String filter", "required": null, "constant_value": "SORTEO | ADJUDI in confirmed queries", "evidence": "compiled /issue q literals"},
+      {"name": "issue_summary", "type": "String filter", "required": null, "constant_value": "ULTIMO or first-day period string", "evidence": "APK latest draw and website period query"},
+      {"name": "assigned_to", "type": "int filter", "required": null, "constant_value": 6, "evidence": "APK adjudication query"},
+      {"name": "status", "type": "String filter", "required": null, "constant_value": "CLOSED", "evidence": "APK adjudication query"},
+      {"name": "issue_descr", "type": "List<String>", "required": true, "constant_value": null, "evidence": "response parsing in HomeBloc/UltAdjudicados"}
+    ],
+    "relations": ["polymorphic payload selected by related_project", "issue_descr is positional and sometimes semicolon-delimited"],
+    "related_endpoints": ["latest_draw_issue", "latest_adjudications_issue", "adjudications_by_period"],
+    "related_models": ["UltimoSorteo", "UltAdjudicados"],
+    "confidence": "high for wire fields; medium for backend semantics"
+  },
+  {
+    "entity": "UltimoSorteo",
+    "functional_name": "Último y próximo sorteo con ganadores",
+    "fields": [
+      {"name": "date", "type": "String?", "required": false, "constant_value": null, "evidence": "ultimo_sorteo.dart toJson 0x5c9648"},
+      {"name": "next_draw_date", "type": "String?", "required": false, "constant_value": null, "evidence": "ultimo_sorteo.dart 0x5c9660"},
+      {"name": "first_winner", "type": "String?", "required": false, "constant_value": null, "evidence": "ultimo_sorteo.dart 0x5c9678"},
+      {"name": "second_winner", "type": "String?", "required": false, "constant_value": null, "evidence": "ultimo_sorteo.dart 0x5c9690"},
+      {"name": "third_winner", "type": "String?", "required": false, "constant_value": null, "evidence": "ultimo_sorteo.dart 0x5c96a8"}
+    ],
+    "relations": ["constructed from issue_descr positional content", "next draw date affects plan-start UI"],
+    "related_endpoints": ["latest_draw_issue"],
+    "related_models": ["UltimoSorteo", "HomeState"],
+    "confidence": "high for model fields; medium for exact positional mapping"
+  },
+  {
+    "entity": "UltAdjudicados",
+    "functional_name": "Tarjeta resumida de adjudicado",
+    "fields": [
+      {"name": "display_value_1", "type": "String", "required": true, "constant_value": null, "evidence": "field_7 receives issue_descr top-level position 0; names stripped"},
+      {"name": "display_value_2", "type": "String", "required": true, "constant_value": null, "evidence": "field_b receives parsed positional data; names stripped"},
+      {"name": "image_id", "type": "String", "required": true, "constant_value": null, "evidence": "field_f receives split tuple position 5 and builds winner image URL"}
+    ],
+    "relations": ["from Issue.issue_descr", "image_id -> /images/winners/<id>.webp"],
+    "related_endpoints": ["latest_adjudications_issue", "winner_image"],
+    "related_models": ["UltAdjudicados"],
+    "confidence": "high for positions; medium/low for unavailable original field names"
+  },
+  {
+    "entity": "RegSubscriberRequest",
+    "functional_name": "Alta de suscriptor/socio",
+    "fields": [
+      {"name": "numdoc", "type": "int", "required": true, "constant_value": null, "evidence": "contrato_bloc.dart 0x577904-0x577f44"},
+      {"name": "nomsoc", "type": "String", "required": true, "constant_value": null, "evidence": "same body literal"},
+      {"name": "domicsoc", "type": "String", "required": true, "constant_value": null, "evidence": "same"},
+      {"name": "codpost", "type": "int", "required": true, "constant_value": null, "evidence": "same"},
+      {"name": "fecnac", "type": "String(ddMMyyyy)", "required": true, "constant_value": null, "evidence": "DateFormat in body construction"},
+      {"name": "telefono", "type": "String", "required": true, "constant_value": null, "evidence": "same"},
+      {"name": "email", "type": "String", "required": true, "constant_value": null, "evidence": "same"},
+      {"name": "estcivil", "type": "int", "required": true, "constant_value": null, "evidence": "EstadoCivil.id"},
+      {"name": "naciona", "type": "String", "required": true, "constant_value": "ARG", "evidence": "body construction"},
+      {"name": "pep", "type": "int", "required": true, "constant_value": null, "evidence": "direct form value"},
+      {"name": "sujeobli", "type": "int", "required": true, "constant_value": null, "evidence": "direct uif value"},
+      {"name": "lugnacim", "type": "int", "required": true, "constant_value": null, "evidence": "birth codpost ?? 0"},
+      {"name": "acid", "type": "int", "required": true, "constant_value": 0, "evidence": "body AOT constant"},
+      {"name": "ncuit", "type": "String", "required": true, "constant_value": null, "evidence": "body construction"},
+      {"name": "sexosoc", "type": "int", "required": true, "constant_value": null, "evidence": "Genero.id"}
+    ],
+    "relations": ["derived from UserFormData"],
+    "related_endpoints": ["register_subscriber"],
+    "related_models": ["UserFormData", "ApiResponse"],
+    "confidence": "high"
+  },
+  {
+    "entity": "ContractCreation",
+    "functional_name": "Solicitud y resultado de creación de contrato",
+    "fields": [
+      {"name": "articulo", "type": "int", "required": true, "constant_value": null, "evidence": "mkcontract body"},
+      {"name": "numdoc", "type": "int", "required": true, "constant_value": null, "evidence": "mkcontract body"},
+      {"name": "tipo", "type": "int", "required": true, "constant_value": 0, "evidence": "mkcontract body"},
+      {"name": "cbu", "type": "String", "required": true, "constant_value": "NONE", "evidence": "mkcontract body"},
+      {"name": "numvende", "type": "int", "required": true, "constant_value": null, "evidence": "mkcontract body"},
+      {"name": "cuota1", "type": "int", "required": true, "constant_value": null, "evidence": "mkcontract body"},
+      {"name": "result", "type": "int", "required": true, "constant_value": null, "evidence": "mkcontract response [0].result"},
+      {"name": "numsort", "type": "int", "required": true, "constant_value": null, "evidence": "contrato response [0].numsort"}
+    ],
+    "relations": ["result is serialized as contrato q.numtit", "numsort becomes client numSorteo"],
+    "related_endpoints": ["make_contract", "contract_lookup_after_creation"],
+    "related_models": ["ContratoBloc state", "OpcionInicioPlan"],
+    "confidence": "high for types/wire relation; medium for business meaning"
+  },
+  {
+    "entity": "ContractDocumentArchive",
+    "functional_name": "Paquete ZIP de evidencia de identidad y firma",
+    "fields": [
+      {"name": "doc_number", "type": "String multipart field", "required": true, "constant_value": null, "evidence": "FormData AOT"},
+      {"name": "images", "type": "MultipartFile", "required": true, "constant_value": "filename test1.zip; application/octet-stream", "evidence": "FormData AOT"},
+      {"name": "dni_dorso.jpg", "type": "ZIP entry", "required": true, "constant_value": null, "evidence": "ContratoBloc ZIP order"},
+      {"name": "dni_frente.jpg", "type": "ZIP entry", "required": true, "constant_value": null, "evidence": "ContratoBloc ZIP order"},
+      {"name": "selfie.jpg", "type": "ZIP entry", "required": true, "constant_value": null, "evidence": "ContratoBloc ZIP order"},
+      {"name": "Firma.jpg", "type": "ZIP entry containing PNG bytes", "required": true, "constant_value": null, "evidence": "signature capture/ZIP AOT"}
+    ],
+    "relations": ["uploaded before mkcontract", "doc_number is raw DNI, unlike numdoc=dni+'1'"],
+    "related_endpoints": ["upload_contract_documents", "make_contract"],
+    "related_models": ["ContratoBloc local file state"],
+    "confidence": "high"
+  },
+  {
+    "entity": "PaymentLinkRequest",
+    "functional_name": "Solicitud de link de pago",
+    "fields": [
+      {"name": "article_id", "type": "int", "required": true, "constant_value": null, "evidence": "generate payment body"},
+      {"name": "amount", "type": "double", "required": true, "constant_value": null, "evidence": "generate payment body"},
+      {"name": "first_name", "type": "String", "required": true, "constant_value": null, "evidence": "generate payment body"},
+      {"name": "last_name", "type": "String", "required": true, "constant_value": null, "evidence": "generate payment body"},
+      {"name": "identification_type", "type": "String", "required": true, "constant_value": "DNI", "evidence": "generate payment body"},
+      {"name": "identification_number", "type": "String", "required": true, "constant_value": null, "evidence": "generate payment body"},
+      {"name": "email", "type": "String", "required": true, "constant_value": null, "evidence": "generate payment body"},
+      {"name": "redirect", "type": "String URL", "required": true, "constant_value": null, "evidence": "response data['redirect']"}
+    ],
+    "relations": ["article_id from Plan.articulo", "redirect loaded into InAppWebView"],
+    "related_endpoints": ["generate_payment_link"],
+    "related_models": ["ContratoBloc payment state"],
+    "confidence": "high"
+  },
+  {
+    "entity": "BackendBusinessError",
+    "functional_name": "Error de negocio interpretado por ContratoService",
+    "fields": [
+      {"name": "error", "type": "bool", "required": false, "constant_value": true, "evidence": "contrato_service verifier 0x578278"},
+      {"name": "detail", "type": "dynamic", "required": false, "constant_value": null, "evidence": "contrato_service verifier"},
+      {"name": "errors", "type": "dynamic", "required": null, "constant_value": null, "evidence": "generic ValidationException path only"},
+      {"name": "message", "type": "dynamic", "required": null, "constant_value": null, "evidence": "generic exception/runtime references; not a confirmed business response field"}
+    ],
+    "relations": ["may be a top-level map or first item of a list for regsubscriber"],
+    "related_endpoints": ["register_subscriber"],
+    "related_models": ["ApiResponse", "ValidationException"],
+    "confidence": "high for error/detail; low for generic fields"
+  }
+]
